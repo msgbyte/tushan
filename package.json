@@ -1,0 +1,28 @@
+{
+  "name": "tushan",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node ./demo/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@koa/router": "^12.0.0",
+    "@types/koa": "^2.13.5",
+    "@types/koa-bodyparser": "^4.3.7",
+    "@types/koa__router": "^8.0.11",
+    "@types/node": "^18.0.6",
+    "prettier": "^2.7.1",
+    "sqlite3": "^5.0.9"
+  },
+  "dependencies": {
+    "koa": "^2.13.4",
+    "koa-bodyparser": "^4.3.0",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.3.7"
+  }
+}
