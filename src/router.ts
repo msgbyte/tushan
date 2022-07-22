@@ -25,14 +25,16 @@ export function buildRouter(options: BuildRouterOptions) {
     try {
       const ret = await next();
 
-      if (Array.isArray(ret)) {
-        ctx.body = {
-          list: ret,
-        };
-      } else {
-        ctx.body = {
-          ...ret,
-        };
+      if (ret) {
+        if (Array.isArray(ret)) {
+          ctx.body = {
+            list: ret,
+          };
+        } else {
+          ctx.body = {
+            ...ret,
+          };
+        }
       }
     } catch (err) {
       ctx.status = 500;
@@ -42,7 +44,10 @@ export function buildRouter(options: BuildRouterOptions) {
       };
     }
 
-    if (ctx.request.accepts().includes('text/html')) {
+    if (
+      typeof ctx.body === 'object' &&
+      ctx.request.accepts().includes('text/html')
+    ) {
       // 如果是网页，则返回值美化一下
       ctx.body = JSON.stringify(ctx.body, null, 2);
     }
@@ -97,5 +102,28 @@ export function buildRouter(options: BuildRouterOptions) {
     });
   });
 
+  router.get('/', (ctx) => {
+    // 首页
+    ctx.body = template('Hello world');
+  });
+
   return router;
+}
+
+function template(content: string) {
+  return `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" href="data:;base64,=">
+</head>
+<body>
+  <div id="app">
+    ${content}
+  </div>
+  <script src="http://localhost:5173/@vite/client"></script>
+  <script src="/admin/asset/app.js"></script>
+</body>
+  `;
 }
