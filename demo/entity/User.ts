@@ -13,4 +13,9 @@ export class User {
 
   @Column()
   age!: number;
+
+  @Column({
+    nullable: true,
+  })
+  desc?: string;
 }

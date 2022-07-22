@@ -6,16 +6,16 @@ import path from 'path';
 const app = new Koa();
 
 const tushan = new Tushan({
-  datasource: new DataSource({
+  datasourceOptions: {
     type: 'sqlite',
     database: path.resolve(__dirname, './db/db.sqlite'),
-    entities: [User],
     synchronize: true,
-  }),
+  },
+  resources: [User],
 });
 
 tushan.initialize().then(() => {
-  const router = buildRouter(tushan);
+  const router = buildRouter({ tushan });
   app.use(router.routes()).use(router.allowedMethods());
 
   app.listen(6789, () => {

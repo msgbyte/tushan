@@ -1,6 +1,7 @@
 import type { Tushan } from './Tushan';
 import Router from '@koa/router';
 import bodyParser from 'koa-bodyparser';
+import { parseColumnType } from './orm';
 
 interface BuildRouterOptions {
   /**
@@ -47,16 +48,24 @@ export function buildRouter(options: BuildRouterOptions) {
     }
   });
 
-  tushan.entityMetadatas.map((metadata) => {
+  tushan.resources.map((resource) => {
+    const metadata = tushan.datasource.getMetadata(resource.entity);
     const resourceName = metadata.name.toLowerCase();
     console.log('Register Resource:', resourceName);
 
     // 列表
     router.get(`/resources/${resourceName}/list`, async (ctx) => {
+      const order = resource.options.order
+        ? {
+            [resource.options.order.orderBy]: resource.options.order.direction,
+          }
+        : undefined;
+
       const [list, count] = await tushan.datasource.manager.findAndCount(
         metadata.target,
         {
-          take: 20,
+          take: resource.options.limit ?? 20,
+          order,
         }
       );
       return {
@@ -74,6 +83,17 @@ export function buildRouter(options: BuildRouterOptions) {
       });
 
       return tushan.datasource.manager.save(entity);
+    });
+
+    // 列元信息
+    router.get(`/meta/${resourceName}/properties`, (ctx) => {
+      return metadata.columns.map((col) => ({
+        name: col.propertyName,
+        default: col.default,
+        type: parseColumnType(col.type),
+        isPrimary: col.isPrimary || col.isObjectId,
+        isNullable: col.isNullable,
+      }));
     });
   });
 
