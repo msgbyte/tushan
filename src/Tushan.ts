@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import type { DataSourceOptions } from 'typeorm';
-import { DataSource, EntityMetadata } from './orm';
+import { DataSource, EntityMetadata } from './server/orm';
 import type { TushanOptions, TushanResource } from './types';
 
 const pkg = JSON.parse(

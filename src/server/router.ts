@@ -1,4 +1,4 @@
-import type { Tushan } from './Tushan';
+import type { Tushan } from '../Tushan';
 import Router from '@koa/router';
 import bodyParser from 'koa-bodyparser';
 import { parseColumnType } from './orm';
