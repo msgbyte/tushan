@@ -3,6 +3,9 @@ import Router from '@koa/router';
 import bodyParser from 'koa-bodyparser';
 import { parseColumnType } from './orm';
 
+import fs from 'fs';
+import path from 'path';
+
 interface BuildRouterOptions {
   /**
    * 涂山实例
@@ -13,7 +16,7 @@ interface BuildRouterOptions {
    */
   prefix?: string;
 }
-export function buildRouter(options: BuildRouterOptions) {
+export async function buildRouter(options: BuildRouterOptions) {
   const { tushan, prefix = '/admin' } = options;
   const router = new Router({
     prefix,
@@ -42,6 +45,7 @@ export function buildRouter(options: BuildRouterOptions) {
         code: 500,
         message: String(err),
       };
+      console.error(err);
     }
 
     if (
@@ -102,28 +106,34 @@ export function buildRouter(options: BuildRouterOptions) {
     });
   });
 
-  router.get('/', (ctx) => {
+  router.get('/', async (ctx) => {
     // 首页
-    ctx.body = template('Hello world');
+    let template = fs.readFileSync(
+      path.resolve(__dirname, '../client/index.html'),
+      'utf-8'
+    );
+
+    if (tushan.env === 'development') {
+      ctx.body = template.replace(
+        '<!--SCRIPTS-SLOT-->',
+        `
+<script type="module">
+  import RefreshRuntime from 'http://localhost:5173/@react-refresh'
+  RefreshRuntime.injectIntoGlobalHook(window)
+  window.$RefreshReg$ = () => {}
+  window.$RefreshSig$ = () => (type) => type
+  window.__vite_plugin_react_preamble_installed__ = true
+</script>
+<script type="module" src="http://localhost:5173/@vite/client"></script>
+<script type="module" src="http://localhost:5173/app.ts"></script>
+<script type="module" src="http://localhost:5173/src/client/index.tsx"></script>
+      `
+      );
+    } else {
+      console.log('TODO');
+      ctx.body = template;
+    }
   });
 
   return router;
-}
-
-function template(content: string) {
-  return `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" href="data:;base64,=">
-</head>
-<body>
-  <div id="app">
-    ${content}
-  </div>
-  <script src="http://localhost:5173/@vite/client"></script>
-  <script src="/admin/asset/app.js"></script>
-</body>
-  `;
 }

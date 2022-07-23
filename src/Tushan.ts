@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import type { DataSourceOptions } from 'typeorm';
+import { createViteServer } from './client/dev-server';
 import { DataSource, EntityMetadata } from './server/orm';
 import type { TushanOptions, TushanResource } from './types';
 
@@ -38,10 +39,18 @@ export class Tushan {
     );
   }
 
+  get env(): 'development' | 'production' {
+    return process.env.NODE_ENV === 'production' ? 'production' : 'development';
+  }
+
   /**
    * 初始化
    */
   async initialize() {
     await this.datasource.initialize();
+
+    if (this.env === 'development') {
+      createViteServer();
+    }
   }
 }

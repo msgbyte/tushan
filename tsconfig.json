@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "esnext",
     "lib": ["DOM"],
-    "jsx": "react",
+    "jsx": "react-jsx",
     "esModuleInterop": true,
     "isolatedModules": true,
     "module": "CommonJS",
@@ -11,7 +11,7 @@
     "importsNotUsedAsValues": "error",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "resolveJsonModule": true,
-    "typeRoots": ["./node_modules/@types", "../node_modules/@types", "./types"]
-  }
+    "resolveJsonModule": true
+  },
+  "include": ["./demo/*", "./src/*"]
 }
