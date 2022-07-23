@@ -125,8 +125,7 @@ export async function buildRouter(options: BuildRouterOptions) {
   window.__vite_plugin_react_preamble_installed__ = true
 </script>
 <script type="module" src="http://localhost:5173/@vite/client"></script>
-<script type="module" src="http://localhost:5173/app.ts"></script>
-<script type="module" src="http://localhost:5173/src/client/index.tsx"></script>
+<script type="module" src="http://localhost:5173/src/index.tsx"></script>
       `
       );
     } else {

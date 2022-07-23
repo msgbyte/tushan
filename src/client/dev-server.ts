@@ -6,6 +6,7 @@ import { createServer } from 'vite';
  */
 export async function createViteServer() {
   const viteServer = await createServer({
+    root: path.resolve(__dirname, './'),
     configFile: path.resolve(__dirname, './vite.config.ts'),
   });
   await viteServer.listen(5173);
