@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import vitePluginForArco from '@arco-plugins/vite-react';
+import sourceRef from 'rollup-plugin-source-ref';
 
 // https://cn.vitejs.dev/guide/backend-integration.html
 // https://vitejs.dev/config/
@@ -10,6 +11,7 @@ export default defineConfig({
     alias: [{ find: '@', replacement: '/src' }],
   },
   plugins: [
+    sourceRef(),
     vitePluginForArco({
       style: 'css',
     }),

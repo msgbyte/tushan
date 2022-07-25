@@ -63,7 +63,7 @@ export async function buildRouter(options: BuildRouterOptions) {
     console.log('Register Resource:', resourceName);
 
     // 列表
-    router.get(`/resources/${resourceName}/list`, async (ctx) => {
+    router.get(`/resource/${resourceName}/list`, async (ctx) => {
       const order = resource.options.order
         ? {
             [resource.options.order.orderBy]: resource.options.order.direction,
@@ -84,7 +84,7 @@ export async function buildRouter(options: BuildRouterOptions) {
     });
 
     // 新增
-    router.post(`/resources/${resourceName}/add`, (ctx) => {
+    router.post(`/resource/${resourceName}/add`, (ctx) => {
       const body = ctx.request.body;
 
       const entity = tushan.datasource.manager.create(metadata.target, {
@@ -106,7 +106,7 @@ export async function buildRouter(options: BuildRouterOptions) {
     });
   });
 
-  router.get('/', async (ctx) => {
+  router.get('/(.*)', async (ctx) => {
     // 首页
     let template = fs.readFileSync(
       path.resolve(__dirname, '../client/index.html'),

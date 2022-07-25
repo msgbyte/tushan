@@ -21,13 +21,13 @@ export const BasicLayout: React.FC<BasicLayoutProps> = React.memo((props) => {
         <Sider collapsible breakpoint="lg">
           <Sidebar />
         </Sider>
-        <Layout className="bg-arco-fill-2">
+        <Layout className="bg-arco-fill-2 p-4">
           <Breadcrumb style={{ margin: '16px 0' }}>
             <Breadcrumb.Item>Home</Breadcrumb.Item>
             <Breadcrumb.Item>List</Breadcrumb.Item>
             <Breadcrumb.Item>App</Breadcrumb.Item>
           </Breadcrumb>
-          <Content>Content</Content>
+          <Content>{props.children}</Content>
           <Footer className="text-center text-gray-500 py-1 text-xs">
             本项目由涂山强力驱动 · Power by Tushan
           </Footer>
