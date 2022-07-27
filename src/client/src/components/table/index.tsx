@@ -1,6 +1,5 @@
 import { Spin, Table, TableColumnProps } from '@arco-design/web-react';
 import React, { useMemo } from 'react';
-import { useParams } from 'react-router';
 import { useResourceList } from '../../model/resource/list';
 import { useResourcePropertiesMeta } from '../../model/resource/meta';
 import { useResourceName } from '../../router/hooks';
