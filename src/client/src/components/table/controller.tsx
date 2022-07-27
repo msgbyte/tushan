@@ -22,7 +22,9 @@ export const TushanTableController: React.FC = React.memo(() => {
         title={`Add ${resourceName}`}
         width={600}
         visible={addDrawerVisible}
-        afterClose={() => setAddDrawerVisible(false)}
+        closable={true}
+        maskClosable={false}
+        onCancel={() => setAddDrawerVisible(false)}
       >
         <Form layout="vertical">
           {resourceMeta.map((meta) => (

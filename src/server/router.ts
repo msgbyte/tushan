@@ -106,6 +106,17 @@ export async function buildRouter(options: BuildRouterOptions) {
     });
   });
 
+  // 列出所有元信息
+  router.get(`/meta/all`, (ctx) => {
+    return tushan.resources.map((resource) => {
+      const metadata = tushan.datasource.getMetadata(resource.entity);
+
+      return {
+        resourceName: metadata.name.toLowerCase(),
+      };
+    });
+  });
+
   router.get('/(.*)', async (ctx) => {
     // 首页
     let template = fs.readFileSync(

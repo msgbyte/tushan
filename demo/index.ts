@@ -1,5 +1,5 @@
 import { buildRouter, Tushan } from '../src/index';
-import { User } from './entity/User';
+import { User } from './resources/User';
 import Koa from 'koa';
 import path from 'path';
 
