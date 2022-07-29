@@ -1,7 +1,9 @@
 import { useRequest } from 'ahooks';
+import {
+  ResourcePropertyMetaType,
+  ResourcePropertyMetaViewType,
+} from '../../../../shared/types';
 import { request } from '../utils';
-
-type ResourcePropertyMetaType = 'string' | 'number';
 
 interface ResourceMeta {
   resourceName: string;
@@ -12,6 +14,7 @@ interface ResourcePropertyMeta {
   isPrimary: boolean;
   name: string;
   type: ResourcePropertyMetaType;
+  viewType: ResourcePropertyMetaViewType;
 }
 
 /**

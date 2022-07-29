@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import type { ColumnType } from 'typeorm';
+import type { ResourcePropertyMetaType } from '../shared/types';
 
 export {
   DataSource,
@@ -12,7 +13,9 @@ export {
 /**
  * 解析类型成字段
  */
-export function parseColumnType(columnType: ColumnType): unknown {
+export function parseColumnType(
+  columnType: ColumnType
+): ResourcePropertyMetaType {
   if (columnType === Number) {
     return 'number';
   }

@@ -2,9 +2,10 @@ import type { Tushan } from '../Tushan';
 import Router from '@koa/router';
 import bodyParser from 'koa-bodyparser';
 import { parseColumnType } from './orm';
-
+import { getDefaultViewType } from '../shared/viewType';
 import fs from 'fs';
 import path from 'path';
+import _ from 'lodash';
 
 interface BuildRouterOptions {
   /**
@@ -84,25 +85,35 @@ export async function buildRouter(options: BuildRouterOptions) {
     });
 
     // 新增
-    router.post(`/resource/${resourceName}/add`, (ctx) => {
+    router.put(`/resource/${resourceName}/add`, (ctx) => {
       const body = ctx.request.body;
 
-      const entity = tushan.datasource.manager.create(metadata.target, {
-        ...body,
-      });
+      const primaryPropertyName = metadata.columns
+        .filter((col) => col.isPrimary)
+        .map((col) => col.propertyName);
+
+      const entity = tushan.datasource.manager.create(
+        metadata.target,
+        _.omit(body, [...primaryPropertyName])
+      );
 
       return tushan.datasource.manager.save(entity);
     });
 
     // 列元信息
     router.get(`/meta/${resourceName}/properties`, (ctx) => {
-      return metadata.columns.map((col) => ({
-        name: col.propertyName,
-        default: col.default,
-        type: parseColumnType(col.type),
-        isPrimary: col.isPrimary || col.isObjectId,
-        isNullable: col.isNullable,
-      }));
+      return metadata.columns.map((col) => {
+        const type = parseColumnType(col.type);
+
+        return {
+          name: col.propertyName,
+          default: col.default,
+          type,
+          viewType: getDefaultViewType(type),
+          isPrimary: col.isPrimary || col.isObjectId,
+          isNullable: col.isNullable,
+        };
+      });
     });
   });
 

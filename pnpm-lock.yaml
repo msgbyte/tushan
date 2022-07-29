@@ -23,7 +23,7 @@ specifiers:
   prettier: ^2.7.1
   react: ^18.2.0
   react-dom: ^18.2.0
-  react-fastify-form: ^1.0.1
+  react-fastify-form: ^1.0.2
   react-router: ^6.3.0
   react-router-dom: ^6.3.0
   reflect-metadata: ^0.1.13
@@ -48,7 +48,7 @@ dependencies:
   lodash: 4.17.21
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
-  react-fastify-form: 1.0.1_react@18.2.0
+  react-fastify-form: 1.0.2_react@18.2.0
   react-router: 6.3.0_react@18.2.0
   react-router-dom: 6.3.0_biqbaboplfbrettd7655fr4n2y
   reflect-metadata: 0.1.13
@@ -2472,8 +2472,8 @@ packages:
     resolution: {integrity: sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==}
     dev: false
 
-  /react-fastify-form/1.0.1_react@18.2.0:
-    resolution: {integrity: sha512-WTqoXFKUc58kdD6piQuOP/9mEtVM68fLFlBIgCyjbdfAnKfw/R36FzdAVPVaSQQPhMKEoB0vxAHSdI8cZUyRXQ==}
+  /react-fastify-form/1.0.2_react@18.2.0:
+    resolution: {integrity: sha512-GkW8hAX+eec/FwchZMxC+1/EJCY5fTfd8a6yCYQniPJLlFR0xjgEx8QYew387Zzue1LTZ8GI6Gi5GVwa75WBgg==}
     peerDependencies:
       react: ^16.14.0
     dependencies:

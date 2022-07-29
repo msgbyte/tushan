@@ -2,28 +2,31 @@ import React, { useMemo } from 'react';
 import {
   FastifyForm,
   regField,
-  FastifyFormContainerComponent,
   regFormContainer,
+  FastifyFormContainerProps,
 } from 'react-fastify-form';
 import { Form, Button } from '@arco-design/web-react';
-
 import { FastifyFormText } from './types/Text';
 import { FastifyFormTextArea } from './types/TextArea';
 import { FastifyFormPassword } from './types/Password';
 import { FastifyFormSelect } from './types/Select';
 import { FastifyFormCheckbox } from './types/Checkbox';
 import { FastifyFormCustom } from './types/Custom';
+import { FastifyFormNumber } from './types/Number';
 
 regField('text', FastifyFormText);
 regField('textarea', FastifyFormTextArea);
 regField('password', FastifyFormPassword);
+regField('number', FastifyFormNumber);
 regField('select', FastifyFormSelect);
 regField('checkbox', FastifyFormCheckbox);
 regField('custom', FastifyFormCustom);
 
-const FastifyFormContainer: FastifyFormContainerComponent = React.memo(
+const FastifyFormContainer: React.FC<FastifyFormContainerProps> = React.memo(
   (props) => {
     const layout = props.layout;
+    const hiddenSubmit: boolean = props.extraProps?.hiddenSubmit ?? false;
+
     const submitButtonRender = useMemo(() => {
       return (
         <Form.Item
@@ -61,7 +64,7 @@ const FastifyFormContainer: FastifyFormContainerComponent = React.memo(
         wrapperCol={layout === 'vertical' ? { xs: 24 } : { sm: 24, md: 16 }}
       >
         {props.children}
-        {submitButtonRender}
+        {!hiddenSubmit && submitButtonRender}
       </Form>
     );
   }
