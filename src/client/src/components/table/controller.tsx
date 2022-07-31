@@ -37,11 +37,13 @@ export const TushanTableController: React.FC = React.memo(() => {
       >
         <WebFastifyForm
           layout="vertical"
-          fields={resourceMeta.map((meta) => ({
-            type: meta.viewType,
-            name: meta.name,
-            label: meta.name,
-          }))}
+          fields={resourceMeta
+            .filter((meta) => !meta.isPrimary)
+            .map((meta) => ({
+              type: meta.viewType,
+              name: meta.name,
+              label: meta.name,
+            }))}
           extraProps={{ hiddenSubmit: true }}
           onChange={setValues}
           onSubmit={_noop}

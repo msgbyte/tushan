@@ -21,7 +21,7 @@ async function start() {
   app.use(router.routes()).use(router.allowedMethods());
 
   app.listen(6789, () => {
-    console.log('服务器已启动:', `http://localhost:6789`);
+    console.log('服务器已启动:', `http://localhost:6789/admin/`);
   });
 }
 
