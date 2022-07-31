@@ -1,5 +1,5 @@
 import { Spin, Table, TableColumnProps } from '@arco-design/web-react';
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { useResourcePropertiesMeta } from '../../model/resource/meta';
 import { useResourceName } from '../../router/hooks';
 import { TushanTableController } from './controller';
@@ -9,6 +9,7 @@ interface TushanTableProps {}
 export const TushanTable: React.FC<TushanTableProps> = React.memo((props) => {
   const resourceName = useResourceName();
   const { init, data, loading: resourceLoading, pagination } = useTableStore();
+  const containerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     init(resourceName);
   }, [resourceName]);
@@ -28,7 +29,7 @@ export const TushanTable: React.FC<TushanTableProps> = React.memo((props) => {
   }
 
   return (
-    <div>
+    <div ref={containerRef}>
       <TushanTableController />
       <Table columns={columns} data={data} pagination={pagination} />
     </div>
