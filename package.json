@@ -47,6 +47,7 @@
     "source-ref-runtime": "^1.0.6",
     "twin.arco": "^1.3.3",
     "typeorm": "^0.3.7",
-    "vite": "^3.0.2"
+    "vite": "^3.0.2",
+    "zustand": "^4.0.0"
   }
 }

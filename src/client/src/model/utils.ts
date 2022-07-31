@@ -13,8 +13,9 @@ export function useAsyncRequest<T>(fn: () => Promise<T>) {
   const { data, error, loading, runAsync } = useRequest(
     async () => {
       try {
-        await fn();
+        const ret = await fn();
         Message.success('操作成功');
+        return ret;
       } catch (err) {
         console.error(err);
         Message.error('操作失败');

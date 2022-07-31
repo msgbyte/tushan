@@ -6,16 +6,19 @@ import { WebFastifyForm } from '../form';
 import _noop from 'lodash/noop';
 import { useAsyncRequest } from '../../model/utils';
 import { addResource } from '../../model/resource/edit';
+import { useTableStore } from './store';
 
 export const TushanTableController: React.FC = React.memo(() => {
   const resourceName = useResourceName();
   const { data: resourceMeta } = useResourcePropertiesMeta(resourceName);
   const [addDrawerVisible, setAddDrawerVisible] = useState(false);
   const [values, setValues] = useState({});
+  const { refresh } = useTableStore();
 
   const [{ loading }, handleAddResource] = useAsyncRequest(async () => {
     await addResource(resourceName, values);
     setAddDrawerVisible(false);
+    refresh();
   });
 
   return (
