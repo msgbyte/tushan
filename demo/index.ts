@@ -13,6 +13,12 @@ async function start() {
       synchronize: true,
     },
     resources: [User],
+    pages: [
+      {
+        url: '/page1',
+        component: Tushan.require(require.resolve('./pages/page1')),
+      },
+    ],
   });
 
   await tushan.initialize();

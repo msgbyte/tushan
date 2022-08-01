@@ -18,7 +18,13 @@ export interface TushanResource {
   options: TushanResourceOptions;
 }
 
+export interface TushanPage {
+  url: string;
+  component: string;
+}
+
 export interface TushanOptions {
   datasourceOptions: Omit<DataSourceOptions, 'entities'>;
   resources: (Function | TushanResource)[];
+  pages: TushanPage[];
 }

@@ -11,6 +11,38 @@ const pkg = JSON.parse(
 export const VERSION = pkg.version;
 
 export class Tushan {
+  /**
+   * 用于覆盖的全局变量
+   */
+  static get customComponents(): Record<string, any> {
+    return (global as any)['__TushanCustomComponents'] ?? {};
+  }
+  static set customComponents(val: {}) {
+    (global as any)['__TushanCustomComponents'] = val;
+  }
+
+  /**
+   * 类似于require, 用于告知 Tushan 想要覆写的前端组件的引用
+   * @param fullpath 完整路径
+   * @returns 返回组件唯一id
+   */
+  static require(fullpath: string): string {
+    const componentId = `Tushan#${
+      Object.entries(Tushan.customComponents).length
+    }`;
+    if (!path.isAbsolute(fullpath)) {
+      throw new Error('Please input full path: ' + fullpath);
+    }
+
+    if (!fs.existsSync(fullpath)) {
+      throw new Error('File not exist: ' + fullpath);
+    }
+
+    Tushan.customComponents[componentId] = fullpath;
+
+    return componentId;
+  }
+
   datasource: DataSource;
 
   constructor(public options: TushanOptions) {
