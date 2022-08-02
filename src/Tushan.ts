@@ -1,9 +1,10 @@
-import fs from 'fs';
+import fs from 'fs-extra';
 import path from 'path';
 import type { DataSourceOptions } from 'typeorm';
 import { createViteServer } from './client/dev-server';
 import { DataSource, EntityMetadata } from './server/orm';
 import type { TushanOptions, TushanResource } from './types';
+import findCacheDir from 'find-cache-dir';
 
 const pkg = JSON.parse(
   fs.readFileSync(path.join(__dirname, '../package.json'), 'utf-8')
@@ -27,7 +28,7 @@ export class Tushan {
    * @returns 返回组件唯一id
    */
   static require(fullpath: string): string {
-    const componentId = `Tushan#${
+    const componentId = `Tushan${
       Object.entries(Tushan.customComponents).length
     }`;
     if (!path.isAbsolute(fullpath)) {
@@ -38,7 +39,10 @@ export class Tushan {
       throw new Error('File not exist: ' + fullpath);
     }
 
-    Tushan.customComponents[componentId] = fullpath;
+    Tushan.customComponents = {
+      ...Tushan.customComponents,
+      [componentId]: fullpath,
+    };
 
     return componentId;
   }
@@ -84,5 +88,29 @@ export class Tushan {
     if (this.env === 'development') {
       createViteServer();
     }
+
+    this.buildComponentEntry();
+  }
+
+  private async buildComponentEntry() {
+    const cacheDir = findCacheDir({ name: 'tushan' });
+    if (!cacheDir) {
+      throw new Error('cannot find package.json file');
+    }
+    await fs.ensureDir(cacheDir);
+
+    console.log(Tushan.customComponents);
+
+    const js = `
+${Object.entries(Tushan.customComponents)
+  .map(([name, url]) => `import ${name} from '${url}';`)
+  .join('\n')}
+
+window.TushanCustomComponent = {${Object.entries(Tushan.customComponents)
+      .map(([name]) => `${name}`)
+      .join(',')}}
+    `;
+
+    await fs.writeFile(path.resolve(cacheDir, './tushan-components.js'), js);
   }
 }
