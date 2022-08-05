@@ -14,7 +14,7 @@ interface FastifyFormSelectOptionsItem {
 export const FastifyFormSelect: FastifyFormFieldComponent<{
   options: FastifyFormSelectOptionsItem[];
 }> = React.memo((props) => {
-  const { name, label, value, onChange, options } = props;
+  const { name, label, required, value, onChange, options } = props;
 
   useEffect(() => {
     if (_isNil(value) || value === '') {
@@ -24,7 +24,7 @@ export const FastifyFormSelect: FastifyFormFieldComponent<{
   }, []);
 
   return (
-    <Form.Item label={label}>
+    <Form.Item label={label} required={required}>
       <Select size="large" value={value} onChange={(val) => onChange(val)}>
         {options.map((option, i) => (
           <Option key={`${option.value}${i}`} value={option.value}>

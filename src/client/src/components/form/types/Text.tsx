@@ -5,14 +5,23 @@ import { getValidateStatus } from '../utils';
 
 export const FastifyFormText: FastifyFormFieldComponent = React.memo(
   (props) => {
-    const { name, label, value, onChange, error, maxLength, placeholder } =
-      props;
+    const {
+      name,
+      label,
+      value,
+      onChange,
+      error,
+      required,
+      maxLength,
+      placeholder,
+    } = props;
 
     return (
       <Form.Item
         label={label}
         validateStatus={getValidateStatus(error)}
         help={error}
+        required={required}
       >
         <Input
           name={name}

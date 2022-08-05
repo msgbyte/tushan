@@ -9,10 +9,10 @@ import { CustomField } from 'react-fastify-form';
 export const FastifyFormCustom: FastifyFormFieldComponent<{
   render: (props: FastifyFormFieldProps) => React.ReactNode;
 }> = React.memo((props) => {
-  const { label } = props;
+  const { label, required } = props;
 
   return (
-    <Form.Item label={label}>
+    <Form.Item label={label} required={required}>
       <CustomField {...props} />
     </Form.Item>
   );

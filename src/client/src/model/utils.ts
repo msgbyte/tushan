@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { Message } from '@arco-design/web-react';
 import { useRequest } from 'ahooks';
+import { FastifyFormInstance } from 'react-fastify-form';
+import { useCallback } from 'react';
 
 export const request = axios.create({
   baseURL: '/admin',
@@ -25,6 +27,31 @@ export function useAsyncRequest<T>(fn: () => Promise<T>) {
       manual: true,
     }
   );
+
+  return [{ data, error, loading }, runAsync] as const;
+}
+
+/**
+ * useAsyncFormRequest 的表单版本
+ */
+export function useAsyncFormRequest<T>(
+  form: FastifyFormInstance | undefined,
+  fn: () => Promise<T>
+) {
+  const [{ data, error, loading }, _runAsync] = useAsyncRequest(fn);
+
+  const runAsync = useCallback(async () => {
+    if (!form) {
+      return;
+    }
+
+    const errors = await form.validateForm();
+    if (Object.keys(errors).length !== 0) {
+      return;
+    }
+
+    return await _runAsync();
+  }, [_runAsync, form]);
 
   return [{ data, error, loading }, runAsync] as const;
 }

@@ -16,7 +16,7 @@ export const BasicLayout: React.FC = React.memo((props) => {
   const menuWidth = collapsed ? 48 : 220;
 
   return (
-    <Layout className="h-full w-full overflow-y-auto">
+    <Layout className="h-full w-full overflow-y-auto min-h-full">
       <Header className="fixed w-full top-0 left-0 z-50 border-b border-arco-border bg-arco-bg-1">
         <Navbar />
       </Header>
@@ -37,11 +37,11 @@ export const BasicLayout: React.FC = React.memo((props) => {
           style={{ paddingTop: navbarHeight + 16, paddingLeft: menuWidth + 16 }}
         >
           <TushanBreadcrumb />
-          <Content>
+          <Content className="flex-1">
             <Outlet />
           </Content>
           <Footer className="text-center text-gray-500 py-1 text-xs">
-            本项目由涂山强力驱动 · Power by Tushan
+            本项目由涂山强力驱动 · Powered by Tushan
           </Footer>
         </Layout>
       </Layout>

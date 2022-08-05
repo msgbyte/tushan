@@ -5,13 +5,14 @@ import { getValidateStatus } from '../utils';
 
 export const FastifyFormCheckbox: FastifyFormFieldComponent = React.memo(
   (props) => {
-    const { name, label, value, onChange, error } = props;
+    const { name, label, required, value, onChange, error } = props;
 
     return (
       <Form.Item
         label={label}
         validateStatus={getValidateStatus(error)}
         help={error}
+        required={required}
       >
         <Checkbox
           checked={Boolean(value)}

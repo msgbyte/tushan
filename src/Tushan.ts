@@ -47,6 +47,14 @@ export class Tushan {
     return componentId;
   }
 
+  static getCacheDir(): string {
+    const cacheDir = findCacheDir({ name: 'tushan' });
+    if (!cacheDir) {
+      throw new Error('cannot find package.json file');
+    }
+    return cacheDir;
+  }
+
   datasource: DataSource;
 
   constructor(public options: TushanOptions) {
@@ -89,17 +97,12 @@ export class Tushan {
       createViteServer();
     }
 
-    this.buildComponentEntry();
+    await this.buildComponentEntry();
   }
 
   private async buildComponentEntry() {
-    const cacheDir = findCacheDir({ name: 'tushan' });
-    if (!cacheDir) {
-      throw new Error('cannot find package.json file');
-    }
+    const cacheDir = Tushan.getCacheDir();
     await fs.ensureDir(cacheDir);
-
-    console.log(Tushan.customComponents);
 
     const js = `
 ${Object.entries(Tushan.customComponents)
