@@ -1,7 +1,7 @@
 import fs from 'fs-extra';
 import path from 'path';
 import type { DataSourceOptions } from 'typeorm';
-import { createViteServer } from './client/dev-server';
+import { createViteServer } from './client/bundler';
 import { DataSource, EntityMetadata } from './server/orm';
 import type { TushanOptions, TushanResource } from './types';
 import findCacheDir from 'find-cache-dir';
