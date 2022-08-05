@@ -3,9 +3,14 @@ import Router from '@koa/router';
 import bodyParser from 'koa-bodyparser';
 import { parseColumnType } from './orm';
 import { getDefaultViewType } from '../shared/viewType';
-import fs from 'fs';
+import fs from 'fs-extra';
 import path from 'path';
 import _ from 'lodash';
+
+const template = fs.readFileSync(
+  path.resolve(__dirname, '../client/index.html'),
+  'utf-8'
+);
 
 interface BuildRouterOptions {
   /**
@@ -17,6 +22,7 @@ interface BuildRouterOptions {
    */
   prefix?: string;
 }
+
 export async function buildRouter(options: BuildRouterOptions) {
   const { tushan, prefix = '/admin' } = options;
   const router = new Router({
@@ -130,11 +136,6 @@ export async function buildRouter(options: BuildRouterOptions) {
 
   router.get('/(.*)', async (ctx) => {
     // 首页
-    let template = fs.readFileSync(
-      path.resolve(__dirname, '../client/index.html'),
-      'utf-8'
-    );
-
     if (tushan.env === 'development') {
       ctx.body = template.replace(
         '<!--SCRIPTS-SLOT-->',
@@ -152,8 +153,21 @@ export async function buildRouter(options: BuildRouterOptions) {
       `
       );
     } else {
-      console.log('TODO');
-      ctx.body = template;
+      const manifest: Record<string, { isEntry?: boolean; file: string }> =
+        await fs.readJson(
+          path.resolve(__dirname, '../client/public/scripts/manifest.json')
+        );
+      ctx.body = template.replace(
+        '<!--SCRIPTS-SLOT-->',
+        `${Object.entries(manifest)
+          .filter(([, item]) => item.isEntry === true)
+          .map(
+            ([, item]) =>
+              `<script type="module" src="${prefix}/scripts/${item.file}"></script>`
+          )
+          .join('\n')}
+        `
+      );
     }
   });
 

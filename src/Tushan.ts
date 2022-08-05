@@ -1,7 +1,7 @@
 import fs from 'fs-extra';
 import path from 'path';
 import type { DataSourceOptions } from 'typeorm';
-import { createViteServer } from './client/bundler';
+import { buildProduction, createViteServer } from './client/bundler';
 import { DataSource, EntityMetadata } from './server/orm';
 import type { TushanOptions, TushanResource } from './types';
 import findCacheDir from 'find-cache-dir';
@@ -15,7 +15,7 @@ export class Tushan {
   /**
    * 用于覆盖的全局变量
    */
-  static get customComponents(): Record<string, any> {
+  static get customComponents(): Record<string, string> {
     return (global as any)['__TushanCustomComponents'] ?? {};
   }
   static set customComponents(val: {}) {
@@ -93,11 +93,13 @@ export class Tushan {
   async initialize() {
     await this.datasource.initialize();
 
-    if (this.env === 'development') {
-      createViteServer();
-    }
-
     await this.buildComponentEntry();
+
+    if (this.env === 'development') {
+      await createViteServer();
+    } else {
+      await buildProduction();
+    }
   }
 
   private async buildComponentEntry() {
@@ -106,7 +108,7 @@ export class Tushan {
 
     const js = `
 ${Object.entries(Tushan.customComponents)
-  .map(([name, url]) => `import ${name} from '${url}';`)
+  .map(([name, url]) => `import ${name} from '${url.replace(/\\/g, '\\\\')}';`)
   .join('\n')}
 
 window.TushanCustomComponent = {${Object.entries(Tushan.customComponents)

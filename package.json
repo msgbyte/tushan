@@ -5,6 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node ./demo/index.ts",
+    "prod": "cross-env NODE_ENV=production ts-node ./demo/index.ts",
+    "build": "pnpm run build:fe",
+    "build:fe": "vite build --config ./src/client/vite.config.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -23,6 +26,7 @@
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "autoprefixer": "^10.4.7",
+    "cross-env": "^7.0.3",
     "postcss": "^8.4.14",
     "prettier": "^2.7.1",
     "rollup-plugin-source-ref": "^1.0.6",

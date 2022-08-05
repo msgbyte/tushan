@@ -24,10 +24,12 @@ export async function createViteServer() {
  * 编译代码(正式环境)
  */
 export async function buildProduction() {
+  console.log('开始编译前端代码...');
+
+  console.time('编译用时');
   await build({
     root,
     configFile,
   });
+  console.timeEnd('编译用时');
 }
-
-buildProduction();
