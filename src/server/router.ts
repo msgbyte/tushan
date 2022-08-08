@@ -6,6 +6,7 @@ import { getDefaultViewType } from '../shared/viewType';
 import fs from 'fs-extra';
 import path from 'path';
 import _ from 'lodash';
+import koaSend from 'koa-send';
 
 const template = fs.readFileSync(
   path.resolve(__dirname, '../client/index.html'),
@@ -25,8 +26,29 @@ interface BuildRouterOptions {
 
 export async function buildRouter(options: BuildRouterOptions) {
   const { tushan, prefix = '/admin' } = options;
+
   const router = new Router({
     prefix,
+  });
+
+  // 静态文件代理
+  router.use(async (ctx, next) => {
+    try {
+      const root = path.resolve(__dirname, '../client/public');
+      const _path = ctx.path.replace(prefix, '');
+      if (_path === '/') {
+        throw new Error();
+      }
+
+      await koaSend(ctx, _path, {
+        root,
+        immutable: true,
+        maxAge: 1000 * 60 * 60 * 24, // 1 day
+      });
+    } catch (err) {
+      // 如果没有命中文件，则继续往下走
+      await next();
+    }
   });
 
   router.use(bodyParser());
