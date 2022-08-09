@@ -13,6 +13,12 @@ const template = fs.readFileSync(
   'utf-8'
 );
 
+interface ViteManifest {
+  isEntry?: boolean;
+  file: string;
+  css?: string[];
+}
+
 interface BuildRouterOptions {
   /**
    * 涂山实例
@@ -159,6 +165,10 @@ export async function buildRouter(options: BuildRouterOptions) {
   router.get('/(.*)', async (ctx) => {
     // 首页
     if (tushan.env === 'development') {
+      const manifest: { url: string; inputs: Record<string, string> } =
+        await fs.readJson(
+          path.resolve(__dirname, '../client/public/scripts/manifest.dev.json')
+        );
       ctx.body = template.replace(
         '<!--SCRIPTS-SLOT-->',
         `
@@ -170,23 +180,35 @@ export async function buildRouter(options: BuildRouterOptions) {
   window.__vite_plugin_react_preamble_installed__ = true
 </script>
 <script type="module" src="//localhost:5173/@vite/client"></script>
-<script type="module" src="//localhost:5173/src/index.tsx"></script>
-<script type="module" src="//localhost:5173/node_modules/.cache/tushan/tushan-components.js"></script>
-      `
+${Object.entries(manifest.inputs)
+  .map(
+    ([, path]) => `<script type="module" src="${manifest.url}${path}"></script>`
+  )
+  .join('\n')}
+`
       );
     } else {
-      const manifest: Record<string, { isEntry?: boolean; file: string }> =
-        await fs.readJson(
-          path.resolve(__dirname, '../client/public/scripts/manifest.json')
-        );
+      const manifest: Record<string, ViteManifest> = await fs.readJson(
+        path.resolve(__dirname, '../client/public/scripts/manifest.json')
+      );
       ctx.body = template.replace(
         '<!--SCRIPTS-SLOT-->',
         `${Object.entries(manifest)
           .filter(([, item]) => item.isEntry === true)
-          .map(
-            ([, item]) =>
-              `<script type="module" src="${prefix}/scripts/${item.file}"></script>`
-          )
+          .map(([, item]) => {
+            let text = `<script type="module" src="${prefix}/scripts/${item.file}"></script>`;
+
+            if (item.css) {
+              text += item.css
+                .map(
+                  (c) =>
+                    `<link rel="stylesheet" href="${prefix}/scripts/${item.file}" />`
+                )
+                .join('\n');
+            }
+
+            return text;
+          })
           .join('\n')}
         `
       );
