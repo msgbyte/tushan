@@ -1,6 +1,5 @@
 import { PaginationProps, TableProps } from '@arco-design/web-react';
-import React, { PropsWithChildren, useContext } from 'react';
-import create, { useStore } from 'zustand';
+import create from 'zustand';
 import { getResourceResource } from '../../model/resource/list';
 
 type RequiredPart<T, K extends keyof T> = Required<Pick<T, K>> & Omit<T, K>;
@@ -13,9 +12,23 @@ interface TableState {
     'current' | 'total' | 'pageSize' | 'sizeCanChange'
   >;
   data: TableProps['data'];
+  drawerStatus:
+    | {
+        type: 'add';
+      }
+    | {
+        type: 'edit';
+        defaultValues: any;
+      }
+    | {
+        type: 'detail';
+      }
+    | false;
   init: (resourceName: string) => Promise<void>;
   refresh: () => Promise<void>;
   changePage: (page: number) => void;
+  showAddDrawer: () => void;
+  closeDrawer: () => void;
 }
 
 const defaultPagination: RequiredPart<
@@ -38,6 +51,7 @@ export const useTableStore = create<TableState>((set, get) => ({
     },
   },
   data: [],
+  drawerStatus: false,
   async init(resourceName: string) {
     set((state) => ({
       loading: true,
@@ -94,6 +108,16 @@ export const useTableStore = create<TableState>((set, get) => ({
         ...state.pagination,
         current: page,
       },
+    }));
+  },
+  showAddDrawer() {
+    set(() => ({
+      drawerStatus: { type: 'add' },
+    }));
+  },
+  closeDrawer() {
+    set(() => ({
+      drawerStatus: false,
     }));
   },
 }));

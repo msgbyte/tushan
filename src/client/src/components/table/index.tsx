@@ -1,9 +1,17 @@
-import { Spin, Table, TableColumnProps } from '@arco-design/web-react';
+import {
+  Button,
+  Space,
+  Spin,
+  Table,
+  TableColumnProps,
+} from '@arco-design/web-react';
 import React, { useEffect, useMemo, useRef } from 'react';
 import { useResourcePropertiesMeta } from '../../model/resource/meta';
 import { useResourceName } from '../../router/hooks';
 import { TushanTableController } from './controller';
 import { useTableStore } from './store';
+import { IconDelete, IconEdit } from '@arco-design/web-react/icon';
+import { TableDrawer } from './drawer';
 
 interface TushanTableProps {}
 export const TushanTable: React.FC<TushanTableProps> = React.memo((props) => {
@@ -18,10 +26,23 @@ export const TushanTable: React.FC<TushanTableProps> = React.memo((props) => {
     useResourcePropertiesMeta(resourceName);
 
   const columns = useMemo<TableColumnProps[]>(() => {
-    return meta.map((m) => ({
-      title: m.name,
-      dataIndex: m.name,
-    }));
+    return [
+      ...meta.map((m) => ({
+        title: m.name,
+        dataIndex: m.name,
+      })),
+      {
+        title: 'Action',
+        render: () => {
+          return (
+            <Space size="small">
+              <Button type="text" icon={<IconEdit />} />
+              <Button type="text" status="danger" icon={<IconDelete />} />
+            </Space>
+          );
+        },
+      },
+    ];
   }, [meta]);
 
   if (metaLoading || resourceLoading) {
@@ -32,6 +53,7 @@ export const TushanTable: React.FC<TushanTableProps> = React.memo((props) => {
     <div ref={containerRef}>
       <TushanTableController />
       <Table columns={columns} data={data} pagination={pagination} />
+      <TableDrawer />
     </div>
   );
 });
