@@ -5,7 +5,7 @@ import {
   FastifyFormInstance,
   fieldSchema,
 } from 'react-fastify-form';
-import { addResource } from '../../model/resource/edit';
+import { addResource, patchResource } from '../../model/resource/edit';
 import { useResourcePropertiesMeta } from '../../model/resource/meta';
 import { useAsyncFormRequest } from '../../model/utils';
 import { useResourceName } from '../../router/hooks';
@@ -20,7 +20,7 @@ export const TableDrawer: React.FC = React.memo(() => {
   const { refresh, drawerStatus, closeDrawer } = useTableStore();
   const formRef = useRef<FastifyFormInstance>();
 
-  const [{ loading }, handleAddResource] = useAsyncFormRequest(
+  const [{ loading: addLoading }, handleAddResource] = useAsyncFormRequest(
     formRef.current,
     async () => {
       await addResource(resourceName, values);
@@ -28,6 +28,17 @@ export const TableDrawer: React.FC = React.memo(() => {
       refresh();
     }
   );
+
+  const [{ loading: editLoading }, handleEditResource] = useAsyncFormRequest(
+    formRef.current,
+    async () => {
+      await patchResource(resourceName, values);
+      closeDrawer();
+      refresh();
+    }
+  );
+
+  const loading = addLoading || editLoading;
 
   const displayedMetaList = useMemo(
     () => resourceMeta.filter((meta) => !meta.isPrimary),
@@ -70,6 +81,8 @@ export const TableDrawer: React.FC = React.memo(() => {
 
     if (drawerStatus.type === 'add') {
       handleAddResource();
+    } else if (drawerStatus.type === 'edit') {
+      handleEditResource();
     }
   }, [drawerStatus, handleAddResource]);
 
@@ -87,6 +100,26 @@ export const TableDrawer: React.FC = React.memo(() => {
       {drawerStatus && drawerStatus.type === 'add' && (
         <WebFastifyForm
           layout="vertical"
+          fields={displayedMetaList.map((meta) => ({
+            type: meta.viewType,
+            name: meta.name,
+            label: meta.name,
+            required: !meta.isNullable,
+          }))}
+          schema={schema}
+          extraProps={{
+            hiddenSubmit: true,
+            onFormMount: (form) => (formRef.current = form),
+          }}
+          onChange={setValues}
+          onSubmit={_noop}
+        />
+      )}
+
+      {drawerStatus && drawerStatus.type === 'edit' && (
+        <WebFastifyForm
+          layout="vertical"
+          initialValues={drawerStatus.defaultValues}
           fields={displayedMetaList.map((meta) => ({
             type: meta.viewType,
             name: meta.name,

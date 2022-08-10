@@ -122,14 +122,41 @@ export async function buildRouter(options: BuildRouterOptions) {
     router.put(`/resource/${resourceName}/add`, (ctx) => {
       const body = ctx.request.body;
 
-      const primaryPropertyName = metadata.columns
+      const primaryPropertyNames = metadata.columns
         .filter((col) => col.isPrimary)
         .map((col) => col.propertyName);
 
       const entity = tushan.datasource.manager.create(
         metadata.target,
-        _.omit(body, [...primaryPropertyName])
+        _.omit(body, [...primaryPropertyNames])
       );
+
+      return tushan.datasource.manager.save(entity);
+    });
+
+    // 新增
+    router.patch(`/resource/${resourceName}/patch`, async (ctx) => {
+      const body = ctx.request.body;
+
+      const primaryPropertyNames = metadata.columns
+        .filter((col) => col.isPrimary)
+        .map((col) => col.propertyName);
+
+      if (primaryPropertyNames.length === 0) {
+        throw new Error('该参数没有主键');
+      }
+
+      const primary = primaryPropertyNames[0];
+
+      const entity = await tushan.datasource.manager.findOne(metadata.target, {
+        where: {
+          [primary]: body[primary],
+        },
+      });
+      if (!entity) {
+        throw new Error('Not found');
+      }
+      Object.assign(entity, _.omit(body, [primary]));
 
       return tushan.datasource.manager.save(entity);
     });

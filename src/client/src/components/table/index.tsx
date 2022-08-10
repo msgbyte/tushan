@@ -18,6 +18,8 @@ export const TushanTable: React.FC<TushanTableProps> = React.memo((props) => {
   const resourceName = useResourceName();
   const { init, data, loading: resourceLoading, pagination } = useTableStore();
   const containerRef = useRef<HTMLDivElement>(null);
+  const { showEditDrawer } = useTableStore();
+
   useEffect(() => {
     init(resourceName);
   }, [resourceName]);
@@ -33,10 +35,14 @@ export const TushanTable: React.FC<TushanTableProps> = React.memo((props) => {
       })),
       {
         title: 'Action',
-        render: () => {
+        render: (_, record) => {
           return (
             <Space size="small">
-              <Button type="text" icon={<IconEdit />} />
+              <Button
+                type="text"
+                icon={<IconEdit />}
+                onClick={() => showEditDrawer(record)}
+              />
               <Button type="text" status="danger" icon={<IconDelete />} />
             </Space>
           );

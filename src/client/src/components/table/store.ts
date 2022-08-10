@@ -28,6 +28,7 @@ interface TableState {
   refresh: () => Promise<void>;
   changePage: (page: number) => void;
   showAddDrawer: () => void;
+  showEditDrawer: (defaultValues: any) => void;
   closeDrawer: () => void;
 }
 
@@ -111,13 +112,21 @@ export const useTableStore = create<TableState>((set, get) => ({
     }));
   },
   showAddDrawer() {
-    set(() => ({
+    set({
       drawerStatus: { type: 'add' },
-    }));
+    });
+  },
+  showEditDrawer(defaultValues: any) {
+    set({
+      drawerStatus: {
+        type: 'edit',
+        defaultValues,
+      },
+    });
   },
   closeDrawer() {
-    set(() => ({
+    set({
       drawerStatus: false,
-    }));
+    });
   },
 }));
