@@ -11,16 +11,19 @@ export const request = axios.create({
 /**
  * 发送修改请求
  */
-export function useAsyncRequest<T>(fn: () => Promise<T>) {
-  const { data, error, loading, runAsync } = useRequest(
-    async () => {
+export function useAsyncRequest<TData, TParams extends any[]>(
+  fn: (...args: TParams) => Promise<TData>
+) {
+  const { data, error, loading, runAsync } = useRequest<TData, TParams>(
+    async (...args: TParams): Promise<TData> => {
       try {
-        const ret = await fn();
+        const ret = await fn(...args);
         Message.success('操作成功');
         return ret;
       } catch (err) {
         console.error(err);
         Message.error('操作失败');
+        throw err;
       }
     },
     {

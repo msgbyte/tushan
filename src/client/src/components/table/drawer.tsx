@@ -15,7 +15,7 @@ import _noop from 'lodash/noop';
 
 export const TableDrawer: React.FC = React.memo(() => {
   const resourceName = useResourceName();
-  const { data: resourceMeta } = useResourcePropertiesMeta(resourceName);
+  const { resourceMeta } = useResourcePropertiesMeta(resourceName);
   const [values, setValues] = useState({});
   const { refresh, drawerStatus, closeDrawer } = useTableStore();
   const formRef = useRef<FastifyFormInstance>();
@@ -41,7 +41,7 @@ export const TableDrawer: React.FC = React.memo(() => {
   const loading = addLoading || editLoading;
 
   const displayedMetaList = useMemo(
-    () => resourceMeta.filter((meta) => !meta.isPrimary),
+    () => resourceMeta.properties.filter((meta) => !meta.isPrimary),
     [resourceMeta]
   );
 
@@ -71,6 +71,14 @@ export const TableDrawer: React.FC = React.memo(() => {
 
     if (drawerStatus.type === 'add') {
       return `Add ${resourceName}`;
+    }
+
+    if (drawerStatus.type === 'edit') {
+      return 'Edit';
+    }
+
+    if (drawerStatus.type === 'detail') {
+      return 'Detail';
     }
   }, [drawerStatus]);
 

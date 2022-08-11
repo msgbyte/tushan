@@ -1,12 +1,12 @@
 import type { Tushan } from '../Tushan';
 import Router from '@koa/router';
 import bodyParser from 'koa-bodyparser';
-import { parseColumnType } from './orm';
 import { getDefaultViewType } from '../shared/viewType';
 import fs from 'fs-extra';
 import path from 'path';
 import _ from 'lodash';
 import koaSend from 'koa-send';
+import { metaTypeIsNumber, parseColumnType } from '../shared/types';
 
 const template = fs.readFileSync(
   path.resolve(__dirname, '../client/index.html'),
@@ -134,7 +134,7 @@ export async function buildRouter(options: BuildRouterOptions) {
       return tushan.datasource.manager.save(entity);
     });
 
-    // 新增
+    // 编辑
     router.patch(`/resource/${resourceName}/patch`, async (ctx) => {
       const body = ctx.request.body;
 
@@ -143,7 +143,7 @@ export async function buildRouter(options: BuildRouterOptions) {
         .map((col) => col.propertyName);
 
       if (primaryPropertyNames.length === 0) {
-        throw new Error('该参数没有主键');
+        throw new Error('该实体没有主键');
       }
 
       const primary = primaryPropertyNames[0];
@@ -159,6 +159,23 @@ export async function buildRouter(options: BuildRouterOptions) {
       Object.assign(entity, _.omit(body, [primary]));
 
       return tushan.datasource.manager.save(entity);
+    });
+
+    // 删除
+    router.delete(`/resource/${resourceName}/:primaryValue`, async (ctx) => {
+      const primaryProperties = metadata.columns.filter((col) => col.isPrimary);
+
+      if (primaryProperties.length === 0) {
+        throw new Error('该实体没有主键');
+      }
+
+      const primaryValue = metaTypeIsNumber(primaryProperties[0].type)
+        ? Number(ctx.params['primaryValue'])
+        : ctx.params['primaryValue'];
+
+      await tushan.datasource.manager.delete(metadata.target, primaryValue);
+
+      return true;
     });
 
     // 列元信息

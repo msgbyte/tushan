@@ -23,3 +23,13 @@ export async function patchResource(
     ...resourceData,
   });
 }
+
+/**
+ * 删除 记录
+ */
+export async function deleteResource(
+  resourceName: string,
+  resourcePrimaryValue: any
+): Promise<void> {
+  await request.delete(`/resource/${resourceName}/${resourcePrimaryValue}`);
+}

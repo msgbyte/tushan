@@ -1,5 +1,6 @@
 import {
   Button,
+  Popconfirm,
   Space,
   Spin,
   Table,
@@ -12,11 +13,19 @@ import { TushanTableController } from './controller';
 import { useTableStore } from './store';
 import { IconDelete, IconEdit } from '@arco-design/web-react/icon';
 import { TableDrawer } from './drawer';
+import { useAsyncRequest } from '../../model/utils';
+import { deleteResource } from '../../model/resource/edit';
 
 interface TushanTableProps {}
 export const TushanTable: React.FC<TushanTableProps> = React.memo((props) => {
   const resourceName = useResourceName();
-  const { init, data, loading: resourceLoading, pagination } = useTableStore();
+  const {
+    init,
+    data,
+    loading: resourceLoading,
+    pagination,
+    refresh,
+  } = useTableStore();
   const containerRef = useRef<HTMLDivElement>(null);
   const { showEditDrawer } = useTableStore();
 
@@ -24,12 +33,17 @@ export const TushanTable: React.FC<TushanTableProps> = React.memo((props) => {
     init(resourceName);
   }, [resourceName]);
 
-  const { data: meta, loading: metaLoading } =
+  const { resourceMeta, loading: metaLoading } =
     useResourcePropertiesMeta(resourceName);
+
+  const [, handleDelete] = useAsyncRequest(async (record: any) => {
+    await deleteResource(resourceName, record[resourceMeta.primaryName]);
+    refresh();
+  });
 
   const columns = useMemo<TableColumnProps[]>(() => {
     return [
-      ...meta.map((m) => ({
+      ...resourceMeta.properties.map((m) => ({
         title: m.name,
         dataIndex: m.name,
       })),
@@ -43,22 +57,32 @@ export const TushanTable: React.FC<TushanTableProps> = React.memo((props) => {
                 icon={<IconEdit />}
                 onClick={() => showEditDrawer(record)}
               />
-              <Button type="text" status="danger" icon={<IconDelete />} />
+              <Popconfirm
+                title="确认要删除该条记录吗?"
+                onOk={() => handleDelete(record)}
+              >
+                <Button type="text" status="danger" icon={<IconDelete />} />
+              </Popconfirm>
             </Space>
           );
         },
       },
     ];
-  }, [meta]);
+  }, [resourceMeta.properties]);
 
-  if (metaLoading || resourceLoading) {
+  if (metaLoading) {
     return <Spin />;
   }
 
   return (
     <div ref={containerRef}>
       <TushanTableController />
-      <Table columns={columns} data={data} pagination={pagination} />
+      <Table
+        loading={resourceLoading}
+        columns={columns}
+        data={data}
+        pagination={pagination}
+      />
       <TableDrawer />
     </div>
   );

@@ -22,21 +22,28 @@ interface ResourcePropertyMeta {
  */
 export function useResourcePropertiesMeta(resourceName: string) {
   const {
-    data = [],
+    data = { properties: [], primaryName: 'id' },
     error,
     loading,
   } = useRequest(
     async () => {
       const { data } = await request.get(`/meta/${resourceName}/properties`);
 
-      return data.list as ResourcePropertyMeta[];
+      const properties = data.list as ResourcePropertyMeta[];
+      const primaryName =
+        properties.filter((item) => item.isPrimary)?.[0].name ?? '';
+
+      return {
+        properties,
+        primaryName,
+      };
     },
     {
       staleTime: 1000 * 60 * 1, // 1 min
     }
   );
 
-  return { data, error, loading };
+  return { resourceMeta: data, error, loading };
 }
 
 /**
