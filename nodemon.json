@@ -1,0 +1,8 @@
+{
+  "verbose": true,
+  "watch": ["src/*"],
+  "ignore": ["src/client/*"],
+  "ext": "ts",
+  "delay": 1000,
+  "exec": "ts-node ./demo/index.ts"
+}

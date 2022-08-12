@@ -11,6 +11,7 @@ export async function createViteServer() {
   const viteServer = await createServer({
     root,
     configFile,
+    clearScreen: false,
   });
   await viteServer.listen(5173);
 

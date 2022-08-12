@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node ./demo/index.ts",
+    "dev": "nodemon",
     "prod": "cross-env NODE_ENV=production ts-node ./demo/index.ts",
     "build": "pnpm run build:fe",
     "build:fe": "vite build --config ./src/client/vite.config.ts",
@@ -28,6 +28,7 @@
     "@types/react-dom": "^18.0.6",
     "autoprefixer": "^10.4.7",
     "cross-env": "^7.0.3",
+    "nodemon": "^2.0.19",
     "postcss": "^8.4.14",
     "prettier": "^2.7.1",
     "rollup-plugin-source-ref": "^1.0.6",
