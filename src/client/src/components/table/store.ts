@@ -40,6 +40,7 @@ const defaultPagination: RequiredPart<
   total: 0,
   pageSize: 20,
   sizeCanChange: false,
+  showTotal: true,
 };
 
 export const useTableStore = create<TableState>((set, get) => ({
