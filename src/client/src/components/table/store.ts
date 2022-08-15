@@ -22,12 +22,14 @@ interface TableState {
       }
     | {
         type: 'detail';
+        drawerRecord: any;
       }
     | false;
   init: (resourceName: string) => Promise<void>;
   refresh: () => Promise<void>;
   changePage: (page: number) => void;
   showAddDrawer: () => void;
+  showDetailDrawer: (drawerRecord: any) => void;
   showEditDrawer: (defaultValues: any) => void;
   closeDrawer: () => void;
 }
@@ -54,6 +56,7 @@ export const useTableStore = create<TableState>((set, get) => ({
   },
   data: [],
   drawerStatus: false,
+  drawerRecord: {},
   async init(resourceName: string) {
     set((state) => ({
       loading: true,
@@ -115,6 +118,11 @@ export const useTableStore = create<TableState>((set, get) => ({
   showAddDrawer() {
     set({
       drawerStatus: { type: 'add' },
+    });
+  },
+  showDetailDrawer(drawerRecord: any) {
+    set({
+      drawerStatus: { type: 'detail', drawerRecord },
     });
   },
   showEditDrawer(defaultValues: any) {

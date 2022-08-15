@@ -9,7 +9,7 @@ interface ResourceMeta {
   resourceName: string;
 }
 
-interface ResourcePropertyMeta {
+export interface ResourcePropertyMeta {
   isNullable: boolean;
   isPrimary: boolean;
   name: string;

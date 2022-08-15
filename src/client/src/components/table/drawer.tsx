@@ -1,4 +1,4 @@
-import { Drawer } from '@arco-design/web-react';
+import { Drawer, DrawerProps } from '@arco-design/web-react';
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import {
   createFastifyFormSchema,
@@ -64,23 +64,29 @@ export const TableDrawer: React.FC = React.memo(() => {
     [displayedMetaList]
   );
 
-  const title = useMemo(() => {
+  const drawerProps = useMemo<DrawerProps>(() => {
     if (!drawerStatus) {
-      return '';
+      return {};
     }
 
     if (drawerStatus.type === 'add') {
-      return `Add ${resourceName}`;
-    }
-
-    if (drawerStatus.type === 'edit') {
-      return 'Edit';
+      return { title: `Add ${resourceName}` };
     }
 
     if (drawerStatus.type === 'detail') {
-      return 'Detail';
+      return {
+        title: 'Detail',
+        maskClosable: true,
+        footer: null,
+      };
     }
-  }, [drawerStatus]);
+
+    if (drawerStatus.type === 'edit') {
+      return { title: 'Edit' };
+    }
+
+    return {};
+  }, [drawerStatus, resourceName]);
 
   const handleOk = useCallback(() => {
     if (!drawerStatus) {
@@ -96,11 +102,11 @@ export const TableDrawer: React.FC = React.memo(() => {
 
   return (
     <Drawer
-      title={title}
       width={600}
-      visible={drawerStatus !== false}
       closable={true}
       maskClosable={false}
+      {...drawerProps}
+      visible={drawerStatus !== false}
       okButtonProps={{ loading }}
       onOk={handleOk}
       onCancel={closeDrawer}
@@ -143,6 +149,25 @@ export const TableDrawer: React.FC = React.memo(() => {
           onSubmit={_noop}
         />
       )}
+
+      {drawerStatus && drawerStatus.type === 'detail' && (
+        <WebFastifyForm
+          layout="vertical"
+          initialValues={drawerStatus.drawerRecord}
+          fields={displayedMetaList.map((meta) => ({
+            type: 'plain',
+            name: meta.name,
+            label: meta.name,
+          }))}
+          schema={schema}
+          extraProps={{
+            hiddenSubmit: true,
+          }}
+          onChange={_noop}
+          onSubmit={_noop}
+        />
+      )}
     </Drawer>
   );
 });
+TableDrawer.displayName = 'TableDrawer';

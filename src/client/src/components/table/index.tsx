@@ -15,6 +15,7 @@ import { IconDelete, IconEdit } from '@arco-design/web-react/icon';
 import { TableDrawer } from './drawer';
 import { useAsyncRequest } from '../../model/utils';
 import { deleteResource } from '../../model/resource/edit';
+import { MetaBaseList } from '../viewtype/__base__/list';
 
 interface TushanTableProps {}
 export const TushanTable: React.FC<TushanTableProps> = React.memo((props) => {
@@ -46,6 +47,13 @@ export const TushanTable: React.FC<TushanTableProps> = React.memo((props) => {
       ...resourceMeta.properties.map((m) => ({
         title: m.name,
         dataIndex: m.name,
+        render: (value, record) => (
+          <MetaBaseList
+            resourcePropertyMeta={m}
+            value={value}
+            record={record}
+          />
+        ),
       })),
       {
         title: 'Action',

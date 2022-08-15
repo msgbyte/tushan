@@ -16,7 +16,9 @@ import { FastifyFormSelect } from './types/Select';
 import { FastifyFormCheckbox } from './types/Checkbox';
 import { FastifyFormCustom } from './types/Custom';
 import { FastifyFormNumber } from './types/Number';
+import { FastifyFormPlain } from './types/Plain';
 
+regField('plain', FastifyFormPlain);
 regField('text', FastifyFormText);
 regField('textarea', FastifyFormTextArea);
 regField('password', FastifyFormPassword);
