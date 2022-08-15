@@ -1,8 +1,8 @@
 import path from 'path';
 import { createServer, build } from 'vite';
 
-const root = path.resolve(__dirname, './');
-const configFile = path.resolve(__dirname, './vite.config.ts');
+const root = path.resolve(__dirname, '../client');
+const configFile = path.resolve(__dirname, '../client/vite.config.ts');
 
 /**
  * Vite 开发服务器

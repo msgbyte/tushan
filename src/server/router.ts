@@ -209,6 +209,7 @@ export async function buildRouter(options: BuildRouterOptions) {
   router.get('/(.*)', async (ctx) => {
     // 首页
     if (tushan.env === 'development') {
+      // 开发环境
       const manifest: { url: string; inputs: Record<string, string> } =
         await fs.readJson(
           path.resolve(__dirname, '../client/public/scripts/manifest.dev.json')
@@ -232,6 +233,7 @@ ${Object.entries(manifest.inputs)
 `
       );
     } else {
+      // 生产环境
       const manifest: Record<string, ViteManifest> = await fs.readJson(
         path.resolve(__dirname, '../client/public/scripts/manifest.json')
       );
