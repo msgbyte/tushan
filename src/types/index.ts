@@ -19,8 +19,14 @@ export interface TushanResource {
 }
 
 export interface TushanPage {
-  url: string;
-  component: string;
+  path: string;
+  componentId: string;
+  /**
+   * 显示名称，用于在侧边栏展示
+   *
+   * 如果不填则不会在侧边栏展示
+   */
+  label?: string;
 }
 
 export interface TushanOptions {

@@ -1,9 +1,10 @@
 import React from 'react';
 import { Menu } from '@arco-design/web-react';
-import { IconApps, IconHome } from '@arco-design/web-react/icon';
+import { IconApps, IconArchive, IconHome } from '@arco-design/web-react/icon';
 import { useAllResources } from '../model/resource/meta';
 import { useRouteNav } from '../router/hooks';
 import { useLocation } from 'react-router';
+import { getTushanCustomInfo } from '../utils';
 
 const MenuItem = Menu.Item;
 
@@ -29,6 +30,15 @@ export const Sidebar: React.FC = React.memo(() => {
           {meta.resourceName}
         </MenuItem>
       ))}
+
+      {getTushanCustomInfo()
+        .customPages.filter((page) => page.label)
+        .map((page) => (
+          <MenuItem key={page.path}>
+            <IconArchive />
+            {page.label}
+          </MenuItem>
+        ))}
     </Menu>
   );
 });

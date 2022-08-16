@@ -1,7 +1,7 @@
 import fs from 'fs-extra';
 import path from 'path';
 import type { DataSourceOptions } from 'typeorm';
-import { buildProduction, createViteServer } from './client/bundler';
+import { buildProduction, createViteServer } from './server/bundler';
 import { DataSource, EntityMetadata } from './server/orm';
 import type { TushanOptions, TushanResource } from './types';
 import findCacheDir from 'find-cache-dir';
@@ -106,15 +106,22 @@ export class Tushan {
     const cacheDir = Tushan.getCacheDir();
     await fs.ensureDir(cacheDir);
 
+    const customComponents = Object.entries(Tushan.customComponents);
+
     const js = `
-${Object.entries(Tushan.customComponents)
+${customComponents
   .map(([name, url]) => `import ${name} from '${url.replace(/\\/g, '\\\\')}';`)
   .join('\n')}
 
-window.TushanCustomComponent = {${Object.entries(Tushan.customComponents)
+window.Tushan = {};
+
+// 用户自定义组件
+window.Tushan.customComponent = {${customComponents
       .map(([name]) => `${name}`)
-      .join(',')}}
-    `;
+      .join(',')}};
+
+window.Tushan.customPages = ${JSON.stringify(this.options.pages ?? [])};
+`;
 
     await fs.writeFile(path.resolve(cacheDir, './tushan-components.js'), js);
   }

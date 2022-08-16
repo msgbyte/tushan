@@ -86,6 +86,7 @@ export const TushanTable: React.FC<TushanTableProps> = React.memo((props) => {
     <div ref={containerRef}>
       <TushanTableController />
       <Table
+        rowKey={resourceMeta.primaryName}
         loading={resourceLoading}
         columns={columns}
         data={data}

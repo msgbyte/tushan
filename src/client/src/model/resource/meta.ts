@@ -3,6 +3,7 @@ import {
   ResourcePropertyMetaType,
   ResourcePropertyMetaViewType,
 } from '../../../../shared/types';
+import { DEFAULT_PRIMARY_NAME } from '../../../../shared/const';
 import { request } from '../utils';
 
 interface ResourceMeta {
@@ -22,7 +23,7 @@ export interface ResourcePropertyMeta {
  */
 export function useResourcePropertiesMeta(resourceName: string) {
   const {
-    data = { properties: [], primaryName: 'id' },
+    data = { properties: [], primaryName: DEFAULT_PRIMARY_NAME },
     error,
     loading,
   } = useRequest(
@@ -31,7 +32,8 @@ export function useResourcePropertiesMeta(resourceName: string) {
 
       const properties = data.list as ResourcePropertyMeta[];
       const primaryName =
-        properties.filter((item) => item.isPrimary)?.[0].name ?? '';
+        properties.filter((item) => item.isPrimary)?.[0].name ??
+        DEFAULT_PRIMARY_NAME;
 
       return {
         properties,

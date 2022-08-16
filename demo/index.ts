@@ -15,8 +15,9 @@ async function start() {
     resources: [User],
     pages: [
       {
-        url: '/page1',
-        component: Tushan.require(require.resolve('./pages/page1')),
+        path: '/page1',
+        componentId: Tushan.require(require.resolve('./pages/page1')),
+        label: '自定义页面',
       },
     ],
   });
