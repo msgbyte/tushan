@@ -27,7 +27,7 @@ export const Sidebar: React.FC = React.memo(() => {
       {metas.map((meta) => (
         <MenuItem key={`/${meta.resourceName}/list`}>
           <IconApps />
-          {meta.resourceName}
+          {meta.resourceLabel}
         </MenuItem>
       ))}
 

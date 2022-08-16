@@ -7,6 +7,7 @@ import { DEFAULT_PRIMARY_NAME } from '../../../../shared/const';
 import { request } from '../utils';
 
 interface ResourceMeta {
+  resourceLabel: string;
   resourceName: string;
 }
 

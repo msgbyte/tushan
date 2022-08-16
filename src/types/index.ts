@@ -11,6 +11,7 @@ export interface TushanResourceOptions {
     orderBy: string;
   };
   limit?: number;
+  label?: string;
 }
 
 export interface TushanResource {

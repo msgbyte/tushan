@@ -12,7 +12,14 @@ async function start() {
       database: path.resolve(__dirname, './db/db.sqlite'),
       synchronize: true,
     },
-    resources: [User],
+    resources: [
+      {
+        entity: User,
+        options: {
+          label: '用户',
+        },
+      },
+    ],
     pages: [
       {
         path: '/page1',

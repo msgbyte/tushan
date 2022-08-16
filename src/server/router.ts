@@ -199,9 +199,11 @@ export async function buildRouter(options: BuildRouterOptions) {
   router.get(`/meta/all`, (ctx) => {
     return tushan.resources.map((resource) => {
       const metadata = tushan.datasource.getMetadata(resource.entity);
+      const name = metadata.name.toLowerCase();
 
       return {
-        resourceName: metadata.name.toLowerCase(),
+        resourceLabel: resource.options.label ?? name,
+        resourceName: name,
       };
     });
   });
