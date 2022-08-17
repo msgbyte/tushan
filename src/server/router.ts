@@ -197,7 +197,7 @@ export async function buildRouter(options: BuildRouterOptions) {
 
   // 列出所有元信息
   router.get(`/meta/all`, (ctx) => {
-    return tushan.resources.map((resource) => {
+    const list = tushan.resources.map((resource) => {
       const metadata = tushan.datasource.getMetadata(resource.entity);
       const name = metadata.name.toLowerCase();
 
@@ -206,6 +206,10 @@ export async function buildRouter(options: BuildRouterOptions) {
         resourceName: name,
       };
     });
+
+    return {
+      list,
+    };
   });
 
   router.get('/(.*)', async (ctx) => {

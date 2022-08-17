@@ -4,6 +4,8 @@ import { Navbar } from './Navbar';
 import { Sidebar } from './Sidebar';
 import { TushanBreadcrumb } from './Breadcrumb';
 import { Outlet } from 'react-router';
+import { useLayoutStore } from '../store/layout';
+import { useEffect } from 'react';
 
 const Sider = Layout.Sider;
 const Header = Layout.Header;
@@ -14,6 +16,11 @@ export const BasicLayout: React.FC = React.memo((props) => {
   const [collapsed, setCollapsed] = useState(false);
   const navbarHeight = 64;
   const menuWidth = collapsed ? 48 : 220;
+  const { init } = useLayoutStore();
+
+  useEffect(() => {
+    init();
+  }, []);
 
   return (
     <Layout className="h-full w-full overflow-y-auto min-h-full">

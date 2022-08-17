@@ -1,17 +1,17 @@
 import React from 'react';
 import { Menu } from '@arco-design/web-react';
 import { IconApps, IconArchive, IconHome } from '@arco-design/web-react/icon';
-import { useAllResources } from '../model/resource/meta';
 import { useRouteNav } from '../router/hooks';
 import { useLocation } from 'react-router';
 import { getTushanCustomInfo } from '../utils';
+import { useLayoutStore } from '../store/layout';
 
 const MenuItem = Menu.Item;
 
 export const Sidebar: React.FC = React.memo(() => {
-  const { metas } = useAllResources();
   const { navigate } = useRouteNav();
   const location = useLocation();
+  const { resources } = useLayoutStore();
 
   return (
     <Menu
@@ -24,10 +24,10 @@ export const Sidebar: React.FC = React.memo(() => {
         Home
       </MenuItem>
 
-      {metas.map((meta) => (
-        <MenuItem key={`/${meta.resourceName}/list`}>
+      {resources.map((item) => (
+        <MenuItem key={`/${item.resourceName}/list`}>
           <IconApps />
-          {meta.resourceLabel}
+          {item.resourceLabel}
         </MenuItem>
       ))}
 
