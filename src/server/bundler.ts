@@ -15,8 +15,7 @@ export async function createViteServer() {
   });
   await viteServer.listen(5173);
 
-  console.log('前端开发服务器已启动:');
-  viteServer.printUrls();
+  console.log('前端开发服务器已启动');
 
   return viteServer;
 }

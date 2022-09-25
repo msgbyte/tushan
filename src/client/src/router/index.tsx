@@ -3,12 +3,14 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { TushanHome } from '../components/home';
 import { TushanTable } from '../components/table';
 import { BasicLayout } from '../layout/Layout';
+import { LoginPage } from '../pages/LoginPage';
 import { getTushanCustomInfo } from '../utils';
 
 export const TushanRouter: React.FC = React.memo(() => {
   return (
     <BrowserRouter basename="/admin">
       <Routes>
+        <Route path="/login" element={<LoginPage />} />
         <Route element={<BasicLayout />}>
           <Route path="/home" element={<TushanHome />} />
           <Route path="/:resourceName/list" element={<TushanTable />} />
