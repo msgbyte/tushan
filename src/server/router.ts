@@ -254,7 +254,7 @@ ${Object.entries(manifest.inputs)
               text += item.css
                 .map(
                   (c) =>
-                    `<link rel="stylesheet" href="${prefix}/scripts/${item.file}" />`
+                    `<link rel="stylesheet" href="${prefix}/scripts/${c}" />`
                 )
                 .join('\n');
             }

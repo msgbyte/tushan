@@ -1,4 +1,4 @@
-import { buildRouter, Tushan } from '../src/index';
+import { buildRouter, Tushan } from '../';
 import { User } from './resources/User';
 import Koa from 'koa';
 import path from 'path';
