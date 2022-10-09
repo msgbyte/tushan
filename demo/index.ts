@@ -2,9 +2,13 @@ import { buildRouter, Tushan } from '../';
 import { User } from './resources/User';
 import Koa from 'koa';
 import path from 'path';
+import session from 'koa-session';
 
 async function start() {
   const app = new Koa();
+
+  app.keys = ['tushan'];
+  app.use(session({ key: 'sess:tushan' }, app));
 
   const tushan = new Tushan({
     datasourceOptions: {
@@ -31,7 +35,12 @@ async function start() {
 
   await tushan.initialize();
 
-  const router = await buildRouter({ tushan });
+  const router = await buildRouter({
+    tushan,
+    auth: {
+      local: async (username, password) => ({ id: 1, username }),
+    },
+  });
   app.use(router.routes()).use(router.allowedMethods());
 
   app.listen(6789, () => {

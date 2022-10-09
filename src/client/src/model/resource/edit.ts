@@ -7,7 +7,7 @@ export async function addResource(
   resourceName: string,
   resourceData: Record<string, any>
 ): Promise<void> {
-  await request.put(`/resource/${resourceName}/add`, {
+  await request.put(`/api/resource/${resourceName}/add`, {
     ...resourceData,
   });
 }
@@ -19,7 +19,7 @@ export async function patchResource(
   resourceName: string,
   resourceData: Record<string, any>
 ): Promise<void> {
-  await request.patch(`/resource/${resourceName}/patch`, {
+  await request.patch(`/api/resource/${resourceName}/patch`, {
     ...resourceData,
   });
 }
@@ -31,5 +31,5 @@ export async function deleteResource(
   resourceName: string,
   resourcePrimaryValue: any
 ): Promise<void> {
-  await request.delete(`/resource/${resourceName}/${resourcePrimaryValue}`);
+  await request.delete(`/api/resource/${resourceName}/${resourcePrimaryValue}`);
 }

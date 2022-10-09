@@ -14,6 +14,11 @@ export interface ResourcePropertyMeta {
   viewType: ResourcePropertyMetaViewType;
 }
 
+export interface ResourceMeta {
+  resourceLabel: string;
+  resourceName: string;
+}
+
 /**
  * 获取资源列元信息
  */
@@ -24,7 +29,9 @@ export function useResourcePropertiesMeta(resourceName: string) {
     loading,
   } = useRequest(
     async () => {
-      const { data } = await request.get(`/meta/${resourceName}/properties`);
+      const { data } = await request.get(
+        `/api/meta/${resourceName}/properties`
+      );
 
       const properties = data.list as ResourcePropertyMeta[];
       const primaryName =
@@ -42,4 +49,10 @@ export function useResourcePropertiesMeta(resourceName: string) {
   );
 
   return { resourceMeta: data, error, loading };
+}
+
+export async function fetchAllMeta(): Promise<ResourceMeta[]> {
+  const { data } = await request.get(`/api/meta/all`);
+
+  return data.list ?? [];
 }

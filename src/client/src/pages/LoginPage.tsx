@@ -12,7 +12,14 @@ import {
 import { IconLock, IconUser } from '@arco-design/web-react/icon';
 import { useLocalStorageState, useMemoizedFn } from 'ahooks';
 import React, { useRef, useState } from 'react';
+import { login } from '../model/auth';
 import { useAsyncRequest } from '../model/utils';
+import { useRouteNav } from '../router/hooks';
+
+const initialValues = {
+  username: 'admin',
+  password: 'admin',
+};
 
 /**
  * TODO: should allow to customize
@@ -41,6 +48,7 @@ export const LoginPage: React.FC = React.memo(() => {
     string | undefined
   >('loginParams');
   const [rememberPassword, setRememberPassword] = useState(!!loginParams);
+  const { navHomePage } = useRouteNav();
 
   function afterLoginSuccess(params) {
     // 记住密码
@@ -51,17 +59,13 @@ export const LoginPage: React.FC = React.memo(() => {
     }
     // 记录登录状态
     localStorage.setItem('userStatus', 'login');
-    // 跳转首页
-    window.location.href = '/';
   }
 
   const [{ loading, error }, handleLogin] = useAsyncRequest(
     async (params: any) => {
-      // TODO
-      console.log(params);
-      Message.info(JSON.stringify(params));
-
-      // afterLoginSuccess(params);
+      await login(params.username, params.password);
+      afterLoginSuccess(params);
+      navHomePage();
     }
   );
 
@@ -101,11 +105,7 @@ export const LoginPage: React.FC = React.memo(() => {
 
           <div className="text-red-500 h-8 leading-8">{error?.message}</div>
 
-          <Form
-            layout="vertical"
-            ref={formRef}
-            initialValues={{ username: 'admin', password: 'admin' }}
-          >
+          <Form layout="vertical" ref={formRef} initialValues={initialValues}>
             <Form.Item
               field="username"
               rules={[{ required: true, message: 'Username is required' }]}

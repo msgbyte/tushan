@@ -24,7 +24,7 @@ export const Sidebar: React.FC = React.memo(() => {
         Home
       </MenuItem>
 
-      {resources.map((item) => (
+      {(resources ?? []).map((item) => (
         <MenuItem key={`/${item.resourceName}/list`}>
           <IconApps />
           {item.resourceLabel}

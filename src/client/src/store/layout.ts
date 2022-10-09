@@ -1,10 +1,5 @@
 import create from 'zustand';
-import { request } from '../model/utils';
-
-interface ResourceMeta {
-  resourceLabel: string;
-  resourceName: string;
-}
+import { fetchAllMeta, ResourceMeta } from '../model/resource/meta';
 
 interface LayoutState {
   resources: ResourceMeta[];
@@ -14,10 +9,10 @@ interface LayoutState {
 export const useLayoutStore = create<LayoutState>((set) => ({
   resources: [],
   init: async () => {
-    const { data } = await request.get(`/meta/all`);
+    const resources = await fetchAllMeta();
 
     set({
-      resources: data.list as ResourceMeta[],
+      resources,
     });
   },
 }));

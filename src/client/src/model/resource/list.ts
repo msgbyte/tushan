@@ -12,7 +12,7 @@ export async function getResourceResource<T>(
   list: T[];
   count: number;
 }> {
-  const { data } = await request.get(`/resource/${resourceName}/list`);
+  const { data } = await request.get(`/api/resource/${resourceName}/list`);
 
   return { list: data.list, count: data.count };
 }
@@ -24,7 +24,7 @@ export async function getResourceResource<T>(
  */
 export function useResourceList(model: string) {
   const { data, error, loading } = useRequest(async () => {
-    const { data } = await request.get(`/resource/${model}/list`);
+    const { data } = await request.get(`/api/resource/${model}/list`);
 
     return { list: data.list, count: data.count };
   });

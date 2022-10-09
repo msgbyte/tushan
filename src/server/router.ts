@@ -7,6 +7,8 @@ import path from 'path';
 import _ from 'lodash';
 import koaSend from 'koa-send';
 import { metaTypeIsNumber, parseColumnType } from '../shared/types';
+import { AuthInfo, useAuth } from './auth';
+import type Koa from 'koa';
 
 const template = fs.readFileSync(
   path.resolve(__dirname, '../client/index.html'),
@@ -24,10 +26,17 @@ interface BuildRouterOptions {
    * 涂山实例
    */
   tushan: Tushan;
+
   /**
    * @default 默认为 `/admin`
    */
   prefix?: string;
+
+  /**
+   * 是否开启校验
+   * 如果开启则需要 app 安装 koa-session 以确保能够存储用户登录状态
+   */
+  auth?: AuthInfo | false;
 }
 
 export async function buildRouter(options: BuildRouterOptions) {
@@ -58,6 +67,10 @@ export async function buildRouter(options: BuildRouterOptions) {
   });
 
   router.use(bodyParser());
+
+  if (options.auth) {
+    useAuth(router, options.auth);
+  }
 
   router.use(async (ctx, next) => {
     try {
@@ -98,7 +111,7 @@ export async function buildRouter(options: BuildRouterOptions) {
     console.log('Register Resource:', resourceName);
 
     // 列表
-    router.get(`/resource/${resourceName}/list`, async (ctx) => {
+    router.get(`/api/resource/${resourceName}/list`, async (ctx) => {
       const order = resource.options.order
         ? {
             [resource.options.order.orderBy]: resource.options.order.direction,
@@ -119,7 +132,7 @@ export async function buildRouter(options: BuildRouterOptions) {
     });
 
     // 新增
-    router.put(`/resource/${resourceName}/add`, (ctx) => {
+    router.put(`/api/resource/${resourceName}/add`, (ctx) => {
       const body = ctx.request.body;
 
       const primaryPropertyNames = metadata.columns
@@ -135,7 +148,7 @@ export async function buildRouter(options: BuildRouterOptions) {
     });
 
     // 编辑
-    router.patch(`/resource/${resourceName}/patch`, async (ctx) => {
+    router.patch(`/api/resource/${resourceName}/patch`, async (ctx) => {
       const body = ctx.request.body;
 
       const primaryPropertyNames = metadata.columns
@@ -162,24 +175,29 @@ export async function buildRouter(options: BuildRouterOptions) {
     });
 
     // 删除
-    router.delete(`/resource/${resourceName}/:primaryValue`, async (ctx) => {
-      const primaryProperties = metadata.columns.filter((col) => col.isPrimary);
+    router.delete(
+      `/api/resource/${resourceName}/:primaryValue`,
+      async (ctx) => {
+        const primaryProperties = metadata.columns.filter(
+          (col) => col.isPrimary
+        );
 
-      if (primaryProperties.length === 0) {
-        throw new Error('该实体没有主键');
+        if (primaryProperties.length === 0) {
+          throw new Error('该实体没有主键');
+        }
+
+        const primaryValue = metaTypeIsNumber(primaryProperties[0].type)
+          ? Number(ctx.params['primaryValue'])
+          : ctx.params['primaryValue'];
+
+        await tushan.datasource.manager.delete(metadata.target, primaryValue);
+
+        return true;
       }
-
-      const primaryValue = metaTypeIsNumber(primaryProperties[0].type)
-        ? Number(ctx.params['primaryValue'])
-        : ctx.params['primaryValue'];
-
-      await tushan.datasource.manager.delete(metadata.target, primaryValue);
-
-      return true;
-    });
+    );
 
     // 列元信息
-    router.get(`/meta/${resourceName}/properties`, (ctx) => {
+    router.get(`/api/meta/${resourceName}/properties`, (ctx) => {
       return metadata.columns.map((col) => {
         const type = parseColumnType(col.type);
 
@@ -196,7 +214,7 @@ export async function buildRouter(options: BuildRouterOptions) {
   });
 
   // 列出所有元信息
-  router.get(`/meta/all`, (ctx) => {
+  router.get(`/api/meta/all`, (ctx) => {
     const list = tushan.resources.map((resource) => {
       const metadata = tushan.datasource.getMetadata(resource.entity);
       const name = metadata.name.toLowerCase();

@@ -8,10 +8,14 @@ specifiers:
   '@types/fs-extra': ^9.0.13
   '@types/koa': ^2.13.5
   '@types/koa-bodyparser': ^4.3.7
+  '@types/koa-passport': ^4.0.3
   '@types/koa-send': ^4.1.3
+  '@types/koa-session': ^5.10.6
   '@types/koa__router': ^8.0.11
   '@types/lodash': ^4.14.182
   '@types/node': ^18.0.6
+  '@types/passport': ^1.0.11
+  '@types/passport-local': ^1.0.34
   '@types/react': ^18.0.15
   '@types/react-dom': ^18.0.6
   '@vitejs/plugin-react': ^2.0.0
@@ -24,14 +28,17 @@ specifiers:
   koa: ^2.13.4
   koa-bodyparser: ^4.3.0
   koa-connect: ^2.1.0
+  koa-passport: 4.1.4
   koa-send: ^5.0.1
+  koa-session: ^6.2.0
   lodash: ^4.17.21
   nodemon: ^2.0.19
+  passport-local: ^1.0.0
   postcss: ^8.4.14
   prettier: ^2.7.1
   react: ^18.2.0
   react-dom: ^18.2.0
-  react-fastify-form: ^1.0.8
+  react-fastify-form: ^1.0.11
   react-router: ^6.3.0
   react-router-dom: ^6.3.0
   reflect-metadata: ^0.1.13
@@ -56,11 +63,14 @@ dependencies:
   koa: 2.13.4
   koa-bodyparser: 4.3.0
   koa-connect: 2.1.0
+  koa-passport: 4.1.4
   koa-send: 5.0.1
+  koa-session: 6.2.0
   lodash: 4.17.21
+  passport-local: 1.0.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
-  react-fastify-form: 1.0.8_react@18.2.0
+  react-fastify-form: 1.0.11_react@18.2.0
   react-router: 6.3.0_react@18.2.0
   react-router-dom: 6.3.0_biqbaboplfbrettd7655fr4n2y
   reflect-metadata: 0.1.13
@@ -77,10 +87,14 @@ devDependencies:
   '@types/fs-extra': 9.0.13
   '@types/koa': 2.13.5
   '@types/koa-bodyparser': 4.3.7
+  '@types/koa-passport': 4.0.3
   '@types/koa-send': 4.1.3
+  '@types/koa-session': 5.10.6
   '@types/koa__router': 8.0.11
   '@types/lodash': 4.14.182
   '@types/node': 18.0.6
+  '@types/passport': 1.0.11
+  '@types/passport-local': 1.0.34
   '@types/react': 18.0.15
   '@types/react-dom': 18.0.6
   autoprefixer: 10.4.7_postcss@8.4.14
@@ -90,7 +104,7 @@ devDependencies:
   prettier: 2.7.1
   rollup-plugin-source-ref: 1.0.6
   sqlite3: 5.0.9
-  tailwindcss: 3.1.6_ts-node@10.9.1
+  tailwindcss: 3.1.6_pe6iykxod2v7i2uk6okjazxzki
   ts-node: 10.9.1_tdn3ypgnfy6bmey2q4hu5jonwi
   typescript: 4.7.4
 
@@ -637,9 +651,23 @@ packages:
       '@types/koa': 2.13.5
     dev: true
 
+  /@types/koa-passport/4.0.3:
+    resolution: {integrity: sha512-tNMYd/bcv0Zw7fc0CzEBYM9uUzVtn4XWzdUYfkTgSkEljP6nap7eI4E5x43ukrUQvztgXSYFkz3Uk+ujFeUzTg==}
+    dependencies:
+      '@types/koa': 2.13.5
+      '@types/passport': 1.0.11
+    dev: true
+
   /@types/koa-send/4.1.3:
     resolution: {integrity: sha512-daaTqPZlgjIJycSTNjKpHYuKhXYP30atFc1pBcy6HHqB9+vcymDgYTguPdx9tO4HMOqNyz6bz/zqpxt5eLR+VA==}
     dependencies:
+      '@types/koa': 2.13.5
+    dev: true
+
+  /@types/koa-session/5.10.6:
+    resolution: {integrity: sha512-p4rgkeRmiJu8XGC3eH2duRCNgnLUl6sjadEXH/AsieH/9fqYfXSZoZNC9CAe+FQK+QmM76hVyvuJ5Jrl5xxNeA==}
+    dependencies:
+      '@types/cookies': 0.7.7
       '@types/koa': 2.13.5
     dev: true
 
@@ -675,6 +703,27 @@ packages:
 
   /@types/node/18.0.6:
     resolution: {integrity: sha512-/xUq6H2aQm261exT6iZTMifUySEt4GR5KX8eYyY+C4MSNPqSh9oNIP7tz2GLKTlFaiBbgZNxffoR3CVRG+cljw==}
+
+  /@types/passport-local/1.0.34:
+    resolution: {integrity: sha512-PSc07UdYx+jhadySxxIYWuv6sAnY5e+gesn/5lkPKfBeGuIYn9OPR+AAEDq73VRUh6NBTpvE/iPE62rzZUslog==}
+    dependencies:
+      '@types/express': 4.17.13
+      '@types/passport': 1.0.11
+      '@types/passport-strategy': 0.2.35
+    dev: true
+
+  /@types/passport-strategy/0.2.35:
+    resolution: {integrity: sha512-o5D19Jy2XPFoX2rKApykY15et3Apgax00RRLf0RUotPDUsYrQa7x4howLYr9El2mlUApHmCMv5CZ1IXqKFQ2+g==}
+    dependencies:
+      '@types/express': 4.17.13
+      '@types/passport': 1.0.11
+    dev: true
+
+  /@types/passport/1.0.11:
+    resolution: {integrity: sha512-pz1cx9ptZvozyGKKKIPLcVDVHwae4hrH5d6g5J+DkMRRjR3cVETb4jMabhXAUbg3Ov7T22nFHEgaK2jj+5CBpw==}
+    dependencies:
+      '@types/express': 4.17.13
+    dev: true
 
   /@types/prop-types/15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
@@ -950,6 +999,13 @@ packages:
       node-releases: 2.0.6
       update-browserslist-db: 1.0.5_browserslist@4.21.2
 
+  /buffer/5.7.1:
+    resolution: {integrity: sha512-EHcyIPBQ4BSGlvjB16k5KgAJ27CIsHY/2JBmCRReo48y9rQ3MaUzWX3KVlBa4U7MyX02HdVj0K7C3WaB3ju7FQ==}
+    dependencies:
+      base64-js: 1.5.1
+      ieee754: 1.2.1
+    dev: false
+
   /buffer/6.0.3:
     resolution: {integrity: sha512-FTiCpNxtwiZZHEZbcbTIcZjERVICn9yq/pDFkTl95/AxzD1naBctN7YO68riM/gLSDY7sdrMby8hofADYuuqOA==}
     dependencies:
@@ -1181,6 +1237,16 @@ packages:
     resolution: {integrity: sha512-3DdaFaU/Zf1AnpLiFDeNCD4TOWe3Zl2RZaTzUvWiIk5ERzcCodOE20Vqq4fzCbNoHURFHT4/us/Lfq+S2zyY4w==}
     dev: false
 
+  /core-util-is/1.0.3:
+    resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
+    dev: false
+
+  /crc/3.8.0:
+    resolution: {integrity: sha512-iX3mfgcTMIq3ZKLIsVFAbv7+Mc10kxabAGQb8HvjA1o3T1PIYprbakQ65d3I+2HGHt6nSKkM9PYjgoJO2KcFBQ==}
+    dependencies:
+      buffer: 5.7.1
+    dev: false
+
   /create-require/1.1.1:
     resolution: {integrity: sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==}
 
@@ -1217,6 +1283,17 @@ packages:
 
   /dayjs/1.11.4:
     resolution: {integrity: sha512-Zj/lPM5hOvQ1Bf7uAvewDaUcsJoI6JmNqmHhHl3nyumwe0XHwt8sWdOVAPACJzCebL8gQCi+K49w7iKWnGwX9g==}
+    dev: false
+
+  /debug/3.2.7:
+    resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
+    dependencies:
+      ms: 2.1.2
     dev: false
 
   /debug/3.2.7_supports-color@5.5.0:
@@ -1953,6 +2030,10 @@ packages:
       binary-extensions: 2.2.0
     dev: true
 
+  /is-class-hotfix/0.0.6:
+    resolution: {integrity: sha512-0n+pzCC6ICtVr/WXnN2f03TK/3BfXY7me4cjCAqT8TYXEl0+JBRoqBo94JJHXcyDSLUeWbNX8Fvy5g5RJdAstQ==}
+    dev: false
+
   /is-core-module/2.9.0:
     resolution: {integrity: sha512-+5FPy5PnwmO3lvfMb0AsoPaBG+5KHUI0wYFXOtYPnVVVspTFUuMZNfNaNVRt3FZadstu2c8x23vykRW/NBoU6A==}
     dependencies:
@@ -1990,8 +2071,20 @@ packages:
     engines: {node: '>=0.12.0'}
     dev: true
 
+  /is-type-of/1.2.1:
+    resolution: {integrity: sha512-uK0kyX9LZYhSDS7H2sVJQJop1UnWPWmo5RvR3q2kFH6AUHYs7sOrVg0b4nyBHw29kRRNFofYN/JbHZDlHiItTA==}
+    dependencies:
+      core-util-is: 1.0.3
+      is-class-hotfix: 0.0.6
+      isstream: 0.1.2
+    dev: false
+
   /isexe/2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
+
+  /isstream/0.1.2:
+    resolution: {integrity: sha512-Yljz7ffyPbrLpLngrMtZ7NduUgVvi6wG9RJ9IUcyCd59YQ911PBJphODUcbOVbqYfxe1wuYf/LJ8PauMRwsM/g==}
+    dev: false
 
   /js-cookie/2.2.1:
     resolution: {integrity: sha512-HvdH2LzI/EAZcUwA8+0nKNtWHqS+ZmijLA30RwZA0bo7ToCckjK5MkGhjED9KoRcXO6BaGI3I9UIzSA1FKFPOQ==}
@@ -2056,6 +2149,13 @@ packages:
       koa-compose: 4.1.0
     dev: false
 
+  /koa-passport/4.1.4:
+    resolution: {integrity: sha512-dJBCkl4X+zdYxbI2V2OtoGy0PUenpvp2ZLLWObc8UJhsId0iQpTFT8RVcuA0709AL2txGwRHnSPoT1bYNGa6Kg==}
+    engines: {node: '>= 4'}
+    dependencies:
+      passport: 0.4.1
+    dev: false
+
   /koa-send/5.0.1:
     resolution: {integrity: sha512-tmcyQ/wXXuxpDxyNXv5yNNkdAMdFRqwtegBXUaowiQzUKqJehttS0x2j0eOZDQAyloAth5w6wwBImnFzkUz3pQ==}
     engines: {node: '>= 8'}
@@ -2063,6 +2163,18 @@ packages:
       debug: 4.3.4
       http-errors: 1.8.1
       resolve-path: 1.4.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /koa-session/6.2.0:
+    resolution: {integrity: sha512-l2ZC6D1BnRkIXhWkRgpewdqKn38/9/2WScmxyShuN408TxX+J/gUzdzGBIvGZaRwmezOU819sNpGmfFGLeDckg==}
+    engines: {node: '>=7.6'}
+    dependencies:
+      crc: 3.8.0
+      debug: 3.2.7
+      is-type-of: 1.2.1
+      uuid: 3.4.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -2473,6 +2585,26 @@ packages:
     engines: {node: '>= 0.8'}
     dev: false
 
+  /passport-local/1.0.0:
+    resolution: {integrity: sha512-9wCE6qKznvf9mQYYbgJ3sVOHmCWoUNMVFoZzNoznmISbhnNNPhN9xfY3sLmScHMetEJeoY7CXwfhCe7argfQow==}
+    engines: {node: '>= 0.4.0'}
+    dependencies:
+      passport-strategy: 1.0.0
+    dev: false
+
+  /passport-strategy/1.0.0:
+    resolution: {integrity: sha512-CB97UUvDKJde2V0KDWWB3lyf6PC3FaZP7YxZ2G8OAtn9p4HI9j9JLP9qjOGZFvyl8uwNT8qM+hGnz/n16NI7oA==}
+    engines: {node: '>= 0.4.0'}
+    dev: false
+
+  /passport/0.4.1:
+    resolution: {integrity: sha512-IxXgZZs8d7uFSt3eqNjM9NQ3g3uQCW5avD8mRNoXV99Yig50vjuaez6dQK2qC0kVWPRTujxY0dWgGfT09adjYg==}
+    engines: {node: '>= 0.4.0'}
+    dependencies:
+      passport-strategy: 1.0.0
+      pause: 0.0.1
+    dev: false
+
   /path-exists/4.0.0:
     resolution: {integrity: sha512-ak9Qy5Q7jYb2Wwcey5Fpvg2KoAc/ZIhLSLOSBmRmygPsGwkVVt0fZa0qrtMz+m6tJTAHfZQ8FnmB4MG4LWy7/w==}
     engines: {node: '>=8'}
@@ -2493,6 +2625,10 @@ packages:
   /path-to-regexp/6.2.1:
     resolution: {integrity: sha512-JLyh7xT1kizaEvcaXOQwOc2/Yhw6KZOvPf1S8401UyLk86CU79LN3vl7ztXGm/pZ+YjoyAJ4rxmHwbkBXJX+yw==}
     dev: true
+
+  /pause/0.0.1:
+    resolution: {integrity: sha512-KG8UEiEVkR3wGEb4m5yZkVCzigAD+cVEJck2CzYZO37ZGJfctvVptVO192MwrtPhzONn6go8ylnOdMhKqi4nfg==}
+    dev: false
 
   /picocolors/1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
@@ -2672,8 +2808,8 @@ packages:
     resolution: {integrity: sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==}
     dev: false
 
-  /react-fastify-form/1.0.8_react@18.2.0:
-    resolution: {integrity: sha512-VUtZ+1O/qEmTTPbhdtskT3SVPTGVwfKGSuNQgEEe8j3UB/5Dxf2awTNF8lK6jIWUYuN2UwycjG/rJBH8rvWJmQ==}
+  /react-fastify-form/1.0.11_react@18.2.0:
+    resolution: {integrity: sha512-4ww2TSun8+DITIOBzBEfw0rOgPeMla7cFeKPYS16ebRLiCYv9chKQgi7rUfG08p2xCwguGosi7o4ZBGftmddyw==}
     peerDependencies:
       react: ^16.14.0
     dependencies:
@@ -3071,10 +3207,12 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
-  /tailwindcss/3.1.6_ts-node@10.9.1:
+  /tailwindcss/3.1.6_pe6iykxod2v7i2uk6okjazxzki:
     resolution: {integrity: sha512-7skAOY56erZAFQssT1xkpk+kWt2NrO45kORlxFPXUt3CiGsVPhH1smuH5XoDH6sGPXLyBv+zgCKA2HWBsgCytg==}
     engines: {node: '>=12.13.0'}
     hasBin: true
+    peerDependencies:
+      postcss: ^8.0.9
     dependencies:
       arg: 5.0.2
       chokidar: 3.5.3
@@ -3380,6 +3518,12 @@ packages:
 
   /util-deprecate/1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
+
+  /uuid/3.4.0:
+    resolution: {integrity: sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==}
+    deprecated: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
+    hasBin: true
+    dev: false
 
   /uuid/8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
