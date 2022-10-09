@@ -1,4 +1,4 @@
-import type { TushanOptions } from './index';
+import type { TushanBanner, TushanOptions } from './index';
 
 export interface TushanCustom {
   /**
@@ -11,4 +11,6 @@ export interface TushanCustom {
    * value: 自定义组件id
    */
   customPages: TushanOptions['pages'];
+
+  customLoginBanner: TushanBanner[];
 }

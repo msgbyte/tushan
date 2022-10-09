@@ -30,8 +30,14 @@ export interface TushanPage {
   label?: string;
 }
 
+export interface TushanBanner {
+  title: string;
+  image: string;
+}
+
 export interface TushanOptions {
   datasourceOptions: Omit<DataSourceOptions, 'entities'>;
   resources: (Function | TushanResource)[];
   pages: TushanPage[];
+  loginBanner?: TushanBanner[];
 }

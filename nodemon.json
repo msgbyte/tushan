@@ -1,7 +1,7 @@
 {
   "verbose": true,
-  "watch": ["src/*"],
-  "ignore": ["src/client/*"],
+  "watch": ["src/*", "demo/*"],
+  "ignore": ["src/client/*", "demo/db/*"],
   "ext": "ts",
   "delay": 1000,
   "exec": "ts-node ./demo/index.ts"

@@ -27,8 +27,8 @@ export default defineConfig({
     rollupOptions: {
       // 覆盖默认的 .html 入口
       input: {
+        component: path.resolve(Tushan.getCacheDir(), './tushan-components.js'), // make sure custom components loading first
         main: path.resolve(__dirname, './src/index.tsx'),
-        component: path.resolve(Tushan.getCacheDir(), './tushan-components.js'),
       },
     },
   },

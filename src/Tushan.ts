@@ -102,6 +102,9 @@ export class Tushan {
     }
   }
 
+  /**
+   * 构建自定义内容入口文件
+   */
   private async buildComponentEntry() {
     const cacheDir = Tushan.getCacheDir();
     await fs.ensureDir(cacheDir);
@@ -121,6 +124,10 @@ window.Tushan.customComponent = {${customComponents
       .join(',')}};
 
 window.Tushan.customPages = ${JSON.stringify(this.options.pages ?? [])};
+
+window.Tushan.customLoginBanner = ${JSON.stringify(
+      this.options.loginBanner ?? []
+    )};
 `;
 
     await fs.writeFile(path.resolve(cacheDir, './tushan-components.js'), js);

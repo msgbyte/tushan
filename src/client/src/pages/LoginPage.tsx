@@ -6,7 +6,6 @@ import {
   FormInstance,
   Input,
   Link,
-  Message,
   Space,
 } from '@arco-design/web-react';
 import { IconLock, IconUser } from '@arco-design/web-react/icon';
@@ -15,6 +14,7 @@ import React, { useRef, useState } from 'react';
 import { login } from '../model/auth';
 import { useAsyncRequest } from '../model/utils';
 import { useRouteNav } from '../router/hooks';
+import { getTushanCustomInfo } from '../utils';
 
 const initialValues = {
   username: 'admin',
@@ -24,23 +24,7 @@ const initialValues = {
 /**
  * TODO: should allow to customize
  */
-const banner = [
-  {
-    title: '涂山1',
-    image:
-      'http://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/6c85f43aed61e320ebec194e6a78d6d3.png~tplv-uwbnlip3yd-png.png',
-  },
-  {
-    title: '涂山2',
-    image:
-      'http://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/6c85f43aed61e320ebec194e6a78d6d3.png~tplv-uwbnlip3yd-png.png',
-  },
-  {
-    title: '涂山3',
-    image:
-      'http://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/6c85f43aed61e320ebec194e6a78d6d3.png~tplv-uwbnlip3yd-png.png',
-  },
-];
+const banner = getTushanCustomInfo().customLoginBanner;
 
 export const LoginPage: React.FC = React.memo(() => {
   const formRef = useRef<FormInstance>(null);
