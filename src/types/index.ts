@@ -38,6 +38,6 @@ export interface TushanBanner {
 export interface TushanOptions {
   datasourceOptions: Omit<DataSourceOptions, 'entities'>;
   resources: (Function | TushanResource)[];
-  pages: TushanPage[];
+  pages?: TushanPage[];
   loginBanner?: TushanBanner[];
 }
