@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import path, { dirname } from 'path';
+import path from 'path';
 import vitePluginForArco from '@arco-plugins/vite-react';
 import sourceRef from 'rollup-plugin-source-ref';
 import { Tushan } from '../Tushan';
@@ -13,6 +13,11 @@ import autoprefixer from 'autoprefixer';
 export default defineConfig({
   resolve: {
     alias: [{ find: '@', replacement: '/src' }],
+  },
+  optimizeDeps: {
+    // 这些依赖可能会因为某些原因(比如pnpm是软连接)而不会被编译成esm，因此需要手动强制指定一下
+    // https://cn.vitejs.dev/guide/dep-pre-bundling.html#monorepos-and-linked-dependencies
+    include: ['axios', 'use-sync-external-store/shim/with-selector.js'],
   },
   css: {
     postcss: {
