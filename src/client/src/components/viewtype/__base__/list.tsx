@@ -2,6 +2,7 @@ import { Link } from '@arco-design/web-react';
 import React from 'react';
 import { useTableStore } from '../../table/store';
 import { MetaViewTypeProps } from '../__shared__/types';
+import { renderPlain } from '../__shared__/utils';
 
 export const MetaBaseList: React.FC<MetaViewTypeProps> = React.memo((props) => {
   const { showDetailDrawer } = useTableStore();
@@ -9,11 +10,11 @@ export const MetaBaseList: React.FC<MetaViewTypeProps> = React.memo((props) => {
   if (props.resourcePropertyMeta.isPrimary) {
     return (
       <Link hoverable={false} onClick={() => showDetailDrawer(props.record)}>
-        {props.value}
+        {renderPlain(props.value)}
       </Link>
     );
   }
 
-  return <div>{props.value}</div>;
+  return <div>{renderPlain(props.value)}</div>;
 });
 MetaBaseList.displayName = 'MetaBaseList';
