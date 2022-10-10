@@ -52,6 +52,7 @@
     "koa-send": "^5.0.1",
     "koa-session": "^6.2.0",
     "lodash": "^4.17.21",
+    "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "postcss": "^8.4.17",
     "react": "^18.2.0",
