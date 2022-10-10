@@ -1,16 +1,28 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import path from 'path';
+import path, { dirname } from 'path';
 import vitePluginForArco from '@arco-plugins/vite-react';
 import sourceRef from 'rollup-plugin-source-ref';
 import { Tushan } from '../Tushan';
 import { devManifestPlugin } from './plugins/dev-manifest';
+import tailwindcss from 'tailwindcss';
+import autoprefixer from 'autoprefixer';
 
 // https://cn.vitejs.dev/guide/backend-integration.html
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
     alias: [{ find: '@', replacement: '/src' }],
+  },
+  css: {
+    postcss: {
+      plugins: [
+        tailwindcss({
+          config: path.resolve(__dirname, './tailwind.config.js'),
+        }),
+        autoprefixer(),
+      ],
+    },
   },
   plugins: [
     sourceRef(),
