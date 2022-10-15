@@ -8,8 +8,15 @@
     "prod": "cross-env NODE_ENV=production ts-node ./demo/index.ts",
     "build": "pnpm run build:fe",
     "build:fe": "vite build --config ./src/client/vite.config.ts",
+    "release": "npm publish --registry https://registry.npmjs.com/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "files": [
+    "src",
+    "tsconfig.json",
+    "LICENSE",
+    "README.md"
+  ],
   "keywords": [],
   "author": "moonrailgun <moonrailgun@gmail.com>",
   "license": "MIT",
