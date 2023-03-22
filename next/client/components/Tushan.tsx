@@ -1,7 +1,6 @@
 import React from 'react';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import { Dashboard } from './Dashboard';
-import { BasicLayout } from './layout';
+import { BrowserRouter } from 'react-router-dom';
+import { BuiltinRoutes } from './BuiltinRoutes';
 import '@arco-design/web-react/dist/css/arco.css';
 
 interface TushanProps extends React.PropsWithChildren {
@@ -12,15 +11,7 @@ export const Tushan: React.FC<TushanProps> = React.memo((props) => {
 
   return (
     <BrowserRouter basename={basename}>
-      <Routes>
-        <Route element={<BasicLayout />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-
-          <Route path="*" element={<Navigate to="/dashboard" />} />
-        </Route>
-
-        {props.children}
-      </Routes>
+      <BuiltinRoutes>{props.children}</BuiltinRoutes>
     </BrowserRouter>
   );
 });

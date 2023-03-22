@@ -10,6 +10,8 @@ interface TushanMenu {
 
 interface MenuStoreState {
   menus: TushanMenu[];
+  addMenu: (menu: TushanMenu) => void;
+  removeMenu: (menuKey: string) => void;
 }
 
 /**
@@ -21,6 +23,11 @@ export const useMenuStore = create<MenuStoreState>()(
     addMenu: (menu: TushanMenu) => {
       set((state) => {
         state.menus.push(menu);
+      });
+    },
+    removeMenu: (menuKey: string) => {
+      set((state) => {
+        state.menus = state.menus.filter((menu) => menu.key !== menuKey);
       });
     },
   }))

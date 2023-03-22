@@ -1,10 +1,13 @@
-import { useState } from 'react';
-import { Tushan } from '../../../index';
+import { Resource, Tushan } from '../../../index';
+
+// https://jsonplaceholder.typicode.com/
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  return <Tushan>foo</Tushan>;
+  return (
+    <Tushan>
+      <Resource name="user" />
+    </Tushan>
+  );
 }
 
 export default App;

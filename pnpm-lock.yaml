@@ -26,6 +26,7 @@ specifiers:
   ahooks: ^3.5.2
   autoprefixer: ^10.4.12
   axios: ^0.27.2
+  clsx: ^1.2.1
   cross-env: ^7.0.3
   find-cache-dir: ^3.3.2
   fs-extra: ^10.1.0
@@ -85,6 +86,7 @@ dependencies:
   ahooks: 3.5.2_react@18.2.0
   autoprefixer: 10.4.12_postcss@8.4.17
   axios: 0.27.2
+  clsx: 1.2.1
   find-cache-dir: 3.3.2
   fs-extra: 10.1.0
   immer: 9.0.19
@@ -1642,6 +1644,11 @@ packages:
     resolution: {integrity: sha512-JQHZ2QMW6l3aH/j6xCqQThY/9OH4D/9ls34cgkUBiEeocRTU04tHfKPBsUK1PqZCUQM7GiA0IIXJSuXHI64Kbg==}
     engines: {node: '>=0.8'}
     dev: true
+
+  /clsx/1.2.1:
+    resolution: {integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==}
+    engines: {node: '>=6'}
+    dev: false
 
   /co-body/6.1.0:
     resolution: {integrity: sha512-m7pOT6CdLN7FuXUcpuz/8lfQ/L77x8SchHCF4G0RBTJO20Wzmhn5Sp4/5WsKy8OSpifBSUrmg83qEqaDHdyFuQ==}
