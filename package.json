@@ -23,6 +23,7 @@
   "license": "MIT",
   "devDependencies": {
     "@release-it/conventional-changelog": "^5.1.1",
+    "@types/qs": "^6.9.7",
     "@types/styled-components": "^5.1.26",
     "cross-env": "^7.0.3",
     "nodemon": "^2.0.19",
@@ -70,6 +71,7 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "postcss": "^8.4.17",
+    "qs": "^6.11.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-fastify-form": "^1.0.11",

@@ -19,6 +19,7 @@ specifiers:
   '@types/node': ^18.0.6
   '@types/passport': ^1.0.11
   '@types/passport-local': ^1.0.34
+  '@types/qs': ^6.9.7
   '@types/react': ^18.0.15
   '@types/react-dom': ^18.0.6
   '@types/styled-components': ^5.1.26
@@ -43,6 +44,7 @@ specifiers:
   passport-local: ^1.0.0
   postcss: ^8.4.17
   prettier: ^2.7.1
+  qs: ^6.11.1
   react: ^18.2.0
   react-dom: ^18.2.0
   react-fastify-form: ^1.0.11
@@ -100,6 +102,7 @@ dependencies:
   passport: 0.4.1
   passport-local: 1.0.0
   postcss: 8.4.17
+  qs: 6.11.1
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-fastify-form: 1.0.11_react@18.2.0
@@ -117,6 +120,7 @@ dependencies:
 
 devDependencies:
   '@release-it/conventional-changelog': 5.1.1_release-it@15.5.0
+  '@types/qs': 6.9.7
   '@types/styled-components': 5.1.26
   cross-env: 7.0.3
   nodemon: 2.0.19
@@ -1036,7 +1040,6 @@ packages:
 
   /@types/qs/6.9.7:
     resolution: {integrity: sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==}
-    dev: false
 
   /@types/range-parser/1.2.4:
     resolution: {integrity: sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==}
@@ -1507,7 +1510,7 @@ packages:
     resolution: {integrity: sha512-7O+FbCihrB5WGbFYesctwmTKae6rOiIzmz1icreWJ+0aA7LJfuqhEso2T9ncpcFtzMQtzXf2QGGueWJGTYsqrA==}
     dependencies:
       function-bind: 1.1.1
-      get-intrinsic: 1.1.2
+      get-intrinsic: 1.1.3
 
   /callsites/3.1.0:
     resolution: {integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==}
@@ -1654,7 +1657,7 @@ packages:
     resolution: {integrity: sha512-m7pOT6CdLN7FuXUcpuz/8lfQ/L77x8SchHCF4G0RBTJO20Wzmhn5Sp4/5WsKy8OSpifBSUrmg83qEqaDHdyFuQ==}
     dependencies:
       inflation: 2.0.0
-      qs: 6.11.0
+      qs: 6.11.1
       raw-body: 2.5.1
       type-is: 1.6.18
     dev: false
@@ -2903,6 +2906,7 @@ packages:
       function-bind: 1.1.1
       has: 1.0.3
       has-symbols: 1.0.3
+    dev: true
 
   /get-intrinsic/1.1.3:
     resolution: {integrity: sha512-QJVz1Tj7MS099PevUG5jvnt9tSkXN8K14dxQlikJuPt4uD9hHAHjLyLBiLR5zELelBdD9QNRAXZzsJx0WaDL9A==}
@@ -4812,8 +4816,8 @@ packages:
     engines: {node: '>=0.6.0', teleport: '>=0.2.0'}
     dev: true
 
-  /qs/6.11.0:
-    resolution: {integrity: sha512-MvjoMCJwEarSbUYk5O+nmoSzSutSsTwF85zcHPQ9OrlFoZOYIjaqBAJIqIXjptyD5vThxGq52Xu/MaJzRkIk4Q==}
+  /qs/6.11.1:
+    resolution: {integrity: sha512-0wsrzgTz/kAVIeuxSjnpGC56rzYtr6JT/2BwEvMaPhFIoYa1aGO8LbzuU1R0uUYQkLpWBTOj0l/CLAJB64J6nQ==}
     engines: {node: '>=0.6'}
     dependencies:
       side-channel: 1.0.4

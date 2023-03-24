@@ -1,5 +1,6 @@
 import React, { isValidElement } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { ResourceContextProvider } from '../context/resource';
 
 export interface ResourceProps extends React.PropsWithChildren {
   name: string;
@@ -11,43 +12,37 @@ export interface ResourceProps extends React.PropsWithChildren {
   icon?: React.ReactElement;
 }
 export const Resource: React.FC<ResourceProps> = React.memo((props) => {
-  const {
-    name,
-    label = name,
-    icon,
-    create: Create,
-    detail: Detail,
-    list: List,
-    edit: Edit,
-  } = props;
+  const { create: Create, detail: Detail, list: List, edit: Edit } = props;
 
   return (
-    <Routes>
-      {List && (
-        <Route path={`/*`} element={isValidElement(List) ? List : <List />} />
-      )}
+    <ResourceContextProvider resourceName={props.name}>
+      <Routes>
+        {List && (
+          <Route path={`/*`} element={isValidElement(List) ? List : <List />} />
+        )}
 
-      {Create && (
-        <Route
-          path={`create/*`}
-          element={isValidElement(Create) ? Create : <Create />}
-        />
-      )}
-      {Detail && (
-        <Route
-          path={`:id/detail/*`}
-          element={isValidElement(Detail) ? Detail : <Detail />}
-        />
-      )}
-      {Edit && (
-        <Route
-          path={`:id/*`}
-          element={isValidElement(Edit) ? Edit : <Edit />}
-        />
-      )}
+        {Create && (
+          <Route
+            path={`create/*`}
+            element={isValidElement(Create) ? Create : <Create />}
+          />
+        )}
+        {Detail && (
+          <Route
+            path={`:id/detail/*`}
+            element={isValidElement(Detail) ? Detail : <Detail />}
+          />
+        )}
+        {Edit && (
+          <Route
+            path={`:id/*`}
+            element={isValidElement(Edit) ? Edit : <Edit />}
+          />
+        )}
 
-      {props.children}
-    </Routes>
+        {props.children}
+      </Routes>
+    </ResourceContextProvider>
   );
 });
 Resource.displayName = 'Resource';
