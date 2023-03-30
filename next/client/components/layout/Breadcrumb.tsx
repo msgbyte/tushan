@@ -11,8 +11,12 @@ export const TushanBreadcrumb: React.FC = React.memo(() => {
   const location = useLocation();
 
   const title = useMemo(() => {
-    return location.pathname;
-  }, [location.pathname]);
+    const menu = menus.find((menu) =>
+      location.pathname.startsWith(`/${menu.key}`)
+    );
+
+    return menu?.label ?? menu?.key ?? '';
+  }, [menus, location.pathname]);
 
   return (
     <Breadcrumb>
