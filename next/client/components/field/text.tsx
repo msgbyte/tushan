@@ -17,5 +17,5 @@ TextFieldEdit.displayName = 'TextFieldEdit';
 
 export const createTextField = createFieldFactory({
   detail: TextFieldDetail,
-  edit: TextFieldDetail,
+  edit: TextFieldEdit,
 });
