@@ -1,4 +1,5 @@
 import {
+  createTextField,
   jsonServerProvider,
   ListTable,
   ListTableProps,
@@ -8,29 +9,32 @@ import {
 
 const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com');
 
-const userColumns: ListTableProps['columns'] = [
-  {
-    dataIndex: 'id',
-    title: 'ID',
-  },
-  {
-    dataIndex: 'name',
-    title: 'Name',
-  },
-  {
-    dataIndex: 'email',
-    title: 'Email',
-  },
-  {
-    dataIndex: 'website',
-    title: 'Website',
-  },
-];
-
 function App() {
   return (
     <Tushan dataProvider={dataProvider}>
-      <Resource name="users" list={<ListTable columns={userColumns} />} />
+      <Resource
+        name="users"
+        label="User"
+        list={
+          <ListTable
+            fields={[
+              createTextField('id', {
+                label: 'ID',
+              }),
+              createTextField('name', {
+                label: 'Name',
+              }),
+              createTextField('email', {
+                label: 'Email',
+              }),
+              createTextField('website', {
+                label: 'Website',
+              }),
+            ]}
+            action={{ edit: true, delete: true }}
+          />
+        }
+      />
     </Tushan>
   );
 }
