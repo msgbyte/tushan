@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@arco-design/web-react': ^2.46.0
+  '@arco-design/web-react': ^2.46.1
   '@arco-plugins/vite-react': ^1.3.2
   '@koa/router': ^12.0.0
   '@release-it/conventional-changelog': ^5.1.1
@@ -65,7 +65,7 @@ specifiers:
   zustand: ^4.3.6
 
 dependencies:
-  '@arco-design/web-react': 2.46.0_bb2bxwco6ptpubzwpazr52qf6i
+  '@arco-design/web-react': 2.46.1_bb2bxwco6ptpubzwpazr52qf6i
   '@arco-plugins/vite-react': 1.3.2
   '@koa/router': 12.0.0
   '@tanstack/react-query': 4.28.0_biqbaboplfbrettd7655fr4n2y
@@ -146,8 +146,8 @@ packages:
       color: 3.2.1
     dev: false
 
-  /@arco-design/web-react/2.46.0_bb2bxwco6ptpubzwpazr52qf6i:
-    resolution: {integrity: sha512-M33kL4K41x7u2Ln88sxQiqNTLm0s2b8GCYLk7GMbin0HP6jFLazFn9n7zY+HLK8p2jiFqt/bVD9qiJXJ5G0d6A==}
+  /@arco-design/web-react/2.46.1_bb2bxwco6ptpubzwpazr52qf6i:
+    resolution: {integrity: sha512-XjG44rODJklDu++OApvxjt/TbRrgkNqVq6grt/H+9skysm46jFn2SwhuSljBHmjo11LtIeB1m/OMPMaFtafeYg==}
     peerDependencies:
       react: '>=16'
       react-dom: '>=16'

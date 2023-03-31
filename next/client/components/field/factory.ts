@@ -20,9 +20,21 @@ export interface EditFieldItem<T = any> {
   render: (value: T, onChange: (val: T) => void) => ReactElement;
 }
 
+export interface DetailFieldItem<T = any> {
+  source: string;
+  title: string;
+  render: (value: T) => ReactElement;
+}
+
 export type FieldHandler = <T extends ViewType>(
   viewType: T
-) => T extends 'list' ? ListFieldItem : T extends 'edit' ? EditFieldItem : null;
+) => T extends 'list'
+  ? ListFieldItem
+  : T extends 'edit'
+  ? EditFieldItem
+  : T extends 'detail'
+  ? DetailFieldItem
+  : null;
 
 export function createFieldFactory(config: CreateFieldFactoryConfig) {
   return (source: string, options?: FieldOptions): FieldHandler =>
@@ -48,6 +60,16 @@ export function createFieldFactory(config: CreateFieldFactoryConfig) {
             });
           },
         } as EditFieldItem;
+      } else if (viewType === 'detail') {
+        return {
+          source,
+          title: options?.label ?? source,
+          render: (value) => {
+            return createElement(config.detail, {
+              value,
+            });
+          },
+        } as DetailFieldItem;
       }
 
       return null as any;

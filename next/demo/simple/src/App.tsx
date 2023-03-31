@@ -31,7 +31,7 @@ function App() {
                 label: 'Website',
               }),
             ]}
-            action={{ edit: true, delete: true }}
+            action={{ detail: true, edit: true, delete: true }}
           />
         }
       />

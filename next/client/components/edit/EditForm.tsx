@@ -1,12 +1,14 @@
 import { Form } from '@arco-design/web-react';
 import React, { useMemo, useState } from 'react';
+import { BasicRecord } from '../../api';
 import { FieldHandler } from '../field/factory';
 
 export interface EditFormProps {
   fields: FieldHandler[];
+  record: BasicRecord;
 }
 export const EditForm: React.FC<EditFormProps> = React.memo((props) => {
-  const [values, setValues] = useState({}); // TODO
+  const [values, setValues] = useState<BasicRecord>(props.record);
 
   const items = useMemo(() => {
     return props.fields.map((handler) => handler('edit'));
@@ -14,16 +16,23 @@ export const EditForm: React.FC<EditFormProps> = React.memo((props) => {
 
   return (
     <Form>
-      {items.map((item) => (
-        <Form.Item label={item.title}>
-          {item.render(values[item.source], (val) => {
-            setValues((state) => ({
-              ...state,
-              [item.source]: val,
-            }));
-          })}
-        </Form.Item>
-      ))}
+      {items.map((item) => {
+        if (item.source === 'id') {
+          // Dont render id field
+          return null;
+        }
+
+        return (
+          <Form.Item label={item.title}>
+            {item.render(values[item.source], (val) => {
+              setValues((state) => ({
+                ...state,
+                [item.source]: val,
+              }));
+            })}
+          </Form.Item>
+        );
+      })}
     </Form>
   );
 });
