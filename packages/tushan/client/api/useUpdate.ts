@@ -24,7 +24,6 @@ import { useResourceContext } from '../context/resource';
  * @param {Params} params The update parameters { id, data, previousData, meta }
  * @param {Object} options Options object to pass to the queryClient.
  * May include side effects to be executed upon success or failure, e.g. { onSuccess: () => { refresh(); } }
- * May include a mutation mode (optimistic/pessimistic/undoable), e.g. { mutationMode: 'undoable' }
  *
  * @typedef Params
  * @prop params.id The resource identifier, e.g. 123
@@ -46,7 +45,7 @@ import { useResourceContext } from '../context/resource';
  * This hook uses react-query useMutation under the hood.
  * This means the state object contains mutate, isIdle, reset and other react-query methods.
  *
- * @see https://react-query-v3.tanstack.com/reference/useMutation
+ * @see https://tanstack.com/query/latest/docs/react/reference/useMutation
  *
  * @example // set params when calling the update callback
  *

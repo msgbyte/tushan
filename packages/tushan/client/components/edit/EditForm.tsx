@@ -15,7 +15,7 @@ export interface EditFormProps {
 }
 export const EditForm: React.FC<EditFormProps> = React.memo((props) => {
   const [values, setValues] = useState<BasicRecord>(props.record);
-  const [update] = useUpdate();
+  const [updateOne] = useUpdate();
   const resource = useResourceContext();
 
   const items = useMemo(() => {
@@ -24,7 +24,10 @@ export const EditForm: React.FC<EditFormProps> = React.memo((props) => {
 
   const handleSubmit = useSendRequest(async () => {
     try {
-      await update(resource, { ...values });
+      await updateOne(resource, {
+        id: values.id,
+        data: { ...values },
+      });
 
       props.onSuccess?.(values);
     } catch (err) {

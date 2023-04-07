@@ -12,6 +12,7 @@ import { useGetList } from '../../api';
 import { IconDelete, IconEdit, IconEye } from '@arco-design/web-react/icon';
 import type { FieldHandler } from '../field';
 import { useListTableDrawer } from './ListTableDrawer';
+import { ListDeleteAction } from './actions/DeleteAction';
 
 export interface ListTableProps {
   fields: FieldHandler[];
@@ -58,26 +59,7 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
                 </Tooltip>
               )}
 
-              {action.delete && (
-                <Popconfirm
-                  focusLock
-                  position="tr"
-                  title="Confirm"
-                  content="Are you sure you want to delete?"
-                  onOk={() => {
-                    Message.info({
-                      content: 'ok',
-                    });
-                  }}
-                  onCancel={() => {
-                    Message.error({
-                      content: 'cancel',
-                    });
-                  }}
-                >
-                  <Button icon={<IconDelete />} />
-                </Popconfirm>
-              )}
+              {action.delete && <ListDeleteAction record={record} />}
             </Space>
           );
         },
