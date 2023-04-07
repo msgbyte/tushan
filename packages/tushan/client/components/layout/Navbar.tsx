@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Button } from '@arco-design/web-react';
+import { Avatar } from '@arco-design/web-react';
 import { IconUser } from '@arco-design/web-react/icon';
 import { Dropdown } from '@arco-design/web-react';
 import { Menu } from '@arco-design/web-react';

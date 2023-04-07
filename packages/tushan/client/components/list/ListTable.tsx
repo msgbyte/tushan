@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import {
   Button,
   Message,
@@ -10,7 +10,7 @@ import {
 import { useResourceContext } from '../../context/resource';
 import { useGetList } from '../../api';
 import { IconDelete, IconEdit, IconEye } from '@arco-design/web-react/icon';
-import { FieldHandler } from '../field';
+import type { FieldHandler } from '../field';
 import { useListTableDrawer } from './ListTableDrawer';
 
 export interface ListTableProps {

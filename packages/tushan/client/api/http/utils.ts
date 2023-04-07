@@ -14,12 +14,12 @@ function isValidObject(value: any): value is object {
 /**
  * {"foo": {"bar": 1}} => {"foo.bar": 1}
  */
-export function flattenObject(value: any, path: string[] = []) {
+export function flattenObject(value: any, path: string[] = []): any {
   if (isValidObject(value)) {
     return Object.assign(
       {},
       ...Object.keys(value).map((key) =>
-        flattenObject(value[key], path.concat([key]))
+        flattenObject((value as any)[key], path.concat([key]))
       )
     );
   } else {

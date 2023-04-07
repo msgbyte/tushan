@@ -1,7 +1,7 @@
 import { Form } from '@arco-design/web-react';
 import React, { useMemo, useState } from 'react';
-import { BasicRecord } from '../../api';
-import { FieldHandler } from '../field/factory';
+import type { BasicRecord } from '../../api';
+import type { FieldHandler } from '../field/factory';
 
 export interface EditFormProps {
   fields: FieldHandler[];

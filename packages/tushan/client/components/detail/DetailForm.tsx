@@ -1,7 +1,7 @@
 import { Form } from '@arco-design/web-react';
 import React, { useMemo } from 'react';
-import { BasicRecord } from '../../api/types';
-import { FieldHandler } from '../field/factory';
+import type { BasicRecord } from '../../api/types';
+import type { FieldHandler } from '../field/factory';
 
 export interface DetailFormProps {
   record: BasicRecord;

@@ -5,8 +5,7 @@ import {
   UseQueryResult,
   useQueryClient,
 } from '@tanstack/react-query';
-
-import { BasicRecord, GetListParams, GetListResult } from './types';
+import type { BasicRecord, GetListParams, GetListResult } from './types';
 import { useDataProvider } from '../context/tushan';
 
 /**

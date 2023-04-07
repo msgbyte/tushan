@@ -1,4 +1,4 @@
-import { DataProvider } from '../types';
+import type { DataProvider } from '../types';
 import { fetchJSON, HTTPClient } from './request';
 import qs from 'qs';
 import { flattenObject } from './utils';

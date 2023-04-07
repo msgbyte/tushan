@@ -1,4 +1,4 @@
-import { DataProvider } from './types';
+import type { DataProvider } from './types';
 
 export const defaultDataProvider: DataProvider = {
   create: () => Promise.resolve({ data: null } as any), // avoids adding a context in tests

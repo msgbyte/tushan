@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Drawer } from '@arco-design/web-react';
-import { FieldHandler } from '../field';
+import type { FieldHandler } from '../field';
 import { EditForm } from '../edit/EditForm';
-import { ViewType } from '../../context/viewtype';
+import type { ViewType } from '../../context/viewtype';
 import { useEvent } from '../../hooks/useEvent';
 import { DetailForm } from '../detail/DetailForm';
-import { BasicRecord } from '../../api/types';
+import type { BasicRecord } from '../../api/types';
 
 export function useListTableDrawer(fields: FieldHandler[]) {
   const [visible, setVisible] = useState(false);

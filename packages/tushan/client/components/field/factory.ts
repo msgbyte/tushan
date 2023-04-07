@@ -1,6 +1,6 @@
-import { FieldDetailComponent, FieldEditComponent } from './types';
-import { ViewType } from '../../context/viewtype';
-import { TableColumnProps } from '@arco-design/web-react';
+import type { FieldDetailComponent, FieldEditComponent } from './types';
+import type { ViewType } from '../../context/viewtype';
+import type { TableColumnProps } from '@arco-design/web-react';
 import { createElement, ReactElement } from 'react';
 
 export interface CreateFieldFactoryConfig {

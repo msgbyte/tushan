@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "dev": "cd next/demo/simple && pnpm dev",
+    "dev": "cd demo/simple && pnpm dev",
     "release": "release-it",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

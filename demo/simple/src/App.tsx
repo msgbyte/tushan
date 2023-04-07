@@ -2,10 +2,9 @@ import {
   createTextField,
   jsonServerProvider,
   ListTable,
-  ListTableProps,
   Resource,
   Tushan,
-} from '../../../packages/tushan/index';
+} from 'tushan';
 
 const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com');
 

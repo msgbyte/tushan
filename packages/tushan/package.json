@@ -2,7 +2,7 @@
   "name": "tushan",
   "version": "0.1.0",
   "description": "",
-  "main": "src/index.ts",
+  "main": "./index.ts",
   "scripts": {
     "build": "pnpm build-cjs && pnpm build-esm",
     "build-cjs": "rimraf ./dist/cjs && tsc --outDir dist/cjs",
