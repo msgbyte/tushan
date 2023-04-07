@@ -6,6 +6,7 @@ import type { ViewType } from '../../context/viewtype';
 import { useEvent } from '../../hooks/useEvent';
 import { DetailForm } from '../detail/DetailForm';
 import type { BasicRecord } from '../../api/types';
+import { useResourceContext } from '../../context/resource';
 
 export function useListTableDrawer(fields: FieldHandler[]) {
   const [visible, setVisible] = useState(false);
@@ -43,16 +44,26 @@ export interface ListTableDrawerProps {
 }
 export const ListTableDrawer: React.FC<ListTableDrawerProps> = React.memo(
   (props) => {
+    const hide = useEvent(() => {
+      props.onChangeVisible(false);
+    });
+
     return (
       <Drawer
         title={props.viewType === 'edit' ? 'Edit' : 'Detail'}
         visible={props.visible}
-        onCancel={() => props.onChangeVisible(false)}
+        onCancel={hide}
         width={props.width ?? 680}
         maskClosable={props.viewType !== 'edit'}
+        footer={null}
       >
         {props.viewType === 'edit' ? (
-          <EditForm fields={props.fields} record={props.record} />
+          <EditForm
+            fields={props.fields}
+            record={props.record}
+            onSuccess={hide}
+            onCancel={hide}
+          />
         ) : (
           <DetailForm fields={props.fields} record={props.record} />
         )}

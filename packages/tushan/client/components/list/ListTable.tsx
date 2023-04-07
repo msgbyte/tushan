@@ -89,7 +89,7 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
 
   return (
     <>
-      <Table columns={columns} data={data} />
+      <Table columns={columns} data={data} rowKey="id" />
 
       {drawerEl}
     </>

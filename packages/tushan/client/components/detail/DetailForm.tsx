@@ -15,7 +15,7 @@ export const DetailForm: React.FC<DetailFormProps> = React.memo((props) => {
   return (
     <Form>
       {items.map((item) => (
-        <Form.Item label={item.title}>
+        <Form.Item key={item.source} label={item.title}>
           {item.render(props.record[item.source])}
         </Form.Item>
       ))}

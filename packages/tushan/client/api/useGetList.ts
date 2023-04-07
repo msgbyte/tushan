@@ -63,6 +63,7 @@ export const useGetList = <RecordType extends BasicRecord = any>(
   } = params;
   const dataProvider = useDataProvider();
   const queryClient = useQueryClient();
+
   const result = useQuery<
     GetListResult<RecordType>,
     Error,
