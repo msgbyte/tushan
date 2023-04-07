@@ -1,5 +1,8 @@
 import {
+  createAvatarField,
+  createEmailField,
   createTextField,
+  createUrlField,
   jsonServerProvider,
   ListTable,
   ReactQueryDevtools,
@@ -24,11 +27,38 @@ function App() {
               createTextField('name', {
                 label: 'Name',
               }),
-              createTextField('email', {
+              createEmailField('email', {
                 label: 'Email',
               }),
-              createTextField('website', {
+              createUrlField('website', {
                 label: 'Website',
+              }),
+            ]}
+            action={{ detail: true, edit: true, delete: true }}
+          />
+        }
+      />
+
+      <Resource
+        name="photos"
+        label="Photos"
+        list={
+          <ListTable
+            fields={[
+              createTextField('id', {
+                label: 'ID',
+              }),
+              createTextField('albumId', {
+                label: 'AlbumId',
+              }),
+              createTextField('title', {
+                label: 'Title',
+              }),
+              createUrlField('url', {
+                label: 'Url',
+              }),
+              createAvatarField('thumbnailUrl', {
+                label: 'ThumbnailUrl',
               }),
             ]}
             action={{ detail: true, edit: true, delete: true }}

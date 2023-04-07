@@ -49,6 +49,7 @@
     "react-router-dom": "^6.3.0",
     "styled-components": "^5.3.9",
     "tailwindcss": "^3.1.8",
+    "url-regex": "^5.0.0",
     "zustand": "^4.3.6"
   }
 }
