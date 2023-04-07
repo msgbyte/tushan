@@ -46,6 +46,7 @@ export const useConfigureAdminRouterFromChildren = (
     customRoutesWithLayout: routesAndResources.customRoutesWithLayout,
     customRoutesWithoutLayout: routesAndResources.customRoutesWithoutLayout,
     resources: routesAndResources.resources,
+    components: routesAndResources.components,
   };
 };
 
@@ -95,13 +96,16 @@ const useRoutesAndResourcesState = (
   const mergeRoutesAndResources = useCallback(
     (newRoutesAndResources: RoutesAndResources) => {
       setRoutesAndResources((previous) => ({
-        customRoutesWithLayout: previous.customRoutesWithLayout.concat(
-          newRoutesAndResources.customRoutesWithLayout
-        ),
-        customRoutesWithoutLayout: previous.customRoutesWithoutLayout.concat(
-          newRoutesAndResources.customRoutesWithoutLayout
-        ),
-        resources: previous.resources.concat(newRoutesAndResources.resources),
+        customRoutesWithLayout: [
+          ...previous.customRoutesWithLayout,
+          newRoutesAndResources.customRoutesWithLayout,
+        ],
+        customRoutesWithoutLayout: [
+          ...previous.customRoutesWithoutLayout,
+          newRoutesAndResources.customRoutesWithoutLayout,
+        ],
+        resources: [...previous.resources, newRoutesAndResources.resources],
+        components: [...previous.components, newRoutesAndResources.components],
       }));
     },
     []
@@ -122,6 +126,7 @@ const getRoutesAndResourceFromNodes = (
   const customRoutesWithLayout: React.ReactElement[] = [];
   const customRoutesWithoutLayout: React.ReactElement[] = [];
   const resources: React.ReactElement[] = [];
+  const components: React.ReactElement[] = [];
 
   Children.forEach(children, (element) => {
     if (!React.isValidElement(element)) {
@@ -141,6 +146,7 @@ const getRoutesAndResourceFromNodes = (
         ...customRoutesFromFragment.customRoutesWithoutLayout
       );
       resources.push(...customRoutesFromFragment.resources);
+      components.push(...customRoutesFromFragment.components);
     }
 
     if (element.type === CustomRoutes) {
@@ -153,6 +159,8 @@ const getRoutesAndResourceFromNodes = (
       }
     } else if (element.type === Resource) {
       resources.push(element as ReactElement<ResourceProps>);
+    } else {
+      components.push(element);
     }
   });
 
@@ -160,6 +168,7 @@ const getRoutesAndResourceFromNodes = (
     customRoutesWithLayout,
     customRoutesWithoutLayout,
     resources,
+    components,
   };
 };
 
@@ -167,6 +176,7 @@ type RoutesAndResources = {
   customRoutesWithLayout: ReactElement<CustomRoutesProps>[];
   customRoutesWithoutLayout: ReactElement<CustomRoutesProps>[];
   resources: ReactElement<ResourceProps>[];
+  components: ReactElement[];
 };
 
 type AdminRouterStatus = 'loading' | 'empty' | 'ready';

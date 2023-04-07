@@ -10,55 +10,63 @@ export interface BuiltinRoutesProps {
 
 export const BuiltinRoutes: React.FC<BuiltinRoutesProps> = React.memo(
   (props) => {
-    const { customRoutesWithLayout, customRoutesWithoutLayout, resources } =
-      useConfigureAdminRouterFromChildren(props.children);
+    const {
+      customRoutesWithLayout,
+      customRoutesWithoutLayout,
+      resources,
+      components,
+    } = useConfigureAdminRouterFromChildren(props.children);
 
     const dashboard = true;
 
     return (
-      <Routes>
-        {customRoutesWithoutLayout}
+      <>
+        <Routes>
+          {customRoutesWithoutLayout}
 
-        <Route element={<BasicLayout />}>
-          <Route
-            path="/*"
-            element={
-              <div>
-                <Routes>
-                  {dashboard && (
-                    <Route path="/dashboard" element={<Dashboard />} />
-                  )}
+          <Route element={<BasicLayout />}>
+            <Route
+              path="/*"
+              element={
+                <div>
+                  <Routes>
+                    {dashboard && (
+                      <Route path="/dashboard" element={<Dashboard />} />
+                    )}
 
-                  {customRoutesWithLayout}
+                    {customRoutesWithLayout}
 
-                  {Children.map(resources, (resource) => (
-                    <Route
-                      key={resource.props.name}
-                      path={`${resource.props.name}/*`}
-                      element={resource}
-                    />
-                  ))}
-
-                  <Route
-                    path="/"
-                    element={
-                      <Navigate
-                        to={
-                          dashboard
-                            ? '/dashboard'
-                            : `/${resources[0].props.name}/`
-                        }
+                    {Children.map(resources, (resource) => (
+                      <Route
+                        key={resource.props.name}
+                        path={`${resource.props.name}/*`}
+                        element={resource}
                       />
-                    }
-                  />
+                    ))}
 
-                  <Route path="*" element={<div>404</div>} />
-                </Routes>
-              </div>
-            }
-          />
-        </Route>
-      </Routes>
+                    <Route
+                      path="/"
+                      element={
+                        <Navigate
+                          to={
+                            dashboard
+                              ? '/dashboard'
+                              : `/${resources[0].props.name}/`
+                          }
+                        />
+                      }
+                    />
+
+                    <Route path="*" element={<div>404</div>} />
+                  </Routes>
+                </div>
+              }
+            />
+          </Route>
+        </Routes>
+
+        {components}
+      </>
     );
   }
 );

@@ -2,6 +2,7 @@ import {
   createTextField,
   jsonServerProvider,
   ListTable,
+  ReactQueryDevtools,
   Resource,
   Tushan,
 } from 'tushan';
@@ -34,6 +35,8 @@ function App() {
           />
         }
       />
+
+      <ReactQueryDevtools />
     </Tushan>
   );
 }
