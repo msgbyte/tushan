@@ -5,7 +5,7 @@ import {
   ListTableProps,
   Resource,
   Tushan,
-} from '../../../index';
+} from '../../../packages/tushan/index';
 
 const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com');
 
