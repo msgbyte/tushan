@@ -11,9 +11,9 @@ import { useResourceContext } from '../../context/resource';
 export function useListTableDrawer(fields: FieldHandler[]) {
   const [visible, setVisible] = useState(false);
   const [viewType, setViewType] = useState<ViewType>('detail');
-  const [record, setRecord] = useState<BasicRecord>({} as BasicRecord);
+  const [record, setRecord] = useState<BasicRecord | null>(null);
   const showTableDrawer = useEvent(
-    (viewType: ViewType, record: BasicRecord) => {
+    (viewType: ViewType, record: BasicRecord | null) => {
       setViewType(viewType);
       setRecord(record);
       setVisible(true);
@@ -38,7 +38,7 @@ export interface ListTableDrawerProps {
   visible: boolean;
   onChangeVisible: (visible: boolean) => void;
   fields: FieldHandler[];
-  record: BasicRecord;
+  record: BasicRecord | null;
   viewType: ViewType;
   width?: number;
 }
@@ -50,7 +50,13 @@ export const ListTableDrawer: React.FC<ListTableDrawerProps> = React.memo(
 
     return (
       <Drawer
-        title={props.viewType === 'edit' ? 'Edit' : 'Detail'}
+        title={
+          props.viewType === 'edit'
+            ? props.record === null
+              ? 'Create'
+              : 'Edit'
+            : 'Detail'
+        }
         visible={props.visible}
         onCancel={hide}
         width={props.width ?? 680}
@@ -65,7 +71,10 @@ export const ListTableDrawer: React.FC<ListTableDrawerProps> = React.memo(
             onCancel={hide}
           />
         ) : (
-          <DetailForm fields={props.fields} record={props.record} />
+          <DetailForm
+            fields={props.fields}
+            record={props.record ?? ({} as any)}
+          />
         )}
       </Drawer>
     );

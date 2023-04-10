@@ -44,7 +44,7 @@ import { useResourceContext } from '../context/resource';
  * This hook uses react-query useMutation under the hood.
  * This means the state object contains mutate, isIdle, reset and other react-query methods.
  *
- * @see https://react-query-v3.tanstack.com/reference/useMutation
+ * @see https://tanstack.com/query/latest/docs/react/reference/useMutation
  *
  * @example // set params when calling the deleteOne callback
  *

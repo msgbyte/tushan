@@ -34,7 +34,7 @@ export type FieldHandler = <T extends ViewType>(
   ? EditFieldItem
   : T extends 'detail'
   ? DetailFieldItem
-  : null;
+  : never;
 
 export function createFieldFactory<CustomOptions = {}>(
   config: CreateFieldFactoryConfig

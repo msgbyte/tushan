@@ -1,15 +1,11 @@
 import {
-  createAvatarField,
-  createEmailField,
-  createImageField,
-  createTextField,
-  createUrlField,
   jsonServerProvider,
   ListTable,
   ReactQueryDevtools,
   Resource,
   Tushan,
 } from 'tushan';
+import { photoFields, userFields } from './fields';
 
 const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com');
 
@@ -21,21 +17,8 @@ function App() {
         label="User"
         list={
           <ListTable
-            fields={[
-              createTextField('id', {
-                label: 'ID',
-              }),
-              createTextField('name', {
-                label: 'Name',
-              }),
-              createEmailField('email', {
-                label: 'Email',
-              }),
-              createUrlField('website', {
-                label: 'Website',
-              }),
-            ]}
-            action={{ detail: true, edit: true, delete: true }}
+            fields={userFields}
+            action={{ create: true, detail: true, edit: true, delete: true }}
           />
         }
       />
@@ -45,24 +28,7 @@ function App() {
         label="Photos"
         list={
           <ListTable
-            fields={[
-              createTextField('id', {
-                label: 'ID',
-              }),
-              createTextField('albumId', {
-                label: 'AlbumId',
-              }),
-              createTextField('title', {
-                label: 'Title',
-              }),
-              createImageField('url', {
-                label: 'Url',
-                height: 300,
-              }),
-              createAvatarField('thumbnailUrl', {
-                label: 'ThumbnailUrl',
-              }),
-            ]}
+            fields={photoFields}
             action={{ detail: true, edit: true, delete: true }}
           />
         }
