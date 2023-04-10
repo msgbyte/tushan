@@ -1,6 +1,7 @@
 import {
   createAvatarField,
   createEmailField,
+  createImageField,
   createTextField,
   createUrlField,
   jsonServerProvider,
@@ -54,8 +55,9 @@ function App() {
               createTextField('title', {
                 label: 'Title',
               }),
-              createUrlField('url', {
+              createImageField('url', {
                 label: 'Url',
+                height: 300,
               }),
               createAvatarField('thumbnailUrl', {
                 label: 'ThumbnailUrl',

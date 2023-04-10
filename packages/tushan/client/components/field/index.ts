@@ -4,3 +4,4 @@ export * from './text';
 export * from './url';
 export * from './email';
 export * from './avatar';
+export * from './image';

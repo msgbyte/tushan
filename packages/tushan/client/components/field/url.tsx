@@ -7,7 +7,7 @@ import type { FieldDetailComponent } from './types';
 export const LinkFieldDetail: FieldDetailComponent<string> = React.memo(
   (props) => {
     return (
-      <Link href={props.value} icon={true}>
+      <Link href={props.value} icon={true} target="_blank">
         {props.value}
       </Link>
     );

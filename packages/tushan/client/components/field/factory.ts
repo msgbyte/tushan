@@ -1,4 +1,8 @@
-import type { FieldDetailComponent, FieldEditComponent } from './types';
+import type {
+  BasicFieldOptions,
+  FieldDetailComponent,
+  FieldEditComponent,
+} from './types';
 import type { ViewType } from '../../context/viewtype';
 import type { TableColumnProps } from '@arco-design/web-react';
 import { createElement, ReactElement } from 'react';
@@ -6,10 +10,6 @@ import { createElement, ReactElement } from 'react';
 export interface CreateFieldFactoryConfig {
   detail: FieldDetailComponent;
   edit: FieldEditComponent;
-}
-
-export interface FieldOptions {
-  label?: string;
 }
 
 export type ListFieldItem = TableColumnProps;
@@ -36,8 +36,13 @@ export type FieldHandler = <T extends ViewType>(
   ? DetailFieldItem
   : null;
 
-export function createFieldFactory(config: CreateFieldFactoryConfig) {
-  return (source: string, options?: FieldOptions): FieldHandler =>
+export function createFieldFactory<CustomOptions = {}>(
+  config: CreateFieldFactoryConfig
+) {
+  return (
+      source: string,
+      options?: BasicFieldOptions & CustomOptions
+    ): FieldHandler =>
     (viewType) => {
       if (viewType === 'list') {
         return {
@@ -46,6 +51,7 @@ export function createFieldFactory(config: CreateFieldFactoryConfig) {
           render: (val) => {
             return createElement(config.detail, {
               value: val,
+              options: options ?? {},
             });
           },
         } as ListFieldItem;
@@ -57,6 +63,7 @@ export function createFieldFactory(config: CreateFieldFactoryConfig) {
             return createElement(config.edit, {
               value,
               onChange,
+              options: options ?? {},
             });
           },
         } as EditFieldItem;
@@ -67,6 +74,7 @@ export function createFieldFactory(config: CreateFieldFactoryConfig) {
           render: (value) => {
             return createElement(config.detail, {
               value,
+              options: options ?? {},
             });
           },
         } as DetailFieldItem;
