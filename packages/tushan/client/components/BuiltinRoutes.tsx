@@ -1,8 +1,13 @@
-import React, { Children } from 'react';
+import React, { Children, useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { defaultAuthParams, useCheckAuth } from '../api/auth';
+import { useTushanContext } from '../context/tushan';
 import { useConfigureAdminRouterFromChildren } from '../hooks/useConfigureAdminRouterFromChildren';
+import { useDelay } from '../hooks/useDelay';
 import { Dashboard } from './Dashboard';
+import { LoginPage } from './defaults/LoginPage';
 import { BasicLayout } from './layout';
+import { LoadingView } from './LoadingView';
 
 export interface BuiltinRoutesProps {
   children?: React.ReactNode;
@@ -16,53 +21,75 @@ export const BuiltinRoutes: React.FC<BuiltinRoutesProps> = React.memo(
       resources,
       components,
     } = useConfigureAdminRouterFromChildren(props.children);
+    const { dashboard = true, authProvider } = useTushanContext();
+    const requireAuth = Boolean(authProvider);
+    const [canRender, setCanRender] = useState(!requireAuth);
+    const oneSecondHasPassed = useDelay(1000);
 
-    const dashboard = true;
+    const checkAuth = useCheckAuth();
+
+    useEffect(() => {
+      if (requireAuth) {
+        checkAuth()
+          .then(() => {
+            setCanRender(true);
+          })
+          .catch(() => {});
+      }
+    }, [checkAuth, requireAuth]);
 
     return (
       <>
         <Routes>
           {customRoutesWithoutLayout}
 
-          <Route element={<BasicLayout />}>
-            <Route
-              path="/*"
-              element={
-                <div>
-                  <Routes>
-                    {dashboard && (
-                      <Route path="/dashboard" element={<Dashboard />} />
-                    )}
+          <Route path={defaultAuthParams.loginUrl} element={<LoginPage />} />
 
-                    {customRoutesWithLayout}
+          {canRender ? (
+            <Route element={<BasicLayout />}>
+              <Route
+                path="/*"
+                element={
+                  <div>
+                    <Routes>
+                      {dashboard && (
+                        <Route path="/dashboard" element={<Dashboard />} />
+                      )}
 
-                    {Children.map(resources, (resource) => (
-                      <Route
-                        key={resource.props.name}
-                        path={`${resource.props.name}/*`}
-                        element={resource}
-                      />
-                    ))}
+                      {customRoutesWithLayout}
 
-                    <Route
-                      path="/"
-                      element={
-                        <Navigate
-                          to={
-                            dashboard
-                              ? '/dashboard'
-                              : `/${resources[0].props.name}/`
-                          }
+                      {Children.map(resources, (resource) => (
+                        <Route
+                          key={resource.props.name}
+                          path={`${resource.props.name}/*`}
+                          element={resource}
                         />
-                      }
-                    />
+                      ))}
 
-                    <Route path="*" element={<div>404</div>} />
-                  </Routes>
-                </div>
-              }
-            />
-          </Route>
+                      <Route
+                        path="/"
+                        element={
+                          <Navigate
+                            to={
+                              dashboard
+                                ? '/dashboard'
+                                : `/${resources[0].props.name}/`
+                            }
+                          />
+                        }
+                      />
+
+                      <Route path="*" element={<div>404</div>} />
+                    </Routes>
+                  </div>
+                }
+              />
+            </Route>
+          ) : oneSecondHasPassed ? (
+            <Route path="*" element={<LoadingView />} />
+          ) : (
+            <Route path="*" element={null} />
+          )}
         </Routes>
 
         {components}

@@ -5,6 +5,7 @@ import { Dropdown } from '@arco-design/web-react';
 import { Menu } from '@arco-design/web-react';
 import { useHref } from 'react-router';
 import styled from 'styled-components';
+import { useLogout } from '../../api/auth';
 
 const Root = styled.div`
   display: flex;
@@ -30,14 +31,11 @@ const Root = styled.div`
 `;
 
 export const Navbar: React.FC = React.memo(() => {
-  const logoutUrl = useHref('/logout');
+  const logout = useLogout();
 
   const dropList = (
     <Menu>
-      <Menu.Item
-        key="logout"
-        onClick={() => (window.location.href = logoutUrl)}
-      >
+      <Menu.Item key="logout" onClick={() => logout()}>
         Logout
       </Menu.Item>
     </Menu>

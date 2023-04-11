@@ -172,3 +172,30 @@ export interface DeleteManyParams<RecordType extends BasicRecord = any> {
 export interface DeleteManyResult<RecordType extends BasicRecord = any> {
   data?: RecordType['id'][];
 }
+
+/**
+ * authProvider types
+ */
+export interface AuthProvider {
+  login: (
+    params: any
+  ) => Promise<{ redirectTo?: string | boolean } | void | any>;
+  logout: (params: any) => Promise<void | false | string>;
+  checkAuth: (params: any) => Promise<void>;
+  checkError: (error: any) => Promise<void>;
+  getIdentity?: () => Promise<UserIdentity>;
+  getPermissions: (params: any) => Promise<any>;
+  handleCallback?: () => Promise<AuthRedirectResult | void | any>;
+}
+
+export interface UserIdentity {
+  id: Identifier;
+  fullName?: string;
+  avatar?: string;
+  [key: string]: any;
+}
+
+export type AuthRedirectResult = {
+  redirectTo?: string | false;
+  logoutOnFailure?: boolean;
+};

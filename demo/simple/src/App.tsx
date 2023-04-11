@@ -5,13 +5,18 @@ import {
   Resource,
   Tushan,
 } from 'tushan';
+import { authProvider } from './auth';
 import { photoFields, userFields } from './fields';
 
 const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com');
 
 function App() {
   return (
-    <Tushan dataProvider={dataProvider}>
+    <Tushan
+      basename="/admin"
+      dataProvider={dataProvider}
+      authProvider={authProvider}
+    >
       <Resource
         name="users"
         label="User"

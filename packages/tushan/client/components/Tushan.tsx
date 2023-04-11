@@ -7,11 +7,10 @@ import { defaultQueryClient } from '../api';
 import '@arco-design/web-react/dist/css/arco.css';
 
 interface TushanProps extends TushanContextProps, React.PropsWithChildren {
-  basename?: string;
   queryClient?: QueryClient;
 }
 export const Tushan: React.FC<TushanProps> = React.memo((props) => {
-  const { basename = '/admin', queryClient = defaultQueryClient } = props;
+  const { basename, queryClient = defaultQueryClient } = props;
 
   return (
     <TushanContextProvider {...props}>

@@ -1,9 +1,12 @@
 import React, { useContext } from 'react';
 import { defaultDataProvider } from '../api/defaultDataProvider';
-import type { DataProvider } from '../api/types';
+import type { AuthProvider, DataProvider } from '../api/types';
 
 export interface TushanContextProps {
+  basename?: string;
+  dashboard?: boolean;
   dataProvider?: DataProvider;
+  authProvider?: AuthProvider;
 }
 
 const TushanContext = React.createContext<TushanContextProps>({});
