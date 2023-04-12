@@ -2,6 +2,7 @@ import type { ComponentType } from 'react';
 
 export interface BasicFieldOptions {
   label?: string;
+  placeholder?: string;
 }
 
 // Detail

@@ -19,7 +19,7 @@ export const TushanBreadcrumb: React.FC = React.memo(() => {
   }, [menus, location.pathname]);
 
   return (
-    <Breadcrumb>
+    <Breadcrumb style={{ marginBottom: 16 }}>
       <Breadcrumb.Item>
         <NavLink to="/home">
           <IconHome className="mr-2" />

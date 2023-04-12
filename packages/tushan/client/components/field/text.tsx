@@ -11,7 +11,13 @@ export const TextFieldDetail: FieldDetailComponent<string> = React.memo(
 TextFieldDetail.displayName = 'TextFieldDetail';
 
 export const TextFieldEdit: FieldEditComponent<string> = React.memo((props) => {
-  return <Input value={props.value} onChange={(val) => props.onChange(val)} />;
+  return (
+    <Input
+      placeholder={props.options.placeholder ?? props.options.label}
+      value={props.value}
+      onChange={(val) => props.onChange(val)}
+    />
+  );
 });
 TextFieldEdit.displayName = 'TextFieldEdit';
 

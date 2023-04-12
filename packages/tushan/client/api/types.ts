@@ -70,7 +70,7 @@ export type DataProvider<ResourceType extends string = string> = {
 export interface GetListParams {
   pagination: PaginationPayload;
   sort: SortPayload;
-  filter: any;
+  filter: Record<string, any>;
   meta?: any;
 }
 

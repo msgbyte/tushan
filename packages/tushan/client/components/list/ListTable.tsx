@@ -1,5 +1,12 @@
-import React, { useMemo } from 'react';
-import { Button, Space, Table, Tooltip } from '@arco-design/web-react';
+import React, { useMemo, useState } from 'react';
+import {
+  Button,
+  Card,
+  Divider,
+  Space,
+  Table,
+  Tooltip,
+} from '@arco-design/web-react';
 import { useResourceContext } from '../../context/resource';
 import { useGetList } from '../../api';
 import { IconEdit, IconEye } from '@arco-design/web-react/icon';
@@ -7,6 +14,9 @@ import type { FieldHandler } from '../field';
 import { useListTableDrawer } from './ListTableDrawer';
 import { ListDeleteAction } from './actions/DeleteAction';
 import styled from 'styled-components';
+import { useObjectState } from '../../hooks/useObjectState';
+import { useDebounce } from '../../hooks/useDebounce';
+import { ListFilter } from './ListFilter';
 
 const Header = styled.div`
   display: flex;
@@ -15,6 +25,7 @@ const Header = styled.div`
 `;
 
 export interface ListTableProps {
+  filter?: FieldHandler[];
   fields: FieldHandler[];
   action?: {
     create?: boolean;
@@ -25,7 +36,9 @@ export interface ListTableProps {
 }
 export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
   const resource = useResourceContext();
-  const { data } = useGetList(resource);
+  const [filterValues, setFilterValues] = useObjectState({});
+  const lazyFilter = useDebounce(filterValues, { wait: 500 });
+  const { data } = useGetList(resource, { filter: lazyFilter });
   const action = props.action;
   const { showTableDrawer, drawerEl } = useListTableDrawer(props.fields);
 
@@ -69,9 +82,15 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
   }, [props.fields, action]);
 
   return (
-    <>
+    <Card>
       <Header>
-        <div>{/* Filter */}</div>
+        <div>
+          <ListFilter
+            fields={props.filter ?? []}
+            filterValues={filterValues}
+            onChangeFilter={(values) => setFilterValues(values)}
+          />
+        </div>
         <div>
           {action?.create && (
             <Button
@@ -86,10 +105,12 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
         </div>
       </Header>
 
+      <Divider />
+
       <Table columns={columns} data={data} rowKey="id" />
 
       {drawerEl}
-    </>
+    </Card>
   );
 });
 ListTable.displayName = 'ListTable';

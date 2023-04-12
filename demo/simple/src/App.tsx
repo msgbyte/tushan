@@ -1,4 +1,5 @@
 import {
+  createTextField,
   jsonServerProvider,
   ListTable,
   ReactQueryDevtools,
@@ -22,6 +23,11 @@ function App() {
         label="User"
         list={
           <ListTable
+            filter={[
+              createTextField('q', {
+                label: 'query',
+              }),
+            ]}
             fields={userFields}
             action={{ create: true, detail: true, edit: true, delete: true }}
           />
