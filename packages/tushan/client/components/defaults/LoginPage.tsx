@@ -106,44 +106,6 @@ const LoginForm: React.FC = React.memo(() => {
           Login
         </Button>
       </Form.Item>
-
-      {/* <CardContent>
-        <TextInput
-          autoFocus
-          source="username"
-          label={translate('ra.auth.username')}
-          autoComplete="username"
-          validate={required()}
-          fullWidth
-        />
-        <TextInput
-          source="password"
-          label={translate('ra.auth.password')}
-          type="password"
-          autoComplete="current-password"
-          validate={required()}
-          fullWidth
-        />
-
-        <Button
-          variant="contained"
-          type="submit"
-          color="primary"
-          disabled={loading}
-          fullWidth
-          className={LoginFormClasses.button}
-        >
-          {loading ? (
-            <CircularProgress
-              className={LoginFormClasses.icon}
-              size={19}
-              thickness={3}
-            />
-          ) : (
-            translate('ra.auth.sign_in')
-          )}
-        </Button>
-      </CardContent> */}
     </StyledForm>
   );
 });

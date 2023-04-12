@@ -4,7 +4,7 @@ import { defaultAuthParams, useCheckAuth } from '../api/auth';
 import { useTushanContext } from '../context/tushan';
 import { useConfigureAdminRouterFromChildren } from '../hooks/useConfigureAdminRouterFromChildren';
 import { useDelay } from '../hooks/useDelay';
-import { Dashboard } from './Dashboard';
+import { Dashboard } from './defaults/Dashboard';
 import { LoginPage } from './defaults/LoginPage';
 import { BasicLayout } from './layout';
 import { LoadingView } from './LoadingView';
