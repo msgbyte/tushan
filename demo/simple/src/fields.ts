@@ -12,6 +12,9 @@ export const userFields = [
   }),
   createTextField('name', {
     label: 'Name',
+    list: {
+      sort: true,
+    },
   }),
   createEmailField('email', {
     label: 'Email',

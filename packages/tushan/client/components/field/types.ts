@@ -2,7 +2,17 @@ import type { ComponentType } from 'react';
 
 export interface BasicFieldOptions {
   label?: string;
-  placeholder?: string;
+
+  list?: {
+    /**
+     * whether allow to sort, work in list table
+     */
+    sort?: boolean;
+  };
+
+  edit?: {
+    placeholder?: string;
+  };
 }
 
 // Detail

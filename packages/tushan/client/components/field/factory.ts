@@ -47,6 +47,8 @@ export function createFieldFactory<CustomOptions = {}>(
       if (viewType === 'list') {
         return {
           dataIndex: source,
+          sorter: options?.list?.sort ?? false,
+          sortDirections: ['ascend', 'descend'],
           title: options?.label ?? source,
           render: (val) => {
             return createElement(config.detail, {

@@ -8,7 +8,7 @@ import {
   Tooltip,
 } from '@arco-design/web-react';
 import { useResourceContext } from '../../context/resource';
-import { useGetList } from '../../api';
+import { SortPayload, useGetList } from '../../api';
 import { IconEdit, IconEye } from '@arco-design/web-react/icon';
 import type { FieldHandler } from '../field';
 import { useListTableDrawer } from './ListTableDrawer';
@@ -37,8 +37,18 @@ export interface ListTableProps {
 export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
   const resource = useResourceContext();
   const [filterValues, setFilterValues] = useObjectState({});
+  const [sort, setSort] = useState<SortPayload | undefined>(undefined);
   const lazyFilter = useDebounce(filterValues, { wait: 500 });
-  const { data } = useGetList(resource, { filter: lazyFilter });
+  const [pageNum, setPageNum] = useState(1);
+  const [pageSize, setPageSize] = useState(20);
+  const { data, isLoading, total } = useGetList(resource, {
+    pagination: {
+      pageNum,
+      pageSize,
+    },
+    filter: lazyFilter,
+    sort,
+  });
   const action = props.action;
   const { showTableDrawer, drawerEl } = useListTableDrawer(props.fields);
 
@@ -107,7 +117,33 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
 
       <Divider />
 
-      <Table columns={columns} data={data} rowKey="id" />
+      <Table
+        loading={isLoading}
+        columns={columns}
+        data={data}
+        rowKey="id"
+        pagination={{
+          total,
+          current: pageNum,
+          pageSize,
+          onChange: (pageNum, pageSize) => {
+            setPageNum(pageNum);
+            setPageSize(pageSize);
+          },
+        }}
+        onChange={(pagination, sorter) => {
+          const { field, direction } = sorter;
+
+          if (field && direction) {
+            setSort({
+              field,
+              order: direction === 'ascend' ? 'ASC' : 'DESC',
+            });
+          } else {
+            setSort(undefined);
+          }
+        }}
+      />
 
       {drawerEl}
     </Card>

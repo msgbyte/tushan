@@ -13,7 +13,7 @@ TextFieldDetail.displayName = 'TextFieldDetail';
 export const TextFieldEdit: FieldEditComponent<string> = React.memo((props) => {
   return (
     <Input
-      placeholder={props.options.placeholder ?? props.options.label}
+      placeholder={props.options.edit?.placeholder ?? props.options.label}
       value={props.value}
       onChange={(val) => props.onChange(val)}
     />
