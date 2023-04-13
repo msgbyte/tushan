@@ -1,8 +1,9 @@
 {
-  "name": "demo-simple",
+  "name": "{{name}}",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "author": "{{author}}",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -11,7 +12,7 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "tushan": "workspace:^0.2.1"
+    "tushan": "^0.2.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",

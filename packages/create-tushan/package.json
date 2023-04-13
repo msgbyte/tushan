@@ -1,0 +1,28 @@
+{
+  "name": "create-tushan",
+  "version": "1.0.6",
+  "description": "",
+  "main": "dist/index.js",
+  "bin": "bin/index.js",
+  "type": "module",
+  "scripts": {
+    "prepare": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "files": [
+    "dist",
+    "templates"
+  ],
+  "keywords": [],
+  "author": "moonrailgun <moonrailgun@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "node-plop": "0.31.1",
+    "plop": "3.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "typescript": "^5.0.4"
+  }
+}

@@ -3,7 +3,7 @@
   "scripts": {
     "dev": "cd demo/simple && pnpm dev",
     "release": "release-it",
-    "publish": "pnpm -r publish --registry=https://registry.npmjs.com/",
+    "publish:all": "pnpm -r publish --registry=https://registry.npmjs.com/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "files": [

@@ -1,0 +1,9 @@
+{
+  "extends": "../../tsconfig.default.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "module": "es2022",
+    "verbatimModuleSyntax": false,
+  },
+  "include": ["./src"]
+}
