@@ -25,7 +25,7 @@ function App() {
           <ListTable
             filter={[
               createTextField('q', {
-                label: 'query',
+                label: 'Query',
               }),
             ]}
             fields={userFields}

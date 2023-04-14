@@ -13,7 +13,7 @@ const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com');
 function App() {
   return (
     <Tushan
-      basename="/admin"
+      basename="/"
       dataProvider={dataProvider}
       authProvider={authProvider}
     >
