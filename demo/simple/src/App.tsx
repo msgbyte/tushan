@@ -34,7 +34,7 @@ function App() {
         }
       />
 
-      <Resource
+      {/* <Resource
         name="photos"
         label="Photos"
         list={
@@ -45,7 +45,7 @@ function App() {
         }
       />
 
-      <ReactQueryDevtools />
+      <ReactQueryDevtools /> */}
     </Tushan>
   );
 }

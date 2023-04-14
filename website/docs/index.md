@@ -2,46 +2,89 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# 介绍
 
-Let's discover **Docusaurus in less than 5 minutes**.
+<img width="128px" src="/img/logo.svg" />
 
-## Getting Started
+`Tushan` 是一个自由度极高的，基于React的，开箱即用的后台管理应用前端框架。
 
-Get started by **creating a new site**.
+作为开发者, 你可以像是调用库一样快速创建一个可用的后台管理框架
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+一个简单的`Tushan` 应用大概会长成以下样子:
 
-### What you'll need
+```tsx
+import {
+  createTextField,
+  createEmailField,
+  createUrlField,
+  jsonServerProvider,
+  ListTable,
+  Resource,
+  Tushan,
+} from 'tushan';
 
-- [Node.js](https://nodejs.org/en/download/) version 16.14 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com');
 
-## Generate a new site
+function App() {
+  return (
+    <Tushan
+      basename="/admin"
+      dataProvider={dataProvider}
+    >
+      <Resource
+        name="users"
+        label="User"
+        list={
+          <ListTable
+            filter={[
+              createTextField('q', {
+                label: 'Query',
+              }),
+            ]}
+            fields={[
+              createTextField('id', {
+                label: 'ID',
+              }),
+              createTextField('name', {
+                label: 'Name',
+                list: {
+                  sort: true,
+                },
+              }),
+              createEmailField('email', {
+                label: 'Email',
+              }),
+              createUrlField('website', {
+                label: 'Website',
+              }),
+            ]}
+            action={{ create: true, detail: true, edit: true, delete: true }}
+          />
+        }
+      />
+    </Tushan>
+  );
+}
 
-Generate a new Docusaurus site using the **classic template**.
-
-The classic template will automatically be added to your project after you run the command:
-
-```bash
-npm init docusaurus@latest my-website classic
+export default App;
 ```
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+我们可以通过指定字段的类型来决定数据表格长成什么样，并且内置实现了常规的增删改查等操作。帮助用户快速产出一个 MVP。
 
-The command also installs all necessary dependencies you need to run Docusaurus.
+预览效果如下:
 
-## Start your site
+![](/img/preview/1.png)
 
-Run the development server:
+![](/img/preview/2.png)
 
-```bash
-cd my-website
-npm run start
-```
+![](/img/preview/3.png)
 
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
+![](/img/preview/4.png)
 
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
+> Tushan 的 api 设计受到 [react-admin](https://marmelab.com/react-admin) 很大的启发，如果对 material-ui 设计的后台方案感兴趣的话可以选择 react-admin 作为替代
 
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+另外，`Tushan` 还包括一些常用的前端依赖项，如 `styled-components` 和 `arco-design` ，可以帮助您更快地搭建前端界面。
+
+## 在 CodeSandbox 中快速示例
+
+访问 [CodeSandbox](https://codesandbox.io/p/github/msgbyte/tushan/master) 快速获得无后台版本的示例程序。

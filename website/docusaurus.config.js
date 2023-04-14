@@ -44,7 +44,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/msgbyte/tushan/tree/main/website/',
+            'https://github.com/msgbyte/tushan/tree/master/website/',
         },
         blog: false,
         pages: false,
@@ -53,6 +53,10 @@ const config = {
         },
       }),
     ],
+  ],
+
+  plugins: [
+    require.resolve('docusaurus-plugin-image-zoom'),
   ],
 
   themeConfig:
@@ -124,6 +128,16 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+      },
+      zoom: {
+        selector: '.markdown img',
+        config: {
+          // options you can specify via https://github.com/francoischalifour/medium-zoom#usage
+          background: {
+            light: 'rgb(255, 255, 255)',
+            dark: 'rgb(50, 50, 50)',
+          },
+        },
       },
     }),
 };
