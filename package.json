@@ -2,6 +2,7 @@
   "private": true,
   "scripts": {
     "dev": "cd demo/simple && pnpm dev",
+    "website": "cd website && pnpm start",
     "release": "release-it",
     "publish:all": "pnpm -r publish --registry=https://registry.npmjs.com/",
     "test": "echo \"Error: no test specified\" && exit 1"
