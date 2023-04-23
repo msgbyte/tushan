@@ -51,6 +51,7 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
   });
   const action = props.action;
   const { showTableDrawer, drawerEl } = useListTableDrawer(props.fields);
+  const filterFields = props.filter ?? [];
 
   const columns = useMemo(() => {
     const c = [...props.fields].map((fieldHandler) => fieldHandler('list'));
@@ -91,12 +92,14 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
     return c;
   }, [props.fields, action]);
 
+  const hasHeader = filterFields.length > 0 || action?.create === true;
+
   return (
     <Card>
       <Header>
         <div>
           <ListFilter
-            fields={props.filter ?? []}
+            fields={filterFields}
             filterValues={filterValues}
             onChangeFilter={(values) => setFilterValues(values)}
           />
@@ -115,7 +118,7 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
         </div>
       </Header>
 
-      <Divider />
+      {hasHeader && <Divider />}
 
       <Table
         loading={isLoading}

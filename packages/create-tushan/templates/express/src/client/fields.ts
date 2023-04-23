@@ -36,7 +36,6 @@ export const photoFields = [
   }),
   createImageField('url', {
     label: 'Url',
-    height: 300,
   }),
   createAvatarField('thumbnailUrl', {
     label: 'ThumbnailUrl',
