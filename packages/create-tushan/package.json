@@ -1,6 +1,6 @@
 {
   "name": "create-tushan",
-  "version": "1.0.7",
+  "version": "1.0.9",
   "description": "",
   "main": "dist/index.js",
   "bin": "bin/index.js",
@@ -17,11 +17,13 @@
   "author": "moonrailgun <moonrailgun@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "inquirer": "^8.2.5",
     "lodash": "^4.17.21",
     "node-plop": "0.31.1",
     "plop": "3.1.2"
   },
   "devDependencies": {
+    "@types/inquirer": "^8.2.6",
     "@types/node": "^18.15.11",
     "typescript": "^5.0.4"
   }

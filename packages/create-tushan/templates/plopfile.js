@@ -37,4 +37,22 @@ export default function (
       },
     ],
   });
+
+  // 服务端插件的前端模板代码
+  plop.setGenerator('express', {
+    description: 'Tushan express template',
+    prompts,
+    actions: [
+      {
+        type: 'addMany',
+        destination: path.resolve(process.cwd(), './{{name}}/'),
+        base: './express',
+        templateFiles: [
+          './express/**/*',
+        ],
+        skipIfExists: true,
+        globOptions: {},
+      },
+    ],
+  });
 };
