@@ -21,7 +21,7 @@ export const TushanBreadcrumb: React.FC = React.memo(() => {
   return (
     <Breadcrumb style={{ marginBottom: 16 }}>
       <Breadcrumb.Item>
-        <NavLink to="/home">
+        <NavLink to="/dashboard">
           <IconHome className="mr-2" />
           Home
         </NavLink>
