@@ -6,7 +6,7 @@ import { Message } from '@arco-design/web-react';
 import { defaultAuthParams } from './const';
 
 export const useCheckAuth = (): CheckAuth => {
-  const { authProvider, basename } = useTushanContext();
+  const { authProvider } = useTushanContext();
   const logout = useLogout();
   const loginUrl = defaultAuthParams.loginUrl;
 

@@ -2,6 +2,8 @@ import { Message } from '@arco-design/web-react';
 import { useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useTushanContext } from '../../context/tushan';
+import { useUserStore } from '../../store/user';
+import { createSelector } from '../../utils/createSelector';
 import { defaultAuthParams } from './const';
 
 const useLogin = (): Login => {
@@ -12,6 +14,7 @@ const useLogin = (): Login => {
   const nextPathName = locationState && locationState.nextPathname;
   const nextSearch = locationState && locationState.nextSearch;
   const afterLoginUrl = defaultAuthParams.afterLoginUrl;
+  const { setIsLogin } = useUserStore(createSelector('setIsLogin'));
 
   const login = useCallback(
     (params: any = {}, pathName?: string) =>
@@ -27,6 +30,8 @@ const useLogin = (): Login => {
             : nextPathName + nextSearch || afterLoginUrl;
           navigate(redirectUrl);
         }
+
+        setIsLogin(true);
         return ret;
       }),
     [authProvider, navigate, nextPathName, nextSearch, afterLoginUrl]

@@ -4,6 +4,8 @@ import { defaultAuthParams, useCheckAuth } from '../api/auth';
 import { useTushanContext } from '../context/tushan';
 import { useConfigureAdminRouterFromChildren } from '../hooks/useConfigureAdminRouterFromChildren';
 import { useDelay } from '../hooks/useDelay';
+import { useUserStore } from '../store/user';
+import { createSelector } from '../utils/createSelector';
 import { Dashboard } from './defaults/Dashboard';
 import { LoginPage } from './defaults/LoginPage';
 import { BasicLayout } from './layout';
@@ -25,6 +27,7 @@ export const BuiltinRoutes: React.FC<BuiltinRoutesProps> = React.memo(
     const requireAuth = Boolean(authProvider);
     const [canRender, setCanRender] = useState(!requireAuth);
     const oneSecondHasPassed = useDelay(1000);
+    const { isLogin } = useUserStore(createSelector('isLogin'));
 
     const checkAuth = useCheckAuth();
 
@@ -36,7 +39,7 @@ export const BuiltinRoutes: React.FC<BuiltinRoutesProps> = React.memo(
           })
           .catch(() => {});
       }
-    }, [checkAuth, requireAuth]);
+    }, [checkAuth, requireAuth, isLogin]);
 
     return (
       <>
@@ -48,7 +51,7 @@ export const BuiltinRoutes: React.FC<BuiltinRoutesProps> = React.memo(
           {canRender ? (
             <Route element={<BasicLayout />}>
               <Route
-                path="/*"
+                path="*"
                 element={
                   <div>
                     <Routes>

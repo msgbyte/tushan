@@ -3,6 +3,8 @@ import { useLocation, useNavigate, Path } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { useTushanContext } from '../../context/tushan';
 import { defaultAuthParams } from './const';
+import { useUserStore } from '../../store/user';
+import { createSelector } from '../../utils/createSelector';
 
 export const useLogout = (): Logout => {
   const { authProvider } = useTushanContext();
@@ -16,6 +18,7 @@ export const useLogout = (): Logout => {
   const location = useLocation();
   const locationRef = useRef(location);
   const loginUrl = defaultAuthParams.loginUrl;
+  const { setIsLogin } = useUserStore(createSelector('setIsLogin'));
 
   /*
    * We need the current location to pass in the router state
@@ -80,6 +83,7 @@ export const useLogout = (): Logout => {
         }
         navigateRef.current(newLocation, newLocationOptions);
         queryClient.clear();
+        setIsLogin(false);
 
         return redirectToFromProvider;
       }),
