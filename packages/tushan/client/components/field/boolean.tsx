@@ -1,8 +1,13 @@
 import { Input, Switch } from '@arco-design/web-react';
 import { IconCheck, IconClose } from '@arco-design/web-react/icon';
 import React from 'react';
+import styled from 'styled-components';
 import { createFieldFactory } from './factory';
 import type { FieldDetailComponent, FieldEditComponent } from './types';
+
+const Tip = styled.div`
+  margin-left: 2px;
+`;
 
 function isTrusty(input: any): boolean {
   return input === '1' || input === 'true' || input === 1 || input === true;
@@ -23,7 +28,7 @@ export const BooleanFieldEdit: FieldEditComponent<boolean> = React.memo(
           checked={isTrusty(props.value)}
           onChange={(val) => props.onChange(val)}
         />
-        <span>{props.options.label}</span>
+        <Tip>{props.options.label}</Tip>
       </div>
     );
   }
