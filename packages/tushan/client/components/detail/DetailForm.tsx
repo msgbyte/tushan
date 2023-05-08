@@ -9,7 +9,9 @@ export interface DetailFormProps {
 }
 export const DetailForm: React.FC<DetailFormProps> = React.memo((props) => {
   const items = useMemo(() => {
-    return props.fields.map((handler) => handler('detail'));
+    return props.fields
+      .map((handler) => handler('detail'))
+      .filter((item) => !item.hidden);
   }, [props.fields]);
 
   return (

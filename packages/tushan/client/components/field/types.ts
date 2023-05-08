@@ -8,10 +8,17 @@ export interface BasicFieldOptions {
      * whether allow to sort, work in list table
      */
     sort?: boolean;
+    width?: string | number;
+    hidden?: boolean;
   };
 
   edit?: {
     placeholder?: string;
+    hidden?: boolean;
+  };
+
+  detail?: {
+    hidden?: boolean;
   };
 }
 

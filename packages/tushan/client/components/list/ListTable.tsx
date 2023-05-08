@@ -54,7 +54,10 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
   const filterFields = props.filter ?? [];
 
   const columns = useMemo(() => {
-    const c = [...props.fields].map((fieldHandler) => fieldHandler('list'));
+    const c = [...props.fields]
+      .map((fieldHandler) => fieldHandler('list'))
+      .filter((item) => !item.hidden)
+      .map((item) => item.columnProps);
 
     if (action) {
       c.push({

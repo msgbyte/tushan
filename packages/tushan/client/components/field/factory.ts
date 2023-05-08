@@ -12,17 +12,22 @@ export interface CreateFieldFactoryConfig {
   edit: FieldEditComponent;
 }
 
-export type ListFieldItem = TableColumnProps;
+export type ListFieldItem = {
+  hidden: boolean;
+  columnProps: TableColumnProps;
+};
 
 export interface EditFieldItem<T = any> {
   source: string;
   title: string;
+  hidden: boolean;
   render: (value: T, onChange: (val: T) => void) => ReactElement;
 }
 
 export interface DetailFieldItem<T = any> {
   source: string;
   title: string;
+  hidden: boolean;
   render: (value: T) => ReactElement;
 }
 
@@ -46,21 +51,26 @@ export function createFieldFactory<CustomOptions = {}>(
     (viewType) => {
       if (viewType === 'list') {
         return {
-          dataIndex: source,
-          sorter: options?.list?.sort ?? false,
-          sortDirections: ['ascend', 'descend'],
-          title: options?.label ?? source,
-          render: (val) => {
-            return createElement(config.detail, {
-              value: val,
-              options: options ?? {},
-            });
+          hidden: options?.list?.hidden ?? false,
+          columnProps: {
+            dataIndex: source,
+            sorter: options?.list?.sort ?? false,
+            sortDirections: ['ascend', 'descend'],
+            title: options?.label ?? source,
+            width: options?.list?.width,
+            render: (val) => {
+              return createElement(config.detail, {
+                value: val,
+                options: options ?? {},
+              });
+            },
           },
         } as ListFieldItem;
       } else if (viewType === 'edit') {
         return {
           source,
           title: options?.label ?? source,
+          hidden: options?.edit?.hidden ?? false,
           render: (value, onChange) => {
             return createElement(config.edit, {
               value,
@@ -73,6 +83,7 @@ export function createFieldFactory<CustomOptions = {}>(
         return {
           source,
           title: options?.label ?? source,
+          hidden: options?.detail?.hidden ?? false,
           render: (value) => {
             return createElement(config.detail, {
               value,

@@ -1,5 +1,5 @@
 import { Button, Form, Message, Space } from '@arco-design/web-react';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import type { BasicRecord } from '../../api';
 import { useCreate } from '../../api/useCreate';
 import { useUpdate } from '../../api/useUpdate';
@@ -17,13 +17,19 @@ export interface EditFormProps {
 export const EditForm: React.FC<EditFormProps> = React.memo((props) => {
   const isCreate = props.record === null;
   const defaultValues = props.record ?? {};
-  const [values, setValues] = useState<{}>(defaultValues);
+  const [values, setValues] = useState<Record<string, unknown>>(defaultValues);
   const [create] = useCreate();
   const [updateOne] = useUpdate();
   const resource = useResourceContext();
 
+  useEffect(() => {
+    setValues(defaultValues);
+  }, [defaultValues]);
+
   const items = useMemo(() => {
-    return props.fields.map((handler) => handler('edit'));
+    return props.fields
+      .map((handler) => handler('edit'))
+      .filter((item) => !item.hidden);
   }, [props.fields]);
 
   const handleSubmit = useSendRequest(async () => {
