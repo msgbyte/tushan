@@ -1,7 +1,8 @@
 import { Form } from '@arco-design/web-react';
 import React, { useMemo } from 'react';
 import type { BasicRecord } from '../../api/types';
-import type { FieldHandler } from '../field/factory';
+import { ViewTypeContextProvider } from '../../context/viewtype';
+import type { FieldHandler } from '../fields/factory';
 
 export interface DetailFormProps {
   record: BasicRecord;
@@ -15,13 +16,15 @@ export const DetailForm: React.FC<DetailFormProps> = React.memo((props) => {
   }, [props.fields]);
 
   return (
-    <Form>
-      {items.map((item) => (
-        <Form.Item key={item.source} label={item.title}>
-          {item.render(props.record[item.source])}
-        </Form.Item>
-      ))}
-    </Form>
+    <ViewTypeContextProvider viewType="detail">
+      <Form>
+        {items.map((item) => (
+          <Form.Item key={item.source} label={item.title}>
+            {item.render(props.record[item.source])}
+          </Form.Item>
+        ))}
+      </Form>
+    </ViewTypeContextProvider>
   );
 });
 DetailForm.displayName = 'DetailForm';

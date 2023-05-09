@@ -17,6 +17,7 @@ import styled from 'styled-components';
 import { useObjectState } from '../../hooks/useObjectState';
 import { useDebounce } from '../../hooks/useDebounce';
 import { ListFilter } from './ListFilter';
+import { ViewTypeContextProvider } from '../../context/viewtype';
 
 const Header = styled.div`
   display: flex;
@@ -98,61 +99,63 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
   const hasHeader = filterFields.length > 0 || action?.create === true;
 
   return (
-    <Card>
-      <Header>
-        <div>
-          <ListFilter
-            fields={filterFields}
-            filterValues={filterValues}
-            onChangeFilter={(values) => setFilterValues(values)}
-          />
-        </div>
-        <div>
-          {action?.create && (
-            <Button
-              type="primary"
-              onClick={() => {
-                showTableDrawer('edit', null);
-              }}
-            >
-              Create
-            </Button>
-          )}
-        </div>
-      </Header>
+    <ViewTypeContextProvider viewType="list">
+      <Card>
+        <Header>
+          <div>
+            <ListFilter
+              fields={filterFields}
+              filterValues={filterValues}
+              onChangeFilter={(values) => setFilterValues(values)}
+            />
+          </div>
+          <div>
+            {action?.create && (
+              <Button
+                type="primary"
+                onClick={() => {
+                  showTableDrawer('edit', null);
+                }}
+              >
+                Create
+              </Button>
+            )}
+          </div>
+        </Header>
 
-      {hasHeader && <Divider />}
+        {hasHeader && <Divider />}
 
-      <Table
-        loading={isLoading}
-        columns={columns}
-        data={data}
-        rowKey="id"
-        pagination={{
-          total,
-          current: pageNum,
-          pageSize,
-          onChange: (pageNum, pageSize) => {
-            setPageNum(pageNum);
-            setPageSize(pageSize);
-          },
-        }}
-        onChange={(pagination, sorter) => {
-          const { field, direction } = sorter;
+        <Table
+          loading={isLoading}
+          columns={columns}
+          data={data}
+          rowKey="id"
+          pagination={{
+            total,
+            current: pageNum,
+            pageSize,
+            onChange: (pageNum, pageSize) => {
+              setPageNum(pageNum);
+              setPageSize(pageSize);
+            },
+          }}
+          onChange={(pagination, sorter) => {
+            const { field, direction } = sorter;
 
-          if (field && direction) {
-            setSort({
-              field,
-              order: direction === 'ascend' ? 'ASC' : 'DESC',
-            });
-          } else {
-            setSort(undefined);
-          }
-        }}
-      />
+            if (field && direction) {
+              setSort({
+                field,
+                order: direction === 'ascend' ? 'ASC' : 'DESC',
+              });
+            } else {
+              setSort(undefined);
+            }
+          }}
+        />
 
-      {drawerEl}
-    </Card>
+        {drawerEl}
+      </Card>
+    </ViewTypeContextProvider>
   );
 });
 ListTable.displayName = 'ListTable';

@@ -20,6 +20,6 @@ ViewTypeContextProvider.displayName = 'ViewTypeContextProvider';
  * 获取视图类型
  * 可能返回 "list" | "detail" | "edit"
  */
-export function useViewTypeContext(): string {
+export function useViewTypeContext(): ViewType {
   return useContext(ViewTypeContext);
 }
