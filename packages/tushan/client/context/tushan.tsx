@@ -7,6 +7,7 @@ export interface TushanContextProps {
   dashboard?: boolean;
   dataProvider?: DataProvider;
   authProvider?: AuthProvider;
+  layout?: React.ReactElement;
 }
 
 const TushanContext = React.createContext<TushanContextProps>({});

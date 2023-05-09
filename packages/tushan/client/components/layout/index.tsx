@@ -51,6 +51,7 @@ const Root = styled(Layout)`
       color: rgb(107 114 128);
       font-size: 0.75rem;
       line-height: 1rem;
+      margin-top: 1rem;
     }
   }
 `;

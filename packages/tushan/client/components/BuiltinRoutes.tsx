@@ -1,4 +1,4 @@
-import React, { Children, useEffect, useState } from 'react';
+import React, { Children, createElement, useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { defaultAuthParams, useCheckAuth } from '../api/auth';
 import { useTushanContext } from '../context/tushan';
@@ -23,7 +23,7 @@ export const BuiltinRoutes: React.FC<BuiltinRoutesProps> = React.memo(
       resources,
       components,
     } = useConfigureAdminRouterFromChildren(props.children);
-    const { dashboard = true, authProvider } = useTushanContext();
+    const { dashboard = true, authProvider, layout } = useTushanContext();
     const requireAuth = Boolean(authProvider);
     const [canRender, setCanRender] = useState(!requireAuth);
     const oneSecondHasPassed = useDelay(1000);
@@ -49,7 +49,7 @@ export const BuiltinRoutes: React.FC<BuiltinRoutesProps> = React.memo(
           <Route path={defaultAuthParams.loginUrl} element={<LoginPage />} />
 
           {canRender ? (
-            <Route element={<BasicLayout />}>
+            <Route element={layout ?? <BasicLayout />}>
               <Route
                 path="*"
                 element={
