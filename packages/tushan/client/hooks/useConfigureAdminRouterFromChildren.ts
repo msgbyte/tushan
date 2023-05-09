@@ -10,10 +10,11 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { CustomRoutes, CustomRoutesProps } from '../components/CustomRoutes';
+import { CustomRoute, CustomRoutesProp } from '../components/CustomRoute';
 import { Resource, ResourceProps } from '../components/Resource';
 import { useMenuStore } from '../store/menu';
-import { useSafeSetState } from './useSafeState';
+import { useEvent } from './useEvent';
+import { useWatch } from './useWatch';
 
 /**
  * This hook inspects the CoreAdminRouter children and returns them separated in three groups:
@@ -40,7 +41,11 @@ export const useConfigureAdminRouterFromChildren = (
   // Whenever children are updated, update our custom routes and resources
   const routesAndResources = useRoutesAndResourcesFromChildren(children);
 
-  useRegisterMenu(routesAndResources);
+  useRegisterMenu(routesAndResources.resources);
+  useRegisterMenu(
+    routesAndResources.customRoutesWithLayout,
+    (item) => item.props.noMenu !== true
+  );
 
   return {
     customRoutesWithLayout: routesAndResources.customRoutesWithLayout,
@@ -50,24 +55,24 @@ export const useConfigureAdminRouterFromChildren = (
   };
 };
 
-function useRegisterMenu(routesAndResources: RoutesAndResources) {
-  const { resources } = routesAndResources;
-
-  useEffect(() => {
-    resources.forEach((resource) => {
+function useRegisterMenu<
+  T extends ReactElement<Pick<CustomRoutesProp, 'name' | 'label' | 'icon'>>
+>(routes: T[], filterFn: (item: T) => boolean = () => true) {
+  useWatch([routes], () => {
+    routes.filter(filterFn).forEach((route) => {
       useMenuStore.getState().addMenu({
-        key: resource.props.name,
-        label: resource.props.label ?? resource.props.name,
-        icon: resource.props.icon,
+        key: route.props.name,
+        label: route.props.label ?? route.props.name,
+        icon: route.props.icon,
       });
     });
 
     return () => {
-      resources.forEach((resource) => {
-        useMenuStore.getState().removeMenu(resource.props.name);
+      routes.filter(filterFn).forEach((route) => {
+        useMenuStore.getState().removeMenu(route.props.name);
       });
     };
-  }, [resources]);
+  });
 }
 
 const useRoutesAndResourcesFromChildren = (
@@ -95,18 +100,24 @@ const useRoutesAndResourcesState = (
 
   const mergeRoutesAndResources = useCallback(
     (newRoutesAndResources: RoutesAndResources) => {
-      setRoutesAndResources((previous) => ({
-        customRoutesWithLayout: [
-          ...previous.customRoutesWithLayout,
-          newRoutesAndResources.customRoutesWithLayout,
-        ],
-        customRoutesWithoutLayout: [
-          ...previous.customRoutesWithoutLayout,
-          newRoutesAndResources.customRoutesWithoutLayout,
-        ],
-        resources: [...previous.resources, newRoutesAndResources.resources],
-        components: [...previous.components, newRoutesAndResources.components],
-      }));
+      setRoutesAndResources(
+        (previous) =>
+          ({
+            customRoutesWithLayout: [
+              ...previous.customRoutesWithLayout,
+              newRoutesAndResources.customRoutesWithLayout,
+            ],
+            customRoutesWithoutLayout: [
+              ...previous.customRoutesWithoutLayout,
+              newRoutesAndResources.customRoutesWithoutLayout,
+            ],
+            resources: [...previous.resources, newRoutesAndResources.resources],
+            components: [
+              ...previous.components,
+              newRoutesAndResources.components,
+            ],
+          } as RoutesAndResources)
+      );
     },
     []
   );
@@ -149,17 +160,18 @@ const getRoutesAndResourceFromNodes = (
       components.push(...customRoutesFromFragment.components);
     }
 
-    if (element.type === CustomRoutes) {
-      const customRoutesElement = element as ReactElement<CustomRoutesProps>;
+    if (element.type === CustomRoute) {
+      const customRouteElement = element as ReactElement<CustomRoutesProp>;
 
-      if (customRoutesElement.props.noLayout) {
-        customRoutesWithoutLayout.push(customRoutesElement.props.children);
+      if (customRouteElement.props.noLayout) {
+        customRoutesWithoutLayout.push(customRouteElement);
       } else {
-        customRoutesWithLayout.push(customRoutesElement.props.children);
+        customRoutesWithLayout.push(customRouteElement);
       }
     } else if (element.type === Resource) {
       resources.push(element as ReactElement<ResourceProps>);
     } else {
+      // Fallback
       components.push(element);
     }
   });
@@ -173,8 +185,8 @@ const getRoutesAndResourceFromNodes = (
 };
 
 type RoutesAndResources = {
-  customRoutesWithLayout: ReactElement<CustomRoutesProps>[];
-  customRoutesWithoutLayout: ReactElement<CustomRoutesProps>[];
+  customRoutesWithLayout: ReactElement<CustomRoutesProp>[];
+  customRoutesWithoutLayout: ReactElement<CustomRoutesProp>[];
   resources: ReactElement<ResourceProps>[];
   components: ReactElement[];
 };

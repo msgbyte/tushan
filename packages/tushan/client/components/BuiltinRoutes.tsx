@@ -1,4 +1,4 @@
-import React, { Children, createElement, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { defaultAuthParams, useCheckAuth } from '../api/auth';
 import { useTushanContext } from '../context/tushan';
@@ -59,9 +59,15 @@ export const BuiltinRoutes: React.FC<BuiltinRoutesProps> = React.memo(
                         <Route path="/dashboard" element={<Dashboard />} />
                       )}
 
-                      {customRoutesWithLayout}
+                      {customRoutesWithLayout.map((item) => (
+                        <Route
+                          key={item.props.name}
+                          path={`${item.props.name}/*`}
+                          element={item}
+                        />
+                      ))}
 
-                      {Children.map(resources, (resource) => (
+                      {resources.map((resource) => (
                         <Route
                           key={resource.props.name}
                           path={`${resource.props.name}/*`}

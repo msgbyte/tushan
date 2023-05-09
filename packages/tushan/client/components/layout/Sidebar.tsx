@@ -29,10 +29,10 @@ export const Sidebar: React.FC = React.memo(() => {
       </MenuItem>
 
       {(menus ?? []).map((item) => {
-        const path = item.path ? item.path : `/${item.key}/list`;
+        const path = item.path ?? item.key;
 
         return (
-          <MenuItem key={path}>
+          <MenuItem key={`/${path}`}>
             {item.icon ? item.icon : <IconApps />}
 
             {item.label}

@@ -5,11 +5,12 @@ import { ResourceContextProvider } from '../context/resource';
 export interface ResourceProps extends React.PropsWithChildren {
   name: string;
   label?: string;
+  icon?: React.ReactElement;
+
   list?: React.ComponentType<any> | React.ReactElement;
   create?: React.ComponentType<any> | React.ReactElement;
   edit?: React.ComponentType<any> | React.ReactElement;
   detail?: React.ComponentType<any> | React.ReactElement;
-  icon?: React.ReactElement;
 }
 export const Resource: React.FC<ResourceProps> = React.memo((props) => {
   const { create: Create, detail: Detail, list: List, edit: Edit } = props;
