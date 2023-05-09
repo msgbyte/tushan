@@ -7,9 +7,9 @@ import type { ViewType } from '../../context/viewtype';
 import type { TableColumnProps } from '@arco-design/web-react';
 import { createElement, ReactElement } from 'react';
 
-export interface CreateFieldFactoryConfig {
-  detail: FieldDetailComponent;
-  edit: FieldEditComponent;
+export interface CreateFieldFactoryConfig<CustomOptions = {}> {
+  detail: FieldDetailComponent<any, CustomOptions>;
+  edit: FieldEditComponent<any, CustomOptions>;
 }
 
 export type ListFieldItem = {
@@ -41,8 +41,8 @@ export type FieldHandler = <T extends ViewType>(
   ? DetailFieldItem
   : never;
 
-export function createFieldFactory<CustomOptions = {}>(
-  config: CreateFieldFactoryConfig
+export function createFieldFactory<CustomOptions extends {} = {}>(
+  config: CreateFieldFactoryConfig<CustomOptions>
 ) {
   return (
       source: string,

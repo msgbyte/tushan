@@ -114,6 +114,9 @@ importers:
       react-is:
         specifier: ^18.2.0
         version: 18.2.0
+      react-json-view:
+        specifier: ^1.21.3
+        version: 1.21.3(@types/react@18.0.33)(react-dom@18.2.0)(react@18.2.0)
       react-router:
         specifier: ^6.3.0
         version: 6.3.0(react@18.2.0)
@@ -1714,13 +1717,13 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.13.9
+    dev: false
 
   /@babel/runtime@7.21.0:
     resolution: {integrity: sha512-xwII0//EObnq89Ji5AKYQaRYiW/nZ3llSv29d49IuxPhKbtJoLP+9QUUZ4nVragQVtaVGeZrpB+ZtG/Pdy/POw==}
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.13.11
-    dev: false
 
   /@babel/template@7.20.7:
     resolution: {integrity: sha512-8SegXApWe6VoNw0r9JHpSteLKTpTiLZ4rMlGIm9JQ18KiCtyQiAMEazujAHrUS5flrcqYZa75ukev3P6QmUwUw==}
@@ -2143,7 +2146,7 @@ packages:
       fs-extra: 10.1.0
       react: 17.0.2
       react-dom: 17.0.2(react@17.0.2)
-      react-json-view: 1.21.3(react-dom@17.0.2)(react@17.0.2)
+      react-json-view: 1.21.3(@types/react@18.0.33)(react-dom@18.2.0)(react@18.2.0)
       tslib: 2.4.0
     transitivePeerDependencies:
       - '@parcel/css'
@@ -5654,7 +5657,7 @@ packages:
   /dom-helpers@5.2.1:
     resolution: {integrity: sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA==}
     dependencies:
-      '@babel/runtime': 7.18.9
+      '@babel/runtime': 7.21.0
       csstype: 3.1.0
     dev: false
 
@@ -6280,14 +6283,14 @@ packages:
     engines: {node: '>= 10.13.0'}
     dev: false
 
-  /flux@4.0.4(react@17.0.2):
+  /flux@4.0.4(react@18.2.0):
     resolution: {integrity: sha512-NCj3XlayA2UsapRpM7va6wU1+9rE5FIL7qoMcmxWHRzbp0yujihMBm9BBHZ1MDIk5h5o2Bl6eGiCe8rYELAmYw==}
     peerDependencies:
       react: ^15.0.2 || ^16.0.0 || ^17.0.0
     dependencies:
       fbemitter: 3.0.0
       fbjs: 3.0.4
-      react: 17.0.2
+      react: 18.2.0
     transitivePeerDependencies:
       - encoding
     dev: false
@@ -6868,7 +6871,7 @@ packages:
   /history@4.10.1:
     resolution: {integrity: sha512-36nwAD620w12kuzPAsyINPWJqlNbij+hpK1k9XRloDtym8mxzGYl2c17LnV6IAGB2Dmg4tEa7G7DlawS0+qjew==}
     dependencies:
-      '@babel/runtime': 7.18.9
+      '@babel/runtime': 7.21.0
       loose-envify: 1.4.0
       resolve-pathname: 3.0.0
       tiny-invariant: 1.3.1
@@ -9632,7 +9635,7 @@ packages:
     peerDependencies:
       react: ^15.3.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@babel/runtime': 7.18.9
+      '@babel/runtime': 7.21.0
       react: 18.2.0
     dev: false
 
@@ -9730,7 +9733,7 @@ packages:
       react: ^16.6.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.6.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@babel/runtime': 7.18.9
+      '@babel/runtime': 7.21.0
       invariant: 2.2.4
       prop-types: 15.8.1
       react: 17.0.2
@@ -9745,18 +9748,18 @@ packages:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
     dev: false
 
-  /react-json-view@1.21.3(react-dom@17.0.2)(react@17.0.2):
+  /react-json-view@1.21.3(@types/react@18.0.33)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-13p8IREj9/x/Ye4WI/JpjhoIwuzEgUAtgJZNBJckfzJt1qyh24BdTm6UQNGnyTq9dapQdrqvquZTo3dz1X6Cjw==}
     peerDependencies:
       react: ^17.0.0 || ^16.3.0 || ^15.5.4
       react-dom: ^17.0.0 || ^16.3.0 || ^15.5.4
     dependencies:
-      flux: 4.0.4(react@17.0.2)
-      react: 17.0.2
+      flux: 4.0.4(react@18.2.0)
+      react: 18.2.0
       react-base16-styling: 0.6.0
-      react-dom: 17.0.2(react@17.0.2)
+      react-dom: 18.2.0(react@18.2.0)
       react-lifecycles-compat: 3.0.4
-      react-textarea-autosize: 8.4.1(react@17.0.2)
+      react-textarea-autosize: 8.4.1(@types/react@18.0.33)(react@18.2.0)
     transitivePeerDependencies:
       - '@types/react'
       - encoding
@@ -9773,7 +9776,7 @@ packages:
       react-loadable: '*'
       webpack: '>=4.41.1 || 5.x'
     dependencies:
-      '@babel/runtime': 7.18.9
+      '@babel/runtime': 7.21.0
       react-loadable: /@docusaurus/react-loadable@5.5.2(react@17.0.2)
       webpack: 5.79.0
     dev: false
@@ -9789,7 +9792,7 @@ packages:
       react: '>=15'
       react-router: '>=5'
     dependencies:
-      '@babel/runtime': 7.18.9
+      '@babel/runtime': 7.21.0
       react: 17.0.2
       react-router: 5.3.4(react@17.0.2)
     dev: false
@@ -9799,7 +9802,7 @@ packages:
     peerDependencies:
       react: '>=15'
     dependencies:
-      '@babel/runtime': 7.18.9
+      '@babel/runtime': 7.21.0
       history: 4.10.1
       loose-envify: 1.4.0
       prop-types: 15.8.1
@@ -9826,7 +9829,7 @@ packages:
     peerDependencies:
       react: '>=15'
     dependencies:
-      '@babel/runtime': 7.18.9
+      '@babel/runtime': 7.21.0
       history: 4.10.1
       hoist-non-react-statics: 3.3.2
       loose-envify: 1.4.0
@@ -9847,16 +9850,16 @@ packages:
       react: 18.2.0
     dev: false
 
-  /react-textarea-autosize@8.4.1(react@17.0.2):
+  /react-textarea-autosize@8.4.1(@types/react@18.0.33)(react@18.2.0):
     resolution: {integrity: sha512-aD2C+qK6QypknC+lCMzteOdIjoMbNlgSFmJjCV+DrfTPwp59i/it9mMNf2HDzvRjQgKAyBDPyLJhcrzElf2U4Q==}
     engines: {node: '>=10'}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       '@babel/runtime': 7.21.0
-      react: 17.0.2
-      use-composed-ref: 1.3.0(react@17.0.2)
-      use-latest: 1.2.1(react@17.0.2)
+      react: 18.2.0
+      use-composed-ref: 1.3.0(react@18.2.0)
+      use-latest: 1.2.1(@types/react@18.0.33)(react@18.2.0)
     transitivePeerDependencies:
       - '@types/react'
     dev: false
@@ -10010,15 +10013,15 @@ packages:
 
   /regenerator-runtime@0.13.11:
     resolution: {integrity: sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==}
-    dev: false
 
   /regenerator-runtime@0.13.9:
     resolution: {integrity: sha512-p3VT+cOEgxFsRRA9X4lkI1E+k2/CtnKtU4gcxyaCUreilL/vqI6CdZ3wxVUx3UOUg+gnUOQQcRI7BmSI656MYA==}
+    dev: false
 
   /regenerator-transform@0.15.1:
     resolution: {integrity: sha512-knzmNAcuyxV+gQCufkYcvOqX/qIIfHLv0u5x79kRxuGojfYVky1f15TzZEu2Avte8QGepvUNTnLskf8E6X6Vyg==}
     dependencies:
-      '@babel/runtime': 7.18.9
+      '@babel/runtime': 7.21.0
     dev: false
 
   /regexp.prototype.flags@1.4.3:
@@ -11548,15 +11551,15 @@ packages:
       tslib: 2.4.0
     dev: false
 
-  /use-composed-ref@1.3.0(react@17.0.2):
+  /use-composed-ref@1.3.0(react@18.2.0):
     resolution: {integrity: sha512-GLMG0Jc/jiKov/3Ulid1wbv3r54K9HlMW29IWcDFPEqFkSO2nS0MuefWgMJpeHQ9YJeXDL3ZUF+P3jdXlZX/cQ==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      react: 17.0.2
+      react: 18.2.0
     dev: false
 
-  /use-isomorphic-layout-effect@1.1.2(react@17.0.2):
+  /use-isomorphic-layout-effect@1.1.2(@types/react@18.0.33)(react@18.2.0):
     resolution: {integrity: sha512-49L8yCO3iGT/ZF9QttjwLF/ZD9Iwto5LnH5LmEdk/6cFmXddqi2ulF0edxTwjj+7mqvpVVGQWvbXZdn32wRSHA==}
     peerDependencies:
       '@types/react': '*'
@@ -11565,10 +11568,11 @@ packages:
       '@types/react':
         optional: true
     dependencies:
-      react: 17.0.2
+      '@types/react': 18.0.33
+      react: 18.2.0
     dev: false
 
-  /use-latest@1.2.1(react@17.0.2):
+  /use-latest@1.2.1(@types/react@18.0.33)(react@18.2.0):
     resolution: {integrity: sha512-xA+AVm/Wlg3e2P/JiItTziwS7FK92LWrDB0p+hgXloIMuVCeJJ8v6f0eeHyPZaJrM+usM1FkFfbNCrJGs8A/zw==}
     peerDependencies:
       '@types/react': '*'
@@ -11577,8 +11581,9 @@ packages:
       '@types/react':
         optional: true
     dependencies:
-      react: 17.0.2
-      use-isomorphic-layout-effect: 1.1.2(react@17.0.2)
+      '@types/react': 18.0.33
+      react: 18.2.0
+      use-isomorphic-layout-effect: 1.1.2(@types/react@18.0.33)(react@18.2.0)
     dev: false
 
   /use-sidecar@1.1.2(@types/react@18.0.33)(react@18.2.0):

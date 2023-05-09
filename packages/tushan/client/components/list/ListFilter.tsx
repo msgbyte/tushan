@@ -1,7 +1,7 @@
 import { Grid } from '@arco-design/web-react';
 import React from 'react';
 import { useControlledObjectState } from '../../hooks/useObjectState';
-import type { FieldHandler } from '../field';
+import type { FieldHandler } from '../fields';
 
 interface ListFilterProps {
   fields: FieldHandler[];

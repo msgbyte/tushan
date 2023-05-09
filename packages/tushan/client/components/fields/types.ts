@@ -28,7 +28,7 @@ export interface FieldDetailComponentProps<
   Options extends BasicFieldOptions
 > {
   value: T;
-  options: Options;
+  options: Partial<Options>;
 }
 export type FieldDetailComponent<T = any, CustomOptions = {}> = ComponentType<
   FieldDetailComponentProps<T, CustomOptions & BasicFieldOptions>
@@ -37,7 +37,7 @@ export type FieldDetailComponent<T = any, CustomOptions = {}> = ComponentType<
 export interface FieldEditComponentProps<T, Options extends BasicFieldOptions> {
   value: T;
   onChange: (val: T) => void;
-  options: Options;
+  options: Partial<Options>;
 }
 export type FieldEditComponent<T = any, CustomOptions = {}> = ComponentType<
   FieldEditComponentProps<T, CustomOptions & BasicFieldOptions>

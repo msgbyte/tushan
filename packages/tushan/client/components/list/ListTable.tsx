@@ -10,7 +10,7 @@ import {
 import { useResourceContext } from '../../context/resource';
 import { SortPayload, useGetList } from '../../api';
 import { IconEdit, IconEye } from '@arco-design/web-react/icon';
-import type { FieldHandler } from '../field';
+import type { FieldHandler } from '../fields';
 import { useListTableDrawer } from './ListTableDrawer';
 import { ListDeleteAction } from './actions/DeleteAction';
 import styled from 'styled-components';

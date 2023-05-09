@@ -6,3 +6,5 @@ export * from './email';
 export * from './avatar';
 export * from './image';
 export * from './boolean';
+export * from './json';
+export * from './datetime';
