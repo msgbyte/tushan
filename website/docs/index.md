@@ -36,11 +36,6 @@ function App() {
         label="User"
         list={
           <ListTable
-            filter={[
-              createTextField('q', {
-                label: 'Query',
-              }),
-            ]}
             fields={[
               createTextField('id', {
                 label: 'ID',
@@ -81,10 +76,16 @@ export default App;
 
 ![](/img/preview/4.png)
 
-> Tushan 的 api 设计受到 [react-admin](https://marmelab.com/react-admin) 很大的启发，如果对 material-ui 设计的后台方案感兴趣的话可以选择 react-admin 作为替代
+> Tushan 的 api 设计受到 [react-admin](https://marmelab.com/react-admin) 很大的启发，两者的接口协议是完全兼容的，这意味着react-admin现成的后端接口生态方案可以完全无缝被 Tushan 使用。如果对 material-ui 设计的后台方案感兴趣的话可以选择 react-admin 作为替代
 
-另外，`Tushan` 还包括一些常用的前端依赖项，如 `styled-components` 和 `arco-design` ，可以帮助您更快地搭建前端界面。
+另外，`Tushan` 还包括一些常用的前端依赖项，如 `styled-components` 和 `arco-design` 等 ，可以帮助您更快地搭建前端界面。
 
 ## 在 CodeSandbox 中快速示例
 
 访问 [CodeSandbox](https://codesandbox.io/p/github/msgbyte/tushan/master) 快速获得无后台版本的示例程序。
+
+## UI框架
+
+`Tushan` 的UI组件库是基于字节跳动的 `arco-design`。你可以在[这里](https://arco.design/react/docs/start)访问`arco-design`的官方文档
+
+所有的组件都已经被导出且可以通过`tushan`直接引入
