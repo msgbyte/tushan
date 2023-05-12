@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
 import { useLogout } from './useLogout';
 import { useTushanContext } from '../../context/tushan';
-import { removeDoubleSlashes } from '../../utils/common';
 import { Message } from '@arco-design/web-react';
 import { defaultAuthParams } from './const';
+import { useUserStore } from '../../store/user';
 
 export const useCheckAuth = (): CheckAuth => {
   const { authProvider } = useTushanContext();
@@ -12,18 +12,27 @@ export const useCheckAuth = (): CheckAuth => {
 
   const checkAuth = useCallback(
     (params: any = {}, logoutOnFailure = true, redirectTo = loginUrl) =>
-      authProvider!.checkAuth(params).catch((error) => {
-        if (logoutOnFailure) {
-          logout(
-            {},
-            error && error.redirectTo != null ? error.redirectTo : redirectTo
-          );
+      authProvider!
+        .checkAuth(params)
+        .then(() => {
+          authProvider!.getIdentity?.().then((userIdentity) => {
+            useUserStore.setState({
+              userIdentity,
+            });
+          });
+        })
+        .catch((error) => {
+          if (logoutOnFailure) {
+            logout(
+              {},
+              error && error.redirectTo != null ? error.redirectTo : redirectTo
+            );
 
-          Message.error('Please login to continue');
-        }
+            Message.error('Please login to continue');
+          }
 
-        throw error;
-      }),
+          throw error;
+        }),
     [authProvider, logout, loginUrl]
   );
 

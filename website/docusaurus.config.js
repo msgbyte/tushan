@@ -65,9 +65,9 @@ const config = {
       // Replace with your project's social card
       // image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'My Site',
+        title: 'Tushan',
         logo: {
-          alt: 'My Site Logo',
+          alt: 'Tushan Logo',
           src: 'img/logo.svg',
         },
         items: [
@@ -91,8 +91,8 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Tutorial',
-                to: '/docs/intro',
+                label: 'Intro',
+                to: '/',
               },
             ],
           },
