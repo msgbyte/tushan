@@ -1,3 +1,4 @@
+import { RulesProps } from '@arco-design/web-react';
 import type { ComponentType } from 'react';
 
 export interface BasicFieldOptions {
@@ -15,6 +16,7 @@ export interface BasicFieldOptions {
   edit?: {
     placeholder?: string;
     hidden?: boolean;
+    rules?: RulesProps<any>[];
   };
 
   detail?: {

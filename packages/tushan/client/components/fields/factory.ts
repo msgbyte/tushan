@@ -4,7 +4,7 @@ import type {
   FieldEditComponent,
 } from './types';
 import type { ViewType } from '../../context/viewtype';
-import type { TableColumnProps } from '@arco-design/web-react';
+import type { RulesProps, TableColumnProps } from '@arco-design/web-react';
 import { createElement, ReactElement } from 'react';
 
 export interface CreateFieldFactoryConfig<CustomOptions = {}> {
@@ -21,6 +21,7 @@ export interface EditFieldItem<T = any> {
   source: string;
   title: string;
   hidden: boolean;
+  rules: RulesProps<any>[];
   render: (value: T, onChange: (val: T) => void) => ReactElement;
 }
 
@@ -71,6 +72,7 @@ export function createFieldFactory<CustomOptions extends {} = {}>(
           source,
           title: options?.label ?? source,
           hidden: options?.edit?.hidden ?? false,
+          rules: options?.edit?.rules ?? [],
           render: (value, onChange) => {
             return createElement(config.edit, {
               value,

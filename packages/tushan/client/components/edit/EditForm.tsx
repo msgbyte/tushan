@@ -1,5 +1,11 @@
-import { Button, Form, Message, Space } from '@arco-design/web-react';
-import React, { useEffect, useMemo, useState } from 'react';
+import {
+  Button,
+  Form,
+  FormInstance,
+  Message,
+  Space,
+} from '@arco-design/web-react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import type { BasicRecord } from '../../api';
 import { useCreate } from '../../api/useCreate';
 import { useUpdate } from '../../api/useUpdate';
@@ -22,6 +28,7 @@ export const EditForm: React.FC<EditFormProps> = React.memo((props) => {
   const [create] = useCreate();
   const [updateOne] = useUpdate();
   const resource = useResourceContext();
+  const formRef = useRef<FormInstance>(null);
 
   useEffect(() => {
     setValues(defaultValues);
@@ -35,6 +42,8 @@ export const EditForm: React.FC<EditFormProps> = React.memo((props) => {
 
   const handleSubmit = useSendRequest(async () => {
     try {
+      await formRef.current?.validate();
+
       if (isCreate) {
         await create(resource, {
           data: { ...values },
@@ -54,7 +63,7 @@ export const EditForm: React.FC<EditFormProps> = React.memo((props) => {
 
   return (
     <ViewTypeContextProvider viewType="edit">
-      <Form layout="vertical">
+      <Form ref={formRef} layout="vertical">
         {items.map((item, i) => {
           if (item.source === 'id') {
             // Dont render id field
@@ -62,7 +71,7 @@ export const EditForm: React.FC<EditFormProps> = React.memo((props) => {
           }
 
           return (
-            <Form.Item key={item.source} label={item.title}>
+            <Form.Item key={item.source} label={item.title} rules={item.rules}>
               {item.render(values[item.source], (val) => {
                 setValues((state) => ({
                   ...state,
