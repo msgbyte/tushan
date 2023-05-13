@@ -16,3 +16,4 @@ export { useAsyncFn } from './hooks/useAsyncFn';
 export { useAsyncRefresh } from './hooks/useAsyncRefresh';
 export { useAsyncRequest } from './hooks/useAsyncRequest';
 export { useEditValue } from './hooks/useEditValue';
+export * from './utils/validator';
