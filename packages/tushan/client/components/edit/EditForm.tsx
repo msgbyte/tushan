@@ -30,10 +30,6 @@ export const EditForm: React.FC<EditFormProps> = React.memo((props) => {
   const resource = useResourceContext();
   const formRef = useRef<FormInstance>(null);
 
-  useEffect(() => {
-    setValues(defaultValues);
-  }, [defaultValues]);
-
   const items = useMemo(() => {
     return props.fields
       .map((handler) => handler('edit'))
@@ -63,7 +59,11 @@ export const EditForm: React.FC<EditFormProps> = React.memo((props) => {
 
   return (
     <ViewTypeContextProvider viewType="edit">
-      <Form ref={formRef} layout="vertical">
+      <Form
+        ref={formRef}
+        layout="vertical"
+        validateTrigger={['onBlur', 'onFocus']}
+      >
         {items.map((item, i) => {
           if (item.source === 'id') {
             // Dont render id field
@@ -71,7 +71,12 @@ export const EditForm: React.FC<EditFormProps> = React.memo((props) => {
           }
 
           return (
-            <Form.Item key={item.source} label={item.title} rules={item.rules}>
+            <Form.Item
+              key={item.source}
+              label={item.title}
+              field={item.source}
+              rules={item.rules}
+            >
               {item.render(values[item.source], (val) => {
                 setValues((state) => ({
                   ...state,
