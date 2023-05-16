@@ -96,6 +96,9 @@ importers:
       immer:
         specifier: ^9.0.19
         version: 9.0.19
+      jsonexport:
+        specifier: ^3.2.0
+        version: 3.2.0
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
@@ -139,6 +142,9 @@ importers:
         specifier: ^4.3.6
         version: 4.3.6(immer@9.0.19)(react@18.2.0)
     devDependencies:
+      '@types/jsonexport':
+        specifier: ^3.0.2
+        version: 3.0.2
       '@types/qs':
         specifier: ^6.9.7
         version: 6.9.7
@@ -3552,6 +3558,12 @@ packages:
 
   /@types/json-schema@7.0.11:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
+
+  /@types/jsonexport@3.0.2:
+    resolution: {integrity: sha512-VrWj30OihopTEE7jDiXO1IbrCF+iNiKi9eLtz03RsazWQCyp1rsMlap1W0V1xjT6ULiilKZP4qXYoWFADnMn8A==}
+    dependencies:
+      '@types/node': 18.15.11
+    dev: true
 
   /@types/keyv@3.1.4:
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
@@ -7868,6 +7880,11 @@ packages:
     resolution: {integrity: sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==}
     engines: {node: '>=6'}
     hasBin: true
+
+  /jsonexport@3.2.0:
+    resolution: {integrity: sha512-GbO9ugb0YTZatPd/hqCGR0FSwbr82H6OzG04yzdrG7XOe4QZ0jhQ+kOsB29zqkzoYJLmLxbbrFiuwbQu891XnQ==}
+    hasBin: true
+    dev: false
 
   /jsonfile@4.0.0:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}

@@ -5,6 +5,10 @@ interface SubmitButtonProps extends ButtonProps {
   onClick: (e: Event) => void | Promise<void>;
 }
 
+/**
+ * Submit Button, use for submit somthing to server
+ * auto add loading state in onClick
+ */
 export const SubmitButton: React.FC<SubmitButtonProps> = React.memo((props) => {
   const [loading, setLoading] = useState(false);
   return (

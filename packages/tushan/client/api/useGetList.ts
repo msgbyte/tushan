@@ -7,6 +7,7 @@ import {
 } from '@tanstack/react-query';
 import type { BasicRecord, GetListParams, GetListResult } from './types';
 import { useDataProvider } from '../context/tushan';
+import { defaultFilter, defaultSort } from './consts';
 
 /**
  * Call the dataProvider.getList() method and return the resolved result
@@ -56,9 +57,9 @@ export const useGetList = <RecordType extends BasicRecord = any>(
   options?: UseQueryOptions<GetListResult<RecordType>, Error>
 ): UseGetListHookValue<RecordType> => {
   const {
-    pagination = { pageNum: 1, pageSize: 25 },
-    sort = { field: 'id', order: 'DESC' },
-    filter = {},
+    pagination = { pageNum: 1, pageSize: 20 },
+    sort = defaultSort,
+    filter = defaultFilter,
     meta,
   } = params;
   const dataProvider = useDataProvider();

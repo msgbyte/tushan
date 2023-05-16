@@ -19,6 +19,7 @@
   "author": "moonrailgun <moonrailgun@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@types/jsonexport": "^3.0.2",
     "@types/qs": "^6.9.7",
     "@types/styled-components": "^5.1.26",
     "cross-env": "^7.0.3",
@@ -39,6 +40,7 @@
     "axios": "^0.27.2",
     "clsx": "^1.2.1",
     "immer": "^9.0.19",
+    "jsonexport": "^3.2.0",
     "lodash": "^4.17.21",
     "postcss": "^8.4.17",
     "qs": "^6.11.1",
