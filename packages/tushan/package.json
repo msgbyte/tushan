@@ -1,6 +1,6 @@
 {
   "name": "tushan",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "",
   "main": "./index.ts",
   "scripts": {
@@ -12,6 +12,8 @@
     "client",
     "server",
     "index.ts",
+    "icon.ts",
+    "chart.ts",
     "tsconfig.json",
     "README.md"
   ],

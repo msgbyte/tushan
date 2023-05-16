@@ -172,7 +172,7 @@ export const useUpdate = <
     ...(reactMutationOptions as any),
     onMutate: async (variables: Partial<UseUpdateMutateParams<RecordType>>) => {
       if (reactMutationOptions.onMutate) {
-        const userContext =
+        const userContext: Record<string, any> =
           (await reactMutationOptions.onMutate(variables)) || {};
         return {
           snapshot: snapshot.current,
