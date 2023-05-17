@@ -1,5 +1,5 @@
 import { useMemo, useRef } from 'react';
-import _isFunction from 'lodash/isFunction';
+import { isFunction } from 'lodash-es';
 
 // From https://github.com/alibaba/hooks/blob/master/packages/hooks/src/useMemoizedFn/index.ts
 
@@ -12,7 +12,7 @@ type PickFunction<T extends Noop> = (
 
 export function useEvent<T extends Noop>(fn: T) {
   if (process.env.NODE_ENV === 'development') {
-    if (!_isFunction(fn)) {
+    if (!isFunction(fn)) {
       console.error(
         `useEvent expected parameter is a function, got ${typeof fn}`
       );
