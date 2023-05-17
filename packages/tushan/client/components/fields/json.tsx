@@ -11,6 +11,16 @@ const defaultJSONViewProps: Partial<ReactJsonViewProps> = {
   iconStyle: 'square',
 };
 
+function getObjectSize(obj: any): number {
+  if (Array.isArray(obj)) {
+    return obj.length;
+  } else if (typeof obj === 'object') {
+    return Object.keys(obj).length;
+  } else {
+    return String(obj).length;
+  }
+}
+
 export const JSONFieldDetail: FieldDetailComponent<object> = React.memo(
   (props) => {
     const viewType = useViewTypeContext();
@@ -21,7 +31,9 @@ export const JSONFieldDetail: FieldDetailComponent<object> = React.memo(
           trigger="click"
           content={<ReactJson {...defaultJSONViewProps} src={props.value} />}
         >
-          <Button size="small">Show</Button>
+          <Button size="small">
+            Show (size: {getObjectSize(props.value)})
+          </Button>
         </Popover>
       );
     } else {

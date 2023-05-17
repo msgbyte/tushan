@@ -8,3 +8,4 @@ export * from './image';
 export * from './boolean';
 export * from './json';
 export * from './datetime';
+export * from './number';
