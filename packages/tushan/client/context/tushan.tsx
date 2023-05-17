@@ -1,12 +1,17 @@
 import React, { useContext } from 'react';
 import { defaultDataProvider } from '../api/defaultDataProvider';
 import type { AuthProvider, DataProvider } from '../api/types';
+import { useInitI18N } from '../hooks/useInitI18N';
+import { ResourceKey } from '../i18n';
 
 export interface TushanContextProps {
   basename?: string;
   dashboard?: boolean;
   dataProvider?: DataProvider;
   authProvider?: AuthProvider;
+  i18n?: {
+    languages: { key: string; label: string; resource: ResourceKey }[];
+  };
   layout?: React.ReactElement;
 }
 
@@ -16,6 +21,8 @@ TushanContext.displayName = 'TushanContext';
 export const TushanContextProvider: React.FC<
   React.PropsWithChildren<TushanContextProps>
 > = React.memo(({ children, ...props }) => {
+  useInitI18N(props.i18n);
+
   return (
     <TushanContext.Provider value={{ ...props }}>
       {children}

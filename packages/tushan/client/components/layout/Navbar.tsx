@@ -1,11 +1,12 @@
 import React from 'react';
-import { Avatar } from '@arco-design/web-react';
-import { IconUser } from '@arco-design/web-react/icon';
+import { Avatar, Button, Space } from '@arco-design/web-react';
+import { IconLanguage, IconUser } from '@arco-design/web-react/icon';
 import { Dropdown } from '@arco-design/web-react';
 import { Menu } from '@arco-design/web-react';
-import { useHref } from 'react-router';
 import styled from 'styled-components';
 import { useLogout } from '../../api/auth';
+import { useTranslation } from '../../i18n';
+import { useTushanContext } from '../../context/tushan';
 
 const Root = styled.div`
   display: flex;
@@ -23,6 +24,7 @@ const Root = styled.div`
   .actions {
     padding-left: 0.75rem;
     padding-right: 0.75rem;
+    display: flex;
 
     .avatar {
       cursor: pointer;
@@ -32,28 +34,55 @@ const Root = styled.div`
 
 export const Navbar: React.FC = React.memo(() => {
   const logout = useLogout();
-
-  const dropList = (
-    <Menu>
-      <Menu.Item key="logout" onClick={() => logout()}>
-        Logout
-      </Menu.Item>
-    </Menu>
-  );
+  const { i18n: i18nConfig } = useTushanContext();
+  const { t, i18n, ready } = useTranslation();
 
   return (
     <Root className="navbar">
-      <div className="title">涂山 · Tushan</div>
+      <div className="title">{t('tushan.navbar.title')}</div>
 
-      <div className="actions">
-        <Dropdown droplist={dropList} position="br" trigger={'click'}>
+      <Space className="actions">
+        {i18nConfig && ready && (
+          <Dropdown
+            droplist={
+              <Menu selectedKeys={[i18n.language]}>
+                {i18nConfig.languages.map((item) => (
+                  <Menu.Item
+                    key={item.key}
+                    onClick={() => i18n.changeLanguage(item.key)}
+                  >
+                    {item.label}
+                  </Menu.Item>
+                ))}
+              </Menu>
+            }
+            position="br"
+            trigger={'click'}
+          >
+            <div>
+              <Button shape="circle" icon={<IconLanguage />} />
+            </div>
+          </Dropdown>
+        )}
+
+        <Dropdown
+          droplist={
+            <Menu>
+              <Menu.Item key="logout" onClick={() => logout()}>
+                Logout
+              </Menu.Item>
+            </Menu>
+          }
+          position="br"
+          trigger={'click'}
+        >
           <div>
             <Avatar size={32} className="avatar">
               <IconUser />
             </Avatar>
           </div>
         </Dropdown>
-      </div>
+      </Space>
     </Root>
   );
 });
