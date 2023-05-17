@@ -28,7 +28,8 @@ export const Sidebar: React.FC = React.memo(() => {
     >
       <MenuItem key="/dashboard">
         <IconHome />
-        Dashboard
+
+        {t('tushan.dashboard.name')}
       </MenuItem>
 
       {(menus ?? []).map((item) => {

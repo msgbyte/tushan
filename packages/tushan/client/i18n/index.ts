@@ -13,6 +13,14 @@ export async function initI18N(resources?: Resource) {
     });
 }
 
-export type TranslationKeys = Record<string, any>;
+export type TranslationKeys = {
+  resources?: {
+    [name: string]: {
+      name: string;
+      fields?: Record<string, string>;
+    };
+  };
+  [key: string]: any;
+};
 
 export { useTranslation, Trans };

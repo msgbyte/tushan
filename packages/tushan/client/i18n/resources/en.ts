@@ -13,6 +13,7 @@ export const i18nEnTranslation: TranslationKeys = {
       home: 'Home',
     },
     dashboard: {
+      name: 'Dashboard',
       welcome: 'Welcome, {{name}}',
       user: 'User',
       group: 'Group',

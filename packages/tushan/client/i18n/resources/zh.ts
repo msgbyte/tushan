@@ -13,6 +13,7 @@ export const i18nZhTranslation: TranslationKeys = {
       home: '首页',
     },
     dashboard: {
+      name: '仪表盘',
       welcome: '欢迎回来, {{name}}',
       user: '用户',
       group: '群组',

@@ -7,14 +7,18 @@ export function useAsyncRequest<T extends FunctionReturningPromise>(
   fn: T,
   deps: DependencyList = []
 ) {
-  const [{ loading, value }, call] = useAsyncFn(async (...args: any[]) => {
-    try {
-      return await fn(...args);
-    } catch (err) {
-      Message.error(String(err));
-      console.error('[useAsyncRequest] error:', err);
-    }
-  }, deps);
+  const [{ loading, value, error }, call] = useAsyncFn(
+    async (...args: any[]) => {
+      try {
+        return await fn(...args);
+      } catch (err) {
+        Message.error(String(err));
+        console.error('[useAsyncRequest] error:', err);
+        throw err;
+      }
+    },
+    deps
+  );
 
-  return [{ loading, value }, call as T] as const;
+  return [{ loading, value, error }, call as T] as const;
 }
