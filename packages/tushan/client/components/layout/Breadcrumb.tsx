@@ -6,6 +6,7 @@ import { useLocation } from 'react-router';
 import { useMemo } from 'react';
 import { useMenuStore } from '../../store/menu';
 import { useTranslation } from 'react-i18next';
+import { startCase } from 'lodash-es';
 
 export const TushanBreadcrumb: React.FC = React.memo(() => {
   const menus = useMenuStore((state) => state.menus);
@@ -17,8 +18,17 @@ export const TushanBreadcrumb: React.FC = React.memo(() => {
       location.pathname.startsWith(`/${menu.key}`)
     );
 
-    return menu?.label ?? menu?.key ?? '';
-  }, [menus, location.pathname]);
+    if (!menu) {
+      return '';
+    }
+
+    return (
+      menu.label ??
+      t(`resources.${menu.key}.name`, {
+        defaultValue: startCase(menu.key),
+      })
+    );
+  }, [menus, location.pathname, t]);
 
   return (
     <Breadcrumb style={{ marginBottom: 16 }}>

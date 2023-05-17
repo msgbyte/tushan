@@ -1,6 +1,6 @@
-import { ResourceKey } from '..';
+import { TranslationKeys } from '..';
 
-export const i18nZhTranslation: ResourceKey = {
+export const i18nZhTranslation: TranslationKeys = {
   tushan: {
     navbar: {
       title: '涂山 · Tushan',

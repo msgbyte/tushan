@@ -1,4 +1,4 @@
-import i18n, { Resource, ResourceKey } from 'i18next';
+import i18n, { Resource } from 'i18next';
 import { useTranslation, initReactI18next, Trans } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { defaultI18NResources } from './default';
@@ -13,5 +13,6 @@ export async function initI18N(resources?: Resource) {
     });
 }
 
+export type TranslationKeys = Record<string, any>;
+
 export { useTranslation, Trans };
-export type { ResourceKey };

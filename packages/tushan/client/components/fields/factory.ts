@@ -6,6 +6,7 @@ import type {
 import type { ViewType } from '../../context/viewtype';
 import type { RulesProps, TableColumnProps } from '@arco-design/web-react';
 import { createElement, ReactElement } from 'react';
+import { FieldTitle } from '../FieldTitle';
 
 export interface CreateFieldFactoryConfig<CustomOptions = {}> {
   detail: FieldDetailComponent<any, CustomOptions>;
@@ -57,7 +58,7 @@ export function createFieldFactory<CustomOptions extends {} = {}>(
             dataIndex: source,
             sorter: options?.list?.sort ?? false,
             sortDirections: ['ascend', 'descend'],
-            title: options?.label ?? source,
+            title: options?.label ?? createElement(FieldTitle, { source }),
             width: options?.list?.width,
             render: (val) => {
               return createElement(config.detail, {
@@ -70,7 +71,7 @@ export function createFieldFactory<CustomOptions extends {} = {}>(
       } else if (viewType === 'edit') {
         return {
           source,
-          title: options?.label ?? source,
+          title: options?.label ?? createElement(FieldTitle, { source }),
           hidden: options?.edit?.hidden ?? false,
           rules: options?.edit?.rules ?? [],
           render: (value, onChange) => {
@@ -84,7 +85,7 @@ export function createFieldFactory<CustomOptions extends {} = {}>(
       } else if (viewType === 'detail') {
         return {
           source,
-          title: options?.label ?? source,
+          title: options?.label ?? createElement(FieldTitle, { source }),
           hidden: options?.detail?.hidden ?? false,
           render: (value) => {
             return createElement(config.detail, {

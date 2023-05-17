@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { defaultDataProvider } from '../api/defaultDataProvider';
 import type { AuthProvider, DataProvider } from '../api/types';
 import { useInitI18N } from '../hooks/useInitI18N';
-import { ResourceKey } from '../i18n';
+import { TranslationKeys } from '../i18n';
 
 export interface TushanContextProps {
   basename?: string;
@@ -10,7 +10,7 @@ export interface TushanContextProps {
   dataProvider?: DataProvider;
   authProvider?: AuthProvider;
   i18n?: {
-    languages: { key: string; label: string; resource: ResourceKey }[];
+    languages: { key: string; label: string; translation: TranslationKeys }[];
   };
   layout?: React.ReactElement;
 }

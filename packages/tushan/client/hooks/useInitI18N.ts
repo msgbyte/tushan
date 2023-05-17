@@ -8,7 +8,7 @@ export function useInitI18N(i18n?: TushanContextProps['i18n']) {
       const resources = i18n.languages.reduce((prev, curr) => {
         return {
           ...prev,
-          [curr.key]: { translation: curr.resource },
+          [curr.key]: { translation: curr.translation },
         };
       }, {});
 

@@ -3,7 +3,7 @@ import { immer } from 'zustand/middleware/immer';
 
 interface TushanMenu {
   key: string;
-  label: string;
+  label?: string;
   icon?: React.ReactNode;
   path?: string;
 }

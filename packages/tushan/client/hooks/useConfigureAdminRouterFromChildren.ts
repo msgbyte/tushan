@@ -7,13 +7,11 @@ import {
   ReactNode,
   SetStateAction,
   useCallback,
-  useEffect,
   useState,
 } from 'react';
 import { CustomRoute, CustomRoutesProp } from '../components/CustomRoute';
 import { Resource, ResourceProps } from '../components/Resource';
 import { useMenuStore } from '../store/menu';
-import { useEvent } from './useEvent';
 import { useWatch } from './useWatch';
 
 /**
@@ -59,16 +57,18 @@ function useRegisterMenu<
   T extends ReactElement<Pick<CustomRoutesProp, 'name' | 'label' | 'icon'>>
 >(routes: T[], filterFn: (item: T) => boolean = () => true) {
   useWatch([routes], () => {
-    routes.filter(filterFn).forEach((route) => {
+    const filteredRoutes = routes.filter(filterFn);
+
+    filteredRoutes.forEach((route) => {
       useMenuStore.getState().addMenu({
         key: route.props.name,
-        label: route.props.label ?? route.props.name,
+        label: route.props.label,
         icon: route.props.icon,
       });
     });
 
     return () => {
-      routes.filter(filterFn).forEach((route) => {
+      filteredRoutes.forEach((route) => {
         useMenuStore.getState().removeMenu(route.props.name);
       });
     };

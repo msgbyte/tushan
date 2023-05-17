@@ -1,6 +1,6 @@
-import { ResourceKey } from '..';
+import { TranslationKeys } from '..';
 
-export const i18nEnTranslation: ResourceKey = {
+export const i18nEnTranslation: TranslationKeys = {
   tushan: {
     navbar: {
       title: 'Tushan',
