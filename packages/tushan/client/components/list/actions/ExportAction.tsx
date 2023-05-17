@@ -1,5 +1,6 @@
 import { Button } from '@arco-design/web-react';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { BasicRecord, DataProvider, Exporter, Identifier } from '../../../api';
 import { defaultFilter, defaultSort } from '../../../api/consts';
 import { defaultExporter } from '../../../api/defaultExporter';
@@ -17,6 +18,7 @@ export const ListExportAction: React.FC<{
   const resource = useResourceContext();
   const { dataProvider } = useTushanContext();
   const params = useListParamsContext();
+  const { t } = useTranslation();
 
   const handleExport = useEvent(async () => {
     if (!dataProvider) {
@@ -42,7 +44,11 @@ export const ListExportAction: React.FC<{
     );
   });
 
-  return <SubmitButton onClick={handleExport}>Export</SubmitButton>;
+  return (
+    <SubmitButton onClick={handleExport}>
+      {t('tushan.list.export')}
+    </SubmitButton>
+  );
 });
 ListExportAction.displayName = 'ListExportAction';
 

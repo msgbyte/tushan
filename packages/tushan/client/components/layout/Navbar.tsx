@@ -69,7 +69,7 @@ export const Navbar: React.FC = React.memo(() => {
           droplist={
             <Menu>
               <Menu.Item key="logout" onClick={() => logout()}>
-                Logout
+                {t('tushan.navbar.logout')}
               </Menu.Item>
             </Menu>
           }

@@ -5,10 +5,12 @@ import { NavLink } from 'react-router-dom';
 import { useLocation } from 'react-router';
 import { useMemo } from 'react';
 import { useMenuStore } from '../../store/menu';
+import { useTranslation } from 'react-i18next';
 
 export const TushanBreadcrumb: React.FC = React.memo(() => {
   const menus = useMenuStore((state) => state.menus);
   const location = useLocation();
+  const { t } = useTranslation();
 
   const title = useMemo(() => {
     const menu = menus.find((menu) =>
@@ -22,8 +24,9 @@ export const TushanBreadcrumb: React.FC = React.memo(() => {
     <Breadcrumb style={{ marginBottom: 16 }}>
       <Breadcrumb.Item>
         <NavLink to="/dashboard">
-          <IconHome className="mr-2" />
-          Home
+          <IconHome className="mr-2" style={{ marginRight: 2 }} />
+
+          {t('tushan.breadcrumb.home')}
         </NavLink>
       </Breadcrumb.Item>
 

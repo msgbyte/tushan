@@ -5,6 +5,7 @@ import { Sidebar } from './Sidebar';
 import { TushanBreadcrumb } from './Breadcrumb';
 import { Outlet } from 'react-router';
 import styled from 'styled-components';
+import { useTranslation } from '../../i18n';
 
 const Sider = Layout.Sider;
 const Header = Layout.Header;
@@ -60,6 +61,7 @@ export const BasicLayout: React.FC = React.memo((props) => {
   const [collapsed, setCollapsed] = useState(false);
   const navbarHeight = 64;
   const menuWidth = collapsed ? 48 : 220;
+  const { t } = useTranslation();
 
   return (
     <Root className="basic-layout">
@@ -87,9 +89,7 @@ export const BasicLayout: React.FC = React.memo((props) => {
           <Content className="body">
             <Outlet />
           </Content>
-          <Footer className="footer">
-            本项目由涂山强力驱动 · Powered by Tushan
-          </Footer>
+          <Footer className="footer">{t('tushan.footer.title')}</Footer>
         </Layout>
       </Layout>
     </Root>

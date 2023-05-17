@@ -19,11 +19,13 @@ import {
 } from '../../chart';
 import { useUserStore } from '../../store/user';
 import { createSelector } from '../../utils/createSelector';
+import { useTranslation } from 'react-i18next';
 
 const { GridItem } = Grid;
 
 export const Dashboard: React.FC = React.memo(() => {
   const { userIdentity } = useUserStore(createSelector('userIdentity'));
+  const { t } = useTranslation();
 
   return (
     <div>
@@ -31,26 +33,40 @@ export const Dashboard: React.FC = React.memo(() => {
         <Space direction="vertical" style={{ width: '100%' }}>
           <Card bordered={false}>
             <Typography.Title heading={5}>
-              Welcome, {userIdentity.fullName}
+              {t('tushan.dashboard.welcome', {
+                name: userIdentity.fullName,
+              })}
             </Typography.Title>
 
             <Divider />
 
             <Grid.Row justify="center">
               <Grid.Col flex={1} style={{ paddingLeft: '1rem' }}>
-                <DataItem icon={<IconUser />} title="User" count={1000} />
+                <DataItem
+                  icon={<IconUser />}
+                  title={t('tushan.dashboard.user')}
+                  count={1000}
+                />
               </Grid.Col>
 
               <Divider type="vertical" style={{ height: 40 }} />
 
               <Grid.Col flex={1} style={{ paddingLeft: '1rem' }}>
-                <DataItem icon={<IconUserGroup />} title="Group" count={1000} />
+                <DataItem
+                  icon={<IconUserGroup />}
+                  title={t('tushan.dashboard.group')}
+                  count={1000}
+                />
               </Grid.Col>
 
               <Divider type="vertical" style={{ height: 40 }} />
 
               <Grid.Col flex={1} style={{ paddingLeft: '1rem' }}>
-                <DataItem icon={<IconApps />} title="Items" count={1000} />
+                <DataItem
+                  icon={<IconApps />}
+                  title={t('tushan.dashboard.item')}
+                  count={1000}
+                />
               </Grid.Col>
             </Grid.Row>
 
@@ -62,7 +78,7 @@ export const Dashboard: React.FC = React.memo(() => {
           <Grid cols={3} colGap={12} rowGap={16}>
             <GridItem index={0}>
               <DashboardItem title="Docs" href="https://tushan.msgbyte.com/">
-                Read Docs for More Detail
+                {t('tushan.dashboard.tip.docs')}
               </DashboardItem>
             </GridItem>
             <GridItem index={0}>
@@ -70,7 +86,7 @@ export const Dashboard: React.FC = React.memo(() => {
                 title="Github"
                 href="https://github.com/msgbyte/tushan"
               >
-                Tushan is Open Source
+                {t('tushan.dashboard.tip.github')}
               </DashboardItem>
             </GridItem>
             <GridItem index={0}>
@@ -78,7 +94,7 @@ export const Dashboard: React.FC = React.memo(() => {
                 title="Design System"
                 href="https://arco.design/docs/spec/introduce"
               >
-                Tushan use Arco Design as basic design system
+                {t('tushan.dashboard.tip.design')}
               </DashboardItem>
             </GridItem>
           </Grid>
@@ -95,13 +111,15 @@ const DashboardItem: React.FC<
     href?: string;
   }>
 > = React.memo((props) => {
+  const { t } = useTranslation();
+
   return (
     <Card
       title={props.title}
       extra={
         props.href && (
           <Link target="_blank" href={props.href}>
-            More
+            {t('tushan.dashboard.more')}
           </Link>
         )
       }

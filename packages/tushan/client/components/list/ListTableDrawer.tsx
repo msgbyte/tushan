@@ -7,6 +7,7 @@ import { useEvent } from '../../hooks/useEvent';
 import { DetailForm } from '../detail/DetailForm';
 import type { BasicRecord } from '../../api/types';
 import { useResourceContext } from '../../context/resource';
+import { useTranslation } from 'react-i18next';
 
 export function useListTableDrawer(fields: FieldHandler[]) {
   const [visible, setVisible] = useState(false);
@@ -44,6 +45,7 @@ export interface ListTableDrawerProps {
 }
 export const ListTableDrawer: React.FC<ListTableDrawerProps> = React.memo(
   (props) => {
+    const { t } = useTranslation();
     const hide = useEvent(() => {
       props.onChangeVisible(false);
     });
@@ -53,9 +55,9 @@ export const ListTableDrawer: React.FC<ListTableDrawerProps> = React.memo(
         title={
           props.viewType === 'edit'
             ? props.record === null
-              ? 'Create'
-              : 'Edit'
-            : 'Detail'
+              ? t('tushan.list.create')
+              : t('tushan.list.edit')
+            : t('tushan.list.detail')
         }
         visible={props.visible}
         onCancel={hide}

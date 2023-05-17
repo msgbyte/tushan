@@ -8,7 +8,7 @@ import {
   Tooltip,
 } from '@arco-design/web-react';
 import { useResourceContext } from '../../context/resource';
-import { SortPayload, useGetList } from '../../api';
+import { GetListParams, SortPayload, useGetList } from '../../api';
 import { IconEdit, IconEye } from '@arco-design/web-react/icon';
 import type { FieldHandler } from '../fields';
 import { useListTableDrawer } from './ListTableDrawer';
@@ -20,6 +20,7 @@ import { ListFilter } from './ListFilter';
 import { ViewTypeContextProvider } from '../../context/viewtype';
 import { ListParamsContextProvider } from './context';
 import { ListExportAction } from './actions/ExportAction';
+import { useTranslation } from 'react-i18next';
 
 const Header = styled.div`
   display: flex;
@@ -43,12 +44,13 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
   const [filterValues, setFilterValues] = useObjectState({});
   const [sort, setSort] = useState<SortPayload | undefined>(undefined);
   const lazyFilter = useDebounce(filterValues, { wait: 500 });
+  const { t } = useTranslation();
   const [pageNum, setPageNum] = useState(1);
   const [pageSize, setPageSize] = useState(20);
-  const listParams = {
+  const listParams: Partial<GetListParams> = {
     pagination: {
-      pageNum,
-      pageSize,
+      page: pageNum,
+      perPage: pageSize,
     },
     filter: lazyFilter,
     sort,
@@ -67,13 +69,13 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
     if (action) {
       c.push({
         key: 'actions',
-        title: 'Actions',
+        title: t('tushan.list.actions'),
         fixed: 'right',
         render: (val, record) => {
           return (
             <Space>
               {action.detail && (
-                <Tooltip content="Detail">
+                <Tooltip content={t('tushan.list.detail')}>
                   <Button
                     icon={<IconEye />}
                     onClick={() => showTableDrawer('detail', record)}
@@ -82,7 +84,7 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
               )}
 
               {action.edit && (
-                <Tooltip content="Edit">
+                <Tooltip content={t('tushan.list.edit')}>
                   <Button
                     icon={<IconEdit />}
                     onClick={() => showTableDrawer('edit', record)}
@@ -98,7 +100,7 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
     }
 
     return c;
-  }, [props.fields, action]);
+  }, [props.fields, action, t]);
 
   const hasHeader = filterFields.length > 0 || action?.create === true;
 
@@ -125,7 +127,7 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
                       showTableDrawer('edit', null);
                     }}
                   >
-                    Create
+                    {t('tushan.list.create')}
                   </Button>
                 )}
               </Space>

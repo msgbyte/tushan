@@ -12,6 +12,10 @@ const defaultJSONViewProps: Partial<ReactJsonViewProps> = {
 };
 
 function getObjectSize(obj: any): number {
+  if (!obj) {
+    return 0;
+  }
+
   if (Array.isArray(obj)) {
     return obj.length;
   } else if (typeof obj === 'object') {

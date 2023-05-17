@@ -22,6 +22,12 @@ export const useMenuStore = create<MenuStoreState>()(
     menus: [],
     addMenu: (menu: TushanMenu) => {
       set((state) => {
+        if (state.menus.findIndex((m) => m.key === menu.key) >= 0) {
+          console.warn('This menu has been exist:', menu);
+
+          return;
+        }
+
         state.menus.push(menu);
       });
     },
