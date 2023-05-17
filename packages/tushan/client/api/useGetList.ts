@@ -57,7 +57,7 @@ export const useGetList = <RecordType extends BasicRecord = any>(
   options?: UseQueryOptions<GetListResult<RecordType>, Error>
 ): UseGetListHookValue<RecordType> => {
   const {
-    pagination = { pageNum: 1, pageSize: 20 },
+    pagination = { page: 1, perPage: 20 },
     sort = defaultSort,
     filter = defaultFilter,
     meta,

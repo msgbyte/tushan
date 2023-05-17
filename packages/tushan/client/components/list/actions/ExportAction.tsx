@@ -29,8 +29,8 @@ export const ListExportAction: React.FC<{
       filter: params.filter ?? defaultFilter,
       meta: params.meta,
       pagination: {
-        pageNum: 1,
-        pageSize: maxCount,
+        page: 1,
+        perPage: maxCount,
       },
     });
 

@@ -14,8 +14,8 @@ export interface FilterPayload {
 }
 
 export interface PaginationPayload {
-  pageNum: number;
-  pageSize: number;
+  page: number;
+  perPage: number;
 }
 
 export type DataProvider<ResourceType extends string = string> = {
