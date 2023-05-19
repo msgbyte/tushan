@@ -3,13 +3,19 @@ import {
   Button,
   Card,
   Divider,
+  Dropdown,
+  Menu,
   Space,
   Table,
   Tooltip,
 } from '@arco-design/web-react';
 import { useResourceContext } from '../../context/resource';
 import { GetListParams, SortPayload, useGetList } from '../../api';
-import { IconEdit, IconEye } from '@arco-design/web-react/icon';
+import {
+  IconEdit,
+  IconEye,
+  IconMoreVertical,
+} from '@arco-design/web-react/icon';
 import type { FieldHandler } from '../fields';
 import { useListTableDrawer } from './ListTableDrawer';
 import { ListDeleteAction } from './actions/DeleteAction';
@@ -18,7 +24,7 @@ import { useObjectState } from '../../hooks/useObjectState';
 import { useDebounce } from '../../hooks/useDebounce';
 import { ListFilter } from './ListFilter';
 import { ViewTypeContextProvider } from '../../context/viewtype';
-import { ListParamsContextProvider } from './context';
+import { ListParamsContextProvider, ListTableContextProvider } from './context';
 import { ListExportAction } from './actions/ExportAction';
 import { useTranslation } from 'react-i18next';
 
@@ -27,6 +33,12 @@ const Header = styled.div`
   justify-content: space-between;
   margin-bottom: 8px;
 `;
+
+export interface ListTableCustomAction {
+  key: string;
+  label: string;
+  onClick: (record: any) => void;
+}
 
 export interface ListTableProps {
   filter?: FieldHandler[];
@@ -37,6 +49,7 @@ export interface ListTableProps {
     edit?: boolean;
     delete?: boolean;
     export?: boolean;
+    custom?: ListTableCustomAction[];
   };
 }
 export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
@@ -55,7 +68,12 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
     filter: lazyFilter,
     sort,
   };
-  const { data, isLoading, total } = useGetList(resource, listParams);
+  const {
+    data: list,
+    isLoading,
+    total,
+    refetch,
+  } = useGetList(resource, listParams);
   const action = props.action;
   const { showTableDrawer, drawerEl } = useListTableDrawer(props.fields);
   const filterFields = props.filter ?? [];
@@ -93,6 +111,27 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
               )}
 
               {action.delete && <ListDeleteAction record={record} />}
+
+              {action.custom && (
+                <Dropdown
+                  position="br"
+                  trigger="click"
+                  droplist={
+                    <Menu>
+                      {action.custom.map((item) => (
+                        <Menu.Item
+                          key={item.key}
+                          onClick={() => item.onClick(record)}
+                        >
+                          {item.label}
+                        </Menu.Item>
+                      ))}
+                    </Menu>
+                  }
+                >
+                  <Button icon={<IconMoreVertical />} />
+                </Dropdown>
+              )}
             </Space>
           );
         },
@@ -106,67 +145,69 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
 
   return (
     <ViewTypeContextProvider viewType="list">
-      <ListParamsContextProvider value={listParams}>
-        <Card>
-          <Header>
-            <div>
-              <ListFilter
-                fields={filterFields}
-                filterValues={filterValues}
-                onChangeFilter={(values) => setFilterValues(values)}
-              />
-            </div>
-            <div>
-              <Space>
-                {action?.export && <ListExportAction />}
+      <ListTableContextProvider value={{ list, total, refetch }}>
+        <ListParamsContextProvider value={listParams}>
+          <Card>
+            <Header>
+              <div>
+                <ListFilter
+                  fields={filterFields}
+                  filterValues={filterValues}
+                  onChangeFilter={(values) => setFilterValues(values)}
+                />
+              </div>
+              <div>
+                <Space>
+                  {action?.export && <ListExportAction />}
 
-                {action?.create && (
-                  <Button
-                    type="primary"
-                    onClick={() => {
-                      showTableDrawer('edit', null);
-                    }}
-                  >
-                    {t('tushan.list.create')}
-                  </Button>
-                )}
-              </Space>
-            </div>
-          </Header>
+                  {action?.create && (
+                    <Button
+                      type="primary"
+                      onClick={() => {
+                        showTableDrawer('edit', null);
+                      }}
+                    >
+                      {t('tushan.list.create')}
+                    </Button>
+                  )}
+                </Space>
+              </div>
+            </Header>
 
-          {hasHeader && <Divider />}
+            {hasHeader && <Divider />}
 
-          <Table
-            loading={isLoading}
-            columns={columns}
-            data={data}
-            rowKey="id"
-            pagination={{
-              total,
-              current: pageNum,
-              pageSize,
-              onChange: (pageNum, pageSize) => {
-                setPageNum(pageNum);
-                setPageSize(pageSize);
-              },
-            }}
-            onChange={(pagination, sorter) => {
-              const { field, direction } = sorter;
+            <Table
+              loading={isLoading}
+              columns={columns}
+              data={list}
+              rowKey="id"
+              pagination={{
+                total,
+                current: pageNum,
+                pageSize,
+                onChange: (pageNum, pageSize) => {
+                  setPageNum(pageNum);
+                  setPageSize(pageSize);
+                },
+              }}
+              onChange={(pagination, sorter) => {
+                const { field, direction } = sorter;
 
-              if (field && direction) {
-                setSort({
-                  field,
-                  order: direction === 'ascend' ? 'ASC' : 'DESC',
-                });
-              } else {
-                setSort(undefined);
-              }
-            }}
-          />
+                if (field && direction) {
+                  setSort({
+                    field,
+                    order: direction === 'ascend' ? 'ASC' : 'DESC',
+                  });
+                } else {
+                  setSort(undefined);
+                }
+              }}
+            />
 
-          {drawerEl}
-        </Card>
-      </ListParamsContextProvider>
+            {drawerEl}
+          </Card>
+        </ListParamsContextProvider>
+      </ListTableContextProvider>
     </ViewTypeContextProvider>
   );
 });

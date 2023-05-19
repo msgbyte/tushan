@@ -36,5 +36,11 @@ export const i18nEnTranslation: TranslationKeys = {
       deleteDesc: 'Are you sure you want to delete?',
       deleteSuccess: 'Delete Success',
     },
+    common: {
+      success: 'Success',
+      failed: 'Failed',
+      confirmTitle: 'Are you sure you want to perform this operation?',
+      confirmContent: 'This action cannot be undone',
+    },
   },
 };

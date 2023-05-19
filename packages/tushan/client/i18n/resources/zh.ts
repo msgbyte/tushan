@@ -36,5 +36,11 @@ export const i18nZhTranslation: TranslationKeys = {
       deleteDesc: '是否确认删除该记录?',
       deleteSuccess: '删除成功',
     },
+    common: {
+      success: '成功',
+      failed: '失败',
+      confirmTitle: '确认要进行该操作么？',
+      confirmContent: '该操作不可撤回',
+    },
   },
 };
