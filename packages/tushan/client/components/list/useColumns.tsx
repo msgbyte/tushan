@@ -4,7 +4,7 @@ import {
   IconEye,
   IconMoreVertical,
 } from '@arco-design/web-react/icon';
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { BasicRecord } from '../../api';
 import { ViewType } from '../../context/viewtype';
 import { useTranslation } from '../../i18n';

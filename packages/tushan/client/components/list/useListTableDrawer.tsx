@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { BasicRecord } from '../../api';
 import { ViewType } from '../../context/viewtype';
 import { useEvent } from '../../hooks/useEvent';
