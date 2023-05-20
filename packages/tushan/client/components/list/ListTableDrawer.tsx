@@ -6,34 +6,7 @@ import type { ViewType } from '../../context/viewtype';
 import { useEvent } from '../../hooks/useEvent';
 import { DetailForm } from '../detail/DetailForm';
 import type { BasicRecord } from '../../api/types';
-import { useResourceContext } from '../../context/resource';
 import { useTranslation } from 'react-i18next';
-
-export function useListTableDrawer(fields: FieldHandler[]) {
-  const [visible, setVisible] = useState(false);
-  const [viewType, setViewType] = useState<ViewType>('detail');
-  const [record, setRecord] = useState<BasicRecord | null>(null);
-  const showTableDrawer = useEvent(
-    (viewType: ViewType, record: BasicRecord | null) => {
-      setViewType(viewType);
-      setRecord(record);
-      setVisible(true);
-    }
-  );
-
-  return {
-    showTableDrawer,
-    drawerEl: (
-      <ListTableDrawer
-        visible={visible}
-        onChangeVisible={setVisible}
-        viewType={viewType}
-        fields={fields}
-        record={record}
-      />
-    ),
-  };
-}
 
 export interface ListTableDrawerProps {
   visible: boolean;

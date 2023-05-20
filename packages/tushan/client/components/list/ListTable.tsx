@@ -17,7 +17,6 @@ import {
   IconMoreVertical,
 } from '@arco-design/web-react/icon';
 import type { FieldHandler } from '../fields';
-import { useListTableDrawer } from './ListTableDrawer';
 import { ListDeleteAction } from './actions/DeleteAction';
 import styled from 'styled-components';
 import { useObjectState } from '../../hooks/useObjectState';
@@ -27,6 +26,8 @@ import { ViewTypeContextProvider } from '../../context/viewtype';
 import { ListParamsContextProvider, ListTableContextProvider } from './context';
 import { ListExportAction } from './actions/ExportAction';
 import { useTranslation } from 'react-i18next';
+import { useListTableDrawer } from './useListTableDrawer';
+import { useColumns } from './useColumns';
 
 const Header = styled.div`
   display: flex;
@@ -78,131 +79,81 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
   const { showTableDrawer, drawerEl } = useListTableDrawer(props.fields);
   const filterFields = props.filter ?? [];
 
-  const columns = useMemo(() => {
-    const c = [...props.fields]
-      .map((fieldHandler) => fieldHandler('list'))
-      .filter((item) => !item.hidden)
-      .map((item) => item.columnProps);
+  const columns = useColumns(props, showTableDrawer);
 
-    if (action) {
-      c.push({
-        key: 'actions',
-        title: t('tushan.list.actions'),
-        fixed: 'right',
-        render: (val, record) => {
-          return (
-            <Space>
-              {action.detail && (
-                <Tooltip content={t('tushan.list.detail')}>
-                  <Button
-                    icon={<IconEye />}
-                    onClick={() => showTableDrawer('detail', record)}
-                  />
-                </Tooltip>
-              )}
+  const hasHeader =
+    filterFields.length > 0 ||
+    action?.export === true ||
+    action?.create === true;
 
-              {action.edit && (
-                <Tooltip content={t('tushan.list.edit')}>
-                  <Button
-                    icon={<IconEdit />}
-                    onClick={() => showTableDrawer('edit', record)}
-                  />
-                </Tooltip>
-              )}
+  const headerEl = (
+    <Header>
+      <div>
+        <ListFilter
+          fields={filterFields}
+          filterValues={filterValues}
+          onChangeFilter={(values) => setFilterValues(values)}
+        />
+      </div>
+      <div>
+        <Space>
+          {action?.export && <ListExportAction />}
 
-              {action.delete && <ListDeleteAction record={record} />}
+          {action?.create && (
+            <Button
+              type="primary"
+              onClick={() => {
+                showTableDrawer('edit', null);
+              }}
+            >
+              {t('tushan.list.create')}
+            </Button>
+          )}
+        </Space>
+      </div>
+    </Header>
+  );
 
-              {action.custom && (
-                <Dropdown
-                  position="br"
-                  trigger="click"
-                  droplist={
-                    <Menu>
-                      {action.custom.map((item) => (
-                        <Menu.Item
-                          key={item.key}
-                          onClick={() => item.onClick(record)}
-                        >
-                          {item.label}
-                        </Menu.Item>
-                      ))}
-                    </Menu>
-                  }
-                >
-                  <Button icon={<IconMoreVertical />} />
-                </Dropdown>
-              )}
-            </Space>
-          );
+  const tableEl = (
+    <Table
+      loading={isLoading}
+      columns={columns}
+      data={list}
+      rowKey="id"
+      pagination={{
+        total,
+        current: pageNum,
+        pageSize,
+        onChange: (pageNum, pageSize) => {
+          setPageNum(pageNum);
+          setPageSize(pageSize);
         },
-      });
-    }
+      }}
+      onChange={(pagination, sorter) => {
+        const { field, direction } = sorter;
 
-    return c;
-  }, [props.fields, action, t]);
-
-  const hasHeader = filterFields.length > 0 || action?.create === true;
+        if (field && direction) {
+          setSort({
+            field,
+            order: direction === 'ascend' ? 'ASC' : 'DESC',
+          });
+        } else {
+          setSort(undefined);
+        }
+      }}
+    />
+  );
 
   return (
     <ViewTypeContextProvider viewType="list">
       <ListTableContextProvider value={{ list, total, refetch }}>
         <ListParamsContextProvider value={listParams}>
           <Card>
-            <Header>
-              <div>
-                <ListFilter
-                  fields={filterFields}
-                  filterValues={filterValues}
-                  onChangeFilter={(values) => setFilterValues(values)}
-                />
-              </div>
-              <div>
-                <Space>
-                  {action?.export && <ListExportAction />}
-
-                  {action?.create && (
-                    <Button
-                      type="primary"
-                      onClick={() => {
-                        showTableDrawer('edit', null);
-                      }}
-                    >
-                      {t('tushan.list.create')}
-                    </Button>
-                  )}
-                </Space>
-              </div>
-            </Header>
+            {headerEl}
 
             {hasHeader && <Divider />}
 
-            <Table
-              loading={isLoading}
-              columns={columns}
-              data={list}
-              rowKey="id"
-              pagination={{
-                total,
-                current: pageNum,
-                pageSize,
-                onChange: (pageNum, pageSize) => {
-                  setPageNum(pageNum);
-                  setPageSize(pageSize);
-                },
-              }}
-              onChange={(pagination, sorter) => {
-                const { field, direction } = sorter;
-
-                if (field && direction) {
-                  setSort({
-                    field,
-                    order: direction === 'ascend' ? 'ASC' : 'DESC',
-                  });
-                } else {
-                  setSort(undefined);
-                }
-              }}
-            />
+            {tableEl}
 
             {drawerEl}
           </Card>
