@@ -6,7 +6,7 @@ import { TranslationKeys } from '../i18n';
 
 export interface TushanContextProps {
   basename?: string;
-  dashboard?: boolean;
+  dashboard?: React.ReactElement | false;
   dataProvider?: DataProvider;
   authProvider?: AuthProvider;
   i18n?: {
@@ -31,7 +31,7 @@ export const TushanContextProvider: React.FC<
 });
 TushanContextProvider.displayName = 'TushanContextProvider';
 
-export function useTushanContext() {
+export function useTushanContext(): TushanContextProps {
   return useContext(TushanContext);
 }
 

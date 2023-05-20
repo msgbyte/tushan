@@ -16,11 +16,11 @@ export const ListFilter: React.FC<ListFilterProps> = React.memo((props) => {
   return (
     <div>
       <Grid cols={3} colGap={12} rowGap={16}>
-        {props.fields.map((fieldHandler) => {
+        {props.fields.map((fieldHandler, i) => {
           const c = fieldHandler('edit');
 
           return (
-            <Grid.GridItem index={0}>
+            <Grid.GridItem index={0} key={i}>
               <div>{c.title}</div>
               <div>
                 {c.render(filterValues[c.source], (val) =>

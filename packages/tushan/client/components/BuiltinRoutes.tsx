@@ -23,7 +23,11 @@ export const BuiltinRoutes: React.FC<BuiltinRoutesProps> = React.memo(
       resources,
       components,
     } = useConfigureAdminRouterFromChildren(props.children);
-    const { dashboard = true, authProvider, layout } = useTushanContext();
+    const {
+      dashboard = <Dashboard />,
+      authProvider,
+      layout,
+    } = useTushanContext();
     const requireAuth = Boolean(authProvider);
     const [canRender, setCanRender] = useState(!requireAuth);
     const oneSecondHasPassed = useDelay(1000);
@@ -56,7 +60,7 @@ export const BuiltinRoutes: React.FC<BuiltinRoutesProps> = React.memo(
                   <div>
                     <Routes>
                       {dashboard && (
-                        <Route path="/dashboard" element={<Dashboard />} />
+                        <Route path="/dashboard" element={dashboard} />
                       )}
 
                       {customRoutesWithLayout.map((item) => (
