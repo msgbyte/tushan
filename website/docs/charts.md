@@ -15,4 +15,4 @@ import { LineChart } from 'tushan/chart'
 ```
 
 
-Recharts: [https://recharts.org/en-US/examples](https://recharts.org/en-US/examples)
+更多关于 `recharts` 的介绍与示例可以访问他的官方文档: [https://recharts.org/en-US/examples](https://recharts.org/en-US/examples)
