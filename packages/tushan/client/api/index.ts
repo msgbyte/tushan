@@ -1,6 +1,7 @@
 export * from './types';
 export * from './defaultDataProvider';
 export * from './defaultQueryClient';
+export * from './auth';
 export * from './http';
 export * from './useGetList';
 export * from './useCreate';
