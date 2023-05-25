@@ -1,6 +1,6 @@
 import { FieldValidator } from './types';
 
-const emailRE = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+const emailRE = /^[a-zA-Z0-9_\-\.]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_\-]+)+$/;
 
 export const emailValidator: FieldValidator = (value, cb) => {
   if (typeof value === 'string') {
