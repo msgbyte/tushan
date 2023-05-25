@@ -4,6 +4,8 @@ export * from './defaultQueryClient';
 export * from './auth';
 export * from './http';
 export * from './useGetList';
+export * from './useGetOne';
+export * from './useGetMany';
 export * from './useCreate';
 export * from './useUpdate';
 export * from './useDelete';
