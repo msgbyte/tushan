@@ -1,9 +1,11 @@
-import { useEffect } from 'react';
+import { useRef } from 'react';
 import { TushanContextProps } from '../context/tushan';
 import { initI18N } from '../i18n';
 
 export function useInitI18N(i18n?: TushanContextProps['i18n']) {
-  useEffect(() => {
+  const initRef = useRef(false);
+
+  if (!initRef.current) {
     if (i18n) {
       const resources = i18n.languages.reduce((prev, curr) => {
         return {
@@ -16,5 +18,7 @@ export function useInitI18N(i18n?: TushanContextProps['i18n']) {
     } else {
       initI18N();
     }
-  }, []);
+
+    initRef.current = true;
+  }
 }

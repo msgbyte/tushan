@@ -109,6 +109,7 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
         total,
         current: pageNum,
         pageSize,
+        showTotal: true,
         onChange: (pageNum, pageSize) => {
           setPageNum(pageNum);
           setPageSize(pageSize);
