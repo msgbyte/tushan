@@ -4,6 +4,11 @@ import type { ComponentType } from 'react';
 export interface BasicFieldOptions {
   label?: string;
 
+  /**
+   * preprocess data before transfer to render component
+   */
+  preRenderTransform?: (value: unknown) => unknown;
+
   list?: {
     /**
      * whether allow to sort, work in list table

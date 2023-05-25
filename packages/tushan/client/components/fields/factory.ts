@@ -62,7 +62,9 @@ export function createFieldFactory<CustomOptions extends {} = {}>(
             width: options?.list?.width,
             render: (val) => {
               return createElement(config.detail, {
-                value: val,
+                value: options?.preRenderTransform
+                  ? options?.preRenderTransform(val)
+                  : val,
                 options: options ?? {},
               });
             },
