@@ -34,12 +34,12 @@ const Root = styled.div`
 
 export const Navbar: React.FC = React.memo(() => {
   const logout = useLogout();
-  const { i18n: i18nConfig } = useTushanContext();
+  const { i18n: i18nConfig, header } = useTushanContext();
   const { t, i18n, ready } = useTranslation();
 
   return (
     <Root className="navbar">
-      <div className="title">{t('tushan.navbar.title')}</div>
+      <div className="title">{header ?? t('tushan.navbar.title')}</div>
 
       <Space className="actions">
         {i18nConfig && ready && (

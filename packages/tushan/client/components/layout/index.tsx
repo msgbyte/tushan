@@ -6,6 +6,7 @@ import { TushanBreadcrumb } from './Breadcrumb';
 import { Outlet } from 'react-router';
 import styled from 'styled-components';
 import { useTranslation } from '../../i18n';
+import { useTushanContext } from '../../context/tushan';
 
 const Sider = Layout.Sider;
 const Header = Layout.Header;
@@ -62,6 +63,7 @@ export const BasicLayout: React.FC = React.memo((props) => {
   const navbarHeight = 64;
   const menuWidth = collapsed ? 48 : 220;
   const { t } = useTranslation();
+  const { footer } = useTushanContext();
 
   return (
     <Root className="basic-layout">
@@ -89,7 +91,9 @@ export const BasicLayout: React.FC = React.memo((props) => {
           <Content className="body">
             <Outlet />
           </Content>
-          <Footer className="footer">{t('tushan.footer.title')}</Footer>
+          <Footer className="footer">
+            {footer ?? t('tushan.footer.title')}
+          </Footer>
         </Layout>
       </Layout>
     </Root>

@@ -1,4 +1,5 @@
-import i18n, { Resource } from 'i18next';
+import i18n from 'i18next';
+import type { Resource } from 'i18next';
 import { useTranslation, initReactI18next, Trans } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { defaultI18NResources } from './default';
