@@ -1,11 +1,6 @@
-import {
-  Button,
-  Form,
-  FormInstance,
-  Message,
-  Space,
-} from '@arco-design/web-react';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { Button, Form, Message, Space } from '@arco-design/web-react';
+import React, { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { BasicRecord } from '../../api';
 import { useCreate } from '../../api/useCreate';
 import { useUpdate } from '../../api/useUpdate';
@@ -23,12 +18,12 @@ export interface EditFormProps {
 }
 export const EditForm: React.FC<EditFormProps> = React.memo((props) => {
   const isCreate = props.record === null;
-  const defaultValues = props.record ?? {};
-  const [values, setValues] = useState<Record<string, unknown>>(defaultValues);
+  const defaultValues = props.record ?? ({} as BasicRecord);
+  const [form] = Form.useForm();
   const [create] = useCreate();
   const [updateOne] = useUpdate();
   const resource = useResourceContext();
-  const formRef = useRef<FormInstance>(null);
+  const { t } = useTranslation();
 
   const items = useMemo(() => {
     return props.fields
@@ -38,31 +33,39 @@ export const EditForm: React.FC<EditFormProps> = React.memo((props) => {
 
   const handleSubmit = useSendRequest(async () => {
     try {
-      await formRef.current?.validate();
+      const values = form.getFieldsValue();
+
+      await form.validate();
 
       if (isCreate) {
         await create(resource, {
           data: { ...values },
         });
       } else {
+        if (!defaultValues.id) {
+          Message.error('Cannot update record, not found id');
+          return;
+        }
         await updateOne(resource, {
-          id: (values as BasicRecord).id,
+          id: defaultValues.id,
           data: { ...values },
         });
       }
 
       props.onSuccess?.(values as BasicRecord);
+      Message.success(t('tushan.common.operateSuccess') ?? '');
     } catch (err) {
-      Message.error(String(err));
+      Message.error(t('tushan.common.operateFailed') + ':' + String(err));
     }
   });
 
   return (
     <ViewTypeContextProvider viewType="edit">
       <Form
-        ref={formRef}
+        form={form}
         layout="vertical"
         validateTrigger={['onBlur', 'onFocus']}
+        initialValues={defaultValues}
       >
         {items.map((item, i) => {
           if (item.source === 'id') {
@@ -72,17 +75,16 @@ export const EditForm: React.FC<EditFormProps> = React.memo((props) => {
 
           return (
             <Form.Item
-              key={item.source}
+              key={`${item.source}#${i}`}
               label={item.title}
               field={item.source}
               rules={item.rules}
             >
-              {item.render(values[item.source], (val) => {
-                setValues((state) => ({
-                  ...state,
-                  [item.source]: val,
-                }));
-              })}
+              {(formData, form) =>
+                item.render(formData[item.source], (val) => {
+                  form.setFieldValue(item.source, val);
+                })
+              }
             </Form.Item>
           );
         })}
@@ -90,10 +92,10 @@ export const EditForm: React.FC<EditFormProps> = React.memo((props) => {
         <Form.Item>
           <Space>
             <SubmitButton type="primary" onClick={handleSubmit}>
-              {isCreate ? 'Create' : 'Save'}
+              {isCreate ? t('tushan.edit.create') : t('tushan.edit.save')}
             </SubmitButton>
             <Button type="default" onClick={props.onCancel}>
-              Cancel
+              {t('tushan.edit.cancel')}
             </Button>
           </Space>
         </Form.Item>

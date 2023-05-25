@@ -35,6 +35,8 @@ export const ListTableDrawer: React.FC<ListTableDrawerProps> = React.memo(
         visible={props.visible}
         onCancel={hide}
         width={props.width ?? 680}
+        mountOnEnter={true}
+        unmountOnExit={true}
         maskClosable={props.viewType !== 'edit'}
         footer={null}
       >
