@@ -2,6 +2,7 @@
 export * from '@arco-design/web-react';
 export { default as styled } from 'styled-components';
 export { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+export { Helmet } from 'react-helmet';
 
 // Core
 export * from './api';
