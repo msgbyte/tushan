@@ -1,6 +1,6 @@
 ---
 sidebar_position: 5
-title: 修改document head
+title: 自定义 document head
 ---
 
 常见的，我们可能需要修改网页的标题、语言、元信息等。
