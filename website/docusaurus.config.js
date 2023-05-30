@@ -59,6 +59,15 @@ const config = {
     require.resolve('docusaurus-plugin-image-zoom'),
   ],
 
+  scripts: [
+    {
+      src: 'https://umami.moonrailgun.com/umami.js',
+      async: true,
+      defer: true,
+      'data-website-id': 'f43cbaec-4a43-4697-989f-3615b8dc489b',
+    },
+  ],
+
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
