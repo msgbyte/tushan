@@ -1,13 +1,8 @@
 import { Input } from '@arco-design/web-react';
 import React from 'react';
+import { normalizeText } from '../../utils/common';
 import { createFieldFactory } from './factory';
 import type { FieldDetailComponent, FieldEditComponent } from './types';
-
-function normalizeText(input: any): string {
-  return input != null && typeof input !== 'string'
-    ? JSON.stringify(input)
-    : input;
-}
 
 export const TextFieldDetail: FieldDetailComponent<string> = React.memo(
   (props) => {

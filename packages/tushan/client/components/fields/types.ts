@@ -16,6 +16,10 @@ export interface BasicFieldOptions {
     sort?: boolean;
     width?: string | number;
     hidden?: boolean;
+    /**
+     * If the cell content exceeds the length, whether it is automatically omitted and displays .... After setting this property, the table-layout of the table will automatically become fixed.
+     */
+    ellipsis?: boolean;
   };
 
   edit?: {

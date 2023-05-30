@@ -60,6 +60,7 @@ export function createFieldFactory<CustomOptions extends {} = {}>(
             sortDirections: ['ascend', 'descend'],
             title: options?.label ?? createElement(FieldTitle, { source }),
             width: options?.list?.width,
+            ellipsis: options?.list?.ellipsis,
             render: (val) => {
               return createElement(config.detail, {
                 value: options?.preRenderTransform
