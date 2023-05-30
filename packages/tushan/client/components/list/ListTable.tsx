@@ -29,6 +29,8 @@ export interface ListTableCustomAction {
 export interface ListTableProps {
   filter?: FieldHandler[];
   fields: FieldHandler[];
+  showTotal?: boolean;
+  showSizeChanger?: boolean;
   action?: {
     create?: boolean;
     detail?: boolean;
@@ -109,7 +111,8 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
         total,
         current: pageNum,
         pageSize,
-        showTotal: true,
+        showTotal: props.showTotal ?? true,
+        sizeCanChange: props.showSizeChanger ?? false,
         onChange: (pageNum, pageSize) => {
           setPageNum(pageNum);
           setPageSize(pageSize);
