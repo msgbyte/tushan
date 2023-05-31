@@ -3,6 +3,13 @@ export * from '@arco-design/web-react';
 export { default as styled } from 'styled-components';
 export { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 export { Helmet } from 'react-helmet';
+export {
+  Outlet,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+  useParams,
+} from 'react-router-dom';
 
 // Core
 export * from './api';

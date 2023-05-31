@@ -26,7 +26,7 @@ export const BuiltinRoutes: React.FC<BuiltinRoutesProps> = React.memo(
     const {
       dashboard = <Dashboard />,
       authProvider,
-      layout,
+      layout = <BasicLayout />,
     } = useTushanContext();
     const requireAuth = Boolean(authProvider);
     const [canRender, setCanRender] = useState(!requireAuth);
@@ -53,7 +53,7 @@ export const BuiltinRoutes: React.FC<BuiltinRoutesProps> = React.memo(
           <Route path={defaultAuthParams.loginUrl} element={<LoginPage />} />
 
           {canRender ? (
-            <Route element={layout ?? <BasicLayout />}>
+            <Route element={layout}>
               <Route
                 path="*"
                 element={
