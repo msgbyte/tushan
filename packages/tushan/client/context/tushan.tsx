@@ -13,6 +13,7 @@ export interface TushanContextProps {
     languages: { key: string; label: string; translation: TranslationKeys }[];
   };
   layout?: React.ReactElement;
+  loginPage?: React.ReactElement;
   header?: React.ReactNode;
   footer?: React.ReactNode;
 }
