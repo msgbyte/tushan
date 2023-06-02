@@ -34,7 +34,7 @@
     "typescript": "^4.9.4"
   },
   "dependencies": {
-    "@arco-design/web-react": "^2.46.1",
+    "@arco-design/web-react": "^2.48.2",
     "@tanstack/react-query": "^4.28.0",
     "@tanstack/react-query-devtools": "^4.28.0",
     "@types/node": "^18.15.11",
