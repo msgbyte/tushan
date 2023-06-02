@@ -2,6 +2,7 @@ import {
   createAvatarField,
   createEmailField,
   createImageField,
+  createTextAreaField,
   createTextField,
   createUrlField,
 } from 'tushan';
@@ -11,34 +12,37 @@ export const userFields = [
     label: 'ID',
   }),
   createTextField('name', {
-    label: 'Name',
     list: {
       sort: true,
     },
   }),
-  createEmailField('email', {
-    label: 'Email',
-  }),
-  createUrlField('website', {
-    label: 'Website',
-  }),
+  createEmailField('email'),
+  createUrlField('website'),
 ];
 
 export const photoFields = [
   createTextField('id', {
     label: 'ID',
   }),
-  createTextField('albumId', {
-    label: 'AlbumId',
-  }),
-  createTextField('title', {
-    label: 'Title',
-  }),
+  createTextField('albumId'),
+  createTextField('title'),
   createImageField('url', {
-    label: 'Url',
     height: 300,
   }),
-  createAvatarField('thumbnailUrl', {
-    label: 'ThumbnailUrl',
+  createAvatarField('thumbnailUrl'),
+];
+
+export const comments = [
+  createTextField('id', {
+    list: {
+      width: 100,
+    },
+  }),
+  createTextField('name'),
+  createEmailField('email'),
+  createTextAreaField('body', {
+    list: {
+      ellipsis: true,
+    },
   }),
 ];

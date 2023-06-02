@@ -6,26 +6,31 @@ import {
   Resource,
   Tushan,
 } from 'tushan';
+import { IconImage, IconMessage, IconUser } from 'tushan/icon';
 import { authProvider } from './auth';
-import { photoFields, userFields } from './fields';
+import { comments, photoFields, userFields } from './fields';
 
 const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com');
 
 function App() {
   return (
     <Tushan
-      basename="/admin"
+      basename="/"
       dataProvider={dataProvider}
       authProvider={authProvider}
     >
       <Resource
         name="users"
         label="User"
+        icon={<IconUser />}
         list={
           <ListTable
             filter={[
               createTextField('q', {
-                label: 'Query',
+                label: 'Search',
+                edit: {
+                  placeholder: 'Search name...',
+                },
               }),
             ]}
             fields={userFields}
@@ -34,9 +39,9 @@ function App() {
         }
       />
 
-      {/* <Resource
+      <Resource
         name="photos"
-        label="Photos"
+        icon={<IconImage />}
         list={
           <ListTable
             fields={photoFields}
@@ -45,7 +50,18 @@ function App() {
         }
       />
 
-      <ReactQueryDevtools /> */}
+      <Resource
+        name="comments"
+        icon={<IconMessage />}
+        list={
+          <ListTable
+            fields={comments}
+            action={{ detail: true, edit: true, delete: true }}
+          />
+        }
+      />
+
+      {/* <ReactQueryDevtools /> */}
     </Tushan>
   );
 }
