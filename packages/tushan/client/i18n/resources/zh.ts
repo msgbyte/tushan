@@ -12,6 +12,11 @@ export const i18nZhTranslation: TranslationKeys = {
     breadcrumb: {
       home: '首页',
     },
+    login: {
+      username: '用户名',
+      password: '密码',
+      loginBtn: '登录',
+    },
     dashboard: {
       name: '仪表盘',
       welcome: '欢迎回来, {{name}}',

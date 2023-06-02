@@ -12,6 +12,11 @@ export const i18nEnTranslation: TranslationKeys = {
     breadcrumb: {
       home: 'Home',
     },
+    login: {
+      username: 'Username',
+      password: 'Password',
+      loginBtn: 'Login',
+    },
     dashboard: {
       name: 'Dashboard',
       welcome: 'Welcome, {{name}}',
