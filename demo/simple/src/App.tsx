@@ -6,9 +6,14 @@ import {
   Resource,
   Tushan,
 } from 'tushan';
-import { IconImage, IconMessage, IconUser } from 'tushan/icon';
+import {
+  IconImage,
+  IconMessage,
+  IconUnorderedList,
+  IconUser,
+} from 'tushan/icon';
 import { authProvider } from './auth';
-import { comments, photoFields, userFields } from './fields';
+import { commentFields, photoFields, todoFields, userFields } from './fields';
 
 const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com');
 
@@ -55,7 +60,18 @@ function App() {
         icon={<IconMessage />}
         list={
           <ListTable
-            fields={comments}
+            fields={commentFields}
+            action={{ detail: true, edit: true, delete: true }}
+          />
+        }
+      />
+
+      <Resource
+        name="todos"
+        icon={<IconUnorderedList />}
+        list={
+          <ListTable
+            fields={todoFields}
             action={{ detail: true, edit: true, delete: true }}
           />
         }

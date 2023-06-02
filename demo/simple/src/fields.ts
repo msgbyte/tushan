@@ -1,7 +1,9 @@
 import {
   createAvatarField,
+  createBooleanField,
   createEmailField,
   createImageField,
+  createReferenceField,
   createTextAreaField,
   createTextField,
   createUrlField,
@@ -32,7 +34,7 @@ export const photoFields = [
   createAvatarField('thumbnailUrl'),
 ];
 
-export const comments = [
+export const commentFields = [
   createTextField('id', {
     list: {
       width: 100,
@@ -45,4 +47,19 @@ export const comments = [
       ellipsis: true,
     },
   }),
+];
+
+export const todoFields = [
+  createTextField('id', {
+    list: {
+      width: 100,
+    },
+  }),
+  createReferenceField('userId', {
+    label: 'User',
+    reference: 'users',
+    displayField: 'name',
+  }),
+  createTextField('title'),
+  createBooleanField('completed'),
 ];
