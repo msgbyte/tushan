@@ -14,6 +14,8 @@ title: 登录鉴权
 </Tushan>
 ```
 
+![](/img/docs/misc/login.png)
+
 其中 `authProvider` 的接口定义如下:
 
 ```tsx

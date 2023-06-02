@@ -1,6 +1,6 @@
 ---
 sidebar_position: 8
-title: 大文本渲染
+title: 长文本渲染
 ---
 
 对于内容过长的文本数据，相比于简单的 `createTextField`, 一般 Tushan 会选择更加适合大文本渲染的 `createTextAreaField` 方式
