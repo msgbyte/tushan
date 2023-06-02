@@ -38,3 +38,48 @@ title: <Tushan />
     // ...
   }
   ```
+  
+### 自定义布局
+
+`Tushan` 中的布局是完全可以被自定义的，包括整体布局以及细节的header/footer等。
+
+一个修改布局的示例如下:
+
+```tsx
+<Tushan
+  header={'My Admin'}
+  footer={'Build with MsgByte'}
+  dashboard={<Dashboard />}
+>
+</Tushan>
+```
+
+在这个示例中自定义了标题栏与底部的footer
+
+或者你也可以整体替换掉整个布局, 如下:
+
+```tsx
+<Tushan
+  layout={<MyLayout />}
+>
+</Tushan>
+```
+
+你可以在源码中查看默认布局实现用于参考:
+
+[https://github.com/msgbyte/tushan/blob/master/packages/tushan/client/components/layout/index.tsx](https://github.com/msgbyte/tushan/blob/master/packages/tushan/client/components/layout/index.tsx)
+
+### 自定义登录界面
+
+类似的，你可以直接在Tushan组件中进行自定义登录界面
+
+```tsx
+<Tushan
+  loginPage={<MyLogin />}
+>
+</Tushan>
+```
+
+登录界面的实现可以参考默认的登录页面实现:
+
+[https://github.com/msgbyte/tushan/blob/master/packages/tushan/client/components/defaults/LoginPage.tsx](https://github.com/msgbyte/tushan/blob/master/packages/tushan/client/components/defaults/LoginPage.tsx)
