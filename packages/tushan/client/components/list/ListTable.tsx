@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Card, Divider, Space, Table } from '@arco-design/web-react';
 import { useResourceContext } from '../../context/resource';
-import { GetListParams, SortPayload, useGetList } from '../../api';
+import { BasicRecord, GetListParams, SortPayload, useGetList } from '../../api';
 import type { FieldHandler } from '../fields';
 import styled from 'styled-components';
 import { useObjectState } from '../../hooks/useObjectState';
@@ -13,6 +13,7 @@ import { ListExportAction } from './actions/ExportAction';
 import { useTranslation } from 'react-i18next';
 import { useListTableDrawer } from './useListTableDrawer';
 import { useColumns } from './useColumns';
+import { ListRefreshAction } from './actions/RefreshAction';
 
 const Header = styled.div`
   display: flex;
@@ -23,7 +24,7 @@ const Header = styled.div`
 export interface ListTableCustomAction {
   key: string;
   label: string;
-  onClick: (record: any) => void;
+  onClick: (record: BasicRecord) => void;
 }
 
 export interface ListTableProps {
@@ -37,6 +38,7 @@ export interface ListTableProps {
     edit?: boolean;
     delete?: boolean;
     export?: boolean;
+    refresh?: boolean;
     custom?: ListTableCustomAction[];
   };
 }
@@ -84,6 +86,8 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
       </div>
       <div>
         <Space>
+          {action?.refresh && <ListRefreshAction />}
+
           {action?.export && <ListExportAction />}
 
           {action?.create && (
@@ -119,11 +123,11 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
         },
       }}
       onChange={(pagination, sorter) => {
-        const { field, direction } = sorter;
+        const { field, direction } = Array.isArray(sorter) ? sorter[0] : sorter;
 
         if (field && direction) {
           setSort({
-            field,
+            field: String(field),
             order: direction === 'ascend' ? 'ASC' : 'DESC',
           });
         } else {
