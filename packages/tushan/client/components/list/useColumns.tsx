@@ -4,12 +4,13 @@ import {
   IconEye,
   IconMoreVertical,
 } from '@arco-design/web-react/icon';
+import { isFunction } from 'lodash-es';
 import React, { useMemo } from 'react';
 import { BasicRecord } from '../../api';
 import { ViewType } from '../../context/viewtype';
 import { useTranslation } from '../../i18n';
 import { ListDeleteAction } from './actions/DeleteAction';
-import type { ListTableProps } from './ListTable';
+import type { ListTableCustomAction, ListTableProps } from './ListTable';
 
 export function useColumns(
   props: ListTableProps,
@@ -53,24 +54,7 @@ export function useColumns(
               {action.delete && <ListDeleteAction record={record} />}
 
               {action.custom && (
-                <Dropdown
-                  position="br"
-                  trigger="click"
-                  droplist={
-                    <Menu>
-                      {action.custom.map((item) => (
-                        <Menu.Item
-                          key={item.key}
-                          onClick={() => item.onClick(record)}
-                        >
-                          {item.label}
-                        </Menu.Item>
-                      ))}
-                    </Menu>
-                  }
-                >
-                  <Button icon={<IconMoreVertical />} />
-                </Dropdown>
+                <CustomActions actions={action.custom} record={record} />
               )}
             </Space>
           );
@@ -83,3 +67,36 @@ export function useColumns(
 
   return columns;
 }
+
+export const CustomActions: React.FC<{
+  actions: ListTableCustomAction;
+  record: BasicRecord;
+}> = React.memo((props) => {
+  const actions = useMemo(() => {
+    return isFunction(props.actions)
+      ? props.actions(props.record)
+      : props.actions;
+  }, [props.actions, props.record]);
+
+  return (
+    <Dropdown
+      position="br"
+      trigger="click"
+      droplist={
+        <Menu>
+          {actions.map((item) => (
+            <Menu.Item
+              key={item.key}
+              onClick={() => item.onClick(props.record)}
+            >
+              {item.label}
+            </Menu.Item>
+          ))}
+        </Menu>
+      }
+    >
+      <Button icon={<IconMoreVertical />} />
+    </Dropdown>
+  );
+});
+CustomActions.displayName = 'CustomActions';

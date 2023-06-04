@@ -21,11 +21,15 @@ const Header = styled.div`
   margin-bottom: 8px;
 `;
 
-export interface ListTableCustomAction {
+export interface ListTableCustomActionItem {
   key: string;
   label: string;
   onClick: (record: BasicRecord) => void;
 }
+
+export type ListTableCustomAction =
+  | ListTableCustomActionItem[]
+  | ((record: BasicRecord) => ListTableCustomActionItem[]);
 
 export interface ListTableProps {
   filter?: FieldHandler[];
@@ -39,7 +43,7 @@ export interface ListTableProps {
     delete?: boolean;
     export?: boolean;
     refresh?: boolean;
-    custom?: ListTableCustomAction[];
+    custom?: ListTableCustomAction;
   };
 }
 export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
