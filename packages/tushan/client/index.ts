@@ -33,3 +33,4 @@ export { useAsyncRequest } from './hooks/useAsyncRequest';
 export { useEditValue } from './hooks/useEditValue';
 export * from './utils/validator';
 export { createSelector } from './utils/createSelector';
+export * from './utils/event';

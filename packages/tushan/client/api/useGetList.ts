@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import {
   useQuery,
   UseQueryOptions,
@@ -8,6 +8,8 @@ import {
 import type { BasicRecord, GetListParams, GetListResult } from './types';
 import { useDataProvider } from '../context/tushan';
 import { defaultFilter, defaultSort } from './consts';
+import { useEvent } from '../hooks/useEvent';
+import { sharedEvent } from '../utils/event';
 
 /**
  * Call the dataProvider.getList() method and return the resolved result
@@ -102,6 +104,23 @@ export const useGetList = <RecordType extends BasicRecord = any>(
       },
     }
   );
+
+  const handleRefresh = useEvent(() => {
+    result.refetch();
+  });
+
+  useEffect(() => {
+    const fn = (_resource: string) => {
+      if (_resource === resource) {
+        handleRefresh();
+      }
+    };
+    sharedEvent.on('refreshList', fn);
+
+    return () => {
+      sharedEvent.off('refreshList', fn);
+    };
+  }, [resource]);
 
   return useMemo(
     () =>
