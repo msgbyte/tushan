@@ -127,13 +127,20 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
         },
       }}
       onChange={(pagination, sorter) => {
-        const { field, direction } = Array.isArray(sorter) ? sorter[0] : sorter;
+        if (sorter) {
+          // If has sorter
+          const { field, direction } = Array.isArray(sorter)
+            ? sorter[0]
+            : sorter;
 
-        if (field && direction) {
-          setSort({
-            field: String(field),
-            order: direction === 'ascend' ? 'ASC' : 'DESC',
-          });
+          if (field && direction) {
+            setSort({
+              field: String(field),
+              order: direction === 'ascend' ? 'ASC' : 'DESC',
+            });
+          } else {
+            setSort(undefined);
+          }
         } else {
           setSort(undefined);
         }
