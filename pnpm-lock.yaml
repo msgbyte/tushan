@@ -75,15 +75,30 @@ importers:
       '@tanstack/react-query-devtools':
         specifier: ^4.28.0
         version: 4.28.0(@tanstack/react-query@4.28.0)(react-dom@18.2.0)(react@18.2.0)
+      '@types/jsonexport':
+        specifier: ^3.0.2
+        version: 3.0.2
+      '@types/lodash-es':
+        specifier: ^4.17.7
+        version: 4.17.7
       '@types/node':
         specifier: ^18.15.11
         version: 18.15.11
+      '@types/qs':
+        specifier: ^6.9.7
+        version: 6.9.7
       '@types/react':
         specifier: ^18.0.15
         version: 18.0.33
       '@types/react-dom':
         specifier: ^18.0.6
         version: 18.0.11
+      '@types/react-helmet':
+        specifier: ^6.1.6
+        version: 6.1.6
+      '@types/styled-components':
+        specifier: ^5.1.26
+        version: 5.1.26
       axios:
         specifier: ^0.27.2
         version: 0.27.2
@@ -157,21 +172,6 @@ importers:
         specifier: ^4.3.6
         version: 4.3.6(immer@9.0.19)(react@18.2.0)
     devDependencies:
-      '@types/jsonexport':
-        specifier: ^3.0.2
-        version: 3.0.2
-      '@types/lodash-es':
-        specifier: ^4.17.7
-        version: 4.17.7
-      '@types/qs':
-        specifier: ^6.9.7
-        version: 6.9.7
-      '@types/react-helmet':
-        specifier: ^6.1.6
-        version: 6.1.6
-      '@types/styled-components':
-        specifier: ^5.1.26
-        version: 5.1.26
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
@@ -3539,7 +3539,7 @@ packages:
     dependencies:
       '@types/react': 18.0.33
       hoist-non-react-statics: 3.3.2
-    dev: true
+    dev: false
 
   /@types/html-minifier-terser@6.1.0:
     resolution: {integrity: sha512-oh/6byDPnL1zeNXFrDXFLyZjkr1MsBG667IM792caf1L2UPOOMf65NFzjUH/ltyfwjAGfs1rsX1eftK0jC/KIg==}
@@ -3584,7 +3584,7 @@ packages:
     resolution: {integrity: sha512-VrWj30OihopTEE7jDiXO1IbrCF+iNiKi9eLtz03RsazWQCyp1rsMlap1W0V1xjT6ULiilKZP4qXYoWFADnMn8A==}
     dependencies:
       '@types/node': 18.15.11
-    dev: true
+    dev: false
 
   /@types/keyv@3.1.4:
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
@@ -3603,11 +3603,11 @@ packages:
     resolution: {integrity: sha512-z0ptr6UI10VlU6l5MYhGwS4mC8DZyYer2mCoyysZtSF7p26zOX8UpbrV0YpNYLGS8K4PUFIyEr62IMFFjveSiQ==}
     dependencies:
       '@types/lodash': 4.14.182
-    dev: true
+    dev: false
 
   /@types/lodash@4.14.182:
     resolution: {integrity: sha512-/THyiqyQAP9AfARo4pF+aCGcyiQ94tX/Is2I7HofNRqoYLgN1PBoOWu2/zTA5zMxzP5EFutMtWtGAFRKUe961Q==}
-    dev: true
+    dev: false
 
   /@types/mdast@3.0.11:
     resolution: {integrity: sha512-Y/uImid8aAwrEA24/1tcRZwpxX3pIFTSilcNDKSPn+Y2iDywSEachzRuvgAYYLR3wpGXAsMbv5lvKLDZLeYPAw==}
@@ -3646,6 +3646,7 @@ packages:
 
   /@types/qs@6.9.7:
     resolution: {integrity: sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==}
+    dev: false
 
   /@types/range-parser@1.2.4:
     resolution: {integrity: sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==}
@@ -3660,7 +3661,7 @@ packages:
     resolution: {integrity: sha512-ZKcoOdW/Tg+kiUbkFCBtvDw0k3nD4HJ/h/B9yWxN4uDO8OkRksWTO+EL+z/Qu3aHTeTll3Ro0Cc/8UhwBCMG5A==}
     dependencies:
       '@types/react': 18.0.33
-    dev: true
+    dev: false
 
   /@types/react-router-config@5.0.7:
     resolution: {integrity: sha512-pFFVXUIydHlcJP6wJm7sDii5mD/bCmmAY0wQzq+M+uX7bqS95AQqHZWP1iNMKrWVQSuHIzj5qi9BvrtLX2/T4w==}
@@ -3733,7 +3734,7 @@ packages:
       '@types/hoist-non-react-statics': 3.3.1
       '@types/react': 18.0.33
       csstype: 3.1.0
-    dev: true
+    dev: false
 
   /@types/through@0.0.30:
     resolution: {integrity: sha512-FvnCJljyxhPM3gkRgWmxmDZyAQSiBQQWLI0A0VFL0K7W1oRUrPJSqNO0NvTnLkBcotdlp3lKvaT0JrnyRDkzOg==}
@@ -7111,6 +7112,7 @@ packages:
     resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
     dependencies:
       react-is: 16.13.1
+    dev: false
 
   /homedir-polyfill@1.0.3:
     resolution: {integrity: sha512-eSmmWE5bZTK2Nou4g0AI3zZ9rswp7GRKoKXS1BLUkvPviOqs4YTN1djQIqrXy9k5gEtdLPy86JjRwsNM9tnDcA==}

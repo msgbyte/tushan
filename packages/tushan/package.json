@@ -1,6 +1,6 @@
 {
   "name": "tushan",
-  "version": "0.2.20",
+  "version": "0.2.21",
   "description": "",
   "main": "./index.ts",
   "scripts": {
@@ -21,11 +21,6 @@
   "author": "moonrailgun <moonrailgun@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@types/jsonexport": "^3.0.2",
-    "@types/lodash-es": "^4.17.7",
-    "@types/qs": "^6.9.7",
-    "@types/react-helmet": "^6.1.6",
-    "@types/styled-components": "^5.1.26",
     "cross-env": "^7.0.3",
     "nodemon": "^2.0.19",
     "prettier": "^2.7.1",
@@ -40,6 +35,11 @@
     "@types/node": "^18.15.11",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
+    "@types/jsonexport": "^3.0.2",
+    "@types/lodash-es": "^4.17.7",
+    "@types/qs": "^6.9.7",
+    "@types/react-helmet": "^6.1.6",
+    "@types/styled-components": "^5.1.26",
     "axios": "^0.27.2",
     "clsx": "^1.2.1",
     "eventemitter-strict": "^1.0.1",
