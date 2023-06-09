@@ -7,6 +7,7 @@ import { createSelector } from '../../utils/createSelector';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { startCase } from 'lodash-es';
+import { useTushanContext } from '../../context/tushan';
 
 const MenuItem = Menu.Item;
 
@@ -19,6 +20,7 @@ export const Sidebar: React.FC = React.memo(() => {
   const location = useLocation();
   const { menus } = useMenuStore(createSelector('menus'));
   const { t } = useTranslation();
+  const { dashboard } = useTushanContext();
 
   return (
     <Root
@@ -26,11 +28,13 @@ export const Sidebar: React.FC = React.memo(() => {
       selectedKeys={[location.pathname]}
       onClickMenuItem={(path) => navigate(path)}
     >
-      <MenuItem key="/dashboard">
-        <IconHome />
+      {dashboard !== false && (
+        <MenuItem key="/dashboard">
+          <IconHome />
 
-        {t('tushan.dashboard.name')}
-      </MenuItem>
+          {t('tushan.dashboard.name')}
+        </MenuItem>
+      )}
 
       {(menus ?? []).map((item) => {
         const path = item.path ?? item.key;
