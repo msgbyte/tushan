@@ -20,7 +20,7 @@ export const ListFilter: React.FC<ListFilterProps> = React.memo((props) => {
           const c = fieldHandler('edit');
 
           return (
-            <Grid.GridItem index={0} key={i}>
+            <Grid.GridItem key={i}>
               <div>{c.title}</div>
               <div>
                 {c.render(filterValues[c.source], (val) =>

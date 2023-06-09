@@ -76,12 +76,12 @@ export const Dashboard: React.FC = React.memo(() => {
           </Card>
 
           <Grid cols={3} colGap={12} rowGap={16}>
-            <GridItem index={0}>
+            <GridItem>
               <DashboardItem title="Docs" href="https://tushan.msgbyte.com/">
                 {t('tushan.dashboard.tip.docs')}
               </DashboardItem>
             </GridItem>
-            <GridItem index={0}>
+            <GridItem>
               <DashboardItem
                 title="Github"
                 href="https://github.com/msgbyte/tushan"
@@ -89,7 +89,7 @@ export const Dashboard: React.FC = React.memo(() => {
                 {t('tushan.dashboard.tip.github')}
               </DashboardItem>
             </GridItem>
-            <GridItem index={0}>
+            <GridItem>
               <DashboardItem
                 title="Design System"
                 href="https://arco.design/docs/spec/introduce"

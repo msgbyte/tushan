@@ -67,8 +67,8 @@ importers:
   packages/tushan:
     dependencies:
       '@arco-design/web-react':
-        specifier: ^2.48.2
-        version: 2.48.2(@types/react@18.0.33)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^2.49.1
+        version: 2.49.1(@types/react@18.0.33)(react-dom@18.2.0)(react@18.2.0)
       '@tanstack/react-query':
         specifier: ^4.28.0
         version: 4.28.0(react-dom@18.2.0)(react@18.2.0)
@@ -352,8 +352,8 @@ packages:
       color: 3.2.1
     dev: false
 
-  /@arco-design/web-react@2.48.2(@types/react@18.0.33)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-ZYhK422FhAYFRsFmofgULEaH21SVaA5EPAVuZCj4iRVBhgF+UUrv4FBsCVPzV5p13ZJugxEyRjvbr4Hyu6autQ==}
+  /@arco-design/web-react@2.49.1(@types/react@18.0.33)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-XXmAyPSLaqtfs+3NVTZRkeiOgeUEeOk1cvX7pTNZi3qoY+6S1tkotyhF35dPf1lo56yHP9fOEEu6WiF7xHUmBA==}
     peerDependencies:
       react: '>=16'
       react-dom: '>=16'
