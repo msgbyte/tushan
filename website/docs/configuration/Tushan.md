@@ -56,6 +56,8 @@ title: <Tushan />
 
 在这个示例中自定义了标题栏与底部的footer
 
+关于如何定义仪表盘可以见 [自定义仪表盘](../guide/custom-dashboard.md)
+
 或者你也可以整体替换掉整个布局, 如下:
 
 ```tsx
