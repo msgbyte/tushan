@@ -20,7 +20,7 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
       tushan:
-        specifier: workspace:^0.2.1
+        specifier: workspace:*
         version: link:../../packages/tushan
     devDependencies:
       '@types/react':
