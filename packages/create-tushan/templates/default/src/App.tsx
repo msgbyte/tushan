@@ -14,6 +14,11 @@ function App() {
   return (
     <Tushan
       basename="/"
+      header="My Admin"
+      footer="Provide by Tushan"
+      // dashboard={
+      //   <div>Custom Dashboard, You can pass false to close the dashboard</div>
+      // }
       dataProvider={dataProvider}
       authProvider={authProvider}
     >
