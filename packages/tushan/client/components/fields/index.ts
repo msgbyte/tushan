@@ -11,3 +11,4 @@ export * from './json';
 export * from './datetime';
 export * from './number';
 export * from './reference';
+export * from './select';

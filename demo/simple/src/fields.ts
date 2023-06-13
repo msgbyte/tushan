@@ -4,6 +4,7 @@ import {
   createEmailField,
   createImageField,
   createReferenceField,
+  createSelectField,
   createTextAreaField,
   createTextField,
   createUrlField,
@@ -61,5 +62,19 @@ export const todoFields = [
     displayField: 'name',
   }),
   createTextField('title'),
-  createBooleanField('completed'),
+  // createBooleanField('completed'),
+  createSelectField('completed', {
+    items: [
+      {
+        value: true,
+        label: 'Completed',
+        color: 'red',
+      },
+      {
+        value: false,
+        label: 'Processing',
+        color: 'green',
+      },
+    ],
+  }),
 ];

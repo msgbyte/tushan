@@ -1,4 +1,4 @@
-import { Input, Switch } from '@arco-design/web-react';
+import { Switch } from '@arco-design/web-react';
 import { IconCheck, IconClose } from '@arco-design/web-react/icon';
 import React from 'react';
 import styled from 'styled-components';
