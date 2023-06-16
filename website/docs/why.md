@@ -52,4 +52,5 @@ sidebar_position: 3
 
 - [Tailchat](https://tailchat.msgbyte.com/) 的后台已经完全由`Tushan`支持
 - [fastgpt-admin](https://github.com/stakeswky/fastgpt-admin)
+- [FastGPT](https://github.com/c121914yu/FastGPT)
 - 创建 [issue](https://github.com/msgbyte/tushan/issues/new) 告诉我们你在使用...
