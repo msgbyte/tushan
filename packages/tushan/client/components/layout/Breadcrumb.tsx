@@ -10,15 +10,16 @@ import { startCase } from 'lodash-es';
 import { useTushanContext } from '../../context/tushan';
 
 export const TushanBreadcrumb: React.FC = React.memo(() => {
-  const menus = useMenuStore((state) => state.menus);
   const location = useLocation();
   const { t } = useTranslation();
   const { dashboard } = useTushanContext();
 
   const title = useMemo(() => {
-    const menu = menus.find((menu) =>
-      location.pathname.startsWith(`/${menu.key}`)
-    );
+    const menu = useMenuStore
+      .getState()
+      .findMenuBySelector((menu) =>
+        location.pathname.startsWith(`/${menu.key}`)
+      );
 
     if (!menu) {
       return '';
@@ -30,7 +31,7 @@ export const TushanBreadcrumb: React.FC = React.memo(() => {
         defaultValue: startCase(menu.key),
       })
     );
-  }, [menus, location.pathname, t]);
+  }, [location.pathname, t]);
 
   return (
     <Breadcrumb style={{ marginBottom: 16 }}>

@@ -9,9 +9,10 @@ import {
   useCallback,
   useState,
 } from 'react';
+import { Category, CategoryProps } from '../components/Category';
 import { CustomRoute, CustomRoutesProp } from '../components/CustomRoute';
 import { Resource, ResourceProps } from '../components/Resource';
-import { useMenuStore } from '../store/menu';
+import { TushanCategoryPathInfo, useMenuStore } from '../store/menu';
 import { useWatch } from './useWatch';
 
 /**
@@ -42,7 +43,7 @@ export const useConfigureAdminRouterFromChildren = (
   useRegisterMenu(routesAndResources.resources);
   useRegisterMenu(
     routesAndResources.customRoutesWithLayout,
-    (item) => item.props.noMenu !== true
+    (item) => item.element.props.noMenu !== true
   );
 
   return {
@@ -54,17 +55,23 @@ export const useConfigureAdminRouterFromChildren = (
 };
 
 function useRegisterMenu<
-  T extends ReactElement<Pick<CustomRoutesProp, 'name' | 'label' | 'icon'>>
+  T extends {
+    path: TushanCategoryPathInfo[];
+    element: ReactElement<Pick<CustomRoutesProp, 'name' | 'label' | 'icon'>>;
+  }
 >(routes: T[], filterFn: (item: T) => boolean = () => true) {
   useWatch([routes], () => {
     const filteredRoutes = routes.filter(filterFn);
 
     filteredRoutes.forEach((route) => {
-      useMenuStore.getState().addMenu({
-        key: route.props.name,
-        label: route.props.label,
-        icon: route.props.icon,
-      });
+      useMenuStore.getState().addMenu(
+        {
+          key: route.element.props.name,
+          label: route.element.props.label,
+          icon: route.element.props.icon,
+        },
+        route.path
+      );
     });
 
     return () => {
@@ -132,12 +139,15 @@ const useRoutesAndResourcesState = (
  * - resources: an array of resources elements
  */
 const getRoutesAndResourceFromNodes = (
-  children: ReactNode
+  children: ReactNode,
+  path: TushanCategoryPathInfo[] = []
 ): RoutesAndResources => {
-  const customRoutesWithLayout: React.ReactElement[] = [];
-  const customRoutesWithoutLayout: React.ReactElement[] = [];
-  const resources: React.ReactElement[] = [];
-  const components: React.ReactElement[] = [];
+  const customRoutesWithLayout: RoutesAndResources['customRoutesWithLayout'] =
+    [];
+  const customRoutesWithoutLayout: RoutesAndResources['customRoutesWithoutLayout'] =
+    [];
+  const resources: RoutesAndResources['resources'] = [];
+  const components: RoutesAndResources['components'] = [];
 
   Children.forEach(children, (element) => {
     if (!React.isValidElement(element)) {
@@ -146,34 +156,55 @@ const getRoutesAndResourceFromNodes = (
       return;
     }
 
+    // Fragment
     if (element.type === Fragment) {
-      const customRoutesFromFragment = getRoutesAndResourceFromNodes(
-        element.props.children
+      const routesFromFragment = getRoutesAndResourceFromNodes(
+        element.props.children,
+        path
       );
-      customRoutesWithLayout.push(
-        ...customRoutesFromFragment.customRoutesWithLayout
-      );
+      customRoutesWithLayout.push(...routesFromFragment.customRoutesWithLayout);
       customRoutesWithoutLayout.push(
-        ...customRoutesFromFragment.customRoutesWithoutLayout
+        ...routesFromFragment.customRoutesWithoutLayout
       );
-      resources.push(...customRoutesFromFragment.resources);
-      components.push(...customRoutesFromFragment.components);
+      resources.push(...routesFromFragment.resources);
+      components.push(...routesFromFragment.components);
     }
 
+    // Category
+    if (element.type === Category) {
+      const categoryElement = element as ReactElement<CategoryProps>;
+      const { children, ...currPathInfo } = categoryElement.props;
+
+      const routesFromCategory = getRoutesAndResourceFromNodes(children, [
+        ...path,
+        currPathInfo,
+      ]);
+
+      customRoutesWithLayout.push(...routesFromCategory.customRoutesWithLayout);
+      customRoutesWithoutLayout.push(
+        ...routesFromCategory.customRoutesWithoutLayout
+      );
+      resources.push(...routesFromCategory.resources);
+      components.push(...routesFromCategory.components);
+    }
+
+    // CustomRoute
     if (element.type === CustomRoute) {
       const customRouteElement = element as ReactElement<CustomRoutesProp>;
 
       if (customRouteElement.props.noLayout) {
         customRoutesWithoutLayout.push(customRouteElement);
       } else {
-        customRoutesWithLayout.push(customRouteElement);
+        customRoutesWithLayout.push({ path, element: customRouteElement });
       }
-    } else if (element.type === Resource) {
-      resources.push(element as ReactElement<ResourceProps>);
-    } else {
-      // Fallback
-      components.push(element);
     }
+
+    if (element.type === Resource) {
+      resources.push({ path, element: element as ReactElement<ResourceProps> });
+    }
+
+    // Fallback
+    components.push(element);
   });
 
   return {
@@ -185,9 +216,15 @@ const getRoutesAndResourceFromNodes = (
 };
 
 type RoutesAndResources = {
-  customRoutesWithLayout: ReactElement<CustomRoutesProp>[];
+  customRoutesWithLayout: {
+    path: TushanCategoryPathInfo[];
+    element: ReactElement<CustomRoutesProp>;
+  }[];
   customRoutesWithoutLayout: ReactElement<CustomRoutesProp>[];
-  resources: ReactElement<ResourceProps>[];
+  resources: {
+    path: TushanCategoryPathInfo[];
+    element: ReactElement<ResourceProps>;
+  }[];
   components: ReactElement[];
 };
 

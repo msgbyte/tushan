@@ -1,4 +1,5 @@
 import {
+  Category,
   createTextField,
   jsonServerProvider,
   ListTable,
@@ -55,28 +56,30 @@ function App() {
         }
       />
 
-      <Resource
-        name="comments"
-        icon={<IconMessage />}
-        list={
-          <ListTable
-            fields={commentFields}
-            action={{ detail: true, edit: true, delete: true }}
-            batchAction={{ delete: true }}
-          />
-        }
-      />
+      <Category name="detail">
+        <Resource
+          name="comments"
+          icon={<IconMessage />}
+          list={
+            <ListTable
+              fields={commentFields}
+              action={{ detail: true, edit: true, delete: true }}
+              batchAction={{ delete: true }}
+            />
+          }
+        />
 
-      <Resource
-        name="todos"
-        icon={<IconUnorderedList />}
-        list={
-          <ListTable
-            fields={todoFields}
-            action={{ detail: true, edit: true, delete: true }}
-          />
-        }
-      />
+        <Resource
+          name="todos"
+          icon={<IconUnorderedList />}
+          list={
+            <ListTable
+              fields={todoFields}
+              action={{ detail: true, edit: true, delete: true }}
+            />
+          }
+        />
+      </Category>
 
       {/* <ReactQueryDevtools /> */}
     </Tushan>

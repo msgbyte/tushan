@@ -66,17 +66,17 @@ export const BuiltinRoutes: React.FC<BuiltinRoutesProps> = React.memo(
 
                       {customRoutesWithLayout.map((item) => (
                         <Route
-                          key={item.props.name}
-                          path={`${item.props.name}/*`}
-                          element={item}
+                          key={item.element.props.name}
+                          path={`${item.element.props.name}/*`}
+                          element={item.element}
                         />
                       ))}
 
                       {resources.map((resource) => (
                         <Route
-                          key={resource.props.name}
-                          path={`${resource.props.name}/*`}
-                          element={resource}
+                          key={resource.element.props.name}
+                          path={`${resource.element.props.name}/*`}
+                          element={resource.element}
                         />
                       ))}
 
@@ -87,7 +87,7 @@ export const BuiltinRoutes: React.FC<BuiltinRoutesProps> = React.memo(
                             to={
                               dashboard
                                 ? '/dashboard'
-                                : `/${resources[0].props.name}/`
+                                : `/${resources[0].element.props.name}/`
                             }
                           />
                         }
