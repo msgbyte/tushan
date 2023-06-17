@@ -11,7 +11,7 @@ title: 自定义仪表盘
 
 ```tsx
 <Tushan dashboard={<MyDashboard />}>
-  {/*// ...*/}
+  {/*...*/}
 </Tushan>
 ```
 
@@ -23,8 +23,10 @@ Tushan 默认的仪表盘代码在这里: [https://github.com/msgbyte/tushan/blo
 
 ## 关闭仪表盘功能
 
+如果你不喜欢或者不需要仪表盘，则可以选择关闭该功能。
+
 ```tsx
 <Tushan dashboard={false}>
-  {/*// ...*/}
+  {/*...*/}
 </Tushan>
 ```
