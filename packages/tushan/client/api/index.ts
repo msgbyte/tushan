@@ -9,4 +9,5 @@ export * from './useGetMany';
 export * from './useCreate';
 export * from './useUpdate';
 export * from './useDelete';
+export * from './useDeleteMany';
 export * from './useRefreshList';

@@ -24,7 +24,6 @@ import { useResourceContext } from '../context/resource';
  * @param {Params} params The delete parameters { id, previousData }
  * @param {Object} options Options object to pass to the queryClient.
  * May include side effects to be executed upon success or failure, e.g. { onSuccess: () => { refresh(); } }
- * May include a mutation mode (optimistic/pessimistic/undoable), e.g. { mutationMode: 'undoable' }
  *
  * @typedef Params
  * @prop params.id The resource identifier, e.g. 123
@@ -86,8 +85,7 @@ export const useDelete = <
   const dataProvider = useDataProvider();
   const queryClient = useQueryClient();
   const contextResource = useResourceContext();
-  const { id, previousData } = params;
-  const { ...reactMutationOptions } = options;
+  const { id } = params;
   const paramsRef = useRef<Partial<DeleteParams<RecordType>>>(params);
   const snapshot = useRef<Snapshot>([]);
 
@@ -177,11 +175,10 @@ export const useDelete = <
           meta: callTimeMeta,
         })
         .then(({ data }) => data),
-    ...reactMutationOptions,
+    ...options,
     onMutate: async (variables: Partial<UseDeleteMutateParams<RecordType>>) => {
-      if (reactMutationOptions.onMutate) {
-        const userContext =
-          (await reactMutationOptions.onMutate(variables)) || {};
+      if (options.onMutate) {
+        const userContext = (await options.onMutate(variables)) || {};
         return {
           snapshot: snapshot.current,
           // @ts-ignore
@@ -207,8 +204,8 @@ export const useDelete = <
         id: callTimeId!,
       });
 
-      if (reactMutationOptions.onSuccess) {
-        reactMutationOptions.onSuccess(data, variables, context);
+      if (options.onSuccess) {
+        options.onSuccess(data, variables, context);
       }
     },
   });

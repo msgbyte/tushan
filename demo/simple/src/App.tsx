@@ -62,6 +62,7 @@ function App() {
           <ListTable
             fields={commentFields}
             action={{ detail: true, edit: true, delete: true }}
+            batchAction={{ delete: true }}
           />
         }
       />

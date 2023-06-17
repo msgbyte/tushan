@@ -37,6 +37,7 @@ export const i18nZhTranslation: TranslationKeys = {
       detail: '详情',
       edit: '编辑',
       delete: '删除',
+      batchDelete: '批量删除',
       deleteTitle: '确认删除',
       deleteDesc: '是否确认删除该记录?',
       deleteSuccess: '删除成功',

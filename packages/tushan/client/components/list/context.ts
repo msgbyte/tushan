@@ -1,6 +1,7 @@
 import { UseQueryResult } from '@tanstack/react-query';
 import React, { useContext } from 'react';
-import { GetListParams } from '../../api';
+import { GetListParams, Identifier } from '../../api';
+import { createContextFactory } from '../../utils/context';
 
 /**
  * ListParamsContext
@@ -37,3 +38,8 @@ export const ListTableContextProvider = ListTableContext.Provider;
 export function useListTableContext(): ListTableContextProps {
   return useContext(ListTableContext) ?? {};
 }
+
+export const {
+  Provider: BatchSelectedIdsContextProvider,
+  useContext: useBatchSelectedIdsContext,
+} = createContextFactory<Identifier[]>([], 'BatchSelectedIdsContext');

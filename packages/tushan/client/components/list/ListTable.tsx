@@ -1,19 +1,37 @@
 import React, { useState } from 'react';
-import { Button, Card, Divider, Space, Table } from '@arco-design/web-react';
+import {
+  Button,
+  Card,
+  Divider,
+  Space,
+  Table,
+  TableProps,
+} from '@arco-design/web-react';
 import { useResourceContext } from '../../context/resource';
-import { BasicRecord, GetListParams, SortPayload, useGetList } from '../../api';
+import {
+  BasicRecord,
+  GetListParams,
+  Identifier,
+  SortPayload,
+  useGetList,
+} from '../../api';
 import type { FieldHandler } from '../fields';
 import styled from 'styled-components';
 import { useObjectState } from '../../hooks/useObjectState';
 import { useDebounce } from '../../hooks/useDebounce';
 import { ListFilter } from './ListFilter';
 import { ViewTypeContextProvider } from '../../context/viewtype';
-import { ListParamsContextProvider, ListTableContextProvider } from './context';
+import {
+  BatchSelectedIdsContextProvider,
+  ListParamsContextProvider,
+  ListTableContextProvider,
+} from './context';
 import { ListExportAction } from './actions/ExportAction';
 import { useTranslation } from 'react-i18next';
 import { useListTableDrawer } from './useListTableDrawer';
 import { useColumns } from './useColumns';
 import { ListRefreshAction } from './actions/RefreshAction';
+import { ListBatchDeleteAction } from './actions/BatchDeleteAction';
 
 const Header = styled.div`
   display: flex;
@@ -45,6 +63,9 @@ export interface ListTableProps {
     refresh?: boolean;
     custom?: ListTableCustomAction;
   };
+  batchAction?: {
+    delete?: boolean;
+  };
 }
 export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
   const resource = useResourceContext();
@@ -69,8 +90,10 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
     refetch,
   } = useGetList(resource, listParams);
   const action = props.action;
+  const batchAction = props.batchAction;
   const { showTableDrawer, drawerEl } = useListTableDrawer(props.fields);
   const filterFields = props.filter ?? [];
+  const [selectedRowKeys, setSelectedRowKeys] = useState<Identifier[]>([]);
 
   const columns = useColumns(props, showTableDrawer);
 
@@ -78,6 +101,19 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
     filterFields.length > 0 ||
     action?.export === true ||
     action?.create === true;
+
+  const rowSelection: TableProps['rowSelection'] = batchAction
+    ? {
+        type: 'checkbox',
+        selectedRowKeys,
+        onChange: (selectedRowKeys) => {
+          setSelectedRowKeys(selectedRowKeys);
+        },
+      }
+    : undefined;
+
+  const showBatchAction =
+    batchAction && Array.isArray(selectedRowKeys) && selectedRowKeys.length > 0;
 
   const headerEl = (
     <Header>
@@ -89,22 +125,30 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
         />
       </div>
       <div>
-        <Space>
-          {action?.refresh && <ListRefreshAction />}
+        {showBatchAction ? (
+          <Space>
+            <BatchSelectedIdsContextProvider value={selectedRowKeys}>
+              {batchAction.delete && <ListBatchDeleteAction />}
+            </BatchSelectedIdsContextProvider>
+          </Space>
+        ) : (
+          <Space>
+            {action?.refresh && <ListRefreshAction />}
 
-          {action?.export && <ListExportAction />}
+            {action?.export && <ListExportAction />}
 
-          {action?.create && (
-            <Button
-              type="primary"
-              onClick={() => {
-                showTableDrawer('edit', null);
-              }}
-            >
-              {t('tushan.list.create')}
-            </Button>
-          )}
-        </Space>
+            {action?.create && (
+              <Button
+                type="primary"
+                onClick={() => {
+                  showTableDrawer('edit', null);
+                }}
+              >
+                {t('tushan.list.create')}
+              </Button>
+            )}
+          </Space>
+        )}
       </div>
     </Header>
   );
@@ -115,6 +159,7 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
       columns={columns}
       data={list}
       rowKey="id"
+      rowSelection={rowSelection}
       pagination={{
         total,
         current: pageNum,

@@ -210,3 +210,8 @@ export type Exporter = (
   dataProvider: DataProvider,
   resource: string
 ) => void | Promise<void>;
+
+export interface GetInfiniteListResult<RecordType extends BasicRecord = any>
+  extends GetListResult<RecordType> {
+  pageParam?: number;
+}

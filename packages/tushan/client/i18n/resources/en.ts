@@ -37,6 +37,7 @@ export const i18nEnTranslation: TranslationKeys = {
       detail: 'Detail',
       edit: 'Edit',
       delete: 'Delete',
+      batchDelete: 'Batch Delete',
       deleteTitle: 'Confirm Delete',
       deleteDesc: 'Are you sure you want to delete?',
       deleteSuccess: 'Delete Success',
