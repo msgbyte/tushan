@@ -4,6 +4,8 @@
 
 <img width="128px" src="https://tushan.msgbyte.com/img/logo.svg" />
 
+官方文档: [https://tushan.msgbyte.com/](https://tushan.msgbyte.com/)
+
 `Tushan` 是一个自由度极高的，基于React的，开箱即用的后台管理应用前端框架。
 
 作为开发者, 你可以像是调用库一样快速创建一个可用的后台管理框架
