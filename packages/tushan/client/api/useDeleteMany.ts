@@ -281,7 +281,7 @@ export const useDeleteMany = <
     // as the previousData would be overwritten by the optimistic update
     paramsRef.current = params;
 
-    return mutation.mutate(
+    await mutation.mutateAsync(
       { resource: callTimeResource, ...callTimeParams },
       { onSuccess, onSettled, onError }
     );

@@ -20,13 +20,20 @@ export const ListDeleteAction: React.FC<{
       title={t('tushan.list.deleteTitle')}
       content={t('tushan.list.deleteDesc')}
       onOk={async () => {
-        await deleteOne(resource, {
-          id: props.record.id,
-        });
+        try {
+          await deleteOne(resource, {
+            id: props.record.id,
+          });
 
-        Message.info({
-          content: t('tushan.list.deleteSuccess'),
-        });
+          Message.info({
+            content: t('tushan.list.deleteSuccess'),
+          });
+        } catch (err) {
+          console.error(err);
+          Message.error({
+            content: t('tushan.common.operateFailed'),
+          });
+        }
       }}
     >
       <Tooltip content={t('tushan.list.delete')}>
