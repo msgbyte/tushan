@@ -168,6 +168,7 @@ const getRoutesAndResourceFromNodes = (
       );
       resources.push(...routesFromFragment.resources);
       components.push(...routesFromFragment.components);
+      return;
     }
 
     // Category
@@ -186,6 +187,7 @@ const getRoutesAndResourceFromNodes = (
       );
       resources.push(...routesFromCategory.resources);
       components.push(...routesFromCategory.components);
+      return;
     }
 
     // CustomRoute
@@ -197,10 +199,12 @@ const getRoutesAndResourceFromNodes = (
       } else {
         customRoutesWithLayout.push({ path, element: customRouteElement });
       }
+      return;
     }
 
     if (element.type === Resource) {
       resources.push({ path, element: element as ReactElement<ResourceProps> });
+      return;
     }
 
     // Fallback
