@@ -8,7 +8,7 @@ import { useObjectState } from '../../hooks/useObjectState';
 import { createFieldFactory } from './factory';
 import type { FieldDetailComponent, FieldEditComponent } from './types';
 
-interface ReferenceFieldOptions {
+export interface ReferenceFieldOptions {
   reference: string;
   /**
    * Source Field for display
