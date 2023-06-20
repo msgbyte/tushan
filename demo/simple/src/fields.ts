@@ -19,7 +19,14 @@ export const userFields = [
       sort: true,
     },
   }),
-  createEmailField('email'),
+  createEmailField('email', {
+    edit: {
+      hidden: true,
+    },
+    create: {
+      hidden: false,
+    },
+  }),
   createUrlField('website'),
 ];
 

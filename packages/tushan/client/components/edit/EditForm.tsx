@@ -27,7 +27,7 @@ export const EditForm: React.FC<EditFormProps> = React.memo((props) => {
 
   const items = useMemo(() => {
     return props.fields
-      .map((handler) => handler('edit'))
+      .map((handler) => (isCreate ? handler('create') : handler('edit')))
       .filter((item) => !item.hidden);
   }, [props.fields]);
 
@@ -60,7 +60,7 @@ export const EditForm: React.FC<EditFormProps> = React.memo((props) => {
   });
 
   return (
-    <ViewTypeContextProvider viewType="edit">
+    <ViewTypeContextProvider viewType={isCreate ? 'create' : 'edit'}>
       <Form
         form={form}
         layout="vertical"

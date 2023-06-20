@@ -1,6 +1,12 @@
 import { RulesProps } from '@arco-design/web-react';
 import type { ComponentType } from 'react';
 
+export interface BasicFieldEditOptions {
+  placeholder?: string;
+  hidden?: boolean;
+  rules?: RulesProps<any>[];
+}
+
 export interface BasicFieldOptions {
   label?: string;
 
@@ -22,11 +28,15 @@ export interface BasicFieldOptions {
     ellipsis?: boolean;
   };
 
-  edit?: {
-    placeholder?: string;
-    hidden?: boolean;
-    rules?: RulesProps<any>[];
-  };
+  edit?: BasicFieldEditOptions;
+
+  /**
+   * options which will be override edit
+   * Useful if you wanna edit and create has any different.
+   *
+   * If you dont need different, you can ignore it.
+   */
+  create?: BasicFieldEditOptions;
 
   detail?: {
     hidden?: boolean;

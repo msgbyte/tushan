@@ -37,7 +37,7 @@ export type FieldHandler = <T extends ViewType>(
   viewType: T
 ) => T extends 'list'
   ? ListFieldItem
-  : T extends 'edit'
+  : T extends 'edit' | 'create'
   ? EditFieldItem
   : T extends 'detail'
   ? DetailFieldItem
@@ -71,12 +71,21 @@ export function createFieldFactory<CustomOptions extends {} = {}>(
             },
           },
         } as ListFieldItem;
-      } else if (viewType === 'edit') {
+      } else if (viewType === 'edit' || viewType === 'create') {
+        let editOptions = options?.edit ?? {};
+
+        if (viewType === 'create') {
+          editOptions = {
+            ...editOptions,
+            ...options?.create,
+          };
+        }
+
         return {
           source,
           title: options?.label ?? createElement(FieldTitle, { source }),
-          hidden: options?.edit?.hidden ?? false,
-          rules: options?.edit?.rules ?? [],
+          hidden: editOptions.hidden ?? false,
+          rules: editOptions.rules ?? [],
           render: (value, onChange) => {
             return createElement(config.edit, {
               value,

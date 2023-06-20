@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 
-export type ViewType = 'list' | 'detail' | 'edit';
+export type ViewType = 'list' | 'detail' | 'edit' | 'create';
 
 const ViewTypeContext = React.createContext<ViewType>('' as ViewType);
 ViewTypeContext.displayName = 'ViewTypeContext';
@@ -17,8 +17,9 @@ export const ViewTypeContextProvider: React.FC<
 ViewTypeContextProvider.displayName = 'ViewTypeContextProvider';
 
 /**
- * 获取视图类型
- * 可能返回 "list" | "detail" | "edit"
+ * Get view type
+ * @returns
+ * "list" | "detail" | "edit" | "create"
  */
 export function useViewTypeContext(): ViewType {
   return useContext(ViewTypeContext);
