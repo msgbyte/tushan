@@ -5,11 +5,16 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import { defaultI18NResources } from './default';
 
 export async function initI18N(resources?: Resource) {
+  let fallbackLng = 'en';
+  if (resources) {
+    fallbackLng = Object.keys(resources)[0];
+  }
+
   await i18n
     .use(initReactI18next)
     .use(LanguageDetector)
     .init({
-      fallbackLng: 'en',
+      fallbackLng,
       resources: resources ?? defaultI18NResources,
     });
 }

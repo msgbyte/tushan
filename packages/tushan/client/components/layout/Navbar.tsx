@@ -42,7 +42,7 @@ export const Navbar: React.FC = React.memo(() => {
       <div className="title">{header ?? t('tushan.navbar.title')}</div>
 
       <Space className="actions">
-        {i18nConfig && ready && (
+        {i18nConfig && ready && i18nConfig.languages.length >= 2 && (
           <Dropdown
             droplist={
               <Menu selectedKeys={[i18n.language]}>
