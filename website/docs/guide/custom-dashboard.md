@@ -19,7 +19,7 @@ title: 自定义仪表盘
 
 Tushan 默认的仪表盘代码在这里: [https://github.com/msgbyte/tushan/blob/master/packages/tushan/client/components/defaults/Dashboard.tsx](https://github.com/msgbyte/tushan/blob/master/packages/tushan/client/components/defaults/Dashboard.tsx)
 
-或者你也可以参考 Tailchat 自定义仪表盘的实现: [https://github.com/msgbyte/tailchat/blob/master/server/admin-next/src/client/components/Dashboard.tsx](https://github.com/msgbyte/tailchat/blob/master/server/admin-next/src/client/components/Dashboard.tsx)
+或者你也可以参考 Tailchat 自定义仪表盘的实现: [https://github.com/msgbyte/tailchat/blob/master/server/admin/src/client/components/Dashboard.tsx](https://github.com/msgbyte/tailchat/blob/master/server/admin/src/client/components/Dashboard.tsx)
 
 ## 关闭仪表盘功能
 
