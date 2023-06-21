@@ -1,6 +1,6 @@
-import { UseQueryResult } from '@tanstack/react-query';
+import type { UseQueryResult } from '@tanstack/react-query';
 import React, { useContext } from 'react';
-import { GetListParams, Identifier } from '../../api';
+import type { GetListParams, Identifier } from '../../api';
 import { createContextFactory } from '../../utils/context';
 
 /**

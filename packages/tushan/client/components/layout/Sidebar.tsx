@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { startCase } from 'lodash-es';
 import { useTushanContext } from '../../context/tushan';
-import { TFunction } from 'i18next';
+import type { TFunction } from 'i18next';
 
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;

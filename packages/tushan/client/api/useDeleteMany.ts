@@ -10,7 +10,7 @@ import {
 } from '@tanstack/react-query';
 import { useDataProvider } from '../context/tushan';
 import { useEvent } from '../hooks/useEvent';
-import {
+import type {
   BasicRecord,
   DeleteManyParams,
   GetListResult as OriginalGetListResult,

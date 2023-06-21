@@ -1,9 +1,10 @@
 {
   "name": "tushan",
-  "version": "0.2.29",
+  "version": "0.2.30",
   "description": "",
   "main": "./index.ts",
   "scripts": {
+    "check:type": "tsc --noEmit",
     "build": "pnpm build-cjs && pnpm build-esm",
     "build-cjs": "rimraf ./dist/cjs && tsc --outDir dist/cjs",
     "build-esm": "rimraf ./dist/esm && tsc --outDir dist/esm --module es2015"

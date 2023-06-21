@@ -1,4 +1,4 @@
-import { FieldValidator } from './types';
+import type { FieldValidator } from './types';
 
 const urlRE =
   /^(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]$/;

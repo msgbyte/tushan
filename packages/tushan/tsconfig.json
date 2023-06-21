@@ -2,6 +2,7 @@
   "extends": "../../tsconfig.default.json",
   "compilerOptions": {
     "lib": ["DOM"],
+    "skipLibCheck": true,
     "jsx": "react",
   },
 }

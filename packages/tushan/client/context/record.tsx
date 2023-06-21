@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { BasicRecord } from '../api/types';
+import type { BasicRecord } from '../api/types';
 
 const RecordContext = React.createContext<BasicRecord>({} as BasicRecord);
 RecordContext.displayName = 'RecordContext';

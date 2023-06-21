@@ -1,4 +1,4 @@
-import { TranslationKeys } from '..';
+import type { TranslationKeys } from '..';
 
 export const i18nEnTranslation: TranslationKeys = {
   tushan: {

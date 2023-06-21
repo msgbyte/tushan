@@ -4,7 +4,7 @@ import {
   UseQueryResult,
 } from '@tanstack/react-query';
 import { useDataProvider } from '../context/tushan';
-import { GetOneParams, BasicRecord } from './types';
+import type { GetOneParams, BasicRecord } from './types';
 
 export function useGetOne<RecordType extends BasicRecord = any>(
   resource: string,

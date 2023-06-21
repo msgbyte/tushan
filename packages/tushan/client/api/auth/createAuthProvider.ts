@@ -1,4 +1,4 @@
-import { AuthProvider } from '../types';
+import type { AuthProvider } from '../types';
 
 interface CreateAuthProviderOptions {
   /**

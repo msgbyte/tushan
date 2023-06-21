@@ -1,4 +1,4 @@
-import { PaginationPayload, SortPayload } from './types';
+import type { PaginationPayload, SortPayload } from './types';
 
 export const defaultSort: SortPayload = { field: 'id', order: 'DESC' };
 

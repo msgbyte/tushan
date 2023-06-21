@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { BasicRecord } from '../../api';
-import { ViewType } from '../../context/viewtype';
+import type { BasicRecord } from '../../api';
+import type { ViewType } from '../../context/viewtype';
 import { useEvent } from '../../hooks/useEvent';
-import { FieldHandler } from '../fields';
+import type { FieldHandler } from '../fields';
 import { ListTableDrawer } from './ListTableDrawer';
 
 export function useListTableDrawer(fields: FieldHandler[]) {

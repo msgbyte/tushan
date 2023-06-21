@@ -1,4 +1,4 @@
-import { Exporter } from './types';
+import type { Exporter } from './types';
 import jsonExport from 'jsonexport/dist';
 import { Message } from '@arco-design/web-react';
 

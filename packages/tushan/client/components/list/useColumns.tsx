@@ -6,8 +6,8 @@ import {
 } from '@arco-design/web-react/icon';
 import { isFunction } from 'lodash-es';
 import React, { useMemo } from 'react';
-import { BasicRecord } from '../../api';
-import { ViewType } from '../../context/viewtype';
+import type { BasicRecord } from '../../api';
+import type { ViewType } from '../../context/viewtype';
 import { useTranslation } from '../../i18n';
 import { ListDeleteAction } from './actions/DeleteAction';
 import type { ListTableCustomAction, ListTableProps } from './ListTable';

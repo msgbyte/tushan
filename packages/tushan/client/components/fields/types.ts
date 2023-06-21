@@ -1,4 +1,4 @@
-import { RulesProps } from '@arco-design/web-react';
+import type { RulesProps } from '@arco-design/web-react';
 import type { ComponentType } from 'react';
 
 export interface BasicFieldEditOptions {

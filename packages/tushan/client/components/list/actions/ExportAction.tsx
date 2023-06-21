@@ -1,7 +1,11 @@
-import { Button } from '@arco-design/web-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { BasicRecord, DataProvider, Exporter, Identifier } from '../../../api';
+import type {
+  BasicRecord,
+  DataProvider,
+  Exporter,
+  Identifier,
+} from '../../../api';
 import { defaultFilter, defaultSort } from '../../../api/consts';
 import { defaultExporter } from '../../../api/defaultExporter';
 import { useResourceContext } from '../../../context/resource';

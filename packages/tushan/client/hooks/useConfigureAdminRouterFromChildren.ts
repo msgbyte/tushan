@@ -76,7 +76,7 @@ function useRegisterMenu<
 
     return () => {
       filteredRoutes.forEach((route) => {
-        useMenuStore.getState().removeMenu(route.props.name);
+        useMenuStore.getState().removeMenu(route.element.props.name);
       });
     };
   });

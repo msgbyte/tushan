@@ -1,4 +1,4 @@
-import { FieldValidator } from './types';
+import type { FieldValidator } from './types';
 
 const strongPasswordRE = /^^[a-zA-Z]\w{5,17}$$/;
 

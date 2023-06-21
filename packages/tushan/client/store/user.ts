@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
-import { UserIdentity } from '../api';
+import type { UserIdentity } from '../api';
 
 interface UserStoreState {
   isLogin: boolean;

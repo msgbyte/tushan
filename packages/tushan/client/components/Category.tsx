@@ -1,5 +1,5 @@
 import React from 'react';
-import { TushanCategoryPathInfo } from '../store/menu';
+import type { TushanCategoryPathInfo } from '../store/menu';
 import { createContextFactory } from '../utils/context';
 
 export const {

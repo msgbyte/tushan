@@ -3,7 +3,7 @@ import enUS from '@arco-design/web-react/es/locale/en-US';
 import { ConfigProvider } from '@arco-design/web-react';
 import { useTranslation } from 'react-i18next';
 import { useAsync } from '../hooks/useAsync';
-import { Locale } from '@arco-design/web-react/es/locale/interface';
+import type { Locale } from '@arco-design/web-react/es/locale/interface';
 
 export const ArcoDesignProvider: React.FC<React.PropsWithChildren> = React.memo(
   (props) => {

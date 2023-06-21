@@ -6,7 +6,7 @@ import {
   hashQueryKey,
 } from '@tanstack/react-query';
 import { useDataProvider } from '../context/tushan';
-import { BasicRecord, GetManyParams } from './types';
+import type { BasicRecord, GetManyParams } from './types';
 
 export const useGetMany = <RecordType extends BasicRecord = any>(
   resource: string,
