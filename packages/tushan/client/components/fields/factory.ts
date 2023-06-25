@@ -99,9 +99,11 @@ export function createFieldFactory<CustomOptions extends {} = {}>(
           source,
           title: options?.label ?? createElement(FieldTitle, { source }),
           hidden: options?.detail?.hidden ?? false,
-          render: (value) => {
+          render: (val) => {
             return createElement(config.detail, {
-              value,
+              value: options?.preRenderTransform
+                ? options?.preRenderTransform(val)
+                : val,
               options: options ?? {},
             });
           },
