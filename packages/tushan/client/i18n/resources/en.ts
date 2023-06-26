@@ -48,6 +48,7 @@ export const i18nEnTranslation: TranslationKeys = {
       cancel: 'Cancel',
     },
     common: {
+      submit: 'Submit',
       success: 'Success',
       failed: 'Failed',
       operateSuccess: 'Operate Success',

@@ -48,6 +48,7 @@ export const i18nZhTranslation: TranslationKeys = {
       cancel: '取消',
     },
     common: {
+      submit: '提交',
       success: '成功',
       failed: '失败',
       operateSuccess: '操作成功',

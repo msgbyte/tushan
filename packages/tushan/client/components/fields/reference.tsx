@@ -1,7 +1,7 @@
 import { Select } from '@arco-design/web-react';
 import { get } from 'lodash-es';
 import React from 'react';
-import { useGetList } from '../../api';
+import { Identifier, useGetList } from '../../api';
 import { useGetOne } from '../../api/useGetOne';
 import { useDebounce } from '../../hooks/useDebounce';
 import { useObjectState } from '../../hooks/useObjectState';
@@ -20,10 +20,15 @@ export interface ReferenceFieldOptions {
    * @default "q"
    */
   searchField?: string;
+
+  /**
+   * @default false
+   */
+  allowClear?: boolean;
 }
 
 export const ReferenceFieldDetail: FieldDetailComponent<
-  string,
+  Identifier,
   ReferenceFieldOptions
 > = React.memo((props) => {
   const options = props.options;
@@ -40,12 +45,13 @@ export const ReferenceFieldDetail: FieldDetailComponent<
 ReferenceFieldDetail.displayName = 'ReferenceFieldDetail';
 
 export const ReferenceFieldEdit: FieldEditComponent<
-  string,
+  Identifier,
   ReferenceFieldOptions
 > = React.memo((props) => {
   const reference = props.options.reference ?? '';
   const displayField = props.options.displayField ?? '';
   const searchField = props.options.searchField ?? 'q';
+  const allowClear = props.options.allowClear ?? false;
   const [filterValues, setFilterValues] = useObjectState({});
   const lazyFilter = useDebounce(filterValues, { wait: 500 });
 
@@ -62,6 +68,7 @@ export const ReferenceFieldEdit: FieldEditComponent<
       showSearch={true}
       filterOption={false}
       onSearch={(value) => setFilterValues({ [searchField]: value })}
+      allowClear={allowClear}
       value={props.value}
       onChange={(val) => props.onChange(val)}
     >
