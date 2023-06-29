@@ -9,7 +9,7 @@ title: 数据后端
 
 访问此处查看可以直接使用的数据后端: [https://marmelab.com/react-admin/DataProviderList.html](https://marmelab.com/react-admin/DataProviderList.html)
 
-## 自己实现相应后端
+## 基于现有的接口格式实现相应后端
 
 以默认内置的 `jsonServerProvider` 为例:
 
@@ -50,3 +50,25 @@ title: 数据后端
     - Body: 删除的数据对象
 
 你可以打开 `chrome devtool` 的 network panel 来查看请求的参数
+
+## 实现自己的 `DataProvider` 以适配已有的后端
+
+首先所有的接口定义都是定义在 `DataProvider` 类型中的，你可以通过以下方式开始:
+
+```tsx
+import type { DataProvider } from 'tushan';
+
+export const myCustomDataProvider: DataProvider = {
+  create: () => Promise.resolve({ data: null } as any),
+  delete: () => Promise.resolve({ data: null } as any),
+  deleteMany: () => Promise.resolve({ data: [] }),
+  getList: () => Promise.resolve({ data: [], total: 0 }),
+  getMany: () => Promise.resolve({ data: [] }),
+  getManyReference: () => Promise.resolve({ data: [], total: 0 }),
+  getOne: () => Promise.resolve({ data: null } as any),
+  update: () => Promise.resolve({ data: null } as any),
+  updateMany: () => Promise.resolve({ data: [] }),
+};
+```
+
+你需要分别实现上面的方法。通过不同的请求来实现接口数据的适配。你可以参考`tushan`自带的`jsonServerProvider`的实现
