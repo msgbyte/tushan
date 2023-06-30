@@ -1,6 +1,6 @@
 {
   "name": "create-tushan",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "",
   "main": "dist/index.js",
   "bin": "bin/index.js",
