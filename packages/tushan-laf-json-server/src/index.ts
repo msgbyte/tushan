@@ -9,6 +9,7 @@ import {
   virtualId,
 } from './utils/common';
 import { buildListFilter } from './utils/buildListFilter';
+import type { TushanLiteConfig } from './types';
 
 const db = cloud.database();
 
@@ -19,6 +20,7 @@ interface TushanJsonServerOptions {
     secret: string;
   };
   maxRows?: number;
+  config: Partial<TushanLiteConfig>;
 }
 
 /**
@@ -38,7 +40,23 @@ export async function createTushanJsonServerInterceptor(
 
   const path = url.replace('/tushan', '');
 
-  console.log('url', url);
+  if (path === '' || path === '/') {
+    const host =
+      (ctx.headers?.['x-forwarded-proto'] ?? 'https') +
+      '://' +
+      (ctx.headers?.['x-forwarded-host'] ?? ctx.headers?.['host']);
+
+    ctx.response?.json({
+      authProvider: {
+        loginUrl: host + '/tushan/login',
+      },
+      dataProvider: {
+        url: host + '/tushan',
+      },
+      ...options.config,
+    });
+    return false;
+  }
 
   if (path === '/login') {
     // login
