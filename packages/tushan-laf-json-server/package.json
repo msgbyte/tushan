@@ -1,0 +1,24 @@
+{
+  "name": "tushan-laf-json-server",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "moonrailgun <moonrailgun@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@lafjs/cloud": "1.0.0-beta.7",
+    "jsonwebtoken": "^8.5.1",
+    "qs": "^6.11.1",
+    "typescript": "^4.9.4"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^8.5.2",
+    "@types/qs": "^6.9.7"
+  }
+}
