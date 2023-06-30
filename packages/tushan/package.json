@@ -1,6 +1,6 @@
 {
   "name": "tushan",
-  "version": "0.2.32",
+  "version": "0.2.33",
   "description": "",
   "main": "./index.ts",
   "scripts": {
@@ -51,7 +51,6 @@
     "lodash-es": "^4.17.21",
     "postcss": "^8.4.17",
     "qs": "^6.11.1",
-    "ra-data-json-server": "^4.10.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
