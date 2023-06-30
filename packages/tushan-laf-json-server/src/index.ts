@@ -26,7 +26,49 @@ interface TushanJsonServerOptions {
 /**
  * Create Tushan Server in Laf context
  *
- * Only receive
+ * @example
+ * __interceptor__
+ *
+ * import { createTushanJsonServerInterceptor } from 'tushan-laf-json-server'
+ *
+ * export default async function (ctx: FunctionContext) {
+ *   try {
+ *     return await createTushanJsonServerInterceptor(ctx as any, {
+ *       auth: {
+ *         username: 'your-username',
+ *         password: "your-password",
+ *         secret: "your-secret"
+ *       },
+ *       config: {
+ *         debug: true,
+ *         resources: [
+ *           {
+ *             name: "test",
+ *             fields: [
+ *               {
+ *                 name: "id",
+ *                 type: "text"
+ *               },
+ *               {
+ *                 name: "content",
+ *                 type: "text",
+ *               }
+ *             ],
+ *             action: {
+ *               create: true,
+ *               edit: true,
+ *               delete: true
+ *             }
+ *           }
+ *         ]
+ *       }
+ *     });
+ *   } catch (err) {
+ *     console.error(err)
+ *   } finally {
+ *     return true;
+ *   }
+ * }
  */
 export async function createTushanJsonServerInterceptor(
   ctx: FunctionContext,
@@ -70,8 +112,8 @@ export async function createTushanJsonServerInterceptor(
     return false;
   }
 
-  const args = path.split('/');
-  const search = qs.parse(path.split('?')[0] ?? '');
+  const args = path.split('?')[0].split('/');
+  const search = qs.parse(path.split('?')[1] ?? '');
   const body = ctx.body;
   const method = ctx.method;
 
@@ -113,10 +155,10 @@ export async function createTushanJsonServerInterceptor(
         query = query.limit(maxRows);
       }
 
-      const res = await query.get();
+      const { data } = await query.get();
       const total = (await db.collection(model).where(filter).count()).total;
       ctx.response?.setHeader('X-Total-Count', total);
-      ctx.response?.json(res);
+      ctx.response?.json(virtualId(data));
       return false;
     } else {
       // item
@@ -129,19 +171,24 @@ export async function createTushanJsonServerInterceptor(
     // create
     const [, model] = args;
     const newData = convertId(body);
-    await db.collection(model).add(newData);
+    const { id } = await db.collection(model).add(newData);
 
-    ctx.response?.json(newData);
+    ctx.response?.json({ ...newData, id });
     return false;
   } else if (method === 'PUT') {
     const [, model, id] = args;
     const updatedData = convertId(body);
-    await db.collection(model).update(
-      { ...updatedData, _id: id },
-      {
-        merge: true,
-      }
-    );
+    await db
+      .collection(model)
+      .where({
+        _id: id,
+      })
+      .update(
+        { ...updatedData },
+        {
+          merge: true,
+        }
+      );
 
     const { data } = await db.collection(model).where({ _id: id }).getOne();
     ctx.response?.json(data);
@@ -151,7 +198,7 @@ export async function createTushanJsonServerInterceptor(
 
     await db.collection(model).where({ _id: id }).remove();
 
-    ctx.response?.json({ _id: id });
+    ctx.response?.json({ id });
 
     return false;
   }
