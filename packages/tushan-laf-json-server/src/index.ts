@@ -55,6 +55,7 @@ interface TushanJsonServerOptions {
  *             ],
  *             action: {
  *               create: true,
+ *               detail: true,
  *               edit: true,
  *               delete: true
  *             }
@@ -68,6 +69,9 @@ interface TushanJsonServerOptions {
  *     return true;
  *   }
  * }
+ *
+ * @usage
+ * visit: https://tushan-lite.msgbyte.com/?config=https://<appid>.laf.dev/tushan
  */
 export async function createTushanJsonServerInterceptor(
   ctx: FunctionContext,
