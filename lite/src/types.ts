@@ -1,6 +1,7 @@
 export interface TushanLiteConfig {
   header?: string;
   footer?: string;
+  debug?: boolean;
   authProvider?: {
     loginUrl: string;
   };

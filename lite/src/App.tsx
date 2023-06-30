@@ -4,6 +4,7 @@ import {
   fetchJSON,
   jsonServerProvider,
   ListTable,
+  ReactQueryDevtools,
   Resource,
   Tushan,
   useAsync,
@@ -74,6 +75,8 @@ function App() {
           }
         />
       ))}
+
+      {config.debug && <ReactQueryDevtools />}
     </Tushan>
   );
 }
