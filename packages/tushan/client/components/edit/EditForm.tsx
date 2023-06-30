@@ -1,7 +1,7 @@
 import { Button, Form, Message, Space } from '@arco-design/web-react';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import type { BasicRecord } from '../../api';
+import { BasicRecord, useRefreshList } from '../../api';
 import { useCreate } from '../../api/useCreate';
 import { useUpdate } from '../../api/useUpdate';
 import { useResourceContext } from '../../context/resource';
@@ -24,6 +24,7 @@ export const EditForm: React.FC<EditFormProps> = React.memo((props) => {
   const [updateOne] = useUpdate();
   const resource = useResourceContext();
   const { t } = useTranslation();
+  const refresh = useRefreshList(resource);
 
   const items = useMemo(() => {
     return props.fields
@@ -41,6 +42,7 @@ export const EditForm: React.FC<EditFormProps> = React.memo((props) => {
         await create(resource, {
           data: { ...values },
         });
+        refresh(); // refresh list after call create in list drawer
       } else {
         if (!defaultValues.id) {
           Message.error('Cannot update record, not found id');
