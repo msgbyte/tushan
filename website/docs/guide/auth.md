@@ -58,6 +58,15 @@ const authProvider: AuthProvider = createAuthProvider({
 
 返回的内容会记录在 `authStorageKey`(默认"tushan:auth") 指定的 localStorage 中。你可以在后续的网络请求中获取`token`并在发送的请求头中携带。
 
+配套的，你可以使用对应的`createAuthHttpClient`函数来创建`httpClient`在发送请求的时候携带token
+
+```tsx
+const dataProvider = jsonServerProvider(
+  config.dataProvider.url,
+  createAuthHttpClient()
+)
+```
+
 ## 请求携带Token
 
 为了使请求能够携带Token, 我们需要修改一下发送请求时请求函数。

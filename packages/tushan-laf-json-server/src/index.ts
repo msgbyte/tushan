@@ -34,7 +34,7 @@ export async function createTushanJsonServerInterceptor(
 ) {
   const url = ctx.request?.url ?? '';
 
-  if (!url.startsWith('/tushan/')) {
+  if (!url.startsWith('/tushan')) {
     return true;
   }
 

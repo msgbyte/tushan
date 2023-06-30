@@ -28,5 +28,5 @@ export interface TushanLiteResource {
 export interface TushanLiteField {
   name: string;
   type: string;
-  options: any;
+  options?: any;
 }

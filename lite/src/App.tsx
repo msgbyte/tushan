@@ -1,4 +1,5 @@
 import {
+  createAuthHttpClient,
   createAuthProvider,
   fetchJSON,
   jsonServerProvider,
@@ -48,7 +49,10 @@ function App() {
       header={config.header}
       footer={config.footer}
       dashboard={false}
-      dataProvider={jsonServerProvider(config.dataProvider.url)}
+      dataProvider={jsonServerProvider(
+        config.dataProvider.url,
+        createAuthHttpClient()
+      )}
       authProvider={
         config.authProvider &&
         createAuthProvider({

@@ -1,4 +1,5 @@
 import type { AuthProvider } from '../types';
+import { defaultAuthStorageKey } from './const';
 
 interface CreateAuthProviderOptions {
   /**
@@ -19,7 +20,7 @@ interface CreateAuthProviderOptions {
 export function createAuthProvider(
   options: CreateAuthProviderOptions
 ): AuthProvider {
-  const { authStorageKey = 'tushan:auth', loginUrl } = options;
+  const { authStorageKey = defaultAuthStorageKey, loginUrl } = options;
 
   const authProvider: AuthProvider = {
     login: async ({ username, password }) => {
