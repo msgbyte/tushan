@@ -40,7 +40,6 @@ interface TushanJsonServerOptions {
  *         secret: "your-secret"
  *       },
  *       config: {
- *         debug: true,
  *         resources: [
  *           {
  *             name: "test",
