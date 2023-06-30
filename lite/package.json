@@ -1,0 +1,27 @@
+{
+  "name": "tushan-lite",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "author": "moonrailgun",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@types/qs": "^6.9.7",
+    "qs": "^6.11.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tushan": "^0.2.32"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@vitejs/plugin-react": "^3.1.0",
+    "typescript": "^4.9.3",
+    "vite": "^4.2.0"
+  }
+}

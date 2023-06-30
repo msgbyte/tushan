@@ -1,0 +1,33 @@
+{
+  "dataProvider": {
+    "url": "https://jsonplaceholder.typicode.com"
+  },
+  "resources": [
+    {
+      "name": "users",
+      "fields": [
+        {
+          "name": "id",
+          "type": "text"
+        },
+        {
+          "name": "name",
+          "type": "text",
+          "options": {
+            "list": {
+              "sort": true
+            }
+          }
+        },
+        {
+          "name": "email",
+          "type": "email"
+        },
+        {
+          "name": "website",
+          "type": "url"
+        }
+      ]
+    }
+  ]
+}

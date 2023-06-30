@@ -38,7 +38,7 @@ const authProvider: AuthProvider = {
 `Tushan` 也提供了一个内置的通用鉴权创建函数
 
 ```tsx
-import { createAuthProvider } from 'tushan';
+import { AuthProvider, createAuthProvider } from 'tushan';
 
 const authProvider: AuthProvider = createAuthProvider({
   loginUrl: '/api/login',

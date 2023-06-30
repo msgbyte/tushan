@@ -2,3 +2,4 @@ packages:
   - 'demo/*'
   - 'packages/*'
   - 'website'
+  - 'lite'
