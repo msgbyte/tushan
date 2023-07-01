@@ -1,0 +1,8 @@
+{
+  "label": "Tushan Lite",
+  "position": 40,
+  "link": {
+    "type": "generated-index",
+    "description": "Tushan Lite 是基于Tushan的纯配置化解决方案，只需要一个简单的配置文件即可实现一整套的后台管理项目的前端实现"
+  }
+}
