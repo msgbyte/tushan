@@ -24,7 +24,7 @@ export const ListFilter: React.FC<ListFilterProps> = React.memo((props) => {
               <div>{c.title}</div>
               <div>
                 {c.render(filterValues[c.source], (val) =>
-                  setFilterValues({ [c.source]: val })
+                  setFilterValues({ [c.source]: castFilterValue(val) })
                 )}
               </div>
             </Grid.GridItem>
@@ -35,3 +35,16 @@ export const ListFilter: React.FC<ListFilterProps> = React.memo((props) => {
   );
 });
 ListFilter.displayName = 'ListFilter';
+
+function castFilterValue(input: any) {
+  if (
+    input === '' ||
+    input === null ||
+    input === undefined ||
+    (Array.isArray(input) && input.length === 0)
+  ) {
+    return undefined;
+  }
+
+  return input;
+}

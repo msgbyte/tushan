@@ -92,10 +92,12 @@ export default async function (ctx: FunctionContext) {
   - `secret`: 用于签发token的秘钥，随机字符串即可
 - `resources`: 一个数组，用于描述配置资源
   - `name`: 模型名，与laf的数据集名字对应
+  - `label`: 显示名称，可选
   - `fields`: 模型字段, 是一个数字
     - `name`: 字段名
     - `type`: 字段类型, 内置支持 text,number,avatar,json,boolean,datetime,password,select,reference,textarea,email,image,url
     - `options`: 字段配置, 可选, 参考`tushan`的字段配置使用
+  - `filter`: 筛选项，配置同`fields`
   - `action`: 启用的功能
     - `create`: 创建
     - `detail`: 详情

@@ -5,6 +5,16 @@
   "resources": [
     {
       "name": "users",
+      "filter": [{
+        "name": "q",
+        "type": "text",
+        "options": {
+          "label": "Name",
+          "list": {
+            "sort": true
+          }
+        }
+      }],
       "fields": [
         {
           "name": "id",
