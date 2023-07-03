@@ -27,7 +27,9 @@ function App() {
     const configUrl =
       (query.config as string) ?? window.sessionStorage.getItem(storageKey);
     if (!configUrl) {
-      throw new Error('Please set `?config=<url>` in url');
+      throw new Error(
+        `Please set \`?config=<url>\` in url, for example: \`${window.location.origin}?config=/demo.json\``
+      );
     }
 
     window.sessionStorage.setItem(storageKey, configUrl);
