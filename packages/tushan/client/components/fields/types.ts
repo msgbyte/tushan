@@ -5,6 +5,10 @@ export interface BasicFieldEditOptions {
   placeholder?: string;
   hidden?: boolean;
   rules?: RulesProps<any>[];
+  /**
+   * default value on create.
+   */
+  default?: any;
 }
 
 export interface BasicFieldOptions {
@@ -31,7 +35,7 @@ export interface BasicFieldOptions {
   edit?: BasicFieldEditOptions;
 
   /**
-   * options which will be override edit
+   * Options which will be override edit
    * Useful if you wanna edit and create has any different.
    *
    * If you dont need different, you can ignore it.

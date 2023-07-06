@@ -18,7 +18,6 @@ export interface EditFormProps {
 }
 export const EditForm: React.FC<EditFormProps> = React.memo((props) => {
   const isCreate = props.record === null;
-  const defaultValues = props.record ?? ({} as BasicRecord);
   const [form] = Form.useForm();
   const [create] = useCreate();
   const [updateOne] = useUpdate();
@@ -30,7 +29,22 @@ export const EditForm: React.FC<EditFormProps> = React.memo((props) => {
     return props.fields
       .map((handler) => (isCreate ? handler('create') : handler('edit')))
       .filter((item) => !item.hidden);
-  }, [props.fields]);
+  }, [props.fields, isCreate]);
+  const defaultValues = useMemo(() => {
+    const v = props.record ?? ({} as BasicRecord);
+    if (isCreate) {
+      items.forEach((item) => {
+        if (
+          typeof v[item.source] === 'undefined' &&
+          typeof item.default !== 'undefined'
+        ) {
+          v[item.source] = item.default;
+        }
+      });
+    }
+
+    return v;
+  }, [props.record, isCreate, items]);
 
   const handleSubmit = useSendRequest(async () => {
     try {

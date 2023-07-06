@@ -22,6 +22,7 @@ export interface EditFieldItem<T = any> {
   source: string;
   title: string;
   hidden: boolean;
+  default?: T;
   rules: RulesProps<any>[];
   render: (value: T, onChange: (val: T) => void) => ReactElement;
 }
@@ -85,6 +86,7 @@ export function createFieldFactory<CustomOptions extends {} = {}>(
           source,
           title: options?.label ?? createElement(FieldTitle, { source }),
           hidden: editOptions.hidden ?? false,
+          default: editOptions.default,
           rules: editOptions.rules ?? [],
           render: (value, onChange) => {
             return createElement(config.edit, {
