@@ -18,7 +18,7 @@
     "tsconfig.json",
     "README.md"
   ],
-  "keywords": [],
+  "keywords": ["react-admin", "react", "admin", "adminjs", "admin.js"],
   "author": "moonrailgun <moonrailgun@gmail.com>",
   "license": "MIT",
   "devDependencies": {
