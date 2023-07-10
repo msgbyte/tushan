@@ -20,6 +20,10 @@
     "@release-it/conventional-changelog": "^5.1.1",
     "release-it": "^15.5.0"
   },
-  "dependencies": {
+  "dependencies": {},
+  "pnpm": {
+    "overrides": {
+      "@types/node": "18.11.9"
+    }
   }
 }

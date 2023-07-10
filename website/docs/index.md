@@ -88,6 +88,8 @@ export default App;
 
 访问 [CodeSandbox](https://codesandbox.io/p/github/msgbyte/tushan/master) 快速获得无后台版本的示例程序。
 
+Demo 程序的账号密码: `tushan` / `tushan`
+
 ## UI框架
 
 `Tushan` 的UI组件库是基于字节跳动的 `arco-design`。你可以在[这里](https://arco.design/react/docs/start)访问`arco-design`的官方文档
