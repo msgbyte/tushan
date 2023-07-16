@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import React, { useMemo } from 'react';
+import { BrowserRouter, HashRouter } from 'react-router-dom';
 import { BuiltinRoutes } from './BuiltinRoutes';
 import { TushanContextProps, TushanContextProvider } from '../context/tushan';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
@@ -11,15 +11,24 @@ interface TushanProps extends TushanContextProps, React.PropsWithChildren {
   queryClient?: QueryClient;
 }
 export const Tushan: React.FC<TushanProps> = React.memo((props) => {
-  const { basename, queryClient = defaultQueryClient } = props;
+  const {
+    basename,
+    queryClient = defaultQueryClient,
+    routerType = 'browser',
+  } = props;
+
+  const Router = useMemo(
+    () => (routerType === 'browser' ? BrowserRouter : HashRouter),
+    []
+  );
 
   return (
     <TushanContextProvider {...props}>
       <QueryClientProvider client={queryClient}>
         <ArcoDesignProvider>
-          <BrowserRouter basename={basename}>
+          <Router basename={basename}>
             <BuiltinRoutes>{props.children}</BuiltinRoutes>
-          </BrowserRouter>
+          </Router>
         </ArcoDesignProvider>
       </QueryClientProvider>
     </TushanContextProvider>

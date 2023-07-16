@@ -6,6 +6,7 @@ import type { TranslationKeys } from '../i18n';
 
 export interface TushanContextProps {
   basename?: string;
+  routerType?: 'browser' | 'hash';
   dashboard?: React.ReactElement | false;
   dataProvider?: DataProvider;
   authProvider?: AuthProvider;
