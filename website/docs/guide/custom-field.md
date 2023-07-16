@@ -62,3 +62,50 @@ export const createRichEditorField = createFieldFactory({
 同时我们还可以通过 `props.options` 来获取当我们创建是的外部输入, 来进行差异化的配置
 
 当我们使用我们的组件时，就可以类似其他的基础字段一样使用 `createRichEditorField(source, options)` 来调用
+
+## 获取上下文信息
+
+有时候在我们自定义字段的时候，不仅仅需要关心本身的属性，还需要关心这条记录的其他字段的内容做一些联动。
+
+### 列表视图与详情视图
+
+在 `list` 和 `detail` 中我们可以通过 `useRecordContext` 来获取上下文
+
+```tsx
+import { useRecordContext } from 'tushan';
+
+export const MyField: FieldDetailComponent<string> = React.memo(
+  (props) => {
+    const record = useRecordContext();
+    
+    return (
+      <div>{props.value}({record.id})</div>
+    );
+  }
+);
+MyField.displayName = 'MyField';
+```
+
+### 编辑视图
+
+在编辑视图中，我们需要用到`Form`提供的上下文, 一个简单的用法如下:
+
+```tsx
+import { Form } from 'tushan';
+
+export const MyField: FieldDetailComponent<string> = React.memo(
+  (props) => {
+    const { form } = Form.useFormContext();
+    const id = Form.useWatch('id', form)
+    
+    return (
+      <div>{props.value}({id})</div>
+    );
+  }
+);
+MyField.displayName = 'MyField';
+```
+
+### 过滤条件视图
+
+目前暂不支持，如有需要可以开启 Issue 告诉开发者

@@ -34,12 +34,20 @@ import { useColumns } from './useColumns';
 import { ListRefreshAction } from './actions/RefreshAction';
 import { ListBatchDeleteAction } from './actions/BatchDeleteAction';
 import { useUrlState } from '../../hooks/useUrlState';
+import type { ComponentsProps } from '@arco-design/web-react/es/Table/interface';
+import { ListTableRow } from './components/ListTableRow';
 
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 8px;
 `;
+
+const tableComponents: ComponentsProps = {
+  body: {
+    row: ListTableRow,
+  },
+};
 
 export interface ListTableCustomActionItem {
   key: string;
@@ -71,6 +79,7 @@ export interface ListTableProps {
     delete?: boolean;
   };
 }
+
 export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
   const resource = useResourceContext();
   const defaultFilter = props.defaultFilter ?? {};
@@ -167,6 +176,7 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
       data={list}
       rowKey="id"
       rowSelection={rowSelection}
+      components={tableComponents}
       pagination={{
         total,
         current: pageNum,
