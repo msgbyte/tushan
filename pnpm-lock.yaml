@@ -57,7 +57,7 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
       tushan:
-        specifier: ^0.2.36
+        specifier: ^0.2.38
         version: link:../packages/tushan
     devDependencies:
       '@types/node':
