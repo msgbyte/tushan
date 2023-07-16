@@ -10,6 +10,7 @@ import {
 import { useResourceContext } from '../../context/resource';
 import {
   BasicRecord,
+  FilterPayload,
   GetListParams,
   Identifier,
   SortPayload,
@@ -32,6 +33,7 @@ import { useListTableDrawer } from './useListTableDrawer';
 import { useColumns } from './useColumns';
 import { ListRefreshAction } from './actions/RefreshAction';
 import { ListBatchDeleteAction } from './actions/BatchDeleteAction';
+import { useUrlState } from '../../hooks/useUrlState';
 
 const Header = styled.div`
   display: flex;
@@ -52,6 +54,8 @@ export type ListTableCustomAction =
 export interface ListTableProps {
   filter?: FieldHandler[];
   fields: FieldHandler[];
+  defaultSort?: SortPayload;
+  defaultFilter?: FilterPayload;
   showTotal?: boolean;
   showSizeChanger?: boolean;
   action?: {
@@ -69,8 +73,11 @@ export interface ListTableProps {
 }
 export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
   const resource = useResourceContext();
-  const [filterValues, setFilterValues] = useObjectState({});
-  const [sort, setSort] = useState<SortPayload | undefined>(undefined);
+  const defaultFilter = props.defaultFilter ?? {};
+  const [filterValues, setFilterValues] = useUrlState(defaultFilter, {
+    nestedKey: 'filter',
+  });
+  const [sort, setSort] = useState<SortPayload | undefined>(props.defaultSort);
   const lazyFilter = useDebounce(filterValues, { wait: 500 });
   const { t } = useTranslation();
   const [pageNum, setPageNum] = useState(1);
