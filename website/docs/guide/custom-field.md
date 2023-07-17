@@ -93,7 +93,7 @@ MyField.displayName = 'MyField';
 ```tsx
 import { Form } from 'tushan';
 
-export const MyField: FieldDetailComponent<string> = React.memo(
+export const MyField: FieldEditComponent<string> = React.memo(
   (props) => {
     const { form } = Form.useFormContext();
     const id = Form.useWatch('id', form)
