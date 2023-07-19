@@ -5,6 +5,7 @@ import { useTushanContext } from '../context/tushan';
 import { useConfigureAdminRouterFromChildren } from '../hooks/useConfigureAdminRouterFromChildren';
 import { useDelay } from '../hooks/useDelay';
 import { useUserStore } from '../store/user';
+import type { TushanChildren } from '../types';
 import { createSelector } from '../utils/createSelector';
 import { Dashboard } from './defaults/Dashboard';
 import { LoginPage } from './defaults/LoginPage';
@@ -12,7 +13,7 @@ import { BasicLayout } from './layout';
 import { LoadingView } from './LoadingView';
 
 export interface BuiltinRoutesProps {
-  children?: React.ReactNode;
+  children: TushanChildren;
 }
 
 export const BuiltinRoutes: React.FC<BuiltinRoutesProps> = React.memo(

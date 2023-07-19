@@ -9,10 +9,13 @@ import {
   useCallback,
   useState,
 } from 'react';
+import { usePermissions } from '../api';
 import { Category, CategoryProps } from '../components/Category';
 import { CustomRoute, CustomRoutesProp } from '../components/CustomRoute';
 import { Resource, ResourceProps } from '../components/Resource';
 import { TushanCategoryPathInfo, useMenuStore } from '../store/menu';
+import type { TushanChildren } from '../types';
+import { useDataReady } from './useDataReady';
 import { useWatch } from './useWatch';
 
 /**
@@ -35,7 +38,7 @@ import { useWatch } from './useWatch';
  * } = useConfigureAdminRouterFromChildren(children);
  */
 export const useConfigureAdminRouterFromChildren = (
-  children: ReactNode
+  children: TushanChildren
 ): RoutesAndResources => {
   // Whenever children are updated, update our custom routes and resources
   const routesAndResources = useRoutesAndResourcesFromChildren(children);
@@ -83,10 +86,27 @@ function useRegisterMenu<
 }
 
 const useRoutesAndResourcesFromChildren = (
-  children: ReactNode
+  children: TushanChildren
 ): RoutesAndResources => {
-  const [routesAndResources] = useRoutesAndResourcesState(
-    getRoutesAndResourceFromNodes(children)
+  const { permissions, isLoading } = usePermissions();
+  const [routesAndResources, setRoutesAndResources] =
+    useRoutesAndResourcesState(
+      getRoutesAndResourceFromNodes(
+        typeof children === 'function' ? undefined : children
+      )
+    );
+
+  useDataReady(
+    () => permissions && isLoading === false,
+    () => {
+      const renderFunc = Array.isArray(children) ? children[0] : children;
+
+      if (typeof renderFunc === 'function') {
+        setRoutesAndResources(
+          getRoutesAndResourceFromNodes(renderFunc({ permissions }))
+        );
+      }
+    }
   );
 
   return routesAndResources;

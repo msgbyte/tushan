@@ -1,13 +1,13 @@
 import React, { useMemo } from 'react';
 import { BrowserRouter, HashRouter } from 'react-router-dom';
-import { BuiltinRoutes } from './BuiltinRoutes';
+import { BuiltinRoutes, BuiltinRoutesProps } from './BuiltinRoutes';
 import { TushanContextProps, TushanContextProvider } from '../context/tushan';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { defaultQueryClient } from '../api';
 import { ArcoDesignProvider } from './ArcoDesignProvider';
 import '@arco-design/web-react/dist/css/arco.css';
 
-interface TushanProps extends TushanContextProps, React.PropsWithChildren {
+interface TushanProps extends TushanContextProps, BuiltinRoutesProps {
   queryClient?: QueryClient;
 }
 export const Tushan: React.FC<TushanProps> = React.memo((props) => {
