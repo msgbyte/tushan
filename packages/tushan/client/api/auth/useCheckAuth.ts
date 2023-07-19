@@ -1,16 +1,16 @@
-import { useCallback } from 'react';
 import { useLogout } from './useLogout';
 import { useTushanContext } from '../../context/tushan';
 import { Message } from '@arco-design/web-react';
 import { defaultAuthParams } from './const';
 import { useUserStore } from '../../store/user';
+import { useEvent } from '../../hooks/useEvent';
 
 export const useCheckAuth = (): CheckAuth => {
   const { authProvider } = useTushanContext();
   const logout = useLogout();
   const loginUrl = defaultAuthParams.loginUrl;
 
-  const checkAuth = useCallback(
+  const checkAuth = useEvent(
     (params: any = {}, logoutOnFailure = true, redirectTo = loginUrl) =>
       authProvider!
         .checkAuth(params)
@@ -18,6 +18,7 @@ export const useCheckAuth = (): CheckAuth => {
           authProvider!.getIdentity?.().then((userIdentity) => {
             useUserStore.setState({
               userIdentity,
+              isLogin: true,
             });
           });
         })
@@ -32,8 +33,7 @@ export const useCheckAuth = (): CheckAuth => {
           }
 
           throw error;
-        }),
-    [authProvider, logout, loginUrl]
+        })
   );
 
   return authProvider ? checkAuth : checkAuthWithoutAuthProvider;

@@ -88,7 +88,7 @@ function useRegisterMenu<
 const useRoutesAndResourcesFromChildren = (
   children: TushanChildren
 ): RoutesAndResources => {
-  const { permissions, isLoading } = usePermissions();
+  const { permissions, isReady } = usePermissions();
   const [routesAndResources, setRoutesAndResources] =
     useRoutesAndResourcesState(
       getRoutesAndResourceFromNodes(
@@ -97,7 +97,7 @@ const useRoutesAndResourcesFromChildren = (
     );
 
   useDataReady(
-    () => permissions && isLoading === false,
+    () => permissions && isReady === true,
     () => {
       const renderFunc = Array.isArray(children) ? children[0] : children;
 

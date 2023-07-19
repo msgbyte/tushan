@@ -1,6 +1,9 @@
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import { useTushanContext } from '../../context/tushan';
+import { useDataReady } from '../../hooks/useDataReady';
+import { useUserStore } from '../../store/user';
+import { createSelector } from '../../utils/createSelector';
 
 export function usePermissions<Permissions = any, Error = any>(
   params = {},
@@ -9,17 +12,39 @@ export function usePermissions<Permissions = any, Error = any>(
   }
 ) {
   const { authProvider } = useTushanContext();
+  const { isLogin } = useUserStore(createSelector('isLogin'));
 
   const result = useQuery(
-    ['auth', 'getPermissions', params],
-    () => authProvider?.getPermissions(params) ?? Promise.resolve(null),
+    ['auth', 'getPermissions', JSON.stringify(params)],
+    async () => {
+      if (authProvider) {
+        try {
+          const permission = await authProvider.getPermissions(params);
+          return permission;
+        } catch (err) {
+          return null;
+        }
+      }
+
+      return null;
+    },
     queryParams
+  );
+
+  useDataReady(
+    () => isLogin === true,
+    () => {
+      if (result.data === null) {
+        // retry when loaded
+        result.refetch();
+      }
+    }
   );
 
   return useMemo(
     () => ({
       permissions: result.data,
-      isLoading: result.isLoading,
+      isReady: isLogin && !result.isLoading,
       error: result.error,
       refetch: result.refetch,
     }),

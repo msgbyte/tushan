@@ -7,10 +7,12 @@ export const authProvider: AuthProvider = {
     }
 
     localStorage.setItem('username', username);
+    localStorage.setItem('permissions', JSON.stringify(['admin', 'user']));
     return Promise.resolve();
   },
   logout: () => {
     localStorage.removeItem('username');
+    localStorage.removeItem('permissions');
     return Promise.resolve();
   },
   checkAuth: () =>
@@ -29,9 +31,13 @@ export const authProvider: AuthProvider = {
       id: 'user',
       fullName: 'John Doe',
     }),
-  getPermissions: () =>
-    Promise.resolve([
-      // 'admin',
-      'user',
-    ]),
+  getPermissions: () => {
+    const raw = localStorage.getItem('permissions');
+
+    if (!raw) {
+      return Promise.reject();
+    }
+
+    return JSON.parse(raw);
+  },
 };
