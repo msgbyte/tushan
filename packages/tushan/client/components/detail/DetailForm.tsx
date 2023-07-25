@@ -1,4 +1,5 @@
 import { Form } from '@arco-design/web-react';
+import { get } from 'lodash-es';
 import React, { useMemo } from 'react';
 import type { BasicRecord } from '../../api/types';
 import { RecordContextProvider } from '../../context/record';
@@ -22,7 +23,7 @@ export const DetailForm: React.FC<DetailFormProps> = React.memo((props) => {
         <Form>
           {items.map((item) => (
             <Form.Item key={item.source} label={item.title}>
-              {item.render(props.record[item.source])}
+              {item.render(get(props.record, item.source))}
             </Form.Item>
           ))}
         </Form>

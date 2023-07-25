@@ -1,4 +1,5 @@
 import { Button, Form, Message, Space } from '@arco-design/web-react';
+import { get } from 'lodash-es';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BasicRecord, useRefreshList } from '../../api';
@@ -97,7 +98,7 @@ export const EditForm: React.FC<EditFormProps> = React.memo((props) => {
               rules={item.rules}
             >
               {(formData, form) =>
-                item.render(formData[item.source], (val) => {
+                item.render(get(formData, item.source), (val) => {
                   form.setFieldValue(item.source, val);
                 })
               }
