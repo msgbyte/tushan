@@ -91,3 +91,7 @@ export default App;
 `Tushan` 的UI组件库是基于字节跳动的 `arco-design`。你可以在[这里](https://arco.design/react/docs/start)访问`arco-design`的官方文档
 
 所有的组件都已经被导出且可以通过`tushan`直接引入
+
+## 扫码访问 tushan 官网
+
+<img width="360" src="./website/static/img/qrcode.jpg" />
