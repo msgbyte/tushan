@@ -69,7 +69,8 @@ export const useLogout = (): Logout => {
         if (
           redirectToCurrentLocationAfterLogin &&
           locationRef.current &&
-          locationRef.current.pathname
+          locationRef.current.pathname &&
+          locationRef.current.pathname !== redirectTo
         ) {
           newLocationOptions = {
             state: {
@@ -83,6 +84,7 @@ export const useLogout = (): Logout => {
         }
         navigateRef.current(newLocation, newLocationOptions);
         queryClient.clear();
+
         setIsLogin(false);
 
         return redirectToFromProvider;

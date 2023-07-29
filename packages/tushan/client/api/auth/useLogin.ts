@@ -20,6 +20,7 @@ const useLogin = (): Login => {
     (params: any = {}, pathName?: string) =>
       authProvider!.login(params).then((ret: any) => {
         Message.clear();
+
         if (ret && ret.hasOwnProperty('redirectTo')) {
           if (ret) {
             navigate(ret.redirectTo);
@@ -32,6 +33,7 @@ const useLogin = (): Login => {
         }
 
         setIsLogin(true);
+
         return ret;
       }),
     [authProvider, navigate, nextPathName, nextSearch, afterLoginUrl]
