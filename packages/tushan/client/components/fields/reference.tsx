@@ -1,5 +1,5 @@
 import { Select } from '@arco-design/web-react';
-import { get } from 'lodash-es';
+import { get, isFunction } from 'lodash-es';
 import React from 'react';
 import { Identifier, useGetList } from '../../api';
 import { useGetOne } from '../../api/useGetOne';
@@ -13,7 +13,7 @@ export interface ReferenceFieldOptions {
   /**
    * Source Field for display
    */
-  displayField: string;
+  displayField: string | ((record: Record<string, any>) => void);
   /**
    * Field which define search filter in edit.
    *
@@ -40,7 +40,13 @@ export const ReferenceFieldDetail: FieldDetailComponent<
     id,
   });
 
-  return <span>{get(data, displayField)}</span>;
+  return (
+    <span>
+      {isFunction(displayField)
+        ? displayField(data ?? {})
+        : get(data, displayField)}
+    </span>
+  );
 });
 ReferenceFieldDetail.displayName = 'ReferenceFieldDetail';
 
@@ -74,7 +80,9 @@ export const ReferenceFieldEdit: FieldEditComponent<
     >
       {data.map((item) => (
         <Select.Option key={item.id} value={item.id}>
-          {get(item, displayField, item.id)}
+          {isFunction(displayField)
+            ? displayField(item ?? {})
+            : get(item, displayField, item.id)}
         </Select.Option>
       ))}
     </Select>
