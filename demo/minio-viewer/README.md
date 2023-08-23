@@ -1,0 +1,11 @@
+WIP
+
+`.env`:
+
+```
+MINIO_URL=
+MINIO_USER=
+MINIO_PASS=
+ADMIN_USER=
+ADMIN_PASS=
+```
