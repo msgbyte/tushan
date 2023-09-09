@@ -60,6 +60,7 @@ export type ListTableCustomAction =
   | ((record: BasicRecord) => ListTableCustomActionItem[]);
 
 export interface ListTableProps {
+  className?: string;
   filter?: FieldHandler[];
   fields: FieldHandler[];
   defaultSort?: SortPayload;
@@ -230,7 +231,7 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
     <ViewTypeContextProvider viewType="list">
       <ListTableContextProvider value={{ list, total, refetch }}>
         <ListParamsContextProvider value={listParams}>
-          <Card>
+          <Card className={props.className}>
             {headerEl}
 
             {hasHeader && <Divider />}
