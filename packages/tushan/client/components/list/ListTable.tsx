@@ -66,6 +66,20 @@ export interface ListTableProps {
   defaultFilter?: FilterPayload;
   showTotal?: boolean;
   showSizeChanger?: boolean;
+  /**
+   * Allow pass table props into table element
+   */
+  tableProps?: Omit<
+    TableProps,
+    | 'loading'
+    | 'columns'
+    | 'data'
+    | 'rowKey'
+    | 'rowSelection'
+    | 'components'
+    | 'pagination'
+    | 'onChange'
+  >;
   action?: {
     create?: boolean;
     detail?: boolean;
@@ -208,6 +222,7 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
           setSort(undefined);
         }
       }}
+      {...props.tableProps}
     />
   );
 
