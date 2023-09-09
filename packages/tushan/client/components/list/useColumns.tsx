@@ -12,7 +12,7 @@ import { useTranslation } from '../../i18n';
 import { ListDeleteAction } from './actions/DeleteAction';
 import type { ListTableCustomAction, ListTableProps } from './ListTable';
 
-export function useColumns(
+export function useListTableColumns(
   props: ListTableProps,
   showTableDrawer: (viewType: ViewType, record: BasicRecord) => void
 ) {
@@ -68,7 +68,7 @@ export function useColumns(
   return columns;
 }
 
-export const CustomActions: React.FC<{
+const CustomActions: React.FC<{
   actions: ListTableCustomAction;
   record: BasicRecord;
 }> = React.memo((props) => {

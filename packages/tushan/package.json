@@ -1,6 +1,6 @@
 {
   "name": "tushan",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "description": "",
   "main": "./index.ts",
   "scripts": {
@@ -18,7 +18,7 @@
     "tsconfig.json",
     "README.md"
   ],
-  "keywords": ["react-admin", "react", "admin", "adminjs", "admin.js"],
+  "keywords": ["tushan", "react-admin", "react", "admin", "adminjs", "admin.js"],
   "author": "moonrailgun <moonrailgun@gmail.com>",
   "license": "MIT",
   "devDependencies": {

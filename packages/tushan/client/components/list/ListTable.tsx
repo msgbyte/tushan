@@ -30,7 +30,7 @@ import {
 import { ListExportAction } from './actions/ExportAction';
 import { useTranslation } from 'react-i18next';
 import { useListTableDrawer } from './useListTableDrawer';
-import { useColumns } from './useColumns';
+import { useListTableColumns } from './useColumns';
 import { ListRefreshAction } from './actions/RefreshAction';
 import { ListBatchDeleteAction } from './actions/BatchDeleteAction';
 import { useUrlState } from '../../hooks/useUrlState';
@@ -126,7 +126,7 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
   const filterFields = props.filter ?? [];
   const [selectedRowKeys, setSelectedRowKeys] = useState<Identifier[]>([]);
 
-  const columns = useColumns(props, showTableDrawer);
+  const columns = useListTableColumns(props, showTableDrawer);
 
   const hasHeader =
     filterFields.length > 0 ||
