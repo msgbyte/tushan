@@ -198,6 +198,7 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
         pageSize,
         showTotal: props.showTotal ?? true,
         sizeCanChange: props.showSizeChanger ?? false,
+        sizeOptions: [10, 20, 50, 100],
         onChange: (pageNum, pageSize) => {
           setPageNum(pageNum);
           setPageSize(pageSize);
