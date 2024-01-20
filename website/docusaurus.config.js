@@ -72,7 +72,14 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      image: 'img/logo.svg',
+      image: 'img/logo.png',
+      metadata: [
+        {
+          name: 'keywords',
+          content:
+            'tushan, admin, opensource, adminjs, fast, react-admin',
+        },
+      ],
       navbar: {
         title: 'Tushan',
         logo: {
