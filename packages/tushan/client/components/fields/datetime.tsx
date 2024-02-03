@@ -6,7 +6,7 @@ import type { FieldDetailComponent, FieldEditComponent } from './types';
 export type DateTimeFieldValueType = string | number;
 
 export interface DateTimeFieldOptions {
-  format: 'iso' | 'unix';
+  format: 'iso' | 'unix' | 'timestamp';
 }
 
 export const DateTimeFieldDetail: FieldDetailComponent<
@@ -32,6 +32,8 @@ export const DateTimeFieldEdit: FieldEditComponent<
           props.onChange(date.toISOString());
         } else if (format === 'unix') {
           props.onChange(date.unix());
+        } else if (format === 'timestamp') {
+          props.onChange(date.valueOf());
         }
       }}
       showTime={true}
