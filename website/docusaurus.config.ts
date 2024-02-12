@@ -1,11 +1,13 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+import type { Config } from '@docusaurus/types';
+import type * as Preset from '@docusaurus/preset-classic';
 
-/** @type {import('@docusaurus/types').Config} */
-const config = {
+import {themes as prismThemes} from 'prism-react-renderer';
+
+
+const config: Config = {
   title: 'Tushan',
   tagline: '快速创建通用后台',
   favicon: 'img/logo.svg',
@@ -35,29 +37,25 @@ const config = {
   presets: [
     [
       'classic',
-      /** @type {import('@docusaurus/preset-classic').Options} */
-      ({
+      {
         docs: {
           routeBasePath: '/',
           path: './docs/',
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/msgbyte/tushan/tree/master/website/',
+          editUrl: 'https://github.com/msgbyte/tushan/tree/master/website/',
         },
         blog: false,
         pages: false,
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
-      }),
+      } satisfies Preset.Options,
     ],
   ],
 
-  plugins: [
-    require.resolve('docusaurus-plugin-image-zoom'),
-  ],
+  plugins: [require.resolve('docusaurus-plugin-image-zoom')],
 
   scripts: [
     {
@@ -69,15 +67,13 @@ const config = {
   ],
 
   themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-    ({
+    {
       // Replace with your project's social card
       image: 'img/logo.png',
       metadata: [
         {
           name: 'keywords',
-          content:
-            'tushan, admin, opensource, adminjs, fast, react-admin',
+          content: 'tushan, admin, opensource, adminjs, fast, react-admin',
         },
       ],
       navbar: {
@@ -142,8 +138,8 @@ const config = {
         copyright: `Copyright © ${new Date().getFullYear()} MsgByte, Inc. Built with Docusaurus.`,
       },
       prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
+        theme: prismThemes.github,
+        darkTheme: prismThemes.dracula,
       },
       zoom: {
         selector: '.markdown img',
@@ -155,7 +151,7 @@ const config = {
           },
         },
       },
-    }),
+    } satisfies Preset.ThemeConfig,
 };
 
-module.exports = config;
+export default config;
