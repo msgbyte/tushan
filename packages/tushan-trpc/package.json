@@ -1,0 +1,39 @@
+{
+  "name": "tushan-trpc",
+  "version": "0.1.0",
+  "description": "",
+  "main": "./index.ts",
+  "scripts": {
+    "check:type": "tsc --noEmit"
+  },
+  "files": [
+    "client",
+    "server",
+    "index.ts",
+    "tsconfig.json",
+    "README.md"
+  ],
+  "keywords": [
+    "tushan",
+    "react-admin",
+    "react",
+    "admin",
+    "adminjs",
+    "admin.js",
+    "trpc"
+  ],
+  "author": "moonrailgun <moonrailgun@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@trpc/client": "^10.45.1",
+    "@trpc/server": "^10.45.1",
+    "tushan": "workspace:*",
+    "zod": "*"
+  },
+  "peerDependencies": {
+    "@trpc/client": "^10.45.1",
+    "@trpc/server": "^10.45.1",
+    "tushan": "workspace:*",
+    "zod": "*"
+  }
+}
