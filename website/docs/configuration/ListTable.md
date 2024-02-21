@@ -1,11 +1,8 @@
----
-sidebar_position: 3
-title: <ListTable />
----
+## `<ListTable />`
 
-`<ListTable />` 是一个预设好的列表视图。包含列表展示、侧边栏、过滤条件、导入导出
+The `<ListTable />` component is a pre-configured list view that includes list display, sidebar, filter conditions, and import/export functionality.
 
-一个常见的`<ListTable />`长成下面这个样子
+A typical `<ListTable />` looks like this:
 
 ```tsx
 <ListTable
@@ -24,7 +21,7 @@ title: <ListTable />
 />
 ```
 
-- `filter`: 用于定义过滤条件，过滤条件用于提供给用户筛选记录的方式。一个简单的示例是这样的:
+- `filter`: Defines filter conditions to allow users to filter records. A simple example is as follows:
   ```tsx
   <ListTable
     filter={[
@@ -34,11 +31,11 @@ title: <ListTable />
     ]}
   />
   ```
-  *一个特殊的约定是我们会定义`q`为通用的搜索条件，比如文档的标题和内容。*
+  *A special convention is defining `q` as a universal search condition, such as for document titles and content.*
 
-- `fields`: 其中`fields`表示要渲染的字段，在列表中则是列表项，在侧边栏则是对应表单的表单项。通过不同的工厂函数生成的不同字段类型的`createXXXField`函数对应多个不同类型数据的渲染方式。
+- `fields`: The `fields` parameter specifies the fields to be rendered in the list, with each field corresponding to a list item in the list view and a form field in the sidebar. Different types of fields are rendered using various factory functions like `createXXXField`, tailored to different data types.
 
-- `action`: 表示需要支持的常见操作类型，常见的操作类型为`创建`, `查看详情`, `编辑`, `删除`。以及 `导出`, `刷新`, 同时还支持自定义操作。一个自定义操作的例子如下:
+- `action`: Specifies the common operation types to be supported, such as `create`, `view details`, `edit`, `delete`, along with `export`, `refresh`, and also supports custom operations. An example of a custom operation is as follows:
   ```tsx
   <ListTable
     action={{
@@ -54,3 +51,5 @@ title: <ListTable />
     }}
   />
   ```
+
+This setup allows for a flexible and feature-rich list view that can be customized to fit various backend management needs.

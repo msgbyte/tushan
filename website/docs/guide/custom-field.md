@@ -1,15 +1,15 @@
 ---
 sidebar_position: 3.5
-title: 自定义字段
+title: Custom Fields
 ---
 
-`Tushan` 默认预设了大量的字段类型。形如: `createXXXField()`
+`Tushan` comes pre-equipped with a wide variety of field types, such as: `createXXXField()`
 
-但是作为开发者往往会有希望实现自己的组件。本章将会学习如何开发自己的自定义组件。
+However, developers often wish to implement their own components. This chapter will guide you on how to develop your own custom components.
 
-在 `Tushan` 中，一个字段会被归纳为两大类，即**编辑态(edit)**与**展示态(detail)**。因此，我们只需要实现一个字段的两种状态就可以用于我们几乎所有的场景。
+In `Tushan`, a field is categorized into two main states: **edit** and **detail**. Therefore, by implementing these two states for a field, it can be used in almost all scenarios.
 
-`Tushan` 提供了开箱即用的工具函数`createFieldFactory`来帮助开发者快速实现字段的两种状态:
+`Tushan` provides an out-of-the-box utility function `createFieldFactory` to help developers quickly implement these two states of a field:
 
 ```tsx
 import { createFieldFactory } from 'tushan';
@@ -20,7 +20,7 @@ export const createTextField = createFieldFactory({
 });
 ```
 
-比如我们实现一个富文本编辑器。那么我们的伪代码可能会是这样的:
+For instance, if we want to implement a rich text editor, our pseudocode might look like this:
 
 ```tsx
 import { RichEditor, RichEditorViewer } from 'richeditor';
@@ -57,19 +57,19 @@ export const createRichEditorField = createFieldFactory({
 });
 ```
 
-在这个示例中，我们假设有一个`richeditor`库，然后分别实现这个字段的 edit 和 detail 两种形式，通过这个我们假设的`richeditor`库来处理数据(value)和修改的回调
+In this example, assuming there's a `richeditor` library, we implement both the edit and detail forms of the field, handling data (value) and change callbacks through this hypothetical `richeditor` library.
 
-同时我们还可以通过 `props.options` 来获取当我们创建是的外部输入, 来进行差异化的配置
+We can also use `props.options` to access external inputs provided during creation for differentiated configuration.
 
-当我们使用我们的组件时，就可以类似其他的基础字段一样使用 `createRichEditorField(source, options)` 来调用
+When using our component, it can be invoked like any other basic field using `createRichEditorField(source, options)`.
 
-## 获取上下文信息
+## Accessing Context Information
 
-有时候在我们自定义字段的时候，不仅仅需要关心本身的属性，还需要关心这条记录的其他字段的内容做一些联动。
+Sometimes, when customizing fields, it's not only the field's properties that matter but also the need to consider the content of other fields in the record for some interactivity.
 
-### 列表视图与详情视图
+### List and Detail Views
 
-在 `list` 和 `detail` 中我们可以通过 `useRecordContext` 来获取上下文
+In `list` and `detail` views, we can use `useRecordContext` to access the context:
 
 ```tsx
 import { useRecordContext } from 'tushan';
@@ -86,9 +86,9 @@ export const MyField: FieldDetailComponent<string> = React.memo(
 MyField.displayName = 'MyField';
 ```
 
-### 编辑视图
+### Edit View
 
-在编辑视图中，我们需要用到`Form`提供的上下文, 一个简单的用法如下:
+In the edit view, we need to use the context provided by `Form`, a simple usage is as follows:
 
 ```tsx
 import { Form } from 'tushan';
@@ -106,6 +106,6 @@ export const MyField: FieldEditComponent<string> = React.memo(
 MyField.displayName = 'MyField';
 ```
 
-### 过滤条件视图
+### Filter View
 
-目前暂不支持，如有需要可以开启 Issue 告诉开发者
+Currently, this is not supported. If needed, you can open an Issue to inform the developers.

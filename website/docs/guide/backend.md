@@ -1,59 +1,57 @@
 ---
 sidebar_position: 0
-title: 数据后端
+title: Data Backend
 ---
 
-`Tushan` 的数据接口设计与 `react-admin` 保持一致，因此我们可以直接复用 `react-admin` 已有的后端接口生态.
+`Tushan`'s data interface design is consistent with `react-admin`, allowing for the direct reuse of the existing backend interface ecosystem of `react-admin`.
 
-## 使用社区已有的生态
+## Using Existing Community Ecosystem
 
-访问此处查看可以直接使用的数据后端: [https://marmelab.com/react-admin/DataProviderList.html](https://marmelab.com/react-admin/DataProviderList.html)
+Visit the following link to view directly usable data backends: [https://marmelab.com/react-admin/DataProviderList.html](https://marmelab.com/react-admin/DataProviderList.html)
 
-## 基于现有的接口格式实现相应后端
+## Implementing a Corresponding Backend Based on Existing Interface Formats
 
-以默认内置的 `jsonServerProvider` 为例:
+Taking the default built-in `jsonServerProvider` as an example, you need to implement the following interfaces on your backend:
 
-你需要在你的后端分别实现以下接口:
+- `GET /`: Fetch list data
+  - Query parameters:
+    - `_sort`: Sort field
+    - `_order`: Sort order: `ASC` | `DESC`
+    - `_start`: Query start position
+    - `_end`: Query end position
+  - Return content:
+    - Header: `X-Total-Count: <number>` defines the total count
+    - Body: An array of database entries, each must include an id
 
-- `GET /`: 获取列表数据
-  - 查询参数:
-    - `_sort`: 排序字段
-    - `_order`: 排序方式: `ASC` | `DESC`
-    - `_start`: 查询开始位置
-    - `_end`: 查询结束位置
-  - 返回内容:
-    - Header: `X-Total-Count: <number>` 定义总数
-    - Body: 数据库数组，必须包含id
+- `GET /:id`: Fetch single data entry
+  - Query parameters:
+    - `:id`: Database id
+  - Return content:
+    - Body: A database object, must include an id
 
-- `GET /:id`: 获取单条数据
-  - 查询参数:
-    - `:id`: 数据库id
-  - 返回内容:
-    - Body: 数据库对象，必须包含id
+- `POST /`: Create data
+  - Query parameters:
+    - Body: Object of create form content
+  - Return content:
+    - Body: The newly created database object, must include an id
 
-- `POST /`: 创建数据
-  - 查询参数:
-    - Body: 创建表单内容对象
-  - 返回内容:
-    - Body: 新建的数据库对象，必须包含id
+- `PUT /:id`: Update data
+  - Query parameters:
+    - Body: Object of edit form content
+  - Return content:
+    - Body: The complete data of the edited form, must include an id
 
-- `PUT /:id`: 修改数据
-  - 查询参数:
-    - Body: 编辑表单内容对象
-  - 返回内容:
-    - Body: 编辑后的表单完整数据，必须包含id
+- `DELETE /:id`: Delete data
+  - Query parameters:
+    - `:id`: The id of the data to be deleted
+  - Return content:
+    - Body: The deleted data object
 
-- `DELETE /:id`: 删除数据
-  - 查询参数:
-    - `:id`: 删除数据的id
-  - 返回内容:
-    - Body: 删除的数据对象
+You can use the `chrome devtool` network panel to observe the request parameters.
 
-你可以打开 `chrome devtool` 的 network panel 来查看请求的参数
+## Implementing Your Own `DataProvider` to Adapt to Existing Backends
 
-## 实现自己的 `DataProvider` 以适配已有的后端
-
-首先所有的接口定义都是定义在 `DataProvider` 类型中的，你可以通过以下方式开始:
+First, all interface definitions are defined in the `DataProvider` type, and you can start as follows:
 
 ```tsx
 import type { DataProvider } from 'tushan';
@@ -71,4 +69,4 @@ export const myCustomDataProvider: DataProvider = {
 };
 ```
 
-你需要分别实现上面的方法。通过不同的请求来实现接口数据的适配。你可以参考`tushan`自带的`jsonServerProvider`的实现
+You need to implement the above methods separately. Adapt the interface data through different requests. You can refer to the implementation of `jsonServerProvider` that comes with `tushan`.

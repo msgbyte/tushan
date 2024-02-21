@@ -1,13 +1,14 @@
 ---
 sidebar_position: 5
-title: 自定义 document head
+title: Customizing Document Head
 ---
 
-常见的，我们可能需要修改网页的标题、语言、元信息等。
+Commonly, there might be a need to modify the webpage's title, language, meta information, etc.
 
-`Tushan` 作为开箱即用的后台管理自带导出了`react-helmet`。
+`Tushan`, being a ready-to-use backend management solution, comes with `react-helmet` exported out of the box.
 
-使用方式非常简单，如下:
+The usage is very straightforward, as shown below:
+
 ```tsx
 <Helmet>
     <meta charSet="utf-8" />

@@ -1,6 +1,6 @@
 ---
 sidebar_position: 2
-title: 资源路由
+title: Resource Routing
 ---
 
-资源路由的文档可以见 [`<Resource />`](../configuration/Resource.md)
+The documentation for resource routing can be found in [`<Resource />`](../configuration/Resource.md).

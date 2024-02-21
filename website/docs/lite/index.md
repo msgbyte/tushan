@@ -3,24 +3,24 @@ sidebar_position: 1
 title: Tushan Lite
 ---
 
-## 什么是 Tushan Lite
+## What is Tushan Lite
 
-Tushan Lite 是基于Tushan的纯配置化解决方案，只需要一个简单的配置文件即可实现一整套的后台管理项目的前端实现.
+Tushan Lite is a purely configuration-based solution built on Tushan, requiring only a simple configuration file to implement a complete set of front-end solutions for backend management projects.
 
-## 快速体验
+## Quick Experience
 
-你可以访问 [https://tushan-lite.msgbyte.com/?config=https://tushan-lite.msgbyte.com/demo.json](https://tushan-lite.msgbyte.com/?config=https://tushan-lite.msgbyte.com/demo.json) 查看示例项目
+You can visit [https://tushan-lite.msgbyte.com/?config=https://tushan-lite.msgbyte.com/demo.json](https://tushan-lite.msgbyte.com/?config=https://tushan-lite.msgbyte.com/demo.json) to view the sample project.
 
-查看 [https://tushan-lite.msgbyte.com/demo.json](https://tushan-lite.msgbyte.com/demo.json) 可以查看demo配置
+Viewing [https://tushan-lite.msgbyte.com/demo.json](https://tushan-lite.msgbyte.com/demo.json) allows you to see the demo configuration.
 
 ![](/img/docs/misc/tushan-lite.png)
 
-### 使用自定义配置
+### Using Custom Configurations
 
-你可以在`?config=`后追加上自己的配置文件，如: `https://tushan-lite.msgbyte.com/?config=<config-url>`
+You can append your own configuration file after `?config=`, like: `https://tushan-lite.msgbyte.com/?config=<config-url>`
 
-## Tushan Lite会盗取拦截用户信息么
+## Will Tushan Lite Steal or Intercept User Information?
 
-不会，Tushan Lite 只是一个前端运行的容器，如果了解过 `react native`/ `Swagger` 就可以理解，`Tushan Lite` 的地位类似于 `Expo`/`Swagger`, 具体的后端实现还是需要发送到远程你自己的服务器上的。
+No, Tushan Lite is just a front-end running container. If you understand `react native`/`Swagger`, you can comprehend that the position of `Tushan Lite` is similar to `Expo`/`Swagger`. The specific backend implementation still needs to be sent to your own remote server.
 
-如果仍然不放心，可以自行编译/部署到自己的服务器上。源码在这里: [https://github.com/msgbyte/tushan/tree/master/lite](https://github.com/msgbyte/tushan/tree/master/lite)
+If still concerned, you can compile/deploy it to your own server. The source code is here: [https://github.com/msgbyte/tushan/tree/master/lite](https://github.com/msgbyte/tushan/tree/master/lite)

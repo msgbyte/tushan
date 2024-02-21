@@ -1,9 +1,6 @@
----
-sidebar_position: 2
-title: <Resource />
----
+## `<Resource />` Component
 
-`<Resource />` 组件定义一个数据实体的实例，会自动产生对应的菜单、路由等常规信息。
+The `<Resource />` component defines an instance of a data entity, automatically generating corresponding menus, routes, and other standard information.
 
 ```tsx
 <Resource
@@ -13,11 +10,11 @@ title: <Resource />
 />
 ```
 
-其中 `name` 的值会涉及到接口的自动请求与缓存定义
+Here, the value of `name` is involved in the automatic request and cache definition of the interface.
 
-`<Resource />` 的具体实现由其参数决定，如果仅有上面的属性的话是没有任何内容的，一般而言我们会为期增加list参数作为默认的页面。
+The specific implementation of `<Resource />` is determined by its parameters. If it only has the above attributes, it will not contain any content. Generally, we add a `list` parameter as the default page.
 
-比如渲染一个最简单的列表
+For example, to render a simple list:
 
 ```tsx
 <Resource
@@ -42,13 +39,13 @@ title: <Resource />
 />
 ```
 
-我们可以使用 `tushan` 内置的 `<ListTable />` 组件来渲染一个基本列表。这个组件可以实现: 过滤、排序、增删改查等常见的列表相关操作。
+We can use the built-in `<ListTable />` component in `tushan` to render a basic list. This component can perform common list-related operations like filtering, sorting, CRUD actions, etc.
 
-对于字段的渲染，我们可以通过形如 `createTextField` 的方法告知 `<ListTable />` 组件我们要声明的字段类型。参数类型为: `createTextField(source, options?)`，其中`source`是前后端统一的字段名，而options则是该字段的一些可供自定义的配置参数。对于不同的字段类型可能会有不同的配置。
+For field rendering, we can use methods like `createTextField` to inform the `<ListTable />` component of the field types we want to declare. The method signature is `createTextField(source, options?)`, where `source` is the field name unified between the frontend and backend, and `options` are customizable configuration parameters for the field. Different field types may have different configurations.
 
-另外, `<ListTable />` 还提供了一个 `action` 参数用于自定义是否打开列表的 **创建**/**查看详情**/**编辑**/**删除** 的操作。
+Additionally, `<ListTable />` provides an `action` parameter to customize whether to enable operations like **create**, **view details**, **edit**, and **delete** for the list.
 
-对于信息的搜索与条件过滤。`<ListTable />`提供`filter`参数用于构建过滤条件字段。形如:
+For search and condition filtering, `<ListTable />` offers a `filter` parameter to construct filter condition fields, like so:
 ```tsx
 <ListTable
   filter={[
@@ -60,9 +57,9 @@ title: <Resource />
 />
 ```
 
-一般来说，我们为把`q`定义为通用的搜索逻辑，其他的具体的字段需要响应的后端提供相关能力。
+Typically, `q` is defined as a universal search logic, while other specific fields require the corresponding backend capabilities to support them.
 
-一个常见的列表搜索请求体大概是这样的:
+A common list search request body might look like this:
 
 ```json
 // GET

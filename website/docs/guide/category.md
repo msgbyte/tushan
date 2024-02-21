@@ -1,13 +1,13 @@
 ---
 sidebar_position: 10
-title: 菜单分类
+title: Menu Categorization
 ---
 
-当我们的菜单过多的时候，仅一级的菜单将无法满足我们的要求，在后台应用中我们往往会选择将相同类型的菜单进行分类。
+When our menu items become too numerous, a single-level menu can no longer meet our needs. In backend applications, we often choose to categorize menus of the same type.
 
 ![](/img/docs/misc/category.png)
 
-在`Tushan`中，我们的菜单分类方式更加符合直觉:
+In `Tushan`, our method of categorizing menus is more intuitive:
 
 ```tsx
 <Tushan>
@@ -17,9 +17,9 @@ title: 菜单分类
 </Tushan>
 ```
 
-我们只需要将我们想要放在某个分类下的入口用`<Category />` 组件包裹起来即可。
+We simply need to wrap the entries we want to place under a certain category with the `<Category />` component.
 
-如:
+For example:
 ```tsx
 <Tushan>
   <Category name="detail">
@@ -30,13 +30,13 @@ title: 菜单分类
 </Tushan>
 ```
 
-除了 `<Resource />` 组件以外，还支持 `<CustomRoute />` 组件
+In addition to the `<Resource />` component, the `<CustomRoute />` component is also supported.
 
-### 多层嵌套
+### Multi-level Nesting
 
-我们可以任意的在我们的资源外包裹 `<Category />` 组件以达到更加复杂的组合
+We can arbitrarily wrap our resources with the `<Category />` component to achieve more complex combinations.
 
-如:
+For example:
 ```tsx
 <Tushan>
   <Category name="category1">

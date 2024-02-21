@@ -1,8 +1,8 @@
 {
-  "label": "应用配置",
+  "label": "Application Configuration",
   "position": 10,
   "link": {
     "type": "generated-index",
-    "description": "Tushan 应用配置"
+    "description": "Tushan Application Configuration"
   }
 }

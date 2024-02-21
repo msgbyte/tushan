@@ -1,11 +1,6 @@
----
-sidebar_position: 1
-title: <Tushan />
----
+## `<Tushan />` Component
 
-## `<Tushan />` 组件
-
-`<Tushan />` 组件是后台管理中一切的入口，一个一个最简单的 `<Tushan />` 组件大概是长成下面这样的:
+The `<Tushan />` component serves as the entry point for backend management. A simple `<Tushan />` component setup might look like this:
 
 ```tsx
 <Tushan
@@ -16,17 +11,17 @@ title: <Tushan />
 </Tushan>
 ```
 
-- `basename` 定义路由的基础路径，默认是 `/`, 你也可以将其改为 `/admin` 或者其他的子路径以方便和其他的项目做集成
-- `dataProvider` 定义与后端接口交互的方式，一般来说常规的json数据格式可以直接用 `tushan` 预设好的方案:
+- `basename` defines the base path for routing, with the default being `/`. You can change this to `/admin` or another subpath to integrate with other projects.
+- `dataProvider` specifies how to interact with backend interfaces. For standard JSON data formats, you can directly use the preset solution from `tushan`:
   ```tsx
   import { jsonServerProvider } from 'tushan';
 
   const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com');
   ```
 
-  其中 `https://jsonplaceholder.typicode.com` 替换成自己的服务端接口地址
+  Replace `https://jsonplaceholder.typicode.com` with your own server's API endpoint.
 
-  当然你可以自己实现自己的`dataProvider`, 具体类型声明可以参考如下结构:
+  You can also implement your own `dataProvider`. The specific type declaration can refer to the following structure:
 
   ```tsx
   import { DataProvider, fetchJSON, HTTPClient } from 'tushan';
@@ -39,11 +34,11 @@ title: <Tushan />
   }
   ```
   
-### 自定义布局
+### Custom Layout
 
-`Tushan` 中的布局是完全可以被自定义的，包括整体布局以及细节的header/footer等。
+The layout in `Tushan`, including the overall structure and details like header/footer, is fully customizable.
 
-一个修改布局的示例如下:
+Here is an example of modifying the layout:
 
 ```tsx
 <Tushan
@@ -54,11 +49,11 @@ title: <Tushan />
 </Tushan>
 ```
 
-在这个示例中自定义了标题栏与底部的footer
+This example customizes the header and the footer.
 
-关于如何定义仪表盘可以见 [自定义仪表盘](../guide/custom-dashboard.md)
+For information on customizing the dashboard, see [Custom Dashboard](../guide/custom-dashboard.md).
 
-或者你也可以整体替换掉整个布局, 如下:
+Alternatively, you can replace the entire layout as follows:
 
 ```tsx
 <Tushan
@@ -67,13 +62,13 @@ title: <Tushan />
 </Tushan>
 ```
 
-你可以在源码中查看默认布局实现用于参考:
+You can refer to the default layout implementation in the source code for guidance:
 
 [https://github.com/msgbyte/tushan/blob/master/packages/tushan/client/components/layout/index.tsx](https://github.com/msgbyte/tushan/blob/master/packages/tushan/client/components/layout/index.tsx)
 
-### 自定义登录界面
+### Custom Login Page
 
-类似的，你可以直接在Tushan组件中进行自定义登录界面
+Similarly, you can customize the login page directly within the Tushan component:
 
 ```tsx
 <Tushan
@@ -82,6 +77,6 @@ title: <Tushan />
 </Tushan>
 ```
 
-登录界面的实现可以参考默认的登录页面实现:
+The implementation of the login page can refer to the default login page:
 
 [https://github.com/msgbyte/tushan/blob/master/packages/tushan/client/components/defaults/LoginPage.tsx](https://github.com/msgbyte/tushan/blob/master/packages/tushan/client/components/defaults/LoginPage.tsx)

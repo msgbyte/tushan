@@ -1,13 +1,13 @@
 ---
 sidebar_position: 7
-title: 列表过滤
+title: List Filtering
 ---
 
-作为开箱即用的后台管理平台解决方案，`Tushan` 当然是支持列表过滤的。
+As a ready-to-use backend management platform solution, `Tushan` naturally supports list filtering.
 
-在 `<ListTable />` 组件中可以指定需要过滤的字段, `Tushan` 会为你添加到表头。
+Within the `<ListTable />` component, you can specify the fields that need filtering, and `Tushan` will add them to the table header for you.
 
-如下:
+For example:
 
 ```tsx
 <ListTable

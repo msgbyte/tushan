@@ -2,55 +2,55 @@
 sidebar_position: 3
 ---
 
-# 为什么选择tushan
+# Why Choose Tushan
 
-## 动机
+## Motivation
 
-在软件开发中，后台应用的开发是一个非常重要的环节。然而，很多开发者对于后台应用的开发都深恶痛绝。这是因为很多后台应用都是重复的增删改查加上一些小小的特殊逻辑。这些重复性模板上的工作非常不值得花费时间。
+In software development, the development of backend applications is a crucial aspect. However, many developers despise developing backend applications. This is because many backend applications involve repetitive CRUD operations along with some minor special logic. The work on these repetitive templates is not worth spending time on.
 
-与此同时，我们可以看到，大部分 UI 系统都有大量相同的重复工作（如按钮、表单、排版、展示等）。同样地，大部分后台管理平台也有大量相同重复工作。如果我们能够把 UI 需求抽象成一个个 xx-design，为什么我们后台需求不能抽象成一个开箱即用库呢？
+At the same time, we can see that most UI systems involve a significant amount of repetitive work (such as buttons, forms, layouts, displays, etc.). Similarly, most backend management platforms also involve a lot of repetitive work. If we can abstract UI requirements into reusable design components, why can't we abstract our backend requirements into a ready-to-use library?
 
-## Tushan 的特殊之处在哪里
+## What Makes Tushan Special
 
-现在市面上有很多现成的、完整的 `xx-admin` 应用，直接就做好了一个完整的 `admin` 项目然后提供给你。直接给你提供一整套的技术栈，你只需要直接运行命令就可以启动了，然后再根据你的需求进行修改与调整。
+There are many ready-made, complete `xx-admin` applications available in the market, which provide you with a complete `admin` project out of the box. They offer you a full stack of technologies, and you only need to run a command to start, and then make modifications and adjustments according to your needs.
 
-但是这些真的好用么？一下子面对一个完整的、庞大的系统，相信很多人都是手足无措的，不得不花费大量的时间去学习文档、阅读源码的。很多刚入门的新手或者初次接触到这类系统的同学会将原因归类在自身，是自己的能力问题。但是我多年的编程经验来看，这其实并不是开发者自身的问题。
+But are these really efficient? Facing a complete and complex system all at once, many people find themselves at a loss and have to spend a lot of time learning documentation and reading source code. Many beginners or those who encounter such systems for the first time tend to attribute the difficulty to themselves, thinking it's a matter of their own capabilities. However, from my years of programming experience, I can say that this is not necessarily the fault of the developers themselves.
 
-#### 做减法永远比做加法难
+#### Subtraction Is Always Harder Than Addition
 
-市面上大多数系统都是做好了一个完整的应用让你去做减法，而后期当你的需求超出预设的框架时，相当于天然的背负了大量技术负债 —— 技术负债往往是因为同一个系统前期和后期的设计目的是不一样导致的，而现成的系统当然不能完全匹配上想要进行二次开发的需求。因此这就是为什么很多开发者不愿意去做一个完整系统的二次开发。
+Most systems available in the market are pre-built applications that require you to subtract from them. Later, when your requirements exceed the predefined framework, you naturally accumulate a significant amount of technical debt. Technical debt often arises because the design purposes of the same system in the early and later stages are different, and ready-made systems cannot fully meet the requirements for secondary development. Therefore, this is why many developers are unwilling to engage in secondary development of a complete system.
 
-随着投入的增加，往往会面临着重构的情况。最后不得不推倒重来，这也是这类现成系统的上限所在。
+With increasing investment, you often face the need for refactoring. Ultimately, you may have to start over, which represents the limit of such ready-made systems.
 
-而`tushan`的设计就是想要打破传统`xx-admin`系统上手难、开发难、学习成本高、上限低的困境。
+The design of `tushan`, on the other hand, aims to break the dilemma of the difficulty in getting started, development difficulty, high learning costs, and low ceiling of traditional `xx-admin` systems.
 
-相比于一个现成系统，`tushan`更多的将自己定位成一个**工具库**，你可以通过提供的现成工具快速构建出一个开箱即用的后台管理平台的前端项目，而作为工具库的好处在于你可以将`tushan`无缝的嵌入现有的前端项目中，此外，`tushan`的学习成本是一个非常平滑的曲线而不是一个陡峭的曲线。渐进式的开发体验会让人很舒服。
+Compared to a ready-made system, `tushan` positions itself more as a **toolbox**. You can quickly build a ready-to-use frontend project for backend management by using the provided tools. The advantage of being a toolbox is that you can seamlessly integrate `tushan` into existing frontend projects. Furthermore, the learning curve of `tushan` is a very smooth curve rather than a steep one. The progressive development experience is very comfortable.
 
-相比于做减法的困难，`tushan`正是在引导开发者做加法，而在做加法的过程中，很多重复的工作都被`Tushan`完成了，作为业务开发者只需要专注于自己的业务即可。
+Compared to the difficulty of subtraction, `tushan` guides developers to do addition. In the process of addition, many repetitive tasks are completed by `Tushan`, allowing business developers to focus on their own business.
 
-## Tushan 的优势
+## Advantages of Tushan
 
-#### 随着时间的投入完成度发生的变化
+#### Changes in Completion with Time Investment
 
-在`tushan`你可以放心的投入时间，获得一个线性的变化。而不是快速获得一个完整项目后面临难以下手的情况
+In `tushan`, you can confidently invest time and experience linear changes, instead of quickly obtaining a complete project and then facing difficulties.
 
 ![](/img/docs/why/1.png)
 
-#### 长久陪伴大于一锤子买卖
+#### Long-Term Accompaniment is Better Than a One-Time Deal
 
-`Tushan`的自身定位就是一个库，而不是一个现成的系统。`Tushan`可以提供给开发者的是快速的启动页面，也可以长久陪伴用户进行开发。
+The positioning of `Tushan` itself is a library, not a ready-made system. `Tushan` can provide developers with a quick start page and accompany users in development for the long term.
 
-如果能够理解组件库在开发生命周期流程中的定义，那么也就可以理解`Tushan`做的事情与定位了。
+If one can understand the definition of a component library in the development life cycle process, then one can also understand what `Tushan` does and its positioning.
 
-#### 自由度
+#### Flexibility
 
-在用一些现成的库的时候往往对面对这样的一个问题。就是其他人做好的工作能不能很好的匹配上自己的需求？如果不匹配怎么办？
+When using some ready-made libraries, you often face a problem: can the work done by others match your needs well? What if it doesn't match?
 
-而`Tushan`的每一块实现都是可以自由定义的，如果你没有很高的界面要求，你可以用`Tushan`快速搭建出一套功能完备的页面，如果你有很高的自定义要求，则可以只使用一部分`tushan`的功能，而一部分则进行自定义。
+However, each component of `Tushan` is freely definable. If you don't have high interface requirements, you can quickly build a fully functional page with `Tushan`. If you have high customization requirements, you can only use some of `Tushan`'s functions while customizing others.
 
-## 谁在用
+## Who's Using It
 
-- [Tailchat](https://tailchat.msgbyte.com/) 的后台已经完全由`Tushan`支持
+- The backend of [Tailchat](https://tailchat.msgbyte.com/) is fully supported by `Tushan`.
 - [fastgpt-admin](https://github.com/stakeswky/fastgpt-admin)
 - [FastGPT](https://github.com/c121914yu/FastGPT)
-- 创建 [issue](https://github.com/msgbyte/tushan/issues/new) 告诉我们你在使用...
+- Create an [issue](https://github.com/msgbyte/tushan/issues/new) to tell us if you're using it...

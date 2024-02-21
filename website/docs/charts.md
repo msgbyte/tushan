@@ -2,21 +2,20 @@
 sidebar_position: 6
 ---
 
-# 图表
+# Charts
 
-图表展示是后台管理系统重要一环，`Tushan` 作为一个开箱即用的最佳实践内部自带了一个图表库 `recharts`
+Chart display is an important part of backend management systems. As a ready-to-use best practice, `Tushan` comes with a charting library called `recharts` internally.
 
-当然你可以不用自带的而使用自定义的库，打包系统会自动过滤到没有引入依赖
+Of course, you can use your own custom library instead of the built-in one, and the bundling system will automatically filter out dependencies that are not imported.
 
-你可以通过如下方式引入:
+You can import it as follows:
 
 ```ts
 import { LineChart } from 'tushan/chart'
 ```
 
-### 示例
+### Example
 
 ![](/img/docs/misc/chart.png)
 
-
-更多关于 `recharts` 的介绍与示例可以访问他的官方文档: [https://recharts.org/en-US/examples](https://recharts.org/en-US/examples)
+For more information and examples about `recharts`, you can visit its official documentation: [https://recharts.org/en-US/examples](https://recharts.org/en-US/examples)

@@ -1,11 +1,11 @@
 ---
 sidebar_position: 3
-title: 自定义路由
+title: Custom Routes
 ---
 
-除了与后端数据库一一对应的资源路由以外，`tushan` 还支持自定义路由
+In addition to the resource routes that correspond one-to-one with the backend database, `tushan` also supports custom routes.
 
-一个自定义路由定义如下:
+A custom route is defined as follows:
 
 ```tsx
 import { CustomRoute } from 'tushan';
@@ -19,13 +19,13 @@ import { CustomRoute } from 'tushan';
 </Tushan>
 ```
 
-其中`name` 表示路由对应的url第一以及唯一标识
+Here, `name` represents the unique identifier for the route's URL.
 
-`icon` 标识需要显示在菜单栏上的图标
+`icon` indicates the icon to be displayed in the menu bar.
 
-对于翻译，可以像普通的资源路由一样使用i18n约定好的翻译内容，也可以简单的使用`label`属性用于指定显示名称
+For translations, you can use the i18n conventions as with standard resource routes, or you can simply use the `label` property to specify a display name.
 
-另外的，还提供以下属性:
+Additionally, the following properties are provided:
 
-- `noMenu`: 是否在菜单中显示
-- `noLayout`: 是否把渲染内容嵌入在框架中(包含顶部导航栏、侧边菜单栏、底部导航栏)
+- `noMenu`: Whether to display in the menu.
+- `noLayout`: Whether to embed the rendered content within the framework (including the top navigation bar, side menu bar, bottom navigation bar).

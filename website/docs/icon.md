@@ -2,17 +2,15 @@
 sidebar_position: 5
 ---
 
-# 图标
+# Icons
 
-因为`Tushan`内置`arco-design`，而`arco-design`天然自带了一套图标。
+Since `Tushan` integrates `arco-design`, and `arco-design` comes with a set of icons by default, `Tushan` can directly use the icon designs from `arco-design`.
 
-因此`Tushan`也能直接引用`arco-design`的图标设计
+The complete list of icons can be accessed at: [https://arco.design/react/components/icon](https://arco.design/react/components/icon)
 
-完整的图标列表可以访问: [https://arco.design/react/components/icon](https://arco.design/react/components/icon)
+## Usage
 
-## 用法
-
-为了可以分开引用，你需要通过`tushan/icon`来引用
+To use icons separately, you need to import them via `tushan/icon`.
 
 ```tsx
 import { IconUser } from "tushan/icon"

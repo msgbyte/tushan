@@ -1,30 +1,29 @@
 ---
 sidebar_position: 2
-title: 在 Laf 中使用
+title: Using Tushan in Laf
 ---
 
-> `Laf` 是一个集函数、数据库、存储为一体的云开发平台
+> `Laf` is a cloud development platform that integrates functions, databases, and storage.
 
-我们可以通过 `Tushan` 预设好的库快速实现 `Laf` 数据库的后台管理页面，仅需要简单配置一下字段列表即可快速实现后台管理系统
+We can quickly implement the backend management page for the `Laf` database using the preset libraries in `Tushan`, with only a simple configuration of the field list required to achieve rapid implementation of the backend management system.
 
-## 如何使用
+## How to Use
 
-### 从函数市场开始
+### Start from the Function Market
 
-你可以从 laf 的函数市场快速开始，点击使用模板以后则可以快速加入到你的应用
+You can quickly start from the Laf function market. After clicking "Use Template", you can quickly join your application.
 
 ![](/img/docs/misc/laf-func-market.png)
 
-为了你的数据库安全，请填入随机性比较大的密码与秘钥防止破解。
+For the security of your database, please fill in a password and key with high randomness to prevent cracking.
 
+### Manual Addition
 
-### 手动添加
+Create an interceptor in your Laf application (named: `__interceptor__`).
 
-在你的laf应用中创建一个拦截器(命名为: `__interceptor__`)
+Install the dependency `tushan-laf-json-server`, taking the latest version.
 
-安装依赖`tushan-laf-json-server`, 版本取最新版即可
-
-填入从以下内容开始:
+Start with the following content:
 
 ```tsx
 import { createTushanJsonServerInterceptor } from 'tushan-laf-json-server'
@@ -34,7 +33,7 @@ export default async function (ctx: FunctionContext) {
     return await createTushanJsonServerInterceptor(ctx as any, {
       auth: {
         /**
-         * 请修改以下三个字段，分别是后台的用户名，密码，和秘钥签名字段
+         * Please modify the following three fields, which are the username, password, and secret key signature fields of the backend.
          */
         username: 'tushan',
         password: "tushan",
@@ -42,10 +41,10 @@ export default async function (ctx: FunctionContext) {
       },
       config: {
         /**
-         * 以下是数据库模型以及模型对应字段的名称和类型
-         * 类型有: text,number,avatar,json,boolean,datetime,password,select,reference,textarea,email,image,url
+         * The following are the names and types of the database models and corresponding fields.
+         * Types include: text, number, avatar, json, boolean, datetime, password, select, reference, textarea, email, image, url
          * 
-         * action表示是否开启相应的功能，默认只有列表页面
+         * action indicates whether to enable the corresponding function. By default, only the list page is available.
          */
         resources: [
           {
@@ -78,34 +77,34 @@ export default async function (ctx: FunctionContext) {
 }
 ```
 
-## 配置解释
+## Configuration Explanation
 
-在 `createTushanJsonServerInterceptor` 中需要两个参数, 分别是http请求的上下文 `ctx`, 和 tushan 所需要的配置选项.
+In `createTushanJsonServerInterceptor`, two parameters are required: the http request context `ctx` and the configuration options required by `tushan`.
 
-我们主要说一下配置:
+We mainly explain the configuration:
 
-- `header`: 标题
-- `footer`: 页脚
-- `auth`: 鉴权相关
-  - `username`: 后台用户名
-  - `password`: 后台密码
-  - `secret`: 用于签发token的秘钥，随机字符串即可
-- `resources`: 一个数组，用于描述配置资源
-  - `name`: 模型名，与laf的数据集名字对应
-  - `label`: 显示名称，可选
-  - `fields`: 模型字段, 是一个数字
-    - `name`: 字段名
-    - `type`: 字段类型, 内置支持 text,number,avatar,json,boolean,datetime,password,select,reference,textarea,email,image,url
-    - `options`: 字段配置, 可选, 参考`tushan`的字段配置使用
-  - `filter`: 筛选项，配置同`fields`
-  - `action`: 启用的功能
-    - `create`: 创建
-    - `detail`: 详情
-    - `edit`: 编辑
-    - `delete`: 删除
-- `authProvider`：可选，如果想实现自己的登录鉴权逻辑可以复写
-- `dataProvider`：可选，如果想实现自己的资源获取逻辑可以复写
+- `header`: Title
+- `footer`: Footer
+- `auth`: Authentication-related
+  - `username`: Backend username
+  - `password`: Backend password
+  - `secret`: Secret key used to generate tokens, a random string is sufficient
+- `resources`: An array for describing configured resources
+  - `name`: Model name, corresponding to the Laf dataset name
+  - `label`: Display name, optional
+  - `fields`: Model fields, an array
+    - `name`: Field name
+    - `type`: Field type, internally supports text, number, avatar, json, boolean, datetime, password, select, reference, textarea, email, image, url
+    - `options`: Field configuration, optional, refer to the usage of `tushan` field configuration
+  - `filter`: Filter options, configured the same as `fields`
+  - `action`: Enabled functions
+    - `create`: Create
+    - `detail`: Detail
+    - `edit`: Edit
+    - `delete`: Delete
+- `authProvider`: Optional, if you want to implement your own login authentication logic, you can override it
+- `dataProvider`: Optional, if you want to implement your own resource acquisition logic, you can override it
 
-## 访问后台
+## Accessing the Backend
 
-部署完毕后访问 `https://tushan-lite.msgbyte.com/?config=https://<appid>.laf.dev/tushan` 即可打开, `<appid>` 需要换成你自己的`laf`应用的`appid`
+After deployment, access `https://tushan-lite.msgbyte.com/?config=https://<appid>.laf.dev/tushan`, replacing `<appid>` with the `appid` of your own `Laf` application.

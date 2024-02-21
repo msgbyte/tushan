@@ -1,13 +1,13 @@
 ---
 sidebar_position: 11
-title: 权限控制与RBAC
+title: Permission Control and RBAC
 ---
 
-一般来说我们会把 `Tushan` 作为快速构建应用的一种解决方案，在最初应当是只有一种完全控制权限场景。
+Generally, we use `Tushan` as a solution for quickly building applications, initially designed to handle a single full-control permission scenario.
 
-但是在后续的迭代中，随着项目的变大，内容与管理员会变得更加复杂，因此我们需要对权限进行细分控制。
+However, as iterations progress and projects expand, the content and administrators become more complex, necessitating finer control over permissions.
 
-`Tushan` 提供了一个内置的权限控制模块，在 authProvider 中，即登录成功后，我们可以定义 `getPermissions` 来控制我们如何拿到权限。这里的函数返回的是一个 promise，意味着我们也可以通过二次请求获取权限。也可以在登录完毕后从请求的返回值获取。
+`Tushan` provides a built-in permission control module within the authProvider. After a successful login, we can define `getPermissions` to control how we obtain permissions. This function returns a promise, meaning we can also acquire permissions through a secondary request or from the response obtained post-login.
 
 ```tsx
 export const authProvider: AuthProvider = {
@@ -16,20 +16,20 @@ export const authProvider: AuthProvider = {
 };
 ```
 
-你可以在`getPermissions`中返回任意结果，因为`Tushan`并不会对其内容进行处理而是原样返回给用户自身
+You can return any result from `getPermissions`, as `Tushan` will not process its content but return it as-is to the user.
 
-## 基于角色的权限控制
+## Role-Based Access Control (RBAC)
 
-比如你可以在`getPermissions` 返回一组数组作为用户角色
+For example, you can return an array of roles as user permissions in `getPermissions`:
 
 ```tsx
 export const authProvider: AuthProvider = {
   // ....
-  getPermissions: () => Promise.resolve(['admin', 'user']), // 这是一个demo, 真实的内容可以从token中获取或者从接口中获取
+  getPermissions: () => Promise.resolve(['admin', 'user']), // This is a demo; actual roles can be obtained from a token or an API.
 };
 ```
 
-然后在资源定义的地方对其进行控制，比如我们假设只有管理员权限才能显示 `User` 模块，示例如下:
+Then, control access to resources based on roles. For instance, assuming only admins can access the `User` module:
 
 ```tsx
 <Tushan dataProvider={dataProvider} authProvider={authProvider}>
@@ -58,7 +58,7 @@ export const authProvider: AuthProvider = {
 </Tushan>
 ```
 
-或者我们可以进行更加细粒度的权限控制, 如所有人都能看到`user`权限，但是只有管理员才能增删改。
+Or for more granular control, where everyone can view `users`, but only admins can add, edit, or delete:
 
 ```tsx
 <Tushan dataProvider={dataProvider} authProvider={authProvider}>
@@ -85,7 +85,7 @@ export const authProvider: AuthProvider = {
 </Tushan>
 ```
 
-对于自定义组件，你可以使用 `usePermissions` 来获取权限内容:
+For custom components, you can use `usePermissions` to access permission data:
 
 ```tsx
 import { usePermissions } from 'tushan';
@@ -101,8 +101,8 @@ export const MyComponent = () => {
 };
 ```
 
-## 注意事项
+## Considerations
 
-当`getPermissions`无法正确获取到权限时，应当抛出一个异常或者返回`null`，而不是空数组或者其他的无权限状态。
+When `getPermissions` fails to retrieve permissions correctly, it should throw an exception or return `null`, rather than an empty array or another non-permission state.
 
-因为`Tushan`会在登录前和登录后分别检查一次，如果登录前的权限能够正常返回内容，则登录后就不会重复获取。
+`Tushan` checks permissions before and after login. If pre-login permissions are correctly returned, it will not fetch them again post-login.

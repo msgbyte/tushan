@@ -1,11 +1,11 @@
 ---
 sidebar_position: 1
-title: 登录鉴权
+title: Authentication
 ---
 
-一个后台服务在 90% 以上的场景都是需要登录鉴权的，毕竟在大多数情况下我们的后台操作是直接操作数据库的。而在 `tushan` 中我们自然提供了封装好的登录逻辑。
+In over 90% of cases, a backend service requires authentication, especially since most backend operations directly manipulate the database. Naturally, `tushan` provides a well-packaged login logic.
 
-我们需要准备 `authProvider` 来告诉 `tushan` 我们要如何处理登录的流程。
+You need to prepare an `authProvider` to inform `tushan` how to handle the login process.
 
 ```tsx
 <Tushan
@@ -16,7 +16,7 @@ title: 登录鉴权
 
 ![](/img/docs/misc/login.png)
 
-其中 `authProvider` 的接口定义如下:
+The interface definition for `authProvider` is as follows:
 
 ```tsx
 import { AuthProvider  } from 'tushan';
@@ -27,15 +27,14 @@ const authProvider: AuthProvider = {
   checkAuth: params => Promise.resolve(/* ... */),
   logout: () => Promise.resolve(/* ... */),
   getIdentity: () => Promise.resolve(/* ... */),
-  handleCallback: () => Promise.resolve(/* ... */), // for 
+  handleCallback: () => Promise.resolve(/* ... */), // for OAuth2
   getPermissions: () => Promise.resolve(/* ... */),
 };
 ```
 
+## Quick Start
 
-## 快速开始
-
-`Tushan` 也提供了一个内置的通用鉴权创建函数
+`Tushan` also offers a built-in generic authentication creation function.
 
 ```tsx
 import { AuthProvider, createAuthProvider } from 'tushan';
@@ -45,20 +44,20 @@ const authProvider: AuthProvider = createAuthProvider({
 });
 ```
 
-其中配置参数 `loginUrl` 表示登录接口url地址。
+The configuration parameter `loginUrl` indicates the URL address of the login interface.
 
-具体的后端登录逻辑需要自行实现。接口需要返回如下内容:
-```tsx
+The specific backend login logic needs to be implemented on your own. The interface should return the following content:
+```json
 {
-  username: string;
-  token: string; // 发送请求时可以携带
-  expiredAt: number; // timestamp
+  "username": "string",
+  "token": "string", // for inclusion in subsequent request headers
+  "expiredAt": "number" // timestamp
 }
 ```
 
-返回的内容会记录在 `authStorageKey`(默认"tushan:auth") 指定的 localStorage 中。你可以在后续的网络请求中获取`token`并在发送的请求头中携带。
+The returned content will be stored in localStorage under `authStorageKey` (default is "tushan:auth"). You can retrieve the `token` from there for inclusion in the headers of subsequent HTTP requests.
 
-配套的，你可以使用对应的`createAuthHttpClient`函数来创建`httpClient`在发送请求的时候携带token
+Correspondingly, you can use the `createAuthHttpClient` function to create a `httpClient` that includes the token in requests.
 
 ```tsx
 const dataProvider = jsonServerProvider(
@@ -67,11 +66,11 @@ const dataProvider = jsonServerProvider(
 )
 ```
 
-## 请求携带Token
+## Including Token in Requests
 
-为了使请求能够携带Token, 我们需要修改一下发送请求时请求函数。
+To include the token in requests, you need to modify the request function used for sending requests.
 
-一个简单的示例如下:
+Here is a simple example:
 
 ```ts
 import { fetchJSON } from 'tushan';
@@ -97,13 +96,13 @@ const httpClient: typeof fetchJSON = (url, options = {}) => {
 const dataProvider = jsonServerProvider('/admin/api', httpClient);
 ```
 
-其中 `fetchJSON` 是对原生`fetch`方法的简单封装。
+`fetchJSON` is a simple wrapper around the native `fetch` method.
 
-## node 示例
+## Node Example
 
-### 登录
+### Login
 
-以下是一个登录的node express服务的中间件的示例，其他语言的实现可以自行参考
+Here is an example of a login middleware for a Node Express service. Implementations in other languages can be adapted accordingly.
 
 ```ts
 const adminAuth = {
@@ -120,7 +119,7 @@ router.post('/api/login', (req, res) => {
   const { username, password } = req.body;
 
   if (username === adminAuth.username && password === adminAuth.password) {
-    // 用户名和密码都正确，返回token
+    // Username and password are correct, return a token
     const token = jwt.sign(
       {
         username,
@@ -143,16 +142,15 @@ router.post('/api/login', (req, res) => {
 });
 ```
 
-在这里我们定义了一个`/api/login`接口，对账号和密码进行简单比较，如果账号密码都匹配则进行签发 jwt Token, 并将相关信息返回给前端
+This defines a `/api/login` interface that performs a simple check of the username and password. If they match, a JWT token is issued, and the relevant information is returned to the frontend.
 
-### 鉴权
+### Authentication
 
-以下是一个鉴权的node express服务的中间件的示例，其他语言的实现可以自行参考
+Here is an example of an authentication middleware for a Node Express service. Implementations in other languages can be adapted accordingly.
 
 ```ts
 import type { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import md5 from 'md5';
 
 const adminAuth = {
   username: process.env.ADMIN_USER,
@@ -162,7 +160,9 @@ const adminAuth = {
 const authSecret = 'any-string';
 
 export function auth() {
-  return (req: Request, res: Response, next: NextFunction) => {
+  return (req: Request, res:
+
+ Response, next: NextFunction) => {
     try {
       const authorization = req.headers.authorization;
       if (!authorization) {
@@ -190,9 +190,9 @@ export function auth() {
 }
 ```
 
-这里使用了单用户模式，从环境变量中拿到了用户名和密码。然后将请求 `Header` 中携带的 `token` 与服务端记录的秘钥进行一次 jwt 的验证，以确保用户的 `token` 合法的
+This uses a single-user mode, retrieving the username and password from environment variables. It then verifies the `token` carried in the request `Header` with the server's secret key using JWT, ensuring the user's `token` is valid.
 
-我们可以通过如下的使用方式来对请求进行鉴权校验
+Requests can be authenticated as follows:
 
 ```ts
 router.use(

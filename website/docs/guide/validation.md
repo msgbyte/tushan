@@ -1,11 +1,11 @@
 ---
 sidebar_position: 9
-title: 输入校验
+title: Input Validation
 ---
 
-在表单中输入校验是非常重要的一环，因此在`Tushan`中当然也提供了内置的输入校验功能。
+Input validation is a crucial aspect of form handling, and thus `Tushan` naturally provides built-in functionality for input validation.
 
-以一个邮箱认证为例:
+Take email verification as an example:
 
 ```tsx
 import {
@@ -33,11 +33,11 @@ const userFields = [
 
 ![](/img/docs/misc/validate.png)
 
-在 `edit.rules` 下可以定义校验规则，具体的语法可以参考: [https://arco.design/react/components/form#api](https://arco.design/react/components/form#api)
+Validation rules can be defined under `edit.rules`, and the specific syntax can be referred to: [https://arco.design/react/components/form#api](https://arco.design/react/components/form#api)
 
-> 特殊的, 如果规则中包含了 `required: true` 则会在表单项标签中追加 "*"。
+> Notably, if the rules include `required: true`, an "*" will be appended to the form item label.
 
-对于一些常见的校验规则，`tushan`已经内置了相关实现，如邮件认证的实现如下：
+For some common validation rules, `tushan` has already built-in implementations, such as the email verification implementation below:
 ```tsx
 import { FieldValidator } from 'tushan';
 
@@ -48,10 +48,10 @@ export const emailValidator: FieldValidator = (value, cb) => {
     if (emailRE.test(value)) {
       cb();
     } else {
-      cb('Not a validate email');
+      cb('Not a valid email');
     }
   } else {
-    cb(`value type must be string, now: ${typeof value}`);
+    cb(`Value type must be string, currently: ${typeof value}`);
   }
 };
 ```

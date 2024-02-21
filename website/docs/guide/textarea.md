@@ -1,19 +1,19 @@
 ---
 sidebar_position: 8
-title: 长文本渲染
+title: Long Text Rendering
 ---
 
-对于内容过长的文本数据，相比于简单的 `createTextField`, 一般 Tushan 会选择更加适合大文本渲染的 `createTextAreaField` 方式
+For text data that is too lengthy, as opposed to the simple `createTextField`, Tushan generally opts for the `createTextAreaField` method, which is more suited for rendering large text.
 
-在 `createTextAreaField` 中对列表中大文本的处理做了一些特殊的优化。
+Some special optimizations have been made in `createTextAreaField` for handling large texts in lists.
 
-## 列表状态
+## List State
 
-为了解决列表状态会出现文本过长导致table展示效果不佳的情况。
+To address the issue of long text causing poor table display in list states:
 
-### 固定宽度
+### Fixed Width
 
-为了让多余的内容采用省略而不是占满大量位置，建议固定改行列表的宽度。如:
+To allow excess content to be truncated rather than occupy a lot of space, it is recommended to fix the width of that row in the list. For example:
 
 ```tsx
 createTextAreaField('content', {
@@ -23,9 +23,9 @@ createTextAreaField('content', {
 }),
 ```
 
-### 省略模式
+### Ellipsis Mode
 
-如果内容比较长，建议开启列表溢出省略模式以提升性能。
+If the content is long, it is recommended to enable the list overflow ellipsis mode to improve performance.
 
 ```tsx
 createTextAreaField('content', {
@@ -35,7 +35,7 @@ createTextAreaField('content', {
 }),
 ```
 
-当然也可以同时开始固定宽度与省略
+Of course, you can also enable both fixed width and ellipsis:
 
 ```tsx
 createTextAreaField('content', {
@@ -46,11 +46,10 @@ createTextAreaField('content', {
 }),
 ```
 
+## Detail State
 
-## 详情状态
+In the detail state, by default, a maximum of 5 lines of data is displayed, with the excess being collapsed.
 
-详情状态下默认最多展示5行数据，超出部分将会被折叠
+## Edit State
 
-## 编辑状态
-
-编辑状态下会采用文本框而不是输入框以方便用户对长文本进行修改
+In the edit state, a text area instead of an input box is used to facilitate user modifications of long texts.

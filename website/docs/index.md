@@ -2,17 +2,17 @@
 sidebar_position: 1
 ---
 
-# 介绍
+# Introduction
 
-## **涂山: 五分钟构建一个后台管理平台**
+## **Tushan: Build a Backend Management Platform in Five Minutes**
 
 <img width="128px" src="/img/logo.svg" />
 
-`Tushan` 是一个自由度极高的，基于React的，开箱即用的后台管理应用前端框架。
+`Tushan` is a highly flexible, React-based, ready-to-use frontend framework for backend management applications.
 
-作为开发者, 你可以像是调用库一样快速创建一个可用的后台管理框架，包含了常见的增删改查等常规行为以及过滤、导出等常见需求。通过 `Tushan`, 你可以把精力更多的放在核心的业务上而不是后台管理上。
+As a developer, you can quickly create a usable backend management framework as if you were calling a library. It includes common CRUD operations, filtering, exporting, and other common requirements. With `Tushan`, you can focus more on core business logic rather than backend management.
 
-一个简单的`Tushan` 应用大概会长成以下样子:
+A simple `Tushan` application might look like this:
 
 ```tsx
 import {
@@ -66,11 +66,11 @@ function App() {
 export default App;
 ```
 
-我们可以通过指定字段的类型来决定数据表格的表现形式，并且内置实现了常规的增删改查等操作。帮助开发者快速产出一个后端应用的 MVP。
+You can determine the appearance of the data table by specifying the field types, and common CRUD operations are internally implemented. This helps developers quickly produce an MVP for a backend application.
 
-## 预览
+## Preview
 
-预览效果如下:
+Preview effects are as follows:
 
 ![](/img/preview/1.png)
 
@@ -80,18 +80,18 @@ export default App;
 
 ![](/img/preview/4.png)
 
-> Tushan 的 api 设计受到 [react-admin](https://marmelab.com/react-admin) 很大的启发，两者的接口协议是完全兼容的，这意味着react-admin现成的后端接口生态方案可以完全无缝被 Tushan 使用。如果对 material-ui 设计的后台方案感兴趣的话可以选择 react-admin 作为替代
+> The API design of Tushan is greatly inspired by [react-admin](https://marmelab.com/react-admin), and their interface protocols are fully compatible. This means that the ready-made backend interface ecosystem of react-admin can be seamlessly used by Tushan. If you are interested in backend solutions designed with material-ui, you can choose react-admin as an alternative.
 
-另外，`Tushan` 还包括一些常用的前端依赖项，如 `styled-components` 和 `arco-design` 等 ，可以帮助您更快地搭建前端界面。
+Additionally, `Tushan` includes some commonly used frontend dependencies such as `styled-components` and `arco-design`, which can help you build frontend interfaces more quickly.
 
-## 在 CodeSandbox 中快速示例
+## Quick Examples in CodeSandbox
 
-访问 [CodeSandbox](https://codesandbox.io/p/github/msgbyte/tushan/master) 快速获得无后台版本的示例程序。
+Visit [CodeSandbox](https://codesandbox.io/p/github/msgbyte/tushan/master) to quickly get an example program without a backend.
 
-Demo 程序的账号密码: `tushan` / `tushan`
+Demo program account: `tushan` / `tushan`
 
-## UI框架
+## UI Framework
 
-`Tushan` 的UI组件库是基于字节跳动的 `arco-design`。你可以在[这里](https://arco.design/react/docs/start)访问`arco-design`的官方文档
+The UI component library of `Tushan` is based on ByteDance's `arco-design`. You can access the official documentation of `arco-design` [here](https://arco.design/react/docs/start).
 
-所有的组件都已经被导出且可以通过`tushan`直接引入
+All components have been exported and can be directly imported via `tushan`.
