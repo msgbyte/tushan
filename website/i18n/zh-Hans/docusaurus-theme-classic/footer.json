@@ -1,0 +1,22 @@
+{
+  "link.title.Docs": {
+    "message": "文档",
+    "description": "脚部链接列的标题，标题为“文档”"
+  },
+  "link.title.More": {
+    "message": "更多",
+    "description": "脚部链接列的标题，标题为“更多”"
+  },
+  "link.item.label.Intro": {
+    "message": "介绍",
+    "description": "链接到 / 的脚部链接标签为“介绍”"
+  },
+  "link.item.label.GitHub": {
+    "message": "GitHub",
+    "description": "链接到 https://github.com/msgbyte/tushan 的脚部链接标签为“GitHub”"
+  },
+  "copyright": {
+    "message": "版权所有 © 2024 MsgByte, Inc. 由 Docusaurus 构建。",
+    "description": "脚部版权信息"
+  }
+}

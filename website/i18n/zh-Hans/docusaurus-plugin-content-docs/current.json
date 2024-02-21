@@ -1,0 +1,30 @@
+{
+  "version.label": {
+    "message": "下一个",
+    "description": "当前版本的标签"
+  },
+  "sidebar.tutorialSidebar.category.Application Configuration": {
+    "message": "应用配置",
+    "description": "侧边栏教程侧边栏中'应用配置'类别的标签"
+  },
+  "sidebar.tutorialSidebar.category.Application Configuration.link.generated-index.description": {
+    "message": "Tushan 应用配置",
+    "description": "侧边栏教程侧边栏中'应用配置'类别的生成索引页面描述"
+  },
+  "sidebar.tutorialSidebar.category.Feature Manual": {
+    "message": "功能手册",
+    "description": "侧边栏教程侧边栏中'功能手册'类别的标签"
+  },
+  "sidebar.tutorialSidebar.category.Feature Manual.link.generated-index.description": {
+    "message": "功能手册",
+    "description": "侧边栏教程侧边栏中'功能手册'类别的生成索引页面描述"
+  },
+  "sidebar.tutorialSidebar.category.Tushan Lite": {
+    "message": "Tushan Lite",
+    "description": "侧边栏教程侧边栏中'Tushan Lite'类别的标签"
+  },
+  "sidebar.tutorialSidebar.category.Tushan Lite.link.generated-index.description": {
+    "message": "Tushan Lite 是基于 Tushan 的纯配置化解决方案，只需要一个简单的配置文件即可实现一整套后台管理项目的前端实现。",
+    "description": "侧边栏教程侧边栏中'Tushan Lite'类别的生成索引页面描述"
+  }
+}
