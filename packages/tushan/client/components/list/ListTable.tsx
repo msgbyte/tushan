@@ -93,6 +93,7 @@ export interface ListTableProps {
   batchAction?: {
     delete?: boolean;
   };
+  meta?: any;
 }
 
 export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
@@ -113,6 +114,7 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
     },
     filter: lazyFilter,
     sort,
+    meta: props.meta,
   };
   const {
     data: list,

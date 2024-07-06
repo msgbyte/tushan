@@ -44,12 +44,14 @@ export function jsonServerProvider(
     getList: (resource, params) => {
       const { page, perPage } = params.pagination;
       const { field, order } = params.sort;
+      const meta = params.meta;
       const query = {
         ...flattenObject(params.filter),
         _sort: field,
         _order: order,
         _start: (page - 1) * perPage,
         _end: page * perPage,
+        meta,
       };
       const url = `${apiUrl}/${resource}?${qs.stringify(query)}`;
 
@@ -78,6 +80,7 @@ export function jsonServerProvider(
     getMany: (resource, params) => {
       const query = {
         id: params.ids,
+        meta: params.meta,
       };
       const url = `${apiUrl}/${resource}?${qs.stringify(query)}`;
       return httpClient(url).then(({ json }) => ({ data: json }));
@@ -86,6 +89,7 @@ export function jsonServerProvider(
     getManyReference: (resource, params) => {
       const { page, perPage } = params.pagination;
       const { field, order } = params.sort;
+      const meta = params.meta;
       const query = {
         ...flattenObject(params.filter),
         [params.target]: params.id,
@@ -93,6 +97,7 @@ export function jsonServerProvider(
         _order: order,
         _start: (page - 1) * perPage,
         _end: page * perPage,
+        meta,
       };
       const url = `${apiUrl}/${resource}?${qs.stringify(query)}`;
 

@@ -1,4 +1,4 @@
-import { DatePicker, Input, TimePicker } from '@arco-design/web-react';
+import { DatePicker } from '@arco-design/web-react';
 import React from 'react';
 import { createFieldFactory } from './factory';
 import type { FieldDetailComponent, FieldEditComponent } from './types';
@@ -6,7 +6,7 @@ import type { FieldDetailComponent, FieldEditComponent } from './types';
 export type DateTimeFieldValueType = string | number;
 
 export interface DateTimeFieldOptions {
-  format: 'iso' | 'unix' | 'timestamp';
+  format?: 'iso' | 'unix' | 'timestamp';
 }
 
 export const DateTimeFieldDetail: FieldDetailComponent<
