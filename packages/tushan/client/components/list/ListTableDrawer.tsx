@@ -14,6 +14,10 @@ export interface ListTableDrawerProps {
   fields: FieldHandler[];
   record: BasicRecord | null;
   viewType: ViewType;
+  /**
+   * Drawer width
+   * @default 680
+   */
   width?: number;
 }
 export const ListTableDrawer: React.FC<ListTableDrawerProps> = React.memo(

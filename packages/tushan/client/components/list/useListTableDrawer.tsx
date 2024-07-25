@@ -5,7 +5,10 @@ import { useEvent } from '../../hooks/useEvent';
 import type { FieldHandler } from '../fields';
 import { ListTableDrawer } from './ListTableDrawer';
 
-export function useListTableDrawer(fields: FieldHandler[]) {
+export function useListTableDrawer(
+  fields: FieldHandler[],
+  options?: { drawerWidth?: number }
+) {
   const [visible, setVisible] = useState(false);
   const [viewType, setViewType] = useState<ViewType>('detail');
   const [record, setRecord] = useState<BasicRecord | null>(null);
@@ -26,6 +29,7 @@ export function useListTableDrawer(fields: FieldHandler[]) {
         viewType={viewType}
         fields={fields}
         record={record}
+        width={options?.drawerWidth}
       />
     ),
   };

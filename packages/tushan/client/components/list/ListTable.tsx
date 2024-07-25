@@ -67,6 +67,7 @@ export interface ListTableProps {
   defaultFilter?: FilterPayload;
   showTotal?: boolean;
   showSizeChanger?: boolean;
+  drawerWidth?: number;
   /**
    * Allow pass table props into table element
    */
@@ -124,7 +125,9 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
   } = useGetList(resource, listParams);
   const action = props.action;
   const batchAction = props.batchAction;
-  const { showTableDrawer, drawerEl } = useListTableDrawer(props.fields);
+  const { showTableDrawer, drawerEl } = useListTableDrawer(props.fields, {
+    drawerWidth: props.drawerWidth,
+  });
   const filterFields = props.filter ?? [];
   const [selectedRowKeys, setSelectedRowKeys] = useState<Identifier[]>([]);
 
