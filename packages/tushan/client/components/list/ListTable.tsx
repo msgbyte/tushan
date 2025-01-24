@@ -66,7 +66,11 @@ export interface ListTableProps {
   defaultSort?: SortPayload;
   defaultFilter?: FilterPayload;
   showTotal?: boolean;
-  showSizeChanger?: boolean;
+  /**
+   * If pass number array, you can change size options,
+   * default is [10, 20, 50, 100]
+   */
+  showSizeChanger?: boolean | number[];
   drawerWidth?: number;
   /**
    * Allow pass table props into table element
@@ -202,8 +206,10 @@ export const ListTable: React.FC<ListTableProps> = React.memo((props) => {
         current: pageNum,
         pageSize,
         showTotal: props.showTotal ?? true,
-        sizeCanChange: props.showSizeChanger ?? false,
-        sizeOptions: [10, 20, 50, 100],
+        sizeCanChange: props.showSizeChanger ? true : false,
+        sizeOptions: Array.isArray(props.showSizeChanger)
+          ? props.showSizeChanger
+          : [10, 20, 50, 100],
         onChange: (pageNum, pageSize) => {
           setPageNum(pageNum);
           setPageSize(pageSize);

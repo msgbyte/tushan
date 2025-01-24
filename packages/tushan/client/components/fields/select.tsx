@@ -22,6 +22,7 @@ export interface SelectFieldOptionItem {
 
 export interface SelectFieldOptions {
   items: SelectFieldOptionItem[];
+  allowClear?: boolean;
 }
 
 export const SelectFieldDetail: FieldDetailComponent<
@@ -49,10 +50,12 @@ export const SelectFieldEdit: FieldEditComponent<
   SelectFieldOptions
 > = React.memo((props) => {
   const items = props.options.items ?? [];
+  const allowClear = props.options.allowClear ?? false;
 
   return (
     <Select
       placeholder={props.options.edit?.placeholder ?? props.options.label}
+      allowClear={allowClear}
       value={props.value}
       onChange={(val) => props.onChange(val)}
     >
