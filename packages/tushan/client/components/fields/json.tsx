@@ -2,14 +2,8 @@ import { Button, Popover } from '@arco-design/web-react';
 import React from 'react';
 import { createFieldFactory } from './factory';
 import type { FieldDetailComponent, FieldEditComponent } from './types';
-import ReactJson, { ReactJsonViewProps } from 'react-json-view';
 import { useViewTypeContext } from '../../context/viewtype';
-
-const defaultJSONViewProps: Partial<ReactJsonViewProps> = {
-  name: false,
-  displayDataTypes: false,
-  iconStyle: 'square',
-};
+import { JSONView } from '../JSONView';
 
 function getObjectSize(obj: any): number {
   if (!obj) {
@@ -31,17 +25,14 @@ export const JSONFieldDetail: FieldDetailComponent<object> = React.memo(
 
     if (viewType === 'list') {
       return (
-        <Popover
-          trigger="click"
-          content={<ReactJson {...defaultJSONViewProps} src={props.value} />}
-        >
+        <Popover trigger="click" content={<JSONView data={props.value} />}>
           <Button size="small">
             Show (size: {getObjectSize(props.value)})
           </Button>
         </Popover>
       );
     } else {
-      return <ReactJson {...defaultJSONViewProps} src={props.value} />;
+      return <JSONView data={props.value} />;
     }
   }
 );
@@ -49,10 +40,11 @@ JSONFieldDetail.displayName = 'JSONFieldDetail';
 
 export const JSONFieldEdit: FieldEditComponent<object> = React.memo((props) => {
   return (
-    <ReactJson
-      {...defaultJSONViewProps}
-      src={props.value}
-      onEdit={(edit) => props.onChange(edit.updated_src)}
+    <JSONView
+      data={props.value}
+      options={{
+        onEdit: (edit) => props.onChange(edit.updated_src),
+      }}
     />
   );
 });
