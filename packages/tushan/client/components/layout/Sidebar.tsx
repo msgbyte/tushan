@@ -24,10 +24,12 @@ export const Sidebar: React.FC = React.memo(() => {
   const { t } = useTranslation();
   const { dashboard } = useTushanContext();
 
+  const defaultSelectedKeys = [location.pathname.replace(/\/$/, '')]; // remove end path /
+
   return (
     <Root
       className="sidebar"
-      selectedKeys={[location.pathname]}
+      selectedKeys={defaultSelectedKeys}
       onClickMenuItem={(path) => navigate(path)}
     >
       {dashboard !== false && (
