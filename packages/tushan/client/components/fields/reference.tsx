@@ -13,7 +13,7 @@ export interface ReferenceFieldOptions {
   /**
    * Source Field for display
    */
-  displayField: string | ((record: Record<string, any>) => void);
+  displayField: string | ((record: Record<string, any>) => React.ReactNode);
   /**
    * Field which define search filter in edit.
    *
