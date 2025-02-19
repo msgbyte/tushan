@@ -1,6 +1,6 @@
 {
   "name": "tushan",
-  "version": "0.3.14",
+  "version": "0.3.15",
   "description": "",
   "main": "./index.ts",
   "scripts": {
@@ -15,7 +15,6 @@
     "index.ts",
     "icon.ts",
     "chart.ts",
-    "tsconfig.json",
     "README.md"
   ],
   "keywords": ["tushan", "react-admin", "react", "admin", "adminjs", "admin.js"],
