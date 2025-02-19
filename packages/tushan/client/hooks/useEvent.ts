@@ -1,4 +1,4 @@
-import { useMemo, useRef } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { isFunction } from 'lodash-es';
 
 // From https://github.com/alibaba/hooks/blob/master/packages/hooks/src/useMemoizedFn/index.ts
@@ -33,4 +33,48 @@ export function useEvent<T extends Noop>(fn: T) {
   }
 
   return memoizedFn.current as T;
+}
+
+/**
+ * Same with useEvent but return loading state
+ */
+export function useEventWithLoading<T extends (...args: any[]) => Promise<any>>(
+  fn: T
+): [T, boolean] {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const _fn = useEvent(async (...args: Parameters<T>) => {
+    setIsLoading(true);
+    try {
+      return await fn(...args);
+    } finally {
+      setIsLoading(false);
+    }
+  }) as T;
+
+  return [_fn, isLoading];
+}
+
+/**
+ * Same with useEvent but has limit once in one time
+ */
+export function useThrottleEvent<T extends (...args: any[]) => Promise<any>>(
+  fn: T
+): T {
+  const isBusyRef = useRef(false);
+
+  const _fn = useEvent(async (...args: Parameters<T>) => {
+    if (isBusyRef.current) {
+      return;
+    }
+
+    isBusyRef.current = true;
+    try {
+      return await fn(...args);
+    } finally {
+      isBusyRef.current = false;
+    }
+  }) as T;
+
+  return _fn;
 }
