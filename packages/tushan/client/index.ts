@@ -26,6 +26,7 @@ export * from './hooks/useEvent';
 export * from './hooks/useSendRequest';
 export * from './hooks/useForceUpdate';
 export * from './hooks/useUrlState';
+export * from './hooks/useWatch';
 export * from './i18n';
 export * from './utils/common';
 export * from './store/menu';
