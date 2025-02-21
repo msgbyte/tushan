@@ -25,6 +25,16 @@ export interface ReferenceFieldOptions {
    * @default false
    */
   allowClear?: boolean;
+
+  /**
+   * @default true
+   */
+  showSearch?: boolean;
+
+  /**
+   * default filter which for edit mode get list
+   */
+  defaultFilter?: Record<string, unknown>;
 }
 
 export const ReferenceFieldDetail: FieldDetailComponent<
@@ -58,6 +68,8 @@ export const ReferenceFieldEdit: FieldEditComponent<
   const displayField = props.options.displayField ?? '';
   const searchField = props.options.searchField ?? 'q';
   const allowClear = props.options.allowClear ?? false;
+  const showSearch = props.options.showSearch ?? true;
+  const defaultFilter = props.options.defaultFilter ?? {};
   const [filterValues, setFilterValues] = useObjectState({});
   const lazyFilter = useDebounce(filterValues, { wait: 500 });
 
@@ -66,12 +78,15 @@ export const ReferenceFieldEdit: FieldEditComponent<
       page: 1,
       perPage: 10,
     },
-    filter: lazyFilter,
+    filter: {
+      ...defaultFilter,
+      ...lazyFilter,
+    },
   });
 
   return (
     <Select
-      showSearch={true}
+      showSearch={showSearch}
       filterOption={false}
       onSearch={(value) => setFilterValues({ [searchField]: value })}
       allowClear={allowClear}

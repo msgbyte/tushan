@@ -4,6 +4,7 @@ import ReactJson, { ReactJsonViewProps } from 'react-json-view';
 const defaultJSONViewProps: Partial<ReactJsonViewProps> = {
   name: false,
   displayDataTypes: false,
+  enableClipboard: false,
   iconStyle: 'square',
 };
 
