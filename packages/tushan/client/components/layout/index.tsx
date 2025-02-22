@@ -63,13 +63,11 @@ export const BasicLayout: React.FC = React.memo((props) => {
   const navbarHeight = 64;
   const menuWidth = collapsed ? 48 : 220;
   const { t } = useTranslation();
-  const { footer } = useTushanContext();
+  const { navbar, footer } = useTushanContext();
 
   return (
     <Root className="basic-layout">
-      <Header className="header">
-        <Navbar />
-      </Header>
+      <Header className="header">{navbar ?? <Navbar />}</Header>
 
       <Layout>
         <Sider

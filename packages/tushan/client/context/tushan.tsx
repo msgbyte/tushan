@@ -15,6 +15,7 @@ export interface TushanContextProps {
   };
   layout?: React.ReactElement;
   loginPage?: React.ReactElement;
+  navbar?: React.ReactNode;
   header?: React.ReactNode;
   footer?: React.ReactNode;
 }
