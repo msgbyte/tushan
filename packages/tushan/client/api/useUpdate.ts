@@ -116,7 +116,7 @@ export const useUpdate = <
         ...old.slice(0, index),
         { ...old[index], ...data },
         ...old.slice(index + 1),
-      ];
+      ] as RecordType[];
     };
 
     type GetListResult = Omit<OriginalGetListResult<RecordType>, 'data'> & {

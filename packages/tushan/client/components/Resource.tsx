@@ -19,24 +19,28 @@ export const Resource: React.FC<ResourceProps> = React.memo((props) => {
     <ResourceContextProvider resourceName={props.name}>
       <Routes>
         {List && (
+          // @ts-ignore
           <Route path={`/*`} element={isValidElement(List) ? List : <List />} />
         )}
 
         {Create && (
           <Route
             path={`create/*`}
+            // @ts-ignore
             element={isValidElement(Create) ? Create : <Create />}
           />
         )}
         {Detail && (
           <Route
             path={`:id/detail/*`}
+            // @ts-ignore
             element={isValidElement(Detail) ? Detail : <Detail />}
           />
         )}
         {Edit && (
           <Route
             path={`:id/*`}
+            // @ts-ignore
             element={isValidElement(Edit) ? Edit : <Edit />}
           />
         )}

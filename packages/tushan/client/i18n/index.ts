@@ -7,7 +7,7 @@ import { defaultI18NResources } from './default';
 export async function initI18N(resources?: Resource) {
   let fallbackLng = 'en';
   if (resources) {
-    fallbackLng = Object.keys(resources)[0];
+    fallbackLng = Object.keys(resources)[0] ?? 'en';
   }
 
   await i18n

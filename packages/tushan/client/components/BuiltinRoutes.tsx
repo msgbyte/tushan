@@ -88,7 +88,7 @@ export const BuiltinRoutes: React.FC<BuiltinRoutesProps> = React.memo(
                             to={
                               dashboard
                                 ? '/dashboard'
-                                : `/${resources[0].element.props.name}/`
+                                : `/${resources[0]?.element.props.name}/`
                             }
                           />
                         }
