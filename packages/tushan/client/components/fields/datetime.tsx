@@ -45,4 +45,9 @@ DateTimeFieldEdit.displayName = 'DateTimeFieldEdit';
 export const createDateTimeField = createFieldFactory<DateTimeFieldOptions>({
   detail: DateTimeFieldDetail,
   edit: DateTimeFieldEdit,
+  defaultOptions: {
+    list: {
+      width: 180,
+    },
+  },
 });

@@ -11,6 +11,7 @@ import { FieldTitle } from '../FieldTitle';
 export interface CreateFieldFactoryConfig<CustomOptions = {}> {
   detail: FieldDetailComponent<any, CustomOptions>;
   edit: FieldEditComponent<any, CustomOptions>;
+  defaultOptions?: BasicFieldOptions & CustomOptions;
 }
 
 export type ListFieldItem = {
@@ -49,9 +50,14 @@ export function createFieldFactory<CustomOptions extends {} = {}>(
 ) {
   return (
       source: string,
-      options?: BasicFieldOptions & CustomOptions
+      _options?: BasicFieldOptions & CustomOptions
     ): FieldHandler =>
     (viewType) => {
+      const options = {
+        ...config.defaultOptions,
+        ..._options,
+      } as BasicFieldOptions & CustomOptions;
+
       if (viewType === 'list') {
         return {
           hidden: options?.list?.hidden ?? false,
