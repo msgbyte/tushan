@@ -35,7 +35,7 @@ export const TushanBreadcrumb: React.FC = React.memo(() => {
 
   return (
     <Breadcrumb style={{ marginBottom: 16 }}>
-      <Breadcrumb.Item>
+      <Breadcrumb.Item key="dashboard">
         {dashboard !== false ? (
           <NavLink to="/dashboard" key="home-dashboard">
             <IconHome className="mr-2" style={{ marginRight: 2 }} />
@@ -51,7 +51,7 @@ export const TushanBreadcrumb: React.FC = React.memo(() => {
         )}
       </Breadcrumb.Item>
 
-      {title && <Breadcrumb.Item>{title}</Breadcrumb.Item>}
+      {title && <Breadcrumb.Item key="title">{title}</Breadcrumb.Item>}
     </Breadcrumb>
   );
 });

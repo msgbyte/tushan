@@ -62,6 +62,7 @@ export function createFieldFactory<CustomOptions extends {} = {}>(
         return {
           hidden: options?.list?.hidden ?? false,
           columnProps: {
+            key: options?.key,
             dataIndex: source,
             sorter: options?.list?.sort ?? false,
             sortDirections: ['ascend', 'descend'],
@@ -89,6 +90,7 @@ export function createFieldFactory<CustomOptions extends {} = {}>(
         }
 
         return {
+          key: options?.key,
           source,
           title: options?.label ?? createElement(FieldTitle, { source }),
           hidden: editOptions.hidden ?? false,
@@ -104,6 +106,7 @@ export function createFieldFactory<CustomOptions extends {} = {}>(
         } as EditFieldItem;
       } else if (viewType === 'detail') {
         return {
+          key: options?.key,
           source,
           title: options?.label ?? createElement(FieldTitle, { source }),
           hidden: options?.detail?.hidden ?? false,

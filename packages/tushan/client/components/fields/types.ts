@@ -12,6 +12,8 @@ export interface BasicFieldEditOptions {
 }
 
 export interface BasicFieldOptions {
+  key?: string;
+
   label?: string;
 
   /**
