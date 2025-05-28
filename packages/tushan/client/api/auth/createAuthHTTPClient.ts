@@ -13,7 +13,14 @@ export function createAuthHttpClient(
       const { token } = JSON.parse(
         window.localStorage.getItem(authStorageKey) ?? '{}'
       );
-      (options.headers as Headers).set('Authorization', `Bearer ${token}`);
+
+      if (options.headers instanceof Headers) {
+        options.headers.set('Authorization', `Bearer ${token}`);
+      } else {
+        (options.headers as Record<string, string>)[
+          'Authorization'
+        ] = `Bearer ${token}`;
+      }
 
       return fetchJSON(url, options);
     } catch (err) {
